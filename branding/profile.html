@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1080px;overflow:hidden}
+.bg{position:absolute;inset:0}
+#c{position:absolute;left:50%;transform:translateX(-50%)}
+</style></head><body><div class="bg" id="bg"></div><div id="c"></div>
+<script src="../character/kid.js"></script><script>
+window.render=function(v){
+  const presets={
+    glint:{o:{eye:"cool",brow:"cool",mo:"smirk",arm:"left",push:1,gdy:-5,glint:1},bg:"#FFD84D",ring:"#FF8C69"},
+    smug:{o:{gl:"glare",eye:"smug",brow:"smug",mo:"smirk",arm:"shrug",tilt:5},bg:"#7FD6C2",ring:"#FFF8EC"},
+    curious:{o:{eye:"up",brow:"up",mo:"o",arm:"chin",front:true},bg:"#FF8C69",ring:"#FFD84D"}
+  };
+  const p=presets[v];
+  // sunburst background + soft ring inside the circle-safe area
+  let rays="";for(let i=0;i<16;i++){const a=i*22.5;rays+=`<path d="M540 540 L${540+900*Math.cos((a-5)*Math.PI/180)} ${540+900*Math.sin((a-5)*Math.PI/180)} L${540+900*Math.cos((a+5)*Math.PI/180)} ${540+900*Math.sin((a+5)*Math.PI/180)}Z" fill="#fff" opacity=".18"/>`}
+  document.getElementById("bg").innerHTML=`<svg width="1080" height="1080"><rect width="1080" height="1080" fill="${p.bg}"/>${rays}<circle cx="540" cy="540" r="470" fill="none" stroke="${p.ring}" stroke-width="18" opacity=".55"/></svg>`;
+  const c=document.getElementById("c");
+  c.innerHTML=kid(p.o);
+  const s=c.querySelector("svg"); s.setAttribute("width","884"); s.setAttribute("height","1360");
+  c.style.top="30px";
+};
+</script></body></html>
