@@ -1,0 +1,40 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
+      border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
+    .lab.yel { background: #FFD84D; }
+    .lab.red { background: #F05A50; color: #FFFFFF; }
+    .lab.blue { background: #9ED8FF; }
+    .lab.org { background: #FF8C69; }
+    .lab.small { font-size: 44px; padding: 4px 22px 6px; }
+    .ne { display: inline-block; width: 0.62em; height: 0.62em; vertical-align: -0.02em; }
+
+  </style>
+  <div id="root" data-composition-id="s6" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <rect id="s6-dim" x="0" y="0" width="1080" height="1920" fill="#2B2B2B"/>
+      <g transform="translate(640 640)"><g id="s6-bang"><text x="0" y="110" text-anchor="middle" font-family="Noto Sans Thai, Noto Sans, sans-serif" font-weight="900" font-size="340" fill="#FFD84D" stroke="#FFFFFF" stroke-width="14" paint-order="stroke">!</text></g></g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (i) => document.getElementById(i);
+      const tl = gsap.timeline({ paused: true });
+      const pop = (sel, t, rot = 0, dur = 0.3) => tl.fromTo(sel, { xPercent: -50, yPercent: -50, scale: 0, rotation: rot - 8 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: rot, duration: dur, ease: "back.out(2.6)" }, t);
+      const out = (sel, t) => tl.to(sel, { scale: 0.85, opacity: 0, duration: 0.2, ease: "power2.in" }, t);
+      const gpop = (sel, t, s = 1, origin = "0 0") => tl.fromTo(sel, { scale: 0, svgOrigin: origin }, { scale: s, duration: 0.3, ease: "back.out(2.4)", svgOrigin: origin }, t);
+      const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
+      tl.fromTo("#s6-dim", { opacity: 0 }, { opacity: 0.78, duration: 0.4, ease: "power1.out" }, 0);
+      tl.fromTo("#s6-bang", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.3, ease: "back.out(3)", svgOrigin: "0 0" }, 0.15);
+      tl.fromTo("#s6-bang", { rotation: -8, svgOrigin: "0 100" }, { rotation: 8, duration: 0.07, ease: "none", yoyo: true, repeat: 17, svgOrigin: "0 100", immediateRender: false }, 0.45);
+      window.__timelines["s6"] = tl;
+    })();
+  </script>
+</template>

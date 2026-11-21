@@ -1,0 +1,56 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
+      border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
+    .lab.yel { background: #FFD84D; }
+    .lab.red { background: #F05A50; color: #FFFFFF; }
+    .lab.blue { background: #9ED8FF; }
+    .lab.org { background: #FF8C69; }
+    .lab.small { font-size: 44px; padding: 4px 22px 6px; }
+    .ne { display: inline-block; width: 0.62em; height: 0.62em; vertical-align: -0.02em; }
+
+  </style>
+  <div id="root" data-composition-id="s2" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(410 560)"><g id="s2-rays"></g></g>
+      <g transform="translate(780 660)"><g id="s2-phone"></g></g>
+      <g id="s2-waves" fill="none" stroke-linecap="round">
+        <path id="s2-w1" d="M 630 880 q -30 40 0 80" stroke="#2B2B2B" stroke-width="16"/><path id="s2-w1c" d="M 630 880 q -30 40 0 80" stroke="#9ED8FF" stroke-width="8"/>
+        <path id="s2-w2" d="M 600 860 q -46 60 0 120" stroke="#2B2B2B" stroke-width="16"/><path id="s2-w2c" d="M 600 860 q -46 60 0 120" stroke="#9ED8FF" stroke-width="8"/>
+        <path id="s2-w3" d="M 570 840 q -62 80 0 160" stroke="#2B2B2B" stroke-width="16"/><path id="s2-w3c" d="M 570 840 q -62 80 0 160" stroke="#9ED8FF" stroke-width="8"/>
+      </g>
+      <g transform="translate(880 330)"><g id="s2-q"><text x="0" y="0" text-anchor="middle" font-family="Noto Sans Thai, Noto Sans, sans-serif" font-weight="900" font-size="140" fill="#FFD84D" stroke="#2B2B2B" stroke-width="9" paint-order="stroke">?</text></g></g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (i) => document.getElementById(i);
+      const tl = gsap.timeline({ paused: true });
+      const pop = (sel, t, rot = 0, dur = 0.3) => tl.fromTo(sel, { xPercent: -50, yPercent: -50, scale: 0, rotation: rot - 8 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: rot, duration: dur, ease: "back.out(2.6)" }, t);
+      const out = (sel, t) => tl.to(sel, { scale: 0.85, opacity: 0, duration: 0.2, ease: "power2.in" }, t);
+      const gpop = (sel, t, s = 1, origin = "0 0") => tl.fromTo(sel, { scale: 0, svgOrigin: origin }, { scale: s, duration: 0.3, ease: "back.out(2.4)", svgOrigin: origin }, t);
+      const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
+      (function(){ let r=""; for (let i=0;i<16;i++){ const a0=i/16*Math.PI*2, a1=a0+Math.PI/16; r+=`<path d="M0 0 L${Math.cos(a0)*1500} ${Math.sin(a0)*1500} L${Math.cos(a1)*1500} ${Math.sin(a1)*1500} Z" fill="#FFE7A6"/>`; } $("s2-rays").innerHTML=r; })();
+      $("s2-phone").innerHTML = A.phone("s2p");
+      tl.fromTo("#s2-rays", { rotation: 20, svgOrigin: "0 0" }, { rotation: 30, duration: 2.05, ease: "none", svgOrigin: "0 0" }, 0);
+      // มือถือเด้งขึ้นข้างตัว (pop 4.305 = local 0.055)
+      tl.fromTo("#s2-phone", { y: 500, rotation: 12, transformOrigin: "50% 50%" }, { y: 0, rotation: -4, duration: 0.3, ease: "back.out(1.8)", transformOrigin: "50% 50%" }, 0.02);
+      tl.fromTo("#s2p-bar", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, transformOrigin: "0% 50%", duration: 1.9, ease: "none" }, 0.4);
+      // คลื่นฟ้าออกลำโพง (blip_talk 4.805 = local 0.555)
+      ["1","2","3"].forEach((k, i) => {
+        tl.fromTo(`#s2-w${k}, #s2-w${k}c`, { opacity: 0 }, { opacity: 1, duration: 0.12, yoyo: true, repeat: 5, ease: "steps(1)" }, 0.555 + i * 0.12);
+      });
+      tl.set("#s2-waves path", { opacity: 1 }, 2.0);
+      tl.fromTo("#s2-q", { scale: 0, y: 40, svgOrigin: "0 0" }, { scale: 1, y: 0, duration: 0.35, ease: "back.out(2.6)", svgOrigin: "0 0" }, 0.7);
+      tl.to("#s2-q", { y: -18, duration: 0.4, yoyo: true, repeat: 2, ease: "sine.inOut" }, 1.05);
+      window.__timelines["s2"] = tl;
+    })();
+  </script>
+</template>

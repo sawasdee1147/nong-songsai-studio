@@ -1,0 +1,165 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    #kid-rig { position: absolute; left: 0; top: 0; width: 260px; height: 400px; transform-origin: 0 0; }
+    #kid-rig svg { width: 260px; height: 400px; display: block; overflow: visible; }
+  </style>
+  <div id="root" data-composition-id="kid" data-width="1080" data-height="1920">
+    <div id="kid-rig" data-layout-allow-overflow></div>
+  </div>
+  <script>
+    (function () {
+      /* ---- เวลาประโยค (timings.json index 1–19) ---- */
+      const LINES = [[0,1.81],[2.075,4.075],[4.305,6.075],[6.405,7.055],[7.269,9.749],[10.056,12.196],[12.469,14.789],[15.001,16.861],[17.162,18.862],[19.069,20.649],[20.936,22.926],[23.14,24.75],[24.968,26.808],[27.093,29.713],[30.078,32.018],[32.243,33.803],[34.048,35.778],[36.103,37.763],[38.153,39.603]];
+      /* ---- preset จาก character/README.md (ตามคอลัมน์ท่าตัวละครในบท) ---- */
+      const PRE = {
+        dare:  { eye:"smug", brow:"smug", mo:"grin", arm:"point" },                                        // 1a กวนๆ ชี้ (บทกำหนด)
+        loud:  { gl:"askew", eye:"shock", brow:"shock", mo:"shock", ah:"zig", arm:"shrug" },               // 1b ตกใจ แขนห่างหู (บทกำหนด)
+        ask:   { eye:"up", brow:"up", mo:"o", arm:"chin", front:true },                                    // สงสัย
+        ping:  { eye:"spark", brow:"none", mo:"grin", ah:"!", arm:"point" },                               // ปิ๊ง!
+        smug:  { gl:"glare", eye:"smug", brow:"smug", mo:"smirk", arm:"shrug", tilt:5 },                   // กวนๆ (แว่นแวบ)
+        peek:  { gl:"down", eye:"side", brow:"none", mo:"flatlow", ah:"droop" },                           // มองข้ามแว่น
+        shock: { gl:"askew", eye:"shock", brow:"shock", mo:"shock", ah:"zig", arm:"up" },                  // ตกใจ
+        laugh: { eye:"laugh", brow:"none", mo:"grin", arm:"belly", tilt:-6, front:true }                   // หัวเราะ
+      };
+      // [เวลาเปลี่ยนท่า, ท่า] — เข้าก่อนคำพูด ~0.1 วิ
+      const POSES = [[0,"dare"],[1.975,"loud"],[4.205,"ask"],[6.305,"ping"],[12.369,"smug"],[14.9,"peek"],[17.06,"smug"],[18.97,"shock"],[20.84,"ping"],[23.04,"shock"],[24.87,"ask"],[29.98,"laugh"],[32.14,"ask"],[33.95,"ping"],[36.103,"outro"]];
+      // ตำแหน่ง X,Y (มุมซ้ายบนของ viewBox) และสเกล — ตัวละครซ้าย ภาพประกอบขวา
+      const LAY = { hook:[125,250,1.9], side:[0,742,1.25], outro:[234.5,323.5,2.35] };
+      const LAYS = [[0,"hook"],[6.2,"side"],[36.0,"outro"]];
+      const OUTRO_T0 = 36.103;
+      const GLARES = [[12.47,13.2],[17.17,17.9]];
+      const BLINKS = [5.3,25.9,28.4,33.2,36.6,40.5];
+      const BLINKABLE = { norm:1, up:1, sad:1 };
+      // ที่อุดหู: ใส่ #1a–1b (หลุด 4.305) และ #13a–13b (ใส่ 32.243 หลุด 35.85)
+      const PLUG_ON = [[ -1, 4.305], [32.243, 35.85]];
+
+      const clamp = x => Math.max(0, Math.min(1, x));
+      const seg = (t,a,b) => clamp((t-a)/(b-a));
+      const io = x => x<.5 ? 2*x*x : 1-Math.pow(-2*x+2,2)/2;
+      const back = x => { const c1=1.9,c3=c1+1; return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2); };
+      const lerp = (a,b,p) => a+(b-a)*p;
+      const find = (arr,t) => { let i=0; for (let k=0;k<arr.length;k++) if (t>=arr[k][0]) i=k; return i; };
+
+      // จังหวะท่าดันแว่นจาก character/outro-push-glasses.html (draw(t))
+      function outroPose(t){
+        const raise=io(seg(t,0.5,1.15)), lower=io(seg(t,3.35,3.8));
+        const push=raise*(1-lower);
+        const pushUp=back(seg(t,1.15,1.35));
+        const slip=io(seg(t,3.4,4.0));
+        let gdy = 9 - 14*pushUp*(t<3.4?1:0) + (t>=3.4? -5+14*slip : 0);
+        if(t<1.15) gdy=9;
+        const flash = t>1.3 && t<1.5;
+        const gp=seg(t,1.3,1.5);
+        let glint = t<1.3?0 : t<3.4 ? (gp<1? back(gp)*1.1 : 1+0.12*Math.sin((t-1.5)*9)) : 1-seg(t,3.4,3.6);
+        const cool = t>=1.45 && t<3.65;
+        const tilt = cool? -4*io(seg(t,1.45,1.7)) : 0;
+        return {gl: flash?"glare":"norm", eye: cool?"cool":"norm", brow: cool?"cool":"norm",
+          mo: cool?"smirk":"smile", arm: push>0.02?"left":"down", push: push>0.02?push:0, gdy, glint, tilt};
+      }
+      function speaking(t){ for (const [a,b] of LINES) if (t>=a && t<b-0.06) return t-a; return -1; }
+      function mouthFor(base, t){
+        const s = speaking(t); if (s<0) return base;
+        const open = ((Math.floor(s*9)*7+3)%5) < 3;
+        if (base==="o") return open ? "o" : "smile";
+        if (base==="shock") return open ? "shock" : "o";
+        return open ? "o" : (base==="flatlow" ? "flatlow" : "smile");
+      }
+      function blinking(t){ for (const b of BLINKS) if (t>=b && t<b+0.13) return true; return false; }
+
+      /* ---- ของประกอบ (พิกัด viewBox ของ kid.js) ---- */
+      // ที่อุดหู: ชิ้นเล็กสีเหลืองโผล่จากรูหูด้านนอก (หู = วงรี cx 60/240 cy 160) ไม่แตะเลนส์แว่น
+      function plugAt(side, sc, dx, dy, rot, op){
+        const x = side<0 ? 56 : 244;
+        return `<g opacity="${op.toFixed(3)}" transform="translate(${(x+dx).toFixed(2)} ${(160+dy).toFixed(2)}) rotate(${rot.toFixed(1)}) scale(${side*0.8*sc} ${0.8*sc})">` +
+          `<rect x="-2" y="-9" width="18" height="18" rx="5" fill="#FFD84D" stroke="#2B2B2B" stroke-width="4"/>` +
+          `<path d="M 14 -16 Q 34 -16 34 0 Q 34 16 14 16 Z" fill="#FFD84D" stroke="#2B2B2B" stroke-width="4" stroke-linejoin="round"/></g>`;
+      }
+      function plugsSvg(t){
+        let s = "";
+        for (const [on, off] of PLUG_ON) {
+          if (t < on || t > off + 0.45) continue;
+          const pin = on < 0 ? 1 : back(seg(t, on, on + 0.25));
+          const po = seg(t, off, off + 0.45);
+          [-1, 1].forEach(side => {
+            const dx = side * po * 120, dy = -po * 90 + po * po * 160, rot = side * po * 200;
+            s += plugAt(side, Math.max(0.01, pin), dx, dy, rot, 1 - po);
+          });
+        }
+        return s;
+      }
+      // 1b: ถังเป็นเส้นขอบอย่างเดียว อยู่นอกวงหัว ปากถังใต้คาง + เส้นก้องวงแหวนสีเหลืองรอบหูด้านนอก
+      function barrelSvg(t){
+        if (t < 2.075 || t > 4.6) return "";
+        const drop = 1 - seg(t, 2.075, 2.275);            // หล่นลงมาครอบ ตรง thud 2.275
+        const gone = seg(t, 4.305, 4.55);                 // หายไปพร้อมที่อุดหูหลุด
+        const y = -170 * drop * drop, sc = 1 + 0.15 * gone, op = (1 - gone);
+        const L = -26, R = 326, T = -6, Bt = 252;
+        const ink = (d, w = 7) => `<path d="${d}" fill="none" stroke="#2B2B2B" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+        let s = `<g opacity="${op.toFixed(3)}" transform="translate(150 ${(120 + y).toFixed(2)}) scale(${sc.toFixed(3)}) translate(-150 -120)">`;
+        s += ink(`M ${L+14} ${T} C ${L-22} ${T+90} ${L-22} ${Bt-90} ${L+14} ${Bt}`) + ink(`M ${R-14} ${T} C ${R+22} ${T+90} ${R+22} ${Bt-90} ${R-14} ${Bt}`);
+        s += `<ellipse cx="150" cy="${T}" rx="${(R-L)/2-14}" ry="20" fill="none" stroke="#2B2B2B" stroke-width="7"/>`;
+        s += `<ellipse cx="150" cy="${Bt}" rx="${(R-L)/2-14}" ry="20" fill="none" stroke="#2B2B2B" stroke-width="7" stroke-dasharray="14 12"/>`;
+        // ห่วงถังเฉพาะด้านข้าง (ไม่พาดหน้า)
+        s += ink(`M ${L-6} ${T+70} L ${L+30} ${T+76} M ${R+6} ${T+70} L ${R-30} ${T+76} M ${L-6} ${Bt-70} L ${L+30} ${Bt-76} M ${R+6} ${Bt-70} L ${R-30} ${Bt-76}`, 6);
+        s += `</g>`;
+        // เส้นก้องสีเหลืองรอบหูด้านนอก (ไม่ทับตา แว่น ปาก)
+        if (t > 2.275) {
+          const a = seg(t, 2.275, 2.45) * op;
+          [-1, 1].forEach(side => {
+            const cx = side < 0 ? 60 : 240;
+            [30, 46].forEach((r0, k) => {
+              const r = r0 + 5 * Math.sin((t - 2.275) * 11 - k * 1.4);
+              const a0 = side < 0 ? 140 : -40, a1 = side < 0 ? 220 : 40;
+              const p = (ang) => [cx + r * Math.cos(ang * Math.PI / 180), 160 + r * Math.sin(ang * Math.PI / 180)];
+              const [x0, y0] = p(a0), [x1, y1] = p(a1);
+              const d = `M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${r.toFixed(1)} ${r.toFixed(1)} 0 0 ${side < 0 ? 0 : 1} ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+              s += `<g opacity="${a.toFixed(3)}"><path d="${d}" fill="none" stroke="#2B2B2B" stroke-width="12" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#FFD84D" stroke-width="6" stroke-linecap="round"/></g>`;
+            });
+          });
+        }
+        return s;
+      }
+
+      const rig = document.getElementById("kid-rig");
+      let lastKey = "";
+      function draw(t){
+        const pi = find(POSES,t), [pt, pname] = POSES[pi];
+        const dt = t - pt;
+        let o;
+        if (pname === "outro") {
+          o = outroPose(Math.max(0, t - OUTRO_T0));
+          o.mo = mouthFor(o.mo, t);
+        } else {
+          o = Object.assign({}, PRE[pname]);
+          if (pname === "smug") o.gl = GLARES.some(([a,b]) => t>=a && t<b) ? "glare" : "norm";
+          o.mo = mouthFor(o.mo, t);
+        }
+        if (blinking(t) && o.gl !== "glare" && BLINKABLE[o.eye]) o.eye = "blink";
+        const ex = barrelSvg(t) + plugsSvg(t);
+        if (ex) o.extra = ex;
+        const key = JSON.stringify(o);
+        if (key !== lastKey) { rig.innerHTML = kid(o); lastKey = key; }
+
+        // เปลี่ยนตำแหน่งแบบจางผ่าน (จางออก → ย้าย → จางเข้า 0.3 วิ)
+        const li = find(LAYS,t), cur = LAY[LAYS[li][1]], prev = LAY[LAYS[Math.max(0,li-1)][1]];
+        const tp = li===0 ? 1 : seg(t, LAYS[li][0], LAYS[li][0]+0.3);
+        const lp = tp < 0.5 ? 0 : 1;
+        rig.style.opacity = (li===0 || tp>=1) ? "1" : Math.abs(Math.cos(Math.PI*tp)).toFixed(3);
+        const X = lerp(prev[0],cur[0],lp), Y = lerp(prev[1],cur[1],lp), S = lerp(prev[2],cur[2],lp);
+        const br = 1 + 0.01*(1 - Math.cos(2*Math.PI*t/2.6));
+        let sy = 1, hop = 0;
+        if (pi > 0 && dt < 0.45) { sy = 1 + 0.12*Math.exp(-dt*8)*Math.sin(dt*26 + Math.PI); hop = dt<0.3 ? -22*Math.sin(Math.PI*clamp(dt/0.3)) : 0; }
+        const sx = 1/Math.sqrt(sy);
+        rig.style.transform = `translate(${X.toFixed(2)}px, ${(Y+hop*S/1.2).toFixed(2)}px) scale(${S.toFixed(4)}) translate(130px, 384px) scale(${(br*sx).toFixed(4)}, ${(br*sy).toFixed(4)}) translate(-130px, -384px)`;
+      }
+
+      const DUR = 41.1;
+      const st = { t: 0 };
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(st, { t: 0 }, { t: DUR, duration: DUR, ease: "none", onUpdate: () => draw(st.t) }, 0);
+      draw(0);
+      window.__timelines["kid"] = tl;
+    })();
+  </script>
+</template>
