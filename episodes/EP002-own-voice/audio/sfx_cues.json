@@ -91,49 +91,49 @@
  },
  {
   "sfx": "tick",
-  "at": 24.888,
+  "at": 24.968,
   "gain_db": -20,
   "line": 13
  },
  {
   "sfx": "tick",
-  "at": 27.013,
+  "at": 27.093,
   "gain_db": -20,
   "line": 14
  },
  {
   "sfx": "wrong",
-  "at": 29.998,
+  "at": 30.078,
   "gain_db": -22,
   "line": 15
  },
  {
   "sfx": "boing",
-  "at": 30.548,
+  "at": 30.628,
   "gain_db": -22,
   "line": 15
  },
  {
   "sfx": "pop",
-  "at": 32.163,
+  "at": 32.243,
   "gain_db": -20,
   "line": 16
  },
  {
   "sfx": "thud",
-  "at": 34.168,
+  "at": 34.248,
   "gain_db": -20,
   "line": 17
  },
  {
   "sfx": "ding",
-  "at": 34.968,
+  "at": 35.048,
   "gain_db": -22,
   "line": 17
  },
  {
   "sfx": "glint",
-  "at": 37.323,
+  "at": 37.403,
   "gain_db": -22,
   "line": 18
  }

@@ -1,6 +1,6 @@
 {
   "sample_rate": 44100,
-  "total": 39.523,
+  "total": 39.603,
   "gap_range": [
     0.2,
     0.4
@@ -98,63 +98,63 @@
       "index": 12,
       "text": "แต่ที่แปลกกว่าคือ…",
       "start": 23.14,
-      "end": 24.67,
-      "duration": 1.53,
+      "end": 24.75,
+      "duration": 1.61,
       "gap_before": 0.214
     },
     {
       "index": 13,
       "text": "งานวิจัยส่วนใหญ่เจอว่า",
-      "start": 24.888,
-      "end": 26.728,
+      "start": 24.968,
+      "end": 26.808,
       "duration": 1.84,
       "gap_before": 0.218
     },
     {
       "index": 14,
       "text": "ฟังเสียงอัด เราจำเสียงตัวเอง",
-      "start": 27.013,
-      "end": 29.633,
+      "start": 27.093,
+      "end": 29.713,
       "duration": 2.62,
       "gap_before": 0.285
     },
     {
       "index": 15,
       "text": "ได้แม่นน้อยกว่าเสียงคนอื่น!",
-      "start": 29.998,
-      "end": 31.938,
+      "start": 30.078,
+      "end": 32.018,
       "duration": 1.94,
       "gap_before": 0.365
     },
     {
       "index": 16,
       "text": "ส่วนตอนอุดหูเมื่อกี้",
-      "start": 32.163,
-      "end": 33.723,
+      "start": 32.243,
+      "end": 33.803,
       "duration": 1.56,
       "gap_before": 0.225
     },
     {
       "index": 17,
       "text": "เธอได้ยินแต่ทางกระดูก!",
-      "start": 33.968,
-      "end": 35.698,
+      "start": 34.048,
+      "end": 35.778,
       "duration": 1.73,
       "gap_before": 0.245
     },
     {
       "index": 18,
       "text": "รู้เรื่องทั้งหมดแล้ว",
-      "start": 36.023,
-      "end": 37.683,
+      "start": 36.103,
+      "end": 37.763,
       "duration": 1.66,
       "gap_before": 0.325
     },
     {
       "index": 19,
       "text": "พวกมึงฉลาดขึ้นแล้วนะ",
-      "start": 38.073,
-      "end": 39.523,
+      "start": 38.153,
+      "end": 39.603,
       "duration": 1.45,
       "gap_before": 0.39
     }
