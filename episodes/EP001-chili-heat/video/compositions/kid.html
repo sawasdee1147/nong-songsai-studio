@@ -24,7 +24,7 @@
       // [เวลาเปลี่ยนท่า, ท่า] — เข้าก่อนคำพูด ~0.1 วิ
       const POSES = [[0,"peek"],[1.995,"smug"],[6.275,"ping"],[11.956,"ask"],[15.079,"smug"],[17.451,"shock"],[25.23,"laugh"],[28.098,"sweat"],[31.293,"smug"],[33.778,"ping"],[36.023,"shock"],[39.228,"outro"]];
       // ตำแหน่ง: X,Y มุมซ้ายบนของ viewBox, S สเกล
-      const LAY = { side:[0,826,1.1], split:[416,884,0.95], big:[182,150,2.75], outro:[202,172,2.6] };
+      const LAY = { side:[0,800,1.1], split:[416,850,0.95], big:[208.5,215,2.55], outro:[202,172,2.6] };
       const LAYS = [[0,"side"],[19.0,"split"],[20.85,"side"],[28.0,"big"],[30.95,"side"],[39.1,"outro"]];
       const OUTRO_T0 = 39.228;
       // แว่นแวบ (ท่ากวนๆ): 1b, ประโยค 2, ประโยค 6, ประโยค 11
@@ -117,7 +117,10 @@
 
         // ตำแหน่ง/สเกล (เปลี่ยนเลย์เอาต์แบบนุ่ม)
         const li = find(LAYS,t), cur = LAY[LAYS[li][1]], prev = LAY[LAYS[Math.max(0,li-1)][1]];
-        const lp = li===0 ? 1 : back(seg(t, LAYS[li][0], LAYS[li][0]+0.42));
+        // ย้ายตำแหน่งแบบจางผ่าน (ไม่ลากทับภาพ): จางออก → ย้าย → จางเข้า ใน 0.3 วิ
+        const tp = li===0 ? 1 : seg(t, LAYS[li][0], LAYS[li][0]+0.3);
+        const lp = tp < 0.5 ? 0 : 1;
+        rig.style.opacity = (li===0 || tp>=1) ? "1" : Math.abs(Math.cos(Math.PI*tp)).toFixed(3);
         const X = lerp(prev[0],cur[0],lp), Y = lerp(prev[1],cur[1],lp), S = lerp(prev[2],cur[2],lp);
         // หายใจ 1–1.02
         const br = 1 + 0.01*(1 - Math.cos(2*Math.PI*t/2.6));
