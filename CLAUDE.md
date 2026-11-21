@@ -52,6 +52,7 @@
 - `tools/audio/tts_elevenlabs.py` — พากย์ทีละประโยค (ต้องมี credential ของ api.elevenlabs.io)
 - `tools/audio/assemble.py` — ตัดเงียบหัวท้าย, เว้นช่วง 0.2–0.4 วิ, ต่อไฟล์, เขียน `timings.json`
 - `tools/sfx/make_sfx.py` — สร้างเสียงประกอบจากโค้ด → `sfx/`
+- `tools/fetch_page.py` — อ่านหน้าเว็บผ่านเครือข่ายของเซสชัน (WebFetch ใช้ไม่ได้ในเซสชันนี้) งานวิจัยให้อ่านจาก PMC
 - `character/kid.js` — ไลบรารีตัวละคร (ดู `character/README.md`)
 - HyperFrames CLI (`hyperframes`) + skills `hyperframes`, `hyperframes-cli`, `hyperframes-registry`
   - เครือข่ายของเซสชันอาจบล็อก CDN: ใช้ GSAP และไลบรารีอื่นจากไฟล์ในโปรเจกต์ (`npm pack` แล้วคัดลอก) ไม่ใช่ลิงก์ CDN
