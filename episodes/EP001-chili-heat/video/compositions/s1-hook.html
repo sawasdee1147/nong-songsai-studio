@@ -1,0 +1,70 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 64px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
+      border: 7px solid #2B2B2B; border-radius: 26px; padding: 2px 30px 10px; white-space: nowrap; box-shadow: 0 9px 0 #2B2B2B; }
+    .lab.red { background: #F05A50; color: #FFFFFF; }
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(600 640)"><g id="s1-rays"></g></g>
+      <path id="s1-link" d="M 400 470 C 470 310 600 300 680 380" fill="none" stroke="#2B2B2B" stroke-width="9" stroke-linecap="round" stroke-dasharray="4 26"/>
+      <g transform="translate(760 470)"><g id="s1-brain"></g></g>
+      <g transform="translate(600 640)">
+        <g id="s1-chili">
+          <g id="s1-body"></g>
+          <g id="s1-face-smug"></g>
+          <g id="s1-face-wink" opacity="0"></g>
+          <g id="s1-mask"></g>
+        </g>
+      </g>
+    </svg>
+    <div id="s1-sign" class="lab red" style="left:640px; top:1010px;">พริก ≠ ไฟ</div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      // แสงแฉกพื้นหลัง (ให้เฟรมแรกสะดุดตา)
+      let rays = "";
+      for (let i = 0; i < 16; i++) {
+        const a0 = (i / 16) * Math.PI * 2, a1 = a0 + Math.PI / 16;
+        rays += `<path d="M0 0 L${Math.cos(a0) * 1400} ${Math.sin(a0) * 1400} L${Math.cos(a1) * 1400} ${Math.sin(a1) * 1400} Z" fill="#FFE7A6"/>`;
+      }
+      $("s1-rays").innerHTML = rays + `<circle r="300" fill="#FFD84D" opacity=".55"/>`;
+      $("s1-body").innerHTML = A.chiliBody();
+      $("s1-face-smug").innerHTML = A.chiliFace("smug");
+      $("s1-face-wink").innerHTML = A.chiliFace("wink");
+      $("s1-mask").innerHTML = A.flameMask();
+      $("s1-brain").innerHTML = A.brainShape() + A.brainFace("q") +
+        `<g transform="translate(0 -190)"><text x="0" y="0" text-anchor="middle" font-family="Noto Sans Thai, sans-serif" font-weight="900" font-size="150" fill="#FFD84D" stroke="#2B2B2B" stroke-width="9" paint-order="stroke">?</text></g>`;
+
+      const tl = gsap.timeline({ paused: true });
+      // แสงหมุนช้าๆ
+      tl.fromTo("#s1-rays", { rotation: 0, svgOrigin: "0 0" }, { rotation: 22, svgOrigin: "0 0", duration: 3.7, ease: "none" }, 0);
+      // พริกยืนเท่ๆ ขยับเบาๆ
+      tl.fromTo("#s1-chili", { scale: 1.3, rotation: -4, x: 0, y: 0, svgOrigin: "0 0" }, { scale: 1.34, rotation: 3, duration: 0.5, ease: "sine.inOut", svgOrigin: "0 0" }, 0);
+      // หน้ากากไฟหลุดร่วงเอง (swoosh_down 0.0)
+      tl.fromTo("#s1-mask", { y: 0, rotation: 0, svgOrigin: "0 -100" }, { y: -14, rotation: -6, duration: 0.12, ease: "power1.out", svgOrigin: "0 -100" }, 0.02);
+      tl.to("#s1-mask", { y: 1500, rotation: 38, duration: 0.5, ease: "power2.in", svgOrigin: "0 -100" }, 0.14);
+      // พริกเด้งหลังหน้ากากหลุด
+      tl.to("#s1-chili", { scale: 1.42, duration: 0.12, ease: "power2.out", svgOrigin: "0 0" }, 0.5);
+      tl.to("#s1-chili", { scale: 1.34, rotation: 0, duration: 0.3, ease: "back.out(3)", svgOrigin: "0 0" }, 0.62);
+      // ป้าย "พริก ≠ ไฟ" เด้ง (wrong 0.6)
+      tl.fromTo("#s1-sign", { xPercent: -50, yPercent: -50, scale: 0, rotation: -12 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: -4, duration: 0.36, ease: "back.out(2.6)" }, 0.6);
+      tl.to("#s1-sign", { scale: 0.9, y: 30, opacity: 0, duration: 0.25, ease: "power2.in" }, 2.0);
+      // 1b: พริกหน้ากวนขยิบตา + เส้นประไปสมอง "?"
+      tl.to("#s1-chili", { x: -270, y: -70, scale: 0.85, duration: 0.42, ease: "back.out(1.6)", svgOrigin: "0 0" }, 2.0);
+      tl.set("#s1-face-smug", { opacity: 0 }, 2.195);
+      tl.set("#s1-face-wink", { opacity: 1 }, 2.195);
+      tl.set("#s1-face-smug", { opacity: 1 }, 2.75);
+      tl.set("#s1-face-wink", { opacity: 0 }, 2.75);
+      tl.fromTo("#s1-link", { strokeDashoffset: 0, opacity: 0 }, { strokeDashoffset: -120, opacity: 1, duration: 1.45, ease: "none" }, 2.25);
+      tl.fromTo("#s1-brain", { scale: 0, svgOrigin: "0 0" }, { scale: 0.72, duration: 0.4, ease: "back.out(2.4)", svgOrigin: "0 0" }, 2.25);
+      tl.to("#s1-brain", { rotation: 6, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: 3, svgOrigin: "0 0" }, 2.7);
+      window.__timelines["s1"] = tl;
+    })();
+  </script>
+</template>

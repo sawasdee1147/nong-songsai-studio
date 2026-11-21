@@ -1,0 +1,58 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 72px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
+      border: 7px solid #2B2B2B; border-radius: 26px; padding: 2px 30px 10px; white-space: nowrap; box-shadow: 0 9px 0 #2B2B2B; }
+    .lab.red { background: #F05A50; color: #FFFFFF; }
+  </style>
+  <div id="root" data-composition-id="s2" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(760 1090)"><g id="s2-person"></g></g>
+      <g id="s2-dots">
+        <circle id="s2-d1" cx="720" cy="960" r="18" fill="#fff" stroke="#2B2B2B" stroke-width="7"/>
+        <circle id="s2-d2" cx="690" cy="900" r="28" fill="#fff" stroke="#2B2B2B" stroke-width="7"/>
+      </g>
+      <g transform="translate(560 560)"><g id="s2-bubble"></g></g>
+      <g transform="translate(560 600)"><g id="s2-chili"></g></g>
+      <g transform="translate(560 560)"><g id="s2-x"></g></g>
+    </svg>
+    <div id="s2-wrong" class="lab red" style="left:820px; top:300px;">ผิด!</div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      $("s2-person").innerHTML = A.person();
+      $("s2-bubble").innerHTML = A.bubble(330, 260) +
+        `<ellipse cx="-260" cy="-150" rx="70" ry="60" fill="#fff" stroke="#2B2B2B" stroke-width="8"/><ellipse cx="250" cy="-170" rx="80" ry="60" fill="#fff" stroke="#2B2B2B" stroke-width="8"/>` +
+        A.bubble(322, 252).replace('stroke-width="8"', 'stroke-width="0"');
+      // พริกลุกเป็นไฟในฟองความคิด
+      $("s2-chili").innerHTML = `<g transform="scale(.62)">
+          <g id="s2-fl1" transform="translate(-110 -150) scale(.7)">${A.flame()}</g>
+          <g id="s2-fl2" transform="translate(120 -170) scale(.8)">${A.flame()}</g>
+          <g id="s2-fl3" transform="translate(0 -250) scale(1)">${A.flame()}</g>
+          ${A.chiliBody()}${A.chiliFace("hot")}</g>`;
+      $("s2-x").innerHTML = A.cross(170);
+
+      const tl = gsap.timeline({ paused: true });
+      // คน + ฟองความคิดขึ้นก่อน (ช่องว่างก่อนประโยค)
+      tl.fromTo("#s2-person", { scale: 0, svgOrigin: "0 200" }, { scale: 1, duration: 0.3, ease: "back.out(2.2)", svgOrigin: "0 200" }, 0);
+      tl.fromTo("#s2-d1", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.15, ease: "back.out(3)", transformOrigin: "50% 50%" }, 0.03);
+      tl.fromTo("#s2-d2", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.15, ease: "back.out(3)", transformOrigin: "50% 50%" }, 0.07);
+      tl.fromTo("#s2-bubble", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.22, ease: "back.out(2)", svgOrigin: "0 0" }, 0.06);
+      tl.fromTo("#s2-chili", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.22, ease: "back.out(2.4)", svgOrigin: "0 0" }, 0.1);
+      // เปลวไฟพลิ้ว
+      ["#s2-fl1", "#s2-fl2", "#s2-fl3"].forEach((id, i) => {
+        tl.fromTo(id + " path", { scaleY: 1, transformOrigin: "50% 100%" }, { scaleY: 1.12, transformOrigin: "50% 100%", duration: 0.16 + i * 0.03, ease: "sine.inOut", yoyo: true, repeat: 13 - i * 2 }, 0.1);
+      });
+      // กากบาทแดง "ผิด!" (wrong 3.905 = local 0.205)
+      tl.fromTo("#s2-x", { scale: 2.2, opacity: 0, svgOrigin: "0 0" }, { scale: 1, opacity: 1, duration: 0.16, ease: "power3.in", svgOrigin: "0 0" }, 0.06);
+      tl.fromTo("#s2-wrong", { xPercent: -50, yPercent: -50, scale: 0, rotation: 14 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: 8, duration: 0.3, ease: "back.out(3)" }, 0.205);
+      // ยิ้มเยาะช่วง "ใช่มั้ยล่ะ"
+      tl.to("#s2-x", { rotation: 6, duration: 0.12, ease: "sine.inOut", yoyo: true, repeat: 3, svgOrigin: "0 0" }, 1.75);
+      window.__timelines["s2"] = tl;
+    })();
+  </script>
+</template>

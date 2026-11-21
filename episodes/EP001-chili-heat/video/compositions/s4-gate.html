@@ -1,0 +1,72 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 54px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
+      border: 7px solid #2B2B2B; border-radius: 24px; padding: 2px 26px 10px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; }
+    .lab.red { background: #F05A50; color: #FFFFFF; font-family: sans-serif; font-size: 66px; padding: 6px 28px 10px; }
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(620 760)"><g id="s4-body"></g></g>
+      <g id="s4-dots">
+        <circle id="s4-p0" cx="620" cy="600" r="15" fill="#FFD84D" stroke="#2B2B2B" stroke-width="5"/>
+        <circle id="s4-p1" cx="620" cy="600" r="15" fill="#FFD84D" stroke="#2B2B2B" stroke-width="5"/>
+        <circle id="s4-p2" cx="620" cy="600" r="15" fill="#FFD84D" stroke="#2B2B2B" stroke-width="5"/>
+        <circle id="s4-p3" cx="620" cy="600" r="15" fill="#FFD84D" stroke="#2B2B2B" stroke-width="5"/>
+      </g>
+      <g transform="translate(620 760) scale(1.25)"><g id="s4-gate"></g></g>
+      <circle id="s4-click" cx="524" cy="735" r="30" fill="none" stroke="#FFD84D" stroke-width="10"/>
+      <g transform="translate(345 612)"><g id="s4-mol"></g></g>
+      <g transform="translate(400 560)"><g id="s4-flame"></g></g>
+      <g transform="translate(900 470) scale(.8)"><g id="s4-thermo"></g></g>
+    </svg>
+    <div id="s4-nlab" class="lab" style="left:640px; top:1010px;">ปลายประสาท</div>
+    <div id="s4-temp" class="lab red" style="left:700px; top:300px;">40°C+</div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      $("s4-body").innerHTML = A.nerveBody(600, 360);
+      $("s4-gate").innerHTML = A.gate("s4g");
+      $("s4-mol").innerHTML = `<g transform="rotate(24)">${A.molecule()}</g>`;
+      $("s4-flame").innerHTML = `<g id="s4-flame-in">${A.flame()}</g>`;
+      $("s4-thermo").innerHTML = A.thermo("s4t");
+
+      const tl = gsap.timeline({ paused: true });
+      // ปลายประสาทเลื่อนขึ้น + ประตูเด้ง (tick 9.209 = local 0.099)
+      tl.fromTo("#s4-body", { y: 500 }, { y: 0, duration: 0.3, ease: "power3.out" }, 0);
+      tl.fromTo("#s4-gate", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.3, ease: "back.out(2.6)", svgOrigin: "0 0" }, 0.08);
+      tl.fromTo("#s4-nlab", { xPercent: -50, yPercent: -50, scale: 0 }, { xPercent: -50, yPercent: -50, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 0.35);
+      // 4: โมเลกุลวิ่งไปเสียบประตู (รูกุญแจที่เสา)
+      tl.fromTo("#s4-mol", { x: -520, y: -330 }, { x: -260, y: -170, duration: 0.45, ease: "power1.inOut" }, 0.3);
+      tl.to("#s4-mol", { x: 0, y: 0, duration: 0.6, ease: "back.out(1.4)" }, 0.75);
+      tl.fromTo("#s4-mol", { rotation: 0, svgOrigin: "0 0" }, { rotation: -8, duration: 0.15, ease: "sine.inOut", yoyo: true, repeat: 3, svgOrigin: "0 0" }, 0.3);
+      tl.fromTo("#s4-click", { scale: 0.3, opacity: 0, transformOrigin: "50% 50%" }, { scale: 2.4, opacity: 0, duration: 0.45, ease: "power2.out", transformOrigin: "50% 50%",
+        keyframes: { opacity: [0, 1, 1, 0] } }, 1.35);
+      // ประตูแง้มเมื่อโมเลกุลเสียบ
+      tl.fromTo("#s4g-dl", { x: 0 }, { x: -30, duration: 0.25, ease: "power2.out" }, 1.45);
+      tl.fromTo("#s4g-dr", { x: 0 }, { x: 30, duration: 0.25, ease: "power2.out" }, 1.45);
+      // 5: (12.056 = local 2.946) โมเลกุลหาย ประตูปิด → ไฟเข้าใกล้ → ประตูเปิด
+      tl.to("#s4-mol", { opacity: 0, x: -200, y: -120, duration: 0.3, ease: "power2.in" }, 2.6);
+      tl.to("#s4g-dl", { x: 0, duration: 0.18, ease: "power2.in" }, 2.7);
+      tl.to("#s4g-dr", { x: 0, duration: 0.18, ease: "power2.in" }, 2.7);
+      tl.fromTo("#s4-flame", { x: -300, scale: 0, svgOrigin: "0 100" }, { x: -300, scale: 0.85, duration: 0.25, ease: "back.out(3)", svgOrigin: "0 100" }, 2.946);
+      tl.to("#s4-flame", { x: 0, duration: 0.9, ease: "power2.inOut" }, 3.2);
+      tl.fromTo("#s4-flame-in", { scaleY: 1, transformOrigin: "50% 100%" }, { scaleY: 1.1, scaleX: 0.95, transformOrigin: "50% 100%", duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 29 }, 2.946);
+      tl.to("#s4g-dl", { x: -46, duration: 0.25, ease: "back.out(2)" }, 4.05);
+      tl.to("#s4g-dr", { x: 46, duration: 0.25, ease: "back.out(2)" }, 4.05);
+      // จุดเล็กๆ ไหลเข้า
+      ["#s4-p0", "#s4-p1", "#s4-p2", "#s4-p3"].forEach((id, i) => {
+        tl.fromTo(id, { y: -40, opacity: 0 }, { y: 440, duration: 0.9, ease: "none", repeat: 4, keyframes: { opacity: [0, 1, 1, 1, 0] } }, 4.2 + i * 0.22);
+      });
+      // 6: (15.179 = local 6.069) เทอร์โมมิเตอร์พุ่ง + 40°C+
+      tl.fromTo("#s4-thermo", { scale: 0, svgOrigin: "0 200" }, { scale: 1, duration: 0.3, ease: "back.out(2.6)", svgOrigin: "0 200" }, 6.0);
+      tl.fromTo("#s4t-merc", { scaleY: 0.15, transformOrigin: "50% 100%" }, { scaleY: 1, transformOrigin: "50% 100%", duration: 0.8, ease: "power3.out" }, 6.1);
+      tl.fromTo("#s4-temp", { xPercent: -50, yPercent: -50, scale: 0, rotation: -10 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: -4, duration: 0.35, ease: "back.out(2.8)" }, 6.75);
+      window.__timelines["s4"] = tl;
+    })();
+  </script>
+</template>

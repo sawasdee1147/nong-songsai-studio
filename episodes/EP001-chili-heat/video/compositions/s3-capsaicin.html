@@ -1,0 +1,64 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 68px; line-height: 1.15; color: #2B2B2B; background: #FFD84D;
+      border: 7px solid #2B2B2B; border-radius: 26px; padding: 8px 34px 14px; white-space: nowrap; box-shadow: 0 9px 0 #2B2B2B; text-align: center; }
+    .lab small { display: block; font-size: 46px; font-weight: 900; font-family: sans-serif; }
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <defs><clipPath id="s3-clip"><circle cx="600" cy="560" r="330"/></clipPath></defs>
+      <g transform="translate(600 600)"><g id="s3-bigchili"></g></g>
+      <g id="s3-callout">
+        <path d="M 860 300 L 760 290 M 860 300 L 870 420" stroke="#2B2B2B" stroke-width="7" stroke-linecap="round" stroke-dasharray="3 18"/>
+        <g transform="translate(905 250)"><g id="s3-mini"></g></g>
+      </g>
+      <g id="s3-lens">
+        <circle cx="600" cy="560" r="330" fill="#FFB4AA"/>
+        <g clip-path="url(#s3-clip)">
+          <g id="s3-cells"></g>
+          <g transform="translate(470 420)"><g id="s3-m1"></g></g>
+          <g transform="translate(700 380)"><g id="s3-m2"></g></g>
+          <g transform="translate(420 640)"><g id="s3-m3"></g></g>
+          <g transform="translate(680 620)"><g id="s3-m4"></g></g>
+          <g transform="translate(560 800)"><g id="s3-m5"></g></g>
+        </g>
+        <circle cx="600" cy="560" r="330" fill="none" stroke="#2B2B2B" stroke-width="14"/>
+        <circle cx="600" cy="560" r="306" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="120 900" stroke-linecap="round" transform="rotate(200 600 560)" opacity=".8"/>
+      </g>
+    </svg>
+    <div id="s3-name" class="lab" style="left:620px; top:1050px;">แคปไซซิน<small>(capsaicin)</small></div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      $("s3-bigchili").innerHTML = A.chiliBody() + A.chiliFace("smug");
+      $("s3-mini").innerHTML = `<g transform="scale(.28) rotate(20)">${A.chiliBody()}${A.chiliFace("smug")}</g>`;
+      // เนื้อพริก (เซลล์เรียบๆ)
+      let cells = "";
+      const pts = [[340,330],[520,290],[720,300],[860,420],[300,520],[880,600],[340,760],[760,820],[560,560],[470,880]];
+      pts.forEach(([x, y], i) => { cells += `<ellipse cx="${x}" cy="${y}" rx="${70 + (i % 3) * 12}" ry="${52 + (i % 2) * 10}" fill="#FFC6BE" stroke="#F05A50" stroke-width="5" opacity=".9"/>`; });
+      $("s3-cells").innerHTML = cells;
+      const mols = ["s3-m1", "s3-m2", "s3-m3", "s3-m4", "s3-m5"];
+      const rots = [-10, 160, 20, 200, -30];
+      mols.forEach((id, i) => { $(id).innerHTML = `<g transform="rotate(${rots[i]}) scale(${i === 4 ? 0.8 : 0.9})">${A.molecule()}</g>`; });
+
+      const tl = gsap.timeline({ paused: true });
+      // ซูมเข้าเนื้อพริก
+      tl.fromTo("#s3-bigchili", { scale: 1, opacity: 1, svgOrigin: "0 -60" }, { scale: 5, opacity: 0, duration: 0.3, ease: "power2.in", svgOrigin: "0 -60" }, 0);
+      // เลนส์ขยาย + โมเลกุลเด้ง (pop 6.375 = local 0.1)
+      tl.fromTo("#s3-lens", { scale: 0.2, opacity: 0, svgOrigin: "600 560" }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.8)", svgOrigin: "600 560" }, 0.08);
+      mols.forEach((id, i) => {
+        tl.fromTo("#" + id, { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.3, ease: "back.out(3)", svgOrigin: "0 0" }, 0.1 + i * 0.07);
+        tl.to("#" + id, { y: i % 2 ? 16 : -16, rotation: i % 2 ? 8 : -8, duration: 0.42 + i * 0.04, ease: "sine.inOut", yoyo: true, repeat: 4, svgOrigin: "0 0" }, 0.45 + i * 0.07);
+      });
+      tl.fromTo("#s3-callout", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.3);
+      // ป้ายชื่อขึ้นตอนพูด "แคปไซซิน" (~7.9 วิ)
+      tl.fromTo("#s3-name", { xPercent: -50, yPercent: -50, scale: 0, rotation: -6 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: -2, duration: 0.35, ease: "back.out(2.6)" }, 1.45);
+      window.__timelines["s3"] = tl;
+    })();
+  </script>
+</template>
