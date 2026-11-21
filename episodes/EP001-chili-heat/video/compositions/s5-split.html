@@ -1,12 +1,15 @@
 <template>
   <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 2px 26px 10px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
     .lab.big { font-size: 60px; padding: 6px 34px 14px; line-height: 1.25; }
     .lab.big b { display: block; color: #F05A50; font-size: 76px; }
+    .ne { display: inline-block; width: 0.62em; height: 0.62em; vertical-align: -0.02em; }
   </style>
   <div id="root" data-composition-id="s5" data-width="1080" data-height="1920">
     <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
@@ -27,7 +30,7 @@
           <circle id="s5-lp1" cx="270" cy="700" r="12" fill="#FFD84D" stroke="#2B2B2B" stroke-width="4"/>
         </g>
         <g transform="translate(270 820) scale(.85)"><g id="s5-lgate"></g></g>
-        <g transform="translate(270 560) scale(.72)"><g id="s5-lflame"></g></g>
+        <g transform="translate(270 600) scale(.66)"><g id="s5-lflame"></g></g>
       </g>
       <g id="s5-right">
         <rect x="540" y="0" width="540" height="1920" fill="#E3F6F1"/>
@@ -37,13 +40,13 @@
           <circle id="s5-rp1" cx="810" cy="700" r="12" fill="#FFD84D" stroke="#2B2B2B" stroke-width="4"/>
         </g>
         <g transform="translate(810 820) scale(.85)"><g id="s5-rgate"></g></g>
-        <g transform="translate(700 590) scale(.85)"><g id="s5-rmol"></g></g>
+        <g transform="translate(700 620) scale(.8)"><g id="s5-rmol"></g></g>
       </g>
       <path id="s5-divider" d="M 540 0 L 540 1920" stroke="#2B2B2B" stroke-width="10"/>
     </svg>
-    <div id="s5-tagl" class="lab" style="left:130px; top:440px;">ไฟ</div>
-    <div id="s5-tagr" class="lab" style="left:850px; top:440px;">พริก</div>
-    <div id="s5-mid" class="lab big" style="left:540px; top:270px;"><b>พริก ≠ ไฟ</b>แต่เปิดได้เหมือนกัน</div>
+    <div id="s5-tagl" class="lab" style="left:130px; top:490px;">ไฟ</div>
+    <div id="s5-tagr" class="lab" style="left:850px; top:490px;">พริก</div>
+    <div id="s5-mid" class="lab big" style="left:540px; top:330px;"><b>พริก <svg class="ne" viewBox="0 0 60 60" aria-label="≠"><path d="M8 22 H52 M8 40 H52 M40 6 L20 54" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"/></svg> ไฟ</b>แต่เปิดได้เหมือนกัน</div>
   </div>
   <script>
     (function () {
@@ -52,9 +55,9 @@
       $("s5-body").innerHTML = A.nerveBody(600, 360);
       $("s5-gate").innerHTML = A.gate("s5g");
       $("s5-flame0").innerHTML = A.flame();
-      $("s5-bang").innerHTML = `<text x="0" y="80" text-anchor="middle" font-family="Noto Sans Thai, sans-serif" font-weight="900" font-size="300" fill="#FFD84D" stroke="#2B2B2B" stroke-width="14" paint-order="stroke">!</text>`;
-      $("s5-lbody").innerHTML = A.nerveBody(500, 260);
-      $("s5-rbody").innerHTML = A.nerveBody(500, 260);
+      $("s5-bang").innerHTML = `<text x="0" y="80" text-anchor="middle" font-family="Noto Sans Thai, Noto Sans, sans-serif" font-weight="900" font-size="300" fill="#FFD84D" stroke="#2B2B2B" stroke-width="14" paint-order="stroke">!</text>`;
+      $("s5-lbody").innerHTML = A.nerveBody(400, 260);
+      $("s5-rbody").innerHTML = A.nerveBody(400, 260);
       $("s5-lgate").innerHTML = A.gate("s5l");
       $("s5-rgate").innerHTML = A.gate("s5r");
       $("s5-lflame").innerHTML = `<g id="s5-lflame-in">${A.flame()}</g>`;
@@ -86,7 +89,7 @@
       tl.fromTo("#s5-rmol", { x: 0, y: 0 }, { x: 14, y: 20, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: 4 }, 1.95);
       tl.fromTo("#s5-tagl", { xPercent: -50, yPercent: -50, scale: 0 }, { xPercent: -50, yPercent: -50, scale: 1, duration: 0.25, ease: "back.out(2.6)" }, 2.0);
       tl.fromTo("#s5-tagr", { xPercent: -50, yPercent: -50, scale: 0 }, { xPercent: -50, yPercent: -50, scale: 1, duration: 0.25, ease: "back.out(2.6)" }, 2.05);
-      tl.fromTo("#s5-mid", { xPercent: -50, yPercent: -50, scale: 0, rotation: -5 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2.4)" }, 1.95);
+      tl.fromTo("#s5-mid", { xPercent: -50, yPercent: -50, scale: 0, rotation: -5 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2.4)" }, 1.75);
       window.__timelines["s5"] = tl;
     })();
   </script>

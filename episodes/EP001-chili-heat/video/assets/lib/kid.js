@@ -27,6 +27,7 @@ function eyes(t){
     case "wink": return dot(L)+`<path d="M168 148 L194 154 L168 160" fill="none" stroke="${INK}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
     case "cool": return [L,R].map(x=>`<path d="M${x-13} ${EY} Q${x} ${EY+20} ${x+13} ${EY}Z" fill="${INK}"/><circle cx="${x+5}" cy="${EY+5}" r="3" fill="#fff"/><path d="M${x-15} ${EY} L${x+15} ${EY-1}" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>`).join("");
     case "sad": return dot(L,0,3)+dot(R,0,3);
+    case "blink": return arc(L,false)+arc(R,false); // ตาปิด (กะพริบ) วาดใต้ชั้นแว่นตามลำดับเดิม
     default: return dot(L)+dot(R);
   }
 }

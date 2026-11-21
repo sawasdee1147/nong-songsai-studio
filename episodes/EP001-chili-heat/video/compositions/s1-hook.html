@@ -1,11 +1,14 @@
 <template>
   <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 64px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 26px; padding: 2px 30px 10px; white-space: nowrap; box-shadow: 0 9px 0 #2B2B2B; }
     .lab.red { background: #F05A50; color: #FFFFFF; }
+    .ne { display: inline-block; width: 0.62em; height: 0.62em; vertical-align: -0.02em; }
   </style>
   <div id="root" data-composition-id="s1" data-width="1080" data-height="1920">
     <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
@@ -21,7 +24,7 @@
         </g>
       </g>
     </svg>
-    <div id="s1-sign" class="lab red" style="left:640px; top:1010px;">พริก ≠ ไฟ</div>
+    <div id="s1-sign" class="lab red" style="left:640px; top:1010px;">พริก <svg class="ne" viewBox="0 0 60 60" aria-label="≠"><path d="M8 22 H52 M8 40 H52 M40 6 L20 54" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"/></svg> ไฟ</div>
   </div>
   <script>
     (function () {
@@ -39,7 +42,7 @@
       $("s1-face-wink").innerHTML = A.chiliFace("wink");
       $("s1-mask").innerHTML = A.flameMask();
       $("s1-brain").innerHTML = A.brainShape() + A.brainFace("q") +
-        `<g transform="translate(0 -190)"><text x="0" y="0" text-anchor="middle" font-family="Noto Sans Thai, sans-serif" font-weight="900" font-size="150" fill="#FFD84D" stroke="#2B2B2B" stroke-width="9" paint-order="stroke">?</text></g>`;
+        `<g transform="translate(0 -190)"><text x="0" y="0" text-anchor="middle" font-family="Noto Sans Thai, Noto Sans, sans-serif" font-weight="900" font-size="150" fill="#FFD84D" stroke="#2B2B2B" stroke-width="9" paint-order="stroke">?</text></g>`;
 
       const tl = gsap.timeline({ paused: true });
       // แสงหมุนช้าๆ

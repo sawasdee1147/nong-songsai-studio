@@ -19,7 +19,7 @@
 
 | option | ค่า | ความหมาย |
 |---|---|---|
-| `eye` | `norm` `up` `smug` `shock` `spark` `laugh` `side` `wink` `cool` `sad` | ตา (`cool` = ตาแอ๊คครึ่งปิด) |
+| `eye` | `norm` `up` `smug` `shock` `spark` `laugh` `side` `wink` `cool` `sad` `blink` | ตา (`cool` = ตาแอ๊คครึ่งปิด, `blink` = ตาปิดโค้งลง ใช้ทำกะพริบตา 3–4 เฟรม) |
 | `brow` | `norm` `smug` `up` `shock` `worry` `cool` `none` | คิ้ว |
 | `mo` | `smile` `o` `smirk` `shock` `grin` `tongue` `flat` `flatlow` `wobble` | ปาก |
 | `ah` | `?` `!` `zig` `droop` `heart` | ผมชี้ (สงสัย / เข้าใจแล้ว / ตกใจ / เบื่อ / เขิน) |

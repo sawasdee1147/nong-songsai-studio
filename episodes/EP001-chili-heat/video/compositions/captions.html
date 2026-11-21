@@ -1,13 +1,15 @@
 <template>
   <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; pointer-events: none; font-family: "Noto Sans Thai", sans-serif; }
+    #root { position: absolute; inset: 0; pointer-events: none; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     /* พื้นที่ซับ: ซ้าย 60 / ขวา 140 / ล่าง 400 จากขอบ (ปลอดภัยตาม show bible) */
     .cap { position: absolute; left: 60px; width: 880px; bottom: 400px; text-align: center; overflow: visible; }
     .card { display: inline-block; background: #FFFFFF; border: 7px solid #2B2B2B; border-radius: 30px;
-      box-shadow: 0 9px 0 #2B2B2B; padding: 6px 34px 14px; color: #2B2B2B; font-weight: 900;
-      font-size: 76px; line-height: 1.32; letter-spacing: 0; }
+      box-shadow: 0 9px 0 #2B2B2B; padding: 18px 34px 14px; color: #2B2B2B; font-weight: 900;
+      font-size: 76px; line-height: 1.42; letter-spacing: 0; }
     .ln { display: block; white-space: nowrap; }
   </style>
   <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">

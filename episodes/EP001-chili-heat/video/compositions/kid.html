@@ -24,9 +24,11 @@
       // [เวลาเปลี่ยนท่า, ท่า] — เข้าก่อนคำพูด ~0.1 วิ
       const POSES = [[0,"peek"],[1.995,"smug"],[6.275,"ping"],[11.956,"ask"],[15.079,"smug"],[17.451,"shock"],[25.23,"laugh"],[28.098,"sweat"],[31.293,"smug"],[33.778,"ping"],[36.023,"shock"],[39.228,"outro"]];
       // ตำแหน่ง: X,Y มุมซ้ายบนของ viewBox, S สเกล
-      const LAY = { side:[0,880,1.2], big:[182,150,2.75], outro:[202,172,2.6] };
-      const LAYS = [[0,"side"],[28.0,"big"],[31.2,"side"],[39.1,"outro"]];
+      const LAY = { side:[0,826,1.1], split:[416,884,0.95], big:[182,150,2.75], outro:[202,172,2.6] };
+      const LAYS = [[0,"side"],[19.0,"split"],[20.85,"side"],[28.0,"big"],[30.95,"side"],[39.1,"outro"]];
       const OUTRO_T0 = 39.228;
+      // แว่นแวบ (ท่ากวนๆ): 1b, ประโยค 2, ประโยค 6, ประโยค 11
+      const GLARES = [[2.11,2.85],[3.92,4.55],[15.2,15.95],[31.4,32.1]];
 
       const clamp = x => Math.max(0, Math.min(1, x));
       const seg = (t,a,b) => clamp((t-a)/(b-a));
@@ -65,12 +67,7 @@
       // กะพริบตา (กำหนดเวลาแน่นอน)
       const BLINKS = [1.2,3.3,5.6,8.1,10.4,13.1,14.4,16.6,19.9,22.2,24.6,27.1,29.6,32.6,35.2,37.6,39.6,43.3];
       function blinking(t){ for (const b of BLINKS) if (t>=b && t<b+0.13) return true; return false; }
-      const BLINKABLE = { norm:21, up:21, sad:21, shock:21 };
-      function lidSvg(o){
-        const r = BLINKABLE[o.eye]; if (!r) return "";
-        const dy = o.eye==="up" ? -5 : 0;
-        return [118,182].map(x => `<ellipse cx="${x}" cy="${152+dy}" rx="${o.eye==="shock"?20:15}" ry="${o.eye==="shock"?20:17}" fill="#FFE0C2"/><path d="M${x-14} ${150+dy} Q${x} ${160+dy} ${x+14} ${150+dy}" fill="none" stroke="#2B2B2B" stroke-width="5" stroke-linecap="round"/>`).join("");
-      }
+      const BLINKABLE = { norm:1, up:1, sad:1 };   // ไม่กะพริบตอนท่าตกใจ
       // ฉาก 10: หยดเหงื่อ + ไอแดงบนแก้ม (ไม่เปลี่ยนสีผิว)
       const DROPS = [[76,120],[222,114],[118,74],[186,70],[56,150],[244,146],[150,56]];
       function sweatSvg(dt){
@@ -110,11 +107,11 @@
           o.mo = mouthFor(o.mo, t);
         } else {
           o = Object.assign({}, PRE[pname]);
-          if (pname === "smug") o.gl = (dt > 0.12 && dt < 0.95) ? "glare" : "norm";   // แว่นแวบ
+          if (pname === "smug") o.gl = GLARES.some(([a,b]) => t>=a && t<b) ? "glare" : "norm";   // แว่นแวบ
           o.mo = mouthFor(o.mo, t);
           if (pname === "sweat") o.extra = sweatSvg(dt);
         }
-        if (blinking(t) && o.gl !== "glare") o.extra = (o.extra||"") + lidSvg(o);
+        if (blinking(t) && o.gl !== "glare" && BLINKABLE[o.eye]) o.eye = "blink";   // ตาปิดวาดใต้ชั้นแว่น (kid.js)
         const key = JSON.stringify(o);
         if (key !== lastKey) { rig.innerHTML = kid(o); lastKey = key; }
 

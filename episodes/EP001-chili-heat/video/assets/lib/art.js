@@ -89,7 +89,7 @@
     <rect x="46" y="-112" width="62" height="224" rx="22" fill="${M}" stroke="${K}" stroke-width="7"/>
     <circle cx="-77" cy="-20" r="13" fill="${K}"/><path d="M -77 -20 L -77 8" stroke="${K}" stroke-width="10" stroke-linecap="round"/>
     ${sign ? `<rect x="-96" y="-182" width="192" height="64" rx="18" fill="${Y}" stroke="${K}" stroke-width="7"/>
-    <text x="0" y="-136" text-anchor="middle" font-family="Noto Sans Thai, sans-serif" font-weight="900" font-size="42" fill="${K}">TRPV1</text>` : ""}`;
+    <text x="0" y="-136" text-anchor="middle" font-family="Noto Sans Thai, Noto Sans, sans-serif" font-weight="900" font-size="42" fill="${K}">TRPV1</text>` : ""}`;
 
   // ปลายประสาท: ผนังเยื่อหุ้มแนวนอน (ด้านบน = ข้างนอก) ตัวประสาทสีชมพูด้านล่าง
   ART.nerveBody = (w, h) => `

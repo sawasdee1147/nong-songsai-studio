@@ -1,7 +1,9 @@
 <template>
   <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 52px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
       border: 6px solid #2B2B2B; border-radius: 22px; padding: 0 24px 8px; white-space: nowrap; box-shadow: 0 7px 0 #2B2B2B; text-align: center; }
@@ -14,13 +16,13 @@
   <div id="root" data-composition-id="s8" data-width="1080" data-height="1920">
     <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
       <g transform="translate(640 330) scale(.62)"><g id="s8-brain"></g></g>
-      <path id="s8-yw-o" d="M 530 950 C 380 800 420 560 570 420" fill="none" stroke="#2B2B2B" stroke-width="30" stroke-linecap="round"/>
-      <path id="s8-yw" d="M 530 950 C 380 800 420 560 570 420" fill="none" stroke="#FFD84D" stroke-width="16" stroke-linecap="round"/>
-      <path id="s8-yp" d="M 530 950 C 380 800 420 560 570 420" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" pathLength="1000" stroke-dasharray="30 170" opacity="0"/>
-      <path id="s8-ow-o" d="M 670 950 C 860 800 860 560 710 420" fill="none" stroke="#2B2B2B" stroke-width="30" stroke-linecap="round"/>
-      <path id="s8-ow" d="M 670 950 C 860 800 860 560 710 420" fill="none" stroke="#E0704F" stroke-width="16" stroke-linecap="round"/>
-      <path id="s8-op" d="M 670 950 C 860 800 860 560 710 420" fill="none" stroke="#FFD84D" stroke-width="10" stroke-linecap="round" pathLength="1000" stroke-dasharray="30 170" opacity="0"/>
-      <g transform="translate(600 1050) scale(.8)"><g id="s8-tongue"></g></g>
+      <path id="s8-yw-o" d="M 540 895 C 380 760 420 560 570 420" fill="none" stroke="#2B2B2B" stroke-width="30" stroke-linecap="round"/>
+      <path id="s8-yw" d="M 540 895 C 380 760 420 560 570 420" fill="none" stroke="#FFD84D" stroke-width="16" stroke-linecap="round"/>
+      <path id="s8-yp" d="M 540 895 C 380 760 420 560 570 420" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" pathLength="1000" stroke-dasharray="30 170" opacity="0"/>
+      <path id="s8-ow-o" d="M 680 895 C 860 760 860 560 710 420" fill="none" stroke="#2B2B2B" stroke-width="30" stroke-linecap="round"/>
+      <path id="s8-ow" d="M 680 895 C 860 760 860 560 710 420" fill="none" stroke="#E0704F" stroke-width="16" stroke-linecap="round"/>
+      <path id="s8-op" d="M 680 895 C 860 760 860 560 710 420" fill="none" stroke="#FFD84D" stroke-width="10" stroke-linecap="round" pathLength="1000" stroke-dasharray="30 170" opacity="0"/>
+      <g transform="translate(610 990) scale(.74)"><g id="s8-tongue"></g></g>
     </svg>
     <div id="s8-t1" class="lab taste" style="left:220px; top:250px;">หวาน</div>
     <div id="s8-t2" class="lab taste" style="left:220px; top:355px;">เค็ม</div>
@@ -38,7 +40,7 @@
       const $ = (id) => document.getElementById(id);
       $("s8-brain").innerHTML = A.brainShape() + A.brainFace("happy");
       $("s8-tongue").innerHTML = A.tongue();
-      $("s8-x").innerHTML = ["#2B2B2B", "#F05A50"].map((c, i) => `<path d="M -78 -58 L 78 58 M 78 -58 L -78 58" stroke="${c}" stroke-width="${i ? 12 : 22}" stroke-linecap="round"/>`).join("");
+      $("s8-x").innerHTML = ["#2B2B2B", "#F05A50"].map((c, i) => `<path d="M -96 -50 L 96 50 M 96 -50 L -96 50" stroke="${c}" stroke-width="${i ? 7 : 13}" stroke-linecap="round"/>`).join("");
 
       const tl = gsap.timeline({ paused: true });
       const pop = (sel, t, rot = 0) => tl.fromTo(sel, { xPercent: -50, yPercent: -50, scale: 0, rotation: rot - 8 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: rot, duration: 0.25, ease: "back.out(2.6)" }, t);
