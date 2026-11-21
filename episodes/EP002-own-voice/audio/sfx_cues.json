@@ -7,134 +7,176 @@
  },
  {
   "sfx": "thud",
-  "at": 2.275,
+  "at": 2.032,
   "gain_db": -20,
   "line": 2
  },
  {
   "sfx": "pop",
-  "at": 4.835,
+  "at": 4.305,
   "gain_db": -20,
   "line": 3
  },
  {
   "sfx": "blip_talk",
-  "at": 5.335,
+  "at": 4.805,
   "gain_db": -24,
   "line": 3
  },
  {
   "sfx": "pop",
-  "at": 6.935,
+  "at": 6.16,
   "gain_db": -20,
   "line": 4
  },
  {
   "sfx": "tick",
-  "at": 7.799,
+  "at": 6.947,
   "gain_db": -20,
   "line": 5
  },
  {
   "sfx": "tick",
-  "at": 10.586,
+  "at": 9.397,
   "gain_db": -20,
   "line": 6
  },
  {
   "sfx": "tick",
-  "at": 11.586,
+  "at": 10.297,
   "gain_db": -20,
   "line": 6
  },
  {
   "sfx": "glint",
-  "at": 13.099,
+  "at": 11.633,
   "gain_db": -22,
   "line": 7
  },
  {
-  "sfx": "tick",
-  "at": 15.531,
-  "gain_db": -20,
-  "line": 8
- },
- {
-  "sfx": "tick",
-  "at": 16.431,
-  "gain_db": -20,
-  "line": 8
- },
- {
-  "sfx": "wrong",
-  "at": 17.692,
+  "sfx": "boing",
+  "at": 13.89,
   "gain_db": -22,
+  "line": 8
+ },
+ {
+  "sfx": "blip_talk",
+  "at": 15.758,
+  "gain_db": -24,
   "line": 9
  },
  {
-  "sfx": "whoosh",
-  "at": 19.599,
+  "sfx": "boing",
+  "at": 17.742,
   "gain_db": -22,
   "line": 10
  },
  {
-  "sfx": "ding",
-  "at": 21.666,
-  "gain_db": -22,
+  "sfx": "tick",
+  "at": 19.375,
+  "gain_db": -20,
   "line": 11
  },
  {
-  "sfx": "riser",
-  "at": 23.67,
-  "gain_db": -24,
-  "line": 12
- },
- {
   "sfx": "tick",
-  "at": 25.498,
+  "at": 20.175,
   "gain_db": -20,
-  "line": 13
- },
- {
-  "sfx": "tick",
-  "at": 27.623,
-  "gain_db": -20,
-  "line": 14
+  "line": 11
  },
  {
   "sfx": "wrong",
-  "at": 30.608,
+  "at": 21.241,
   "gain_db": -22,
+  "line": 12
+ },
+ {
+  "sfx": "whoosh",
+  "at": 22.962,
+  "gain_db": -22,
+  "line": 13
+ },
+ {
+  "sfx": "ding",
+  "at": 24.804,
+  "gain_db": -22,
+  "line": 14
+ },
+ {
+  "sfx": "riser",
+  "at": 26.677,
+  "gain_db": -24,
   "line": 15
  },
  {
-  "sfx": "boing",
-  "at": 31.158,
-  "gain_db": -22,
-  "line": 15
- },
- {
-  "sfx": "pop",
-  "at": 32.773,
+  "sfx": "tick",
+  "at": 28.311,
   "gain_db": -20,
   "line": 16
  },
  {
-  "sfx": "thud",
-  "at": 34.778,
+  "sfx": "tick",
+  "at": 30.169,
   "gain_db": -20,
   "line": 17
  },
  {
-  "sfx": "ding",
-  "at": 35.578,
+  "sfx": "wrong",
+  "at": 32.756,
   "gain_db": -22,
-  "line": 17
+  "line": 18
+ },
+ {
+  "sfx": "boing",
+  "at": 33.306,
+  "gain_db": -22,
+  "line": 18
+ },
+ {
+  "sfx": "pop",
+  "at": 34.771,
+  "gain_db": -20,
+  "line": 19
+ },
+ {
+  "sfx": "tick",
+  "at": 37.149,
+  "gain_db": -20,
+  "line": 20
+ },
+ {
+  "sfx": "pop",
+  "at": 39.447,
+  "gain_db": -20,
+  "line": 21
+ },
+ {
+  "sfx": "thud",
+  "at": 41.732,
+  "gain_db": -20,
+  "line": 22
+ },
+ {
+  "sfx": "pop",
+  "at": 43.906,
+  "gain_db": -20,
+  "line": 23
+ },
+ {
+  "sfx": "thud",
+  "at": 45.768,
+  "gain_db": -20,
+  "line": 24
+ },
+ {
+  "sfx": "ding",
+  "at": 46.468,
+  "gain_db": -22,
+  "line": 24
  },
  {
   "sfx": "glint",
-  "at": 37.823,
+  "at": 48.537,
   "gain_db": -22,
-  "line": 18
+  "line": 25
  }
 ]
