@@ -4,7 +4,7 @@
     @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
@@ -19,6 +19,7 @@
   </style>
   <div id="root" data-composition-id="s4" data-width="1080" data-height="1920">
     <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g id="s4-art">
       <g transform="translate(770 560) scale(.58)"><g id="s4-head">
         <g id="s4-skull"></g>
         <path id="s4-bone-o" d="M -110 236 C -112 150 -70 60 -30 -6" fill="none" stroke="#2B2B2B" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/><path id="s4-bone" d="M -110 236 C -112 150 -70 60 -30 -6" fill="none" stroke="#FF8C69" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
@@ -37,8 +38,9 @@
       </g>
       <path id="s4-suckpath" d="M 655 610 C 600 660 520 560 450 540" fill="none" stroke="none"/>
       <g transform="translate(430 330)"><g id="s4-bub"></g></g>
+      </g>
     </svg>
-    <div id="s4-r1" class="lab small" style="left:640px; top:930px;">เธอ: อากาศ+กระดูก</div>
+    <div id="s4-r1" class="lab small" style="left:640px; top:930px;">คุณ: อากาศ+กระดูก</div>
     <div id="s4-r2" class="lab small" style="left:640px; top:1035px;">เพื่อน: อากาศ</div>
     <div id="s4-r2b" class="lab small" style="left:640px; top:1035px;">คลิป: อากาศ</div>
     <div id="s4-bad" class="lab small" style="left:430px; top:325px;"><span style="position:relative">ไมค์ห่วย?</span><div id="s4-strike" class="strike"></div><div id="s4-xb" class="xb"><svg viewBox="-40 -40 80 80" width="70" height="70"><circle r="33" fill="#F05A50" stroke="#2B2B2B" stroke-width="6"/><path d="M -13 -13 L 13 13 M 13 -13 L -13 13" stroke="#fff" stroke-width="8" stroke-linecap="round"/></svg></div></div>
@@ -56,42 +58,44 @@
       $("s4-friend").innerHTML = A.person();
       $("s4-mic").innerHTML = A.mic();
       $("s4-bub").innerHTML = A.bubble(190, 95) + `<circle cx="-30" cy="150" r="20" fill="#fff" stroke="#2B2B2B" stroke-width="7"/><circle cx="-10" cy="200" r="12" fill="#fff" stroke="#2B2B2B" stroke-width="6"/>`;
-      // #7 คนอื่นได้ยินแค่ทางอากาศ (tick 15.001 / 15.901 = local 0.101 / 1.001)
+      // #7 (tick 19.375 = 0.075 / 20.175 = 0.875)
       gpop("#s4-head", 0.0);
       gpop("#s4-friend", 0.05, 1, "0 200");
       tl.fromTo("#s4-airw path", { opacity: 0 }, { opacity: 1, duration: 0.12, stagger: 0.06, ease: "steps(1)" }, 0.2);
-      tl.to("#s4-airw g, #s4-airw path", { x: -18, duration: 0.35, yoyo: true, repeat: 15, ease: "sine.inOut" }, 0.4);
-      pop("#s4-r1", 0.101);
-      pop("#s4-r2", 1.001);
-      // 8a: ไมค์เด้งเข้า + ฟอง "ไมค์ห่วย?" โดนกากบาท (wrong 17.162 = local 2.262)
-      tl.to("#s4-friend", { x: -400, opacity: 0, duration: 0.25, ease: "power2.in" }, 2.05);
-      gpop("#s4-mic", 2.2, 1, "0 200");
-      gpop("#s4-bub", 2.2);
-      pop("#s4-bad", 2.22);
-      tl.fromTo("#s4-strike", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, transformOrigin: "0% 50%", duration: 0.12, ease: "power2.out" }, 2.3);
-      tl.fromTo("#s4-xb", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.1, ease: "power3.in" }, 2.262);
-      out("#s4-bad", 4.4); tl.to("#s4-bub", { opacity: 0, duration: 0.2 }, 4.4);
-      // 8b: ไมค์ดูดทางอากาศ / ทางกระดูกชนขอบหัวเด้งกลับ (whoosh 19.069 = local 4.169)
+      tl.to("#s4-airw path", { x: -18, duration: 0.35, yoyo: true, repeat: 11, ease: "sine.inOut" }, 0.4);
+      pop("#s4-r1", 0.075);
+      pop("#s4-r2", 0.875);
+      // 8a (wrong 21.241 = 1.941)
+      tl.to("#s4-friend", { x: -400, opacity: 0, duration: 0.25, ease: "power2.in" }, 1.7);
+      gpop("#s4-mic", 1.85, 1, "0 200");
+      gpop("#s4-bub", 1.85);
+      pop("#s4-bad", 1.87);
+      tl.fromTo("#s4-strike", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, transformOrigin: "0% 50%", duration: 0.12, ease: "power2.out" }, 1.96);
+      tl.fromTo("#s4-xb", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.1, ease: "power3.in" }, 1.941);
+      out("#s4-bad", 3.9); tl.to("#s4-bub", { opacity: 0, duration: 0.2 }, 3.9);
+      // 8b (whoosh 22.962 = 3.662)
       const sp = $("s4-suckpath"), SL = sp.getTotalLength();
       ["s4-s0","s4-s1","s4-s2"].forEach((id, i) => {
         const st = { p: 0 };
-        tl.fromTo(st, { p: 0 }, { p: 1, duration: 0.6, ease: "power1.in", repeat: 2, onUpdate: () => { const q = sp.getPointAtLength(st.p * SL); $(id).setAttribute("cx", q.x); $(id).setAttribute("cy", q.y); } }, 4.169 + i * 0.2);
-        tl.fromTo("#" + id, { opacity: 0 }, { opacity: 1, duration: 0.05 }, 4.169 + i * 0.2);
+        tl.fromTo(st, { p: 0 }, { p: 1, duration: 0.55, ease: "power1.in", repeat: 1, onUpdate: () => { const q = sp.getPointAtLength(st.p * SL); $(id).setAttribute("cx", q.x); $(id).setAttribute("cy", q.y); } }, 3.662 + i * 0.18);
+        tl.fromTo("#" + id, { opacity: 0 }, { opacity: 1, duration: 0.05 }, 3.662 + i * 0.18);
       });
-      tl.set("#s4-suck circle", { opacity: 0 }, 5.85);
-      tl.fromTo("#s4-mic", { rotation: 0, svgOrigin: "0 100" }, { rotation: 5, duration: 0.1, yoyo: true, repeat: 7, ease: "sine.inOut", svgOrigin: "0 100", immediateRender: false }, 4.2);
+      tl.set("#s4-suck circle", { opacity: 0 }, 5.0);
+      tl.fromTo("#s4-mic", { rotation: 0, svgOrigin: "0 100" }, { rotation: 5, duration: 0.1, yoyo: true, repeat: 7, ease: "sine.inOut", svgOrigin: "0 100", immediateRender: false }, 3.7);
       const bp = { p: 0 };
-      tl.fromTo(bp, { p: 0 }, { p: 1, duration: 0.9, ease: "none", onUpdate: () => {
+      tl.fromTo(bp, { p: 0 }, { p: 1, duration: 0.8, ease: "none", onUpdate: () => {
         const p = bp.p, x0 = -110, y0 = 236, xm = -205, ym = 60;
         const f = p < 0.55 ? p / 0.55 : 1 - (p - 0.55) / 0.45 * 0.7;
         $("s4-bpulse").setAttribute("cx", x0 + (xm - x0) * f); $("s4-bpulse").setAttribute("cy", y0 + (ym - y0) * f);
-      } }, 4.25);
-      tl.fromTo("#s4-bpulse", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 4.25);
-      tl.fromTo("#s4-spark", { opacity: 0, scale: 0.3, svgOrigin: "0 0" }, { opacity: 1, scale: 1.2, duration: 0.15, ease: "back.out(3)", svgOrigin: "0 0" }, 4.74);
-      tl.to("#s4-spark", { opacity: 0, duration: 0.3 }, 5.2);
-      // แถว 2 เปลี่ยน "เพื่อน: อากาศ" → "คลิป: อากาศ"
-      tl.to("#s4-r2", { opacity: 0, scale: 0.8, duration: 0.12 }, 4.169);
-      pop("#s4-r2b", 4.2);
+      } }, 3.74);
+      tl.fromTo("#s4-bpulse", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 3.74);
+      tl.fromTo("#s4-spark", { opacity: 0, scale: 0.3, svgOrigin: "0 0" }, { opacity: 1, scale: 1.2, duration: 0.15, ease: "back.out(3)", svgOrigin: "0 0" }, 4.18);
+      tl.to("#s4-spark", { opacity: 0, duration: 0.3 }, 4.6);
+      tl.to("#s4-r2", { opacity: 0, scale: 0.8, duration: 0.12 }, 3.662);
+      pop("#s4-r2b", 3.662);
+      // ส่งต่อ #10: ภาพจางออก (24.45) แถวเทียบค้างให้ครบ 2 วิ
+      tl.to("#s4-art", { opacity: 0, duration: 0.15 }, 5.15);
+      tl.to("#s4-r1, #s4-r2b", { opacity: 0, duration: 0.1 }, 5.6);
       window.__timelines["s4"] = tl;
     })();
   </script>

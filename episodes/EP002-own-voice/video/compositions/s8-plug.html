@@ -50,34 +50,30 @@
       const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
       $("s8-skull").innerHTML = A.headSection("s8");
       $("s8-plug").innerHTML = A.plug(1.3);
-      // 13a: กลับมาภาพหัวตัดขวาง + ใส่ที่อุดหูที่ปากช่องหู (pop 32.243 = local 0.103)
+      // 13a (pop 44.053 = 0.053)
       gpop("#s8-head", 0.0);
-      tl.fromTo("#s8-plug", { x: 120, y: -60, scale: 0, svgOrigin: "0 0" }, { x: 0, y: 0, scale: 1, duration: 0.3, ease: "back.out(2.4)", svgOrigin: "0 0" }, 0.103);
+      tl.fromTo("#s8-plug", { x: 120, y: -60, scale: 0, svgOrigin: "0 0" }, { x: 0, y: 0, scale: 1, duration: 0.3, ease: "back.out(2.4)", svgOrigin: "0 0" }, 0.053);
       tl.fromTo("#s8-airg, #s8-back, #s8-boneg, #s8-echo", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
-      // 13b: ทางอากาศชนที่อุดหูเด้งกลับ (thud 34.248 = local 2.108)
-      tl.set("#s8-airg", { opacity: 1 }, 1.9);
-      reveal("#s8-air-o, #s8-air", 1.9, 0.208);
-      tl.fromTo("#s8-spark", { opacity: 0, scale: 0.3, svgOrigin: "0 0" }, { opacity: 1, scale: 1.2, duration: 0.15, ease: "back.out(3)", svgOrigin: "0 0" }, 2.108);
-      tl.to("#s8-spark", { opacity: 0, duration: 0.3 }, 2.6);
-      tl.set("#s8-back", { opacity: 1 }, 2.12);
-      reveal("#s8-bk-o, #s8-bk", 2.12, 0.25);
-      tl.to("#s8-airg, #s8-back", { opacity: 0.35, duration: 0.3 }, 2.7);
-      // ทางกระดูกยังจบที่คอเคลีย (ไม่เข้าช่องหู)
-      tl.set("#s8-boneg", { opacity: 1 }, 2.0);
-      reveal("#s8-bone-o, #s8-bone", 2.0, 0.35);
-      tl.fromTo("#s8-cglow circle", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" }, { opacity: 0.9, scale: 1.25, transformOrigin: "50% 50%", duration: 0.3, yoyo: true, repeat: 5, ease: "sine.inOut" }, 2.35);
-      // เส้นก้องในช่องหูที่ปิด (เหลือง) + ป้าย "ก้อง!" สั้นๆ
-      tl.set("#s8-echo", { opacity: 1 }, 2.2);
-      tl.fromTo("#s8-echo g", { opacity: 0.2 }, { opacity: 1, duration: 0.1, stagger: 0.08, yoyo: true, repeat: 11, ease: "steps(1)" }, 2.2);
-      pop("#s8-boom", 2.2, -6);
-      out("#s8-boom", 2.75);
-      // ป้ายแบ่ง 2 แถว ขึ้นกลางประโยค (ding 35.048 = local 2.908) ค้างถึง 37.0
-      pop("#s8-r1", 2.76);
-      pop("#s8-r2", 2.908);
-      // เข้าท่าปิด: ภาพหัวจางออก (36.0 = local 3.86) ป้ายค้างต่อ
-      tl.to("#s8-art", { opacity: 0, duration: 0.3 }, 3.86);
-      tl.to("#s8-bg", { opacity: 0, duration: 0.3 }, 3.86);
-      tl.to("#s8-r1, #s8-r2", { opacity: 0, duration: 0.12 }, 4.94);
+      // 13b (thud 45.914 = 1.914, ding 46.614 = 2.614)
+      tl.set("#s8-airg", { opacity: 1 }, 1.71);
+      reveal("#s8-air-o, #s8-air", 1.71, 0.2);
+      tl.fromTo("#s8-spark", { opacity: 0, scale: 0.3, svgOrigin: "0 0" }, { opacity: 1, scale: 1.2, duration: 0.15, ease: "back.out(3)", svgOrigin: "0 0" }, 1.914);
+      tl.to("#s8-spark", { opacity: 0, duration: 0.3 }, 2.4);
+      tl.set("#s8-back", { opacity: 1 }, 1.93);
+      reveal("#s8-bk-o, #s8-bk", 1.93, 0.25);
+      tl.to("#s8-airg, #s8-back", { opacity: 0.35, duration: 0.3 }, 2.5);
+      tl.set("#s8-boneg", { opacity: 1 }, 1.8);
+      reveal("#s8-bone-o, #s8-bone", 1.8, 0.35);
+      tl.fromTo("#s8-cglow circle", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" }, { opacity: 0.9, scale: 1.25, transformOrigin: "50% 50%", duration: 0.3, yoyo: true, repeat: 5, ease: "sine.inOut" }, 2.15);
+      tl.set("#s8-echo", { opacity: 1 }, 2.0);
+      tl.fromTo("#s8-echo g", { opacity: 0.2 }, { opacity: 1, duration: 0.1, stagger: 0.08, yoyo: true, repeat: 11, ease: "steps(1)" }, 2.0);
+      pop("#s8-boom", 2.0, -6);
+      out("#s8-boom", 2.5);
+      pop("#s8-r1", 2.45);
+      pop("#s8-r2", 2.614);
+      // เข้าท่าปิด (47.25 = 3.25): ภาพหัวจางออก ป้ายค้างให้ครบ 2 วิ
+      tl.to("#s8-art, #s8-bg", { opacity: 0, duration: 0.3 }, 3.25);
+      tl.to("#s8-r1, #s8-r2", { opacity: 0, duration: 0.12 }, 4.7);
       window.__timelines["s8"] = tl;
     })();
   </script>

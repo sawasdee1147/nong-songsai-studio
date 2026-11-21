@@ -209,3 +209,26 @@
     return d;
   };
 })();
+
+/* ---------- EP002 v3: นาฬิกาจับเวลา / คลิปบอร์ด / หลอดทดลอง ---------- */
+(function () {
+  const A = window.ART, K = A.K, Y = A.Y, M = A.M, B = A.B, W = A.W, RED = A.RED, P = A.P;
+  A.stopwatch = (id) => `
+    <rect x="-18" y="-128" width="36" height="26" rx="8" fill="${K}"/>
+    <circle cx="0" cy="0" r="100" fill="${W}" stroke="${K}" stroke-width="9"/>
+    <path d="M 0 -100 A 100 100 0 0 1 0 100 Z" fill="${Y}" opacity=".55"/>
+    <path d="M 0 -84 L 0 -70 M 84 0 L 70 0 M 0 84 L 0 70 M -84 0 L -70 0" stroke="${K}" stroke-width="7" stroke-linecap="round"/>
+    <g id="${id}-hand"><path d="M 0 0 L 0 -66" stroke="${RED}" stroke-width="9" stroke-linecap="round"/></g>
+    <circle r="10" fill="${K}"/>`;
+  A.clipboard = () => `
+    <rect x="-120" y="-150" width="240" height="310" rx="22" fill="#E9B97A" stroke="${K}" stroke-width="8"/>
+    <rect x="-96" y="-118" width="192" height="254" rx="10" fill="${W}" stroke="${K}" stroke-width="6"/>
+    <rect x="-48" y="-170" width="96" height="44" rx="14" fill="#C9CDD3" stroke="${K}" stroke-width="7"/>
+    <path d="M -70 -70 L 70 -70 M -70 -30 L 70 -30 M -70 10 L 30 10 M -70 50 L 70 50 M -70 90 L 10 90" stroke="${K}" stroke-width="7" stroke-linecap="round" opacity=".45"/>`;
+  A.testtube = () => `
+    <path d="M -36 -170 L -36 110 A 36 36 0 0 0 36 110 L 36 -170" fill="${W}" stroke="${K}" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M -30 20 L -30 110 A 30 30 0 0 0 30 110 L 30 20 Z" fill="${M}"/>
+    <circle cx="-8" cy="70" r="9" fill="${W}" opacity=".8"/><circle cx="10" cy="40" r="6" fill="${W}" opacity=".8"/>
+    <path d="M -52 -170 L 52 -170" stroke="${K}" stroke-width="10" stroke-linecap="round"/>`;
+  A.personMini = () => `<circle cx="0" cy="-18" r="22" fill="${A.SK}" stroke="${K}" stroke-width="6"/><path d="M -34 34 Q -34 6 0 6 Q 34 6 34 34 Z" fill="${M}" stroke="${K}" stroke-width="6" stroke-linejoin="round"/>`;
+})();

@@ -1,0 +1,56 @@
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans"; font-weight: 700; src: url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
+      border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
+    .lab.yel { background: #FFD84D; }
+    .lab.red { background: #F05A50; color: #FFFFFF; }
+    .lab.blue { background: #9ED8FF; }
+    .lab.org { background: #FF8C69; }
+    .lab.small { font-size: 44px; padding: 4px 22px 6px; }
+    .ne { display: inline-block; width: 0.62em; height: 0.62em; vertical-align: -0.02em; }
+
+  </style>
+  <div id="root" data-composition-id="s3c" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <rect id="s3c-bg" x="0" y="0" width="1080" height="1920" fill="#FFF8EC"/>
+      <g id="s3c-art">
+        <g transform="translate(560 640) scale(.95)"><g id="s3c-clip"></g></g>
+        <g transform="translate(800 660)"><g id="s3c-tube"></g></g>
+        <g transform="translate(660 620)"><g id="s3c-orbit" font-family="Noto Sans Thai, Noto Sans, sans-serif" font-weight="900" font-size="90" fill="#FFD84D" stroke="#2B2B2B" stroke-width="7" paint-order="stroke" text-anchor="middle">
+          <text x="0" y="-200">?</text><text x="200" y="40">?</text><text x="-200" y="80">?</text><text x="20" y="250">?</text>
+        </g></g>
+      </g>
+    </svg>
+    <div id="s3c-lab" class="lab yel" style="left:640px; top:290px;">ยังวิจัยอยู่</div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (i) => document.getElementById(i);
+      const tl = gsap.timeline({ paused: true });
+      const pop = (sel, t, rot = 0, dur = 0.3) => tl.fromTo(sel, { xPercent: -50, yPercent: -50, scale: 0, rotation: rot - 8 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: rot, duration: dur, ease: "back.out(2.6)" }, t);
+      const out = (sel, t) => tl.to(sel, { scale: 0.85, opacity: 0, duration: 0.2, ease: "power2.in" }, t);
+      const gpop = (sel, t, s = 1, origin = "0 0") => tl.fromTo(sel, { scale: 0, svgOrigin: origin }, { scale: s, duration: 0.3, ease: "back.out(2.4)", svgOrigin: origin }, t);
+      const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
+      $("s3c-clip").innerHTML = A.clipboard();
+      $("s3c-tube").innerHTML = A.testtube();
+      gpop("#s3c-clip", 0.0, 1, "0 160");
+      gpop("#s3c-tube", 0.08, 1, "0 140");
+      // "?" หมุนรอบ (boing 17.742 = 0.082)
+      tl.fromTo("#s3c-orbit", { rotation: 0, scale: 0, svgOrigin: "0 0" }, { rotation: 0, scale: 1, duration: 0.3, ease: "back.out(2.4)", svgOrigin: "0 0" }, 0.08);
+      tl.to("#s3c-orbit", { rotation: 120, duration: 1.4, ease: "none", svgOrigin: "0 0" }, 0.38);
+      tl.fromTo("#s3c-tube", { rotation: -6, svgOrigin: "0 140" }, { rotation: 6, duration: 0.15, yoyo: true, repeat: 7, ease: "sine.inOut", svgOrigin: "0 140", immediateRender: false }, 0.4);
+      pop("#s3c-lab", 0.0, -3);
+      // ส่งต่อฉาก #7: ภาพจางออก ป้ายค้างให้ครบ 2 วิ
+      tl.to("#s3c-art, #s3c-bg", { opacity: 0, duration: 0.15 }, 1.6);
+      tl.to("#s3c-lab", { opacity: 0, duration: 0.1 }, 2.0);
+      window.__timelines["s3c"] = tl;
+    })();
+  </script>
+</template>

@@ -4,7 +4,7 @@
     @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
@@ -34,7 +34,7 @@
       </g>
     </svg>
     <div id="s7-most" class="lab yel" style="left:650px; top:1080px;">งานวิจัยส่วนใหญ่</div>
-    <div id="s7-who" class="lab" style="left:645px; top:310px; font-size:60px;">ใครเสียงเธอ?</div>
+    <div id="s7-who" class="lab" style="left:645px; top:310px; font-size:60px;">ใครเสียงคุณ?</div>
     <div id="s7-wrong" class="lab red" style="left:820px; top:500px;">ผิด!</div>
   </div>
   <script>
@@ -49,26 +49,29 @@
       ["s7-p1","s7-p2","s7-p3"].forEach(id => $(id).innerHTML = A.papers());
       ["s7-sp1","s7-sp3"].forEach(id => $(id).innerHTML = A.speaker(false));
       $("s7-sp2in").innerHTML = A.speaker(true);
-      // 12a: กองงานวิจัย (tick 24.968 = local 0.098)
+      // 12a (tick 28.311 = 0.111)
       ["#s7-p1","#s7-p2","#s7-p3"].forEach((s, i) => tl.fromTo(s, { y: 700, rotation: -10 + i * 10, svgOrigin: "0 0" }, { y: 0, rotation: (i - 1) * 4, duration: 0.3, ease: "back.out(1.6)", svgOrigin: "0 0" }, 0.02 + i * 0.07));
-      pop("#s7-most", 0.098, -2);
-      // 12b: เกมโชว์ ลำโพง 3 ตัว (tick 27.093 = local 2.223)
-      ["#s7-p1","#s7-p2","#s7-p3"].forEach((s, i) => tl.to(s, { y: -900, duration: 0.3, ease: "power2.in" }, 2.05 + i * 0.04));
-      out("#s7-most", 2.1);
-      tl.fromTo("#s7-show", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 2.2);
-      ["#s7-sp1","#s7-sp2","#s7-sp3"].forEach((s, i) => tl.fromTo(s, { scale: 0, svgOrigin: "0 100" }, { scale: 1, duration: 0.3, ease: "back.out(2.4)", svgOrigin: "0 100" }, 2.223 + i * 0.08));
-      tl.fromTo("#s7-q text", { opacity: 0 }, { opacity: 1, duration: 0.1, stagger: 0.1 }, 2.5);
-      tl.to("#s7-q text", { y: -14, duration: 0.3, yoyo: true, repeat: 7, stagger: 0.1, ease: "sine.inOut" }, 2.7);
-      pop("#s7-who", 2.223, -2);
+      pop("#s7-most", 0.111, -2);
+      // 12b (tick 30.169 = 1.969)
+      ["#s7-p1","#s7-p2","#s7-p3"].forEach((s, i) => tl.to(s, { y: -900, duration: 0.3, ease: "power2.in" }, 1.75 + i * 0.04));
+      tl.fromTo("#s7-show", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 1.95);
+      ["#s7-sp1","#s7-sp2","#s7-sp3"].forEach((s, i) => tl.fromTo(s, { scale: 0, svgOrigin: "0 100" }, { scale: 1, duration: 0.3, ease: "back.out(2.4)", svgOrigin: "0 100" }, 1.969 + i * 0.08));
+      out("#s7-most", 2.13);
+      tl.fromTo("#s7-q text", { opacity: 0 }, { opacity: 1, duration: 0.1, stagger: 0.1 }, 2.25);
+      tl.to("#s7-q text", { y: -14, duration: 0.3, yoyo: true, repeat: 5, stagger: 0.1, ease: "sine.inOut" }, 2.45);
+      pop("#s7-who", 1.969, -2);
       tl.fromTo("#s7-lamp", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
-      // 12c: ไฟแดง "ผิด!" (wrong 30.078 = local 5.208) + ลำโพงเสียงตัวเองยักไหล่ (boing 30.628 = local 5.758)
-      tl.set("#s7-q text", { opacity: 0 }, 5.15);
-      tl.set("#s7-lamp", { opacity: 1 }, 5.208);
-      tl.fromTo("#s7-lamp", { scale: 0.6, svgOrigin: "0 0" }, { scale: 1.1, duration: 0.14, yoyo: true, repeat: 9, ease: "steps(1)", svgOrigin: "0 0" }, 5.208);
-      pop("#s7-wrong", 5.208, 6);
-      tl.set("#s7-sp2arms", { opacity: 1 }, 5.758);
-      tl.fromTo("#s7-sp2", { y: 0 }, { y: -40, duration: 0.15, yoyo: true, repeat: 5, ease: "power2.out" }, 5.758);
-      tl.fromTo("#s7-sp2arms", { y: 0 }, { y: -18, duration: 0.15, yoyo: true, repeat: 5, ease: "sine.inOut" }, 5.758);
+      // 12c (wrong 32.756 = 4.556, boing 33.306 = 5.106)
+      tl.set("#s7-q text", { opacity: 0 }, 4.5);
+      tl.set("#s7-lamp", { opacity: 1 }, 4.556);
+      tl.fromTo("#s7-lamp", { scale: 0.6, svgOrigin: "0 0" }, { scale: 1.1, duration: 0.14, yoyo: true, repeat: 9, ease: "steps(1)", svgOrigin: "0 0" }, 4.556);
+      pop("#s7-wrong", 4.556, 6);
+      tl.set("#s7-sp2arms", { opacity: 1 }, 5.106);
+      tl.fromTo("#s7-sp2", { y: 0 }, { y: -40, duration: 0.15, yoyo: true, repeat: 5, ease: "power2.out" }, 5.106);
+      tl.fromTo("#s7-sp2arms", { y: 0 }, { y: -18, duration: 0.15, yoyo: true, repeat: 5, ease: "sine.inOut" }, 5.106);
+      // ป้าย "ใครเสียงคุณ?" หายก่อนป้ายการทดลอง (34.771)
+      out("#s7-who", 6.35);
+      out("#s7-wrong", 6.36);
       window.__timelines["s7"] = tl;
     })();
   </script>

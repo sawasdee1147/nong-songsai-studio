@@ -4,7 +4,7 @@
     @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
@@ -23,8 +23,7 @@
         <path id="s5-a0-o" d="M 0 -40 q -26 40 0 80" fill="none" stroke="#2B2B2B" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><path id="s5-a0" d="M 0 -40 q -26 40 0 80" fill="none" stroke="#9ED8FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path id="s5-a1-o" d="M 0 -40 q -26 40 0 80" fill="none" stroke="#2B2B2B" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><path id="s5-a1" d="M 0 -40 q -26 40 0 80" fill="none" stroke="#9ED8FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path id="s5-a2-o" d="M 0 -40 q -26 40 0 80" fill="none" stroke="#2B2B2B" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><path id="s5-a2" d="M 0 -40 q -26 40 0 80" fill="none" stroke="#9ED8FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
       </g>
     </svg>
-    <div id="s5-big" class="lab yel" style="left:640px; top:290px; font-size:60px;">หนึ่งในเหตุผลหลัก</div>
-    <div id="s5-sub" class="lab small" style="left:650px; top:1060px; font-size:40px; line-height:1.42;">เหตุผลหลักข้อหนึ่ง:<br>เสียงในคลิปขาดทางกระดูก</div>
+    <div id="s5-big" class="lab yel" style="left:640px; top:290px; font-size:58px;">คลิป = ขาดทางกระดูก</div>
   </div>
   <script>
     (function () {
@@ -36,16 +35,13 @@
       const gpop = (sel, t, s = 1, origin = "0 0") => tl.fromTo(sel, { scale: 0, svgOrigin: origin }, { scale: s, duration: 0.3, ease: "back.out(2.4)", svgOrigin: origin }, t);
       const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
       $("s5-phone").innerHTML = A.phone("s5p");
-      gpop("#s5-phone", 0.0, 1, "0 0");
-      tl.fromTo("#s5p-bar", { scaleX: 0.2, transformOrigin: "0% 50%" }, { scaleX: 1, transformOrigin: "0% 50%", duration: 2.2, ease: "none" }, 0);
-      // คลื่นฟ้า (อากาศเท่านั้น) จากลำโพงเข้าหูน้องสงสัย
+      gpop("#s5-phone", 0.1, 1, "0 0");
+      tl.fromTo("#s5p-bar", { scaleX: 0.2, transformOrigin: "0% 50%" }, { scaleX: 1, transformOrigin: "0% 50%", duration: 2.0, ease: "none" }, 0.1);
       ["#s5-a0", "#s5-a1", "#s5-a2"].forEach((id, i) => {
-        const g = [id + "-o", id];
-        tl.fromTo(g, { x: 640, y: 830, opacity: 0 }, { x: 320, y: 980, duration: 0.8, ease: "none", repeat: 2, keyframes: { opacity: [0, 1, 1, 0] } }, 0.25 + i * 0.27);
+        tl.fromTo([id + "-o", id], { x: 640, y: 830, opacity: 0 }, { x: 320, y: 980, duration: 0.75, ease: "none", repeat: 1, keyframes: { opacity: [0, 1, 1, 0] } }, 0.25 + i * 0.25);
       });
-      // ป้ายขึ้นพร้อมกัน (ding 21.136 = local 0.336) ค้างถึงท้ายฉาก
-      pop("#s5-big", 0.2, -2);
-      pop("#s5-sub", 0.25, 0);
+      // ป้ายเดียว (ding 24.804 = 0.354) ค้างตลอดประโยค
+      pop("#s5-big", 0.1, -2);
       window.__timelines["s5"] = tl;
     })();
   </script>

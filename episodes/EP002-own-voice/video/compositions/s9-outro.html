@@ -4,7 +4,7 @@
     @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
@@ -35,11 +35,11 @@
       const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
       (function(){ let r=""; for (let i=0;i<16;i++){ const a0=i/16*Math.PI*2, a1=a0+Math.PI/16; r+=`<path d="M0 0 L${Math.cos(a0)*1500} ${Math.sin(a0)*1500} L${Math.cos(a1)*1500} ${Math.sin(a1)*1500} Z" fill="#FFE7A6"/>`; } $("s9-rays").innerHTML=r; })();
       ["s9-sp1","s9-sp2","s9-sp3"].forEach((id, i) => $(id).innerHTML = A.sparkle(1.4 - i * 0.2));
-      tl.fromTo("#s9-rays", { rotation: 0, scale: 0.4, opacity: 0, svgOrigin: "0 0" }, { rotation: 30, scale: 1, opacity: 1, duration: 5.1, ease: "power2.out", svgOrigin: "0 0" }, 0);
-      // ประกายตรง glint 37.403 (= local 1.403)
+      tl.fromTo("#s9-rays", { rotation: 0, scale: 0.4, opacity: 0, svgOrigin: "0 0" }, { rotation: 30, scale: 1, opacity: 1, duration: 4.79, ease: "power2.out", svgOrigin: "0 0" }, 0);
+      // ประกายตรง glint 48.683 (= 1.483)
       ["#s9-sp1","#s9-sp2","#s9-sp3"].forEach((s, i) => {
-        tl.fromTo(s, { scale: 0, rotation: 0, svgOrigin: "0 0" }, { scale: 1, rotation: 90, duration: 0.4, ease: "back.out(3)", svgOrigin: "0 0" }, 1.4 + i * 0.08);
-        tl.to(s, { scale: 0.75, duration: 0.5, yoyo: true, repeat: 3, ease: "sine.inOut", svgOrigin: "0 0" }, 1.9 + i * 0.08);
+        tl.fromTo(s, { scale: 0, rotation: 0, svgOrigin: "0 0" }, { scale: 1, rotation: 90, duration: 0.4, ease: "back.out(3)", svgOrigin: "0 0" }, 1.48 + i * 0.08);
+        tl.to(s, { scale: 0.75, duration: 0.5, yoyo: true, repeat: 3, ease: "sine.inOut", svgOrigin: "0 0" }, 1.98 + i * 0.08);
       });
       window.__timelines["s9"] = tl;
     })();

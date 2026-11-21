@@ -10,7 +10,7 @@
   <script>
     (function () {
       /* ---- เวลาประโยค (timings.json index 1–19) ---- */
-      const LINES = [[0,1.81],[2.075,4.075],[4.305,6.075],[6.405,7.055],[7.269,9.749],[10.056,12.196],[12.469,14.789],[15.001,16.861],[17.162,18.862],[19.069,20.649],[20.936,22.926],[23.14,24.75],[24.968,26.808],[27.093,29.713],[30.078,32.018],[32.243,33.803],[34.048,35.778],[36.103,37.763],[38.153,39.603]];
+      const LINES = [[0.0,1.6],[1.832,4.09],[4.305,5.895],[6.16,6.74],[6.947,9.143],[9.397,11.296],[11.533,13.584],[13.79,15.507],[15.758,17.538],[17.742,19.132],[19.375,21.034],[21.241,22.753],[22.962,24.362],[24.604,26.394],[26.677,28.099],[28.311,29.947],[30.169,32.493],[32.756,34.476],[34.771,36.891],[37.149,39.354],[39.594,41.381],[41.679,43.848],[44.053,45.428],[45.714,47.154],[47.383,48.973],[49.187,50.487]];
       /* ---- preset จาก character/README.md (ตามคอลัมน์ท่าตัวละครในบท) ---- */
       const PRE = {
         dare:  { eye:"smug", brow:"smug", mo:"grin", arm:"point" },                                        // 1a กวนๆ ชี้ (บทกำหนด)
@@ -20,19 +20,20 @@
         smug:  { gl:"glare", eye:"smug", brow:"smug", mo:"smirk", arm:"shrug", tilt:5 },                   // กวนๆ (แว่นแวบ)
         peek:  { gl:"down", eye:"side", brow:"none", mo:"flatlow", ah:"droop" },                           // มองข้ามแว่น
         shock: { gl:"askew", eye:"shock", brow:"shock", mo:"shock", ah:"zig", arm:"up" },                  // ตกใจ
-        laugh: { eye:"laugh", brow:"none", mo:"grin", arm:"belly", tilt:-6, front:true }                   // หัวเราะ
+        laugh: { eye:"laugh", brow:"none", mo:"grin", arm:"belly", tilt:-6, front:true },                  // หัวเราะ
+        tongue:{ eye:"wink", brow:"none", mo:"tongue", arm:"point", tilt:6 }                               // แลบลิ้น (#5a)
       };
       // [เวลาเปลี่ยนท่า, ท่า] — เข้าก่อนคำพูด ~0.1 วิ
-      const POSES = [[0,"dare"],[1.975,"loud"],[4.205,"ask"],[6.305,"ping"],[12.369,"smug"],[14.9,"peek"],[17.06,"smug"],[18.97,"shock"],[20.84,"ping"],[23.04,"shock"],[24.87,"ask"],[29.98,"laugh"],[32.14,"ask"],[33.95,"ping"],[36.103,"outro"]];
+      const POSES = [[0,"dare"],[1.732,"loud"],[4.205,"ask"],[6.06,"ping"],[11.433,"smug"],[13.69,"tongue"],[15.658,"ask"],[17.642,"laugh"],[19.275,"peek"],[21.141,"smug"],[22.862,"shock"],[24.504,"ping"],[26.577,"shock"],[28.211,"ask"],[32.656,"laugh"],[34.671,"ask"],[37.049,"ping"],[39.494,"peek"],[41.579,"shock"],[43.953,"ask"],[45.614,"ping"],[47.383,"outro"]];
       // ตำแหน่ง X,Y (มุมซ้ายบนของ viewBox) และสเกล — ตัวละครซ้าย ภาพประกอบขวา
-      const LAY = { hook:[125,250,1.9], side:[0,742,1.25], outro:[234.5,323.5,2.35] };
-      const LAYS = [[0,"hook"],[6.2,"side"],[36.0,"outro"]];
-      const OUTRO_T0 = 36.103;
-      const GLARES = [[12.47,13.2],[17.17,17.9]];
-      const BLINKS = [5.3,25.9,28.4,33.2,36.6,40.5];
+      const LAY = { hook:[125,250,1.9], side:[0,742,1.25], outro:[267,421,2.1] };
+      const LAYS = [[0,"hook"],[6.0,"side"],[47.25,"outro"]];
+      const OUTRO_T0 = 47.383;
+      const GLARES = [[11.55,12.3],[21.25,21.95]];
+      const BLINKS = [5.2,16.6,29.0,31.2,35.6,44.8,47.9,51.6];
       const BLINKABLE = { norm:1, up:1, sad:1 };
-      // ที่อุดหู: ใส่ #1a–1b (หลุด 4.305) และ #13a–13b (ใส่ 32.243 หลุด 35.85)
-      const PLUG_ON = [[ -1, 4.305], [32.243, 35.85]];
+      // ที่อุดหู: ใส่ #1a–1b (หลุด 4.305) และ #13a–13b (ใส่ 44.053 หลุด 47.16)
+      const PLUG_ON = [[ -1, 4.305], [44.053, 47.16]];
 
       const clamp = x => Math.max(0, Math.min(1, x));
       const seg = (t,a,b) => clamp((t-a)/(b-a));
@@ -90,8 +91,8 @@
       }
       // 1b: ถังเป็นเส้นขอบอย่างเดียว อยู่นอกวงหัว ปากถังใต้คาง + เส้นก้องวงแหวนสีเหลืองรอบหูด้านนอก
       function barrelSvg(t){
-        if (t < 2.075 || t > 4.6) return "";
-        const drop = 1 - seg(t, 2.075, 2.275);            // หล่นลงมาครอบ ตรง thud 2.275
+        if (t < 1.832 || t > 4.6) return "";
+        const drop = 1 - seg(t, 1.832, 2.032);            // หล่นลงมาครอบ ตรง thud 2.032
         const gone = seg(t, 4.305, 4.55);                 // หายไปพร้อมที่อุดหูหลุด
         const y = -170 * drop * drop, sc = 1 + 0.15 * gone, op = (1 - gone);
         const L = -26, R = 326, T = -6, Bt = 252;
@@ -104,12 +105,12 @@
         s += ink(`M ${L-6} ${T+70} L ${L+30} ${T+76} M ${R+6} ${T+70} L ${R-30} ${T+76} M ${L-6} ${Bt-70} L ${L+30} ${Bt-76} M ${R+6} ${Bt-70} L ${R-30} ${Bt-76}`, 6);
         s += `</g>`;
         // เส้นก้องสีเหลืองรอบหูด้านนอก (ไม่ทับตา แว่น ปาก)
-        if (t > 2.275) {
-          const a = seg(t, 2.275, 2.45) * op;
+        if (t > 2.032) {
+          const a = seg(t, 2.032, 2.2) * op;
           [-1, 1].forEach(side => {
             const cx = side < 0 ? 60 : 240;
             [30, 46].forEach((r0, k) => {
-              const r = r0 + 5 * Math.sin((t - 2.275) * 11 - k * 1.4);
+              const r = r0 + 5 * Math.sin((t - 2.032) * 11 - k * 1.4);
               const a0 = side < 0 ? 140 : -40, a1 = side < 0 ? 220 : 40;
               const p = (ang) => [cx + r * Math.cos(ang * Math.PI / 180), 160 + r * Math.sin(ang * Math.PI / 180)];
               const [x0, y0] = p(a0), [x1, y1] = p(a1);
@@ -154,7 +155,7 @@
         rig.style.transform = `translate(${X.toFixed(2)}px, ${(Y+hop*S/1.2).toFixed(2)}px) scale(${S.toFixed(4)}) translate(130px, 384px) scale(${(br*sx).toFixed(4)}, ${(br*sy).toFixed(4)}) translate(-130px, -384px)`;
       }
 
-      const DUR = 41.1;
+      const DUR = 51.99;
       const st = { t: 0 };
       const tl = gsap.timeline({ paused: true });
       tl.fromTo(st, { t: 0 }, { t: DUR, duration: DUR, ease: "none", onUpdate: () => draw(st.t) }, 0);

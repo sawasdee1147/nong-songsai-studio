@@ -4,7 +4,7 @@
     @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
@@ -31,9 +31,9 @@
       const out = (sel, t) => tl.to(sel, { scale: 0.85, opacity: 0, duration: 0.2, ease: "power2.in" }, t);
       const gpop = (sel, t, s = 1, origin = "0 0") => tl.fromTo(sel, { scale: 0, svgOrigin: origin }, { scale: s, duration: 0.3, ease: "back.out(2.4)", svgOrigin: origin }, t);
       const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
-      tl.fromTo("#s6-dim", { opacity: 0 }, { opacity: 0.78, duration: 0.4, ease: "power1.out" }, 0);
-      tl.fromTo("#s6-bang", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.3, ease: "back.out(3)", svgOrigin: "0 0" }, 0.15);
-      tl.fromTo("#s6-bang", { rotation: -8, svgOrigin: "0 100" }, { rotation: 8, duration: 0.07, ease: "none", yoyo: true, repeat: 17, svgOrigin: "0 100", immediateRender: false }, 0.45);
+      tl.fromTo("#s6-dim", { opacity: 0 }, { opacity: 0.78, duration: 0.35, ease: "power1.out" }, 0);
+      tl.fromTo("#s6-bang", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.3, ease: "back.out(3)", svgOrigin: "0 0" }, 0.12);
+      tl.fromTo("#s6-bang", { rotation: -8, svgOrigin: "0 100" }, { rotation: 8, duration: 0.07, ease: "none", yoyo: true, repeat: 15, svgOrigin: "0 100", immediateRender: false }, 0.42);
       window.__timelines["s6"] = tl;
     })();
   </script>

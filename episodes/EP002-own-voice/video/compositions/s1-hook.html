@@ -4,7 +4,7 @@
     @font-face { font-family: "Noto Sans"; font-weight: 900; src: url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
     @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; font-family: "Noto Sans Thai", "Noto Sans", sans-serif; }
     #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
     .lab { position: absolute; font-weight: 900; font-size: 56px; line-height: 1.42; color: #2B2B2B; background: #FFFFFF;
       border: 7px solid #2B2B2B; border-radius: 24px; padding: 6px 28px 8px; white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; text-align: center; }
@@ -34,13 +34,12 @@
       const reveal = (sel, t, d = 0.35) => tl.fromTo(sel, { strokeDasharray: "2400 2400", strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t);
       (function(){ let r=""; for (let i=0;i<16;i++){ const a0=i/16*Math.PI*2, a1=a0+Math.PI/16; r+=`<path d="M0 0 L${Math.cos(a0)*1500} ${Math.sin(a0)*1500} L${Math.cos(a1)*1500} ${Math.sin(a1)*1500} Z" fill="#FFE7A6"/>`; } $("s1-rays").innerHTML=r; })();
       tl.fromTo("#s1-rays", { rotation: 0, svgOrigin: "0 0" }, { rotation: 20, duration: 4.25, ease: "none", svgOrigin: "0 0" }, 0);
-      // "ลองดิ!" อยู่บนจอตั้งแต่เฟรมแรก แล้วเด้งตาม pop
       tl.fromTo("#s1-try", { xPercent: -50, yPercent: -50, scale: 1.25, rotation: -4 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: -4, duration: 0.3, ease: "back.out(3)" }, 0);
-      tl.to("#s1-try", { rotation: 4, duration: 0.18, yoyo: true, repeat: 5, ease: "sine.inOut" }, 0.5);
-      out("#s1-try", 2.0);
-      // 1b: ป้าย "ดัง + ทุ้ม" ลงตรง thud 2.275
-      pop("#s1-loud", 2.2, 3);
-      tl.to("#s1-loud", { y: 14, duration: 0.08, yoyo: true, repeat: 3, ease: "none" }, 2.4);
+      tl.to("#s1-try", { rotation: 4, duration: 0.18, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.5);
+      out("#s1-try", 1.65);
+      // 1b: "ดัง + ทุ้ม" ลงตรง thud 2.032
+      pop("#s1-loud", 1.95, 3);
+      tl.to("#s1-loud", { y: 14, duration: 0.08, yoyo: true, repeat: 3, ease: "none" }, 2.15);
       window.__timelines["s1"] = tl;
     })();
   </script>
