@@ -33,9 +33,11 @@ def synth(text, prev_text, next_text, cfg, ctx):
     }
     if cfg.get("language_code"):
         body["language_code"] = cfg["language_code"]
-    if prev_text:
+    # eleven_v3 ยังไม่รองรับ previous_text/next_text
+    use_ctx = cfg.get("use_context", not body["model_id"].startswith("eleven_v3"))
+    if use_ctx and prev_text:
         body["previous_text"] = prev_text
-    if next_text:
+    if use_ctx and next_text:
         body["next_text"] = next_text
     if cfg.get("seed") is not None:
         body["seed"] = cfg["seed"]
