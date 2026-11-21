@@ -49,6 +49,7 @@
       // หน้ากากไฟหลุดร่วงเอง (swoosh_down 0.0)
       tl.fromTo("#s1-mask", { y: 0, rotation: 0, svgOrigin: "0 -100" }, { y: -14, rotation: -6, duration: 0.12, ease: "power1.out", svgOrigin: "0 -100" }, 0.02);
       tl.to("#s1-mask", { y: 1500, rotation: 38, duration: 0.5, ease: "power2.in", svgOrigin: "0 -100" }, 0.14);
+      tl.set("#s1-mask", { opacity: 0 }, 0.7);
       // พริกเด้งหลังหน้ากากหลุด
       tl.to("#s1-chili", { scale: 1.42, duration: 0.12, ease: "power2.out", svgOrigin: "0 0" }, 0.5);
       tl.to("#s1-chili", { scale: 1.34, rotation: 0, duration: 0.3, ease: "back.out(3)", svgOrigin: "0 0" }, 0.62);

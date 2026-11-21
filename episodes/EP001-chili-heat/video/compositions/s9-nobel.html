@@ -1,1 +1,57 @@
-<template><style>#root{position:absolute;inset:0;background:#FFF8EC}</style><div id="root" data-composition-id="s9" data-width="1080" data-height="1920"><div id="s9-x" style="position:absolute;left:400px;top:400px;font-size:80px">s9</div></div><script>(function(){const tl=gsap.timeline({paused:true});tl.fromTo("#s9-x",{opacity:0.5},{opacity:1,duration:1},0);window.__timelines["s9"]=tl;})();</script></template>
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 700; src: url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    #s9-banner { position: absolute; left: 620px; top: 760px; font-family: "Noto Sans Thai", sans-serif; font-weight: 900; font-size: 46px;
+      line-height: 1.25; color: #2B2B2B; background: #FFFFFF; border: 7px solid #2B2B2B; border-radius: 18px; padding: 6px 26px 10px;
+      white-space: nowrap; box-shadow: 0 8px 0 #2B2B2B; }
+    #s9-note { position: absolute; left: 620px; top: 1030px; font-weight: 700; font-size: 40px; line-height: 1.35; color: #2B2B2B;
+      text-align: center; white-space: nowrap; background: #FFF8EC; padding: 4px 18px; border-radius: 16px; }
+  </style>
+  <div id="root" data-composition-id="s9" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(620 760)"><g id="s9-rays"></g></g>
+      <g transform="translate(620 580) scale(.95)"><g id="s9-body"></g></g>
+      <g transform="translate(620 560) scale(1.05)"><g id="s9-gate"></g></g>
+      <g transform="translate(620 760)"><g id="s9-medal"></g></g>
+      <g transform="translate(400 600)"><g id="s9-sp1"></g></g>
+      <g transform="translate(870 660)"><g id="s9-sp2"></g></g>
+    </svg>
+    <!-- บนเหรียญ: เฉพาะ "Nobel 2021 · David Julius" -->
+    <div id="s9-banner">Nobel 2021 · David Julius</div>
+    <!-- ข้อความเล็กแยกใต้เหรียญ -->
+    <div id="s9-note">(ร่วมกับ Ardem Patapoutian —<br>ค้นพบตัวรับแรงกด)</div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      let rays = "";
+      for (let i = 0; i < 18; i++) {
+        const a0 = (i / 18) * Math.PI * 2, a1 = a0 + Math.PI / 18;
+        rays += `<path d="M0 0 L${Math.cos(a0) * 1300} ${Math.sin(a0) * 1300} L${Math.cos(a1) * 1300} ${Math.sin(a1) * 1300} Z" fill="#FFE7A6"/>`;
+      }
+      $("s9-rays").innerHTML = rays;
+      $("s9-body").innerHTML = A.nerveBody(520, 220);
+      $("s9-gate").innerHTML = A.gate("s9g");
+      $("s9-medal").innerHTML = A.medal();
+      $("s9-sp1").innerHTML = A.sparkle(1.3);
+      $("s9-sp2").innerHTML = A.sparkle(1.1);
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s9-gate", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.25, ease: "back.out(2.4)", svgOrigin: "0 0" }, 0);
+      tl.fromTo("#s9-body", { y: 400 }, { y: 0, duration: 0.25, ease: "power3.out" }, 0);
+      // เหรียญหล่นลงคล้องประตู (riser 36.123 → ding 37.123 = local 1.103)
+      tl.fromTo("#s9-medal", { y: -1100 }, { y: -560, duration: 0.6, ease: "sine.out" }, 0.1);
+      tl.to("#s9-medal", { y: 0, duration: 0.4, ease: "power3.in" }, 0.703);
+      tl.fromTo("#s9-medal", { rotation: 0, svgOrigin: "0 -300" }, { rotation: 7, duration: 0.22, yoyo: true, repeat: 5, ease: "sine.inOut", svgOrigin: "0 -300", immediateRender: false }, 1.103);
+      tl.fromTo("#s9-rays", { scale: 0, rotation: 0, svgOrigin: "0 0" }, { scale: 1, rotation: 25, duration: 2.0, ease: "power2.out", svgOrigin: "0 0" }, 1.1);
+      tl.fromTo("#s9-banner", { xPercent: -50, yPercent: -50, scale: 0 }, { xPercent: -50, yPercent: -50, scale: 1, duration: 0.3, ease: "back.out(2.6)" }, 1.1);
+      tl.fromTo("#s9-note", { xPercent: -50, yPercent: -50, opacity: 0, y: 20 }, { xPercent: -50, yPercent: -50, opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 1.2);
+      ["#s9-sp1", "#s9-sp2"].forEach((s, i) => tl.fromTo(s, { scale: 0, rotation: 0, svgOrigin: "0 0" }, { scale: 1, rotation: 90, duration: 0.35, ease: "back.out(3)", svgOrigin: "0 0" }, 1.15 + i * 0.1));
+      window.__timelines["s9"] = tl;
+    })();
+  </script>
+</template>

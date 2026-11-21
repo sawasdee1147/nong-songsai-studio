@@ -1,1 +1,35 @@
-<template><style>#root{position:absolute;inset:0;background:#FFF8EC}</style><div id="root" data-composition-id="s7" data-width="1080" data-height="1920"><div id="s7-x" style="position:absolute;left:400px;top:400px;font-size:80px">s7</div></div><script>(function(){const tl=gsap.timeline({paused:true});tl.fromTo("#s7-x",{opacity:0.5},{opacity:1,duration:1},0);window.__timelines["s7"]=tl;})();</script></template>
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFE9D9; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+  </style>
+  <div id="root" data-composition-id="s7" data-width="1080" data-height="1920">
+    <!-- ฉาก 10: น้องสงสัยเต็มจอ (ตัวละครอยู่ใน kid.html) — พื้นหลังอุ่น + คลื่นความร้อน -->
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(540 700)"><g id="s7-rays"></g></g>
+      <g id="s7-waves"></g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      let rays = "";
+      for (let i = 0; i < 14; i++) {
+        const a0 = (i / 14) * Math.PI * 2, a1 = a0 + Math.PI / 14;
+        rays += `<path d="M0 0 L${Math.cos(a0) * 1500} ${Math.sin(a0) * 1500} L${Math.cos(a1) * 1500} ${Math.sin(a1) * 1500} Z" fill="#FFD7BF"/>`;
+      }
+      $("s7-rays").innerHTML = rays;
+      let w = "";
+      [[120, 1150], [960, 1050], [150, 420], [930, 360]].forEach(([x, y], i) => {
+        w += `<path id="s7-w${i}" d="M ${x} ${y} q 22 -40 0 -80 t 0 -80 t 0 -80" fill="none" stroke="#E0704F" stroke-width="12" stroke-linecap="round"/>`;
+      });
+      $("s7-waves").innerHTML = w;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s7-rays", { rotation: 0, scale: 0.6, svgOrigin: "0 0" }, { rotation: 18, scale: 1, duration: 3.05, ease: "power1.out", svgOrigin: "0 0" }, 0);
+      [0, 1, 2, 3].forEach((i) => {
+        tl.fromTo("#s7-w" + i, { y: 60, opacity: 0 }, { y: -80, duration: 0.9, ease: "none", repeat: 2, keyframes: { opacity: [0, 0.8, 0.8, 0] } }, 0.1 + i * 0.2);
+      });
+      window.__timelines["s7"] = tl;
+    })();
+  </script>
+</template>

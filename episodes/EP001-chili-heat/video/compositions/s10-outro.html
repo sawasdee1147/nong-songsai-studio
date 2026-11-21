@@ -1,1 +1,36 @@
-<template><style>#root{position:absolute;inset:0;background:#FFF8EC}</style><div id="root" data-composition-id="s10" data-width="1080" data-height="1920"><div id="s10-x" style="position:absolute;left:400px;top:400px;font-size:80px">s10</div></div><script>(function(){const tl=gsap.timeline({paused:true});tl.fromTo("#s10-x",{opacity:0.5},{opacity:1,duration:1},0);window.__timelines["s10"]=tl;})();</script></template>
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+  </style>
+  <div id="root" data-composition-id="s10" data-width="1080" data-height="1920">
+    <!-- ท่าปิด: ดันแว่น (ตัวละครอยู่ใน kid.html ตามจังหวะ outro-push-glasses.html) -->
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(540 720)"><g id="s10-rays"></g></g>
+      <g transform="translate(220 420)"><g id="s10-sp1"></g></g>
+      <g transform="translate(870 560)"><g id="s10-sp2"></g></g>
+      <g transform="translate(860 1060)"><g id="s10-sp3"></g></g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      let rays = "";
+      for (let i = 0; i < 16; i++) {
+        const a0 = (i / 16) * Math.PI * 2, a1 = a0 + Math.PI / 16;
+        rays += `<path d="M0 0 L${Math.cos(a0) * 1500} ${Math.sin(a0) * 1500} L${Math.cos(a1) * 1500} ${Math.sin(a1) * 1500} Z" fill="#FFE7A6"/>`;
+      }
+      $("s10-rays").innerHTML = rays + `<circle r="380" fill="#FFD84D" opacity=".45"/>`;
+      ["s10-sp1", "s10-sp2", "s10-sp3"].forEach((id, i) => { $(id).innerHTML = A.sparkle(1.4 - i * 0.2); });
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s10-rays", { rotation: 0, scale: 0.4, svgOrigin: "0 0" }, { rotation: 30, scale: 1, duration: 4.89, ease: "power2.out", svgOrigin: "0 0" }, 0);
+      // ประกายเด้งตรง glint 40.528 (= local 1.398)
+      ["#s10-sp1", "#s10-sp2", "#s10-sp3"].forEach((id, i) => {
+        tl.fromTo(id, { scale: 0, rotation: 0, svgOrigin: "0 0" }, { scale: 1, rotation: 90, duration: 0.4, ease: "back.out(3)", svgOrigin: "0 0" }, 1.4 + i * 0.08);
+        tl.to(id, { scale: 0.75, duration: 0.5, yoyo: true, repeat: 3, ease: "sine.inOut", svgOrigin: "0 0" }, 1.9 + i * 0.08);
+      });
+      window.__timelines["s10"] = tl;
+    })();
+  </script>
+</template>

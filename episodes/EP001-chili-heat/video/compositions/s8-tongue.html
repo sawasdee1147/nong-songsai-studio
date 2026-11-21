@@ -1,1 +1,65 @@
-<template><style>#root{position:absolute;inset:0;background:#FFF8EC}</style><div id="root" data-composition-id="s8" data-width="1080" data-height="1920"><div id="s8-x" style="position:absolute;left:400px;top:400px;font-size:80px">s8</div></div><script>(function(){const tl=gsap.timeline({paused:true});tl.fromTo("#s8-x",{opacity:0.5},{opacity:1,duration:1},0);window.__timelines["s8"]=tl;})();</script></template>
+<template>
+  <style>
+    @font-face { font-family: "Noto Sans Thai"; font-weight: 900; src: url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #FFF8EC; font-family: "Noto Sans Thai", sans-serif; }
+    #root svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    .lab { position: absolute; font-weight: 900; font-size: 52px; line-height: 1.3; color: #2B2B2B; background: #FFFFFF;
+      border: 6px solid #2B2B2B; border-radius: 22px; padding: 0 24px 8px; white-space: nowrap; box-shadow: 0 7px 0 #2B2B2B; text-align: center; }
+    .lab.taste { min-width: 176px; font-size: 48px; padding: 0 18px 6px; }
+    .lab.yel { background: #FFD84D; }
+    .lab.org { background: #E0704F; color: #FFFFFF; line-height: 1.2; padding: 4px 26px 10px; }
+    .lab.red { background: #F05A50; color: #FFFFFF; }
+    #s8-xmark { position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin: -100px 0 0 -100px; }
+  </style>
+  <div id="root" data-composition-id="s8" data-width="1080" data-height="1920">
+    <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <g transform="translate(640 330) scale(.62)"><g id="s8-brain"></g></g>
+      <path id="s8-yw-o" d="M 530 950 C 380 800 420 560 570 420" fill="none" stroke="#2B2B2B" stroke-width="30" stroke-linecap="round"/>
+      <path id="s8-yw" d="M 530 950 C 380 800 420 560 570 420" fill="none" stroke="#FFD84D" stroke-width="16" stroke-linecap="round"/>
+      <path id="s8-yp" d="M 530 950 C 380 800 420 560 570 420" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" pathLength="1000" stroke-dasharray="30 170" opacity="0"/>
+      <path id="s8-ow-o" d="M 670 950 C 860 800 860 560 710 420" fill="none" stroke="#2B2B2B" stroke-width="30" stroke-linecap="round"/>
+      <path id="s8-ow" d="M 670 950 C 860 800 860 560 710 420" fill="none" stroke="#E0704F" stroke-width="16" stroke-linecap="round"/>
+      <path id="s8-op" d="M 670 950 C 860 800 860 560 710 420" fill="none" stroke="#FFD84D" stroke-width="10" stroke-linecap="round" pathLength="1000" stroke-dasharray="30 170" opacity="0"/>
+      <g transform="translate(600 1050) scale(.8)"><g id="s8-tongue"></g></g>
+    </svg>
+    <div id="s8-t1" class="lab taste" style="left:220px; top:250px;">หวาน</div>
+    <div id="s8-t2" class="lab taste" style="left:220px; top:355px;">เค็ม</div>
+    <div id="s8-t3" class="lab taste" style="left:220px; top:460px;">เปรี้ยว</div>
+    <div id="s8-t4" class="lab taste" style="left:220px; top:565px;">ขม</div>
+    <div id="s8-t5" class="lab taste" style="left:220px; top:670px;">อูมามิ</div>
+    <div id="s8-t6" class="lab taste" style="left:220px; top:800px; font-size:54px;"><div id="s8-xmark"><svg viewBox="-100 -100 200 200" width="200" height="200"><g id="s8-x"></g></svg></div><span style="position:relative">เผ็ด</span></div>
+    <div id="s8-ylab" class="lab yel" style="left:420px; top:660px;">รับรส</div>
+    <div id="s8-olab" class="lab org" style="left:790px; top:720px;">เส้นประสาท<br>คู่ที่ 5</div>
+    <div id="s8-pain" class="lab red" style="left:790px; top:510px;">ร้อน + เจ็บ</div>
+  </div>
+  <script>
+    (function () {
+      const A = window.ART;
+      const $ = (id) => document.getElementById(id);
+      $("s8-brain").innerHTML = A.brainShape() + A.brainFace("happy");
+      $("s8-tongue").innerHTML = A.tongue();
+      $("s8-x").innerHTML = ["#2B2B2B", "#F05A50"].map((c, i) => `<path d="M -78 -58 L 78 58 M 78 -58 L -78 58" stroke="${c}" stroke-width="${i ? 12 : 22}" stroke-linecap="round"/>`).join("");
+
+      const tl = gsap.timeline({ paused: true });
+      const pop = (sel, t, rot = 0) => tl.fromTo(sel, { xPercent: -50, yPercent: -50, scale: 0, rotation: rot - 8 }, { xPercent: -50, yPercent: -50, scale: 1, rotation: rot, duration: 0.25, ease: "back.out(2.6)" }, t);
+      tl.fromTo("#s8-tongue", { y: 300, scale: 0.6, svgOrigin: "0 0" }, { y: 0, scale: 1, duration: 0.25, ease: "back.out(1.8)", svgOrigin: "0 0" }, 0);
+      tl.fromTo("#s8-brain", { scale: 0, svgOrigin: "0 0" }, { scale: 1, duration: 0.25, ease: "back.out(2)", svgOrigin: "0 0" }, 0.02);
+      // สายรับรสสีเหลือง
+      tl.fromTo("#s8-yw-o, #s8-yw", { strokeDasharray: "900 900", strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, 0.02);
+      pop("#s8-ylab", 0.15, -4);
+      // ป้าย 5 รส ไล่ลงมา แล้วช่องที่ 6 "เผ็ด" โดนกากบาท (wrong 31.393 = local 0.243)
+      ["#s8-t1", "#s8-t2", "#s8-t3", "#s8-t4", "#s8-t5"].forEach((s, i) => pop(s, 0.0 + i * 0.035));
+      pop("#s8-t6", 0.18);
+      tl.fromTo("#s8-xmark", { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.07, ease: "power3.in" }, 0.2);
+      tl.fromTo("#s8-t6", { x: 0 }, { x: 12, duration: 0.05, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, 0.27);
+      tl.fromTo("#s8-yp", { opacity: 0, strokeDashoffset: 0 }, { opacity: 1, strokeDashoffset: -600, duration: 2.2, ease: "none" }, 0.4);
+      // 12: สายประสาทคู่ที่ 5 สีส้ม (33.878 = local 2.728, ding 34.078 = local 2.928)
+      tl.fromTo("#s8-ow-o, #s8-ow", { strokeDasharray: "900 900", strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, 2.68);
+      pop("#s8-olab", 2.928, 3);
+      tl.fromTo("#s8-op", { opacity: 0, strokeDashoffset: 0 }, { opacity: 1, strokeDashoffset: -800, duration: 1.8, ease: "none" }, 2.95);
+      pop("#s8-pain", 3.35, -3);
+      tl.fromTo("#s8-brain", { rotation: 0, svgOrigin: "0 0" }, { rotation: 5, duration: 0.12, yoyo: true, repeat: 3, ease: "sine.inOut", svgOrigin: "0 0", immediateRender: false }, 3.4);
+      window.__timelines["s8"] = tl;
+    })();
+  </script>
+</template>
