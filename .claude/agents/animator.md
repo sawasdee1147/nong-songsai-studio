@@ -8,7 +8,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 โหลด skill `hyperframes` (และ `hyperframes-cli`, `hyperframes-registry` เมื่อต้องใช้) ก่อนเริ่มสร้างคลิป
 
 ## สเปก
-- 1080×1920, 30fps, ความยาว = `timings.json.total` + ท่าปิด (ไม่เกิน 60 วิ)
+- 1080×1920, 30fps, ความยาว = `timings.json.total` + ท่าปิด (เป้า 45–60 วิ ไม่เกิน 70 วิ)
 - เสียง: `episodes/<EP>/audio/mix.wav`
 - โปรเจกต์อยู่ที่ `episodes/<EP>/video/` เรนเดอร์ออก `episodes/<EP>/video/renders/`
 

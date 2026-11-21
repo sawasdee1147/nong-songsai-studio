@@ -14,14 +14,15 @@ import argparse, glob, json, os, random, re, subprocess, sys, wave
 SR = 44100
 
 
-def trim_to_wav(src, dst, thr_db, rel_db=28.0, pad=0.03):
+def trim_to_wav(src, dst, thr_db, rel_db=28.0, pad=0.03, tempo=1.0):
     """แปลงเป็น WAV mono แล้วตัดเงียบหัวท้ายด้วย RMS ทีละ 10ms
     ถือว่า "มีเสียงพูด" เมื่อ RMS สูงกว่าทั้ง thr_db (ค่าสัมบูรณ์) และ (RMS สูงสุดของประโยค − rel_db)
     จึงตัดหางเสียงเบา/เสียงหายใจที่ดังกว่า −45 dB แต่เบากว่าเสียงพูดมากได้
     """
     import numpy as np
     tmp = dst + ".full.wav"
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src,
+    af = ["-af", f"atempo={tempo}"] if abs(tempo - 1.0) > 1e-6 else []
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, *af,
                     "-ac", "1", "-ar", str(SR), "-c:a", "pcm_s16le", tmp], check=True)
     with wave.open(tmp, "rb") as w:
         x = np.frombuffer(w.readframes(w.getnframes()), "<i2").astype(np.float64) / 32768
@@ -83,6 +84,8 @@ def main():
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--max-line", type=float, default=3.0)
     ap.add_argument("--threshold", type=float, default=-45.0, help="dB ระดับที่ถือว่าเงียบ (ค่าสัมบูรณ์)")
+    ap.add_argument("--tempo", type=float, default=1.0,
+                    help="เร่ง/ลดความเร็วเสียงพูด (คงระดับเสียง) เช่น 1.12 — ค่าประจำช่องอยู่ใน tools/audio/voice.json: tempo")
     ap.add_argument("--rel", type=float, default=28.0, help="dB ต่ำกว่าช่วงที่ดังที่สุดของประโยค ที่ถือว่าเงียบ")
     a = ap.parse_args()
     assert 0 <= a.gap_min <= a.gap_max
@@ -106,7 +109,7 @@ def main():
     for k, src in enumerate(files):
         idx = int(re.search(r"line_(\d+)", src).group(1))
         dst = os.path.join(a.out_dir, "trimmed", f"line_{idx:02d}.wav")
-        trim_to_wav(src, dst, a.threshold, a.rel)
+        trim_to_wav(src, dst, a.threshold, a.rel, tempo=a.tempo)
         fr = read_frames(dst)
         n = len(fr) // 2
         if n == 0:
@@ -130,7 +133,7 @@ def main():
 
     with wave.open(os.path.join(a.out_dir, "voice.wav"), "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(bytes(out))
-    result = {"sample_rate": SR, "total": round(t, 3), "gap_range": [a.gap_min, a.gap_max],
+    result = {"sample_rate": SR, "tempo": a.tempo, "total": round(t, 3), "gap_range": [a.gap_min, a.gap_max],
               "max_line": a.max_line, "lines": lines,
               "too_long": [e["index"] for e in too_long]}
     with open(os.path.join(a.out_dir, "timings.json"), "w", encoding="utf-8") as f:
