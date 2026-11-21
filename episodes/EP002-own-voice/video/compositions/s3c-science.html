@@ -27,7 +27,7 @@
         </g></g>
       </g>
     </svg>
-    <div id="s3c-lab" class="lab yel" style="left:640px; top:290px;">ยังวิจัยอยู่</div>
+    <div id="s3c-lab" class="lab yel" style="left:400px; top:280px;">ยังวิจัยอยู่</div>
   </div>
   <script>
     (function () {
@@ -48,7 +48,7 @@
       tl.fromTo("#s3c-tube", { rotation: -6, svgOrigin: "0 140" }, { rotation: 6, duration: 0.15, yoyo: true, repeat: 7, ease: "sine.inOut", svgOrigin: "0 140", immediateRender: false }, 0.4);
       pop("#s3c-lab", 0.0, -3);
       // ส่งต่อฉาก #7: ภาพจางออก ป้ายค้างให้ครบ 2 วิ
-      tl.to("#s3c-art, #s3c-bg", { opacity: 0, duration: 0.15 }, 1.6);
+      tl.to("#s3c-art, #s3c-bg", { opacity: 0, duration: 0.12 }, 1.5);
       tl.to("#s3c-lab", { opacity: 0, duration: 0.1 }, 2.0);
       window.__timelines["s3c"] = tl;
     })();

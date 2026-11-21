@@ -18,9 +18,9 @@
   </style>
   <div id="root" data-composition-id="s7" data-width="1080" data-height="1920">
     <svg class="full" viewBox="0 0 1080 1920" data-layout-allow-overflow>
-      <g transform="translate(470 760)"><g id="s7-p1"></g></g>
-      <g transform="translate(650 700)"><g id="s7-p2"></g></g>
-      <g transform="translate(830 760)"><g id="s7-p3"></g></g>
+      <g transform="translate(450 760)"><g id="s7-p1"></g></g>
+      <g transform="translate(630 700)"><g id="s7-p2"></g></g>
+      <g transform="translate(805 760)"><g id="s7-p3"></g></g>
       <g id="s7-show">
         <path d="M 600 230 L 470 980 L 600 980 Z" fill="#FFF3C4" opacity=".7"/>
         <rect x="350" y="960" width="590" height="60" rx="14" fill="#FF8C69" stroke="#2B2B2B" stroke-width="7"/>
@@ -50,7 +50,7 @@
       ["s7-sp1","s7-sp3"].forEach(id => $(id).innerHTML = A.speaker(false));
       $("s7-sp2in").innerHTML = A.speaker(true);
       // 12a (tick 28.311 = 0.111)
-      ["#s7-p1","#s7-p2","#s7-p3"].forEach((s, i) => tl.fromTo(s, { y: 700, rotation: -10 + i * 10, svgOrigin: "0 0" }, { y: 0, rotation: (i - 1) * 4, duration: 0.3, ease: "back.out(1.6)", svgOrigin: "0 0" }, 0.02 + i * 0.07));
+      ["#s7-p1","#s7-p2","#s7-p3"].forEach((s, i) => tl.fromTo(s, { y: 700, rotation: -10 + i * 10, transformOrigin: "50% 100%" }, { y: 0, rotation: (i - 1) * 4, duration: 0.3, ease: "back.out(1.6)", transformOrigin: "50% 100%" }, 0.02 + i * 0.07));
       pop("#s7-most", 0.111, -2);
       // 12b (tick 30.169 = 1.969)
       ["#s7-p1","#s7-p2","#s7-p3"].forEach((s, i) => tl.to(s, { y: -900, duration: 0.3, ease: "power2.in" }, 1.75 + i * 0.04));

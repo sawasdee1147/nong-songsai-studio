@@ -43,7 +43,7 @@
     <div id="s3-tair" class="lab blue" style="left:560px; top:290px;">อากาศ</div>
     <div id="s3-tbone" class="lab org" style="left:470px; top:885px;">กระดูก</div>
     <div id="s3-deep" class="lab yel" style="left:820px; top:1065px;">ทุ้มขึ้น</div>
-    <div id="s3-vib" class="lab yel" style="left:650px; top:1010px;">หัวสั่นด้วย</div>
+    <div id="s3-vib" class="lab yel" style="left:740px; top:1060px;">หัวสั่นด้วย</div>
     <div id="s3-how" class="lab" style="left:790px; top:330px;">ยังไงแน่?</div>
   </div>
   <script>
@@ -91,8 +91,8 @@
       tl.fromTo("#s3-shake", { x: 0 }, { x: 4, duration: 0.05, yoyo: true, repeat: 31, ease: "sine.inOut" }, 7.84);
       tl.fromTo("#s3-trem", { opacity: 0 }, { opacity: 1, duration: 0.08, yoyo: true, repeat: 13, ease: "steps(1)" }, 7.84);
       tl.set("#s3-trem", { opacity: 0 }, 9.55);
-      pop("#s3-vib", 7.78, 3);
-      out("#s3-vib", 9.83);
+      pop("#s3-vib", 7.55, 3);
+      out("#s3-vib", 9.5);
       // 5b (15.758 = 9.708) "?" เหนือกะโหลก + "ยังไงแน่?" (ห้ามตะแกรง/Hz)
       out("#s3-tair", 9.45); out("#s3-tbone", 9.45);
       tl.to("#s3-airg", { opacity: 0.3, duration: 0.25 }, 9.45);
