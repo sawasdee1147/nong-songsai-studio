@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""มิกซ์เสียงพากย์ + เสียงประกอบ (จาก sfx/) แล้วปรับความดังรวม
+"""มิกซ์เสียงพากย์ + เสียงประกอบ (จาก sfx/) แล้วปรับความดังรวม (ผลลัพธ์เป็น WAV สเตอริโอ)
 
 ใช้:
   python3 tools/audio/mix.py <voice.wav> <sfx_cues.json> <out.wav> [--sfx-dir sfx] [--tail 0] [--lufs -14]
@@ -57,8 +57,10 @@ def main():
         raw = os.path.join(td, "raw.wav")
         save(raw, mixbuf * 0.7)
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw,
-                        "-af", f"loudnorm=I={a.lufs}:TP=-1.5:LRA=11",
-                        "-ar", str(SR), "-ac", "1", "-c:a", "pcm_s16le", a.out], check=True)
+                        # ส่งออกเป็นสเตอริโอ (dual mono) แล้ววัด/ปรับความดังในรูปสเตอริโอ
+                        # วิดีโอใช้เสียงสเตอริโอ ถ้า normalize แบบโมโนแล้วไปแตกเป็น 2 ช่องทีหลัง จะดังขึ้น ~3 LU
+                        "-af", f"pan=stereo|c0=c0|c1=c0,loudnorm=I={a.lufs}:TP=-2:LRA=11",
+                        "-ar", str(SR), "-ac", "2", "-c:a", "pcm_s16le", a.out], check=True)
     print(f"mix -> {a.out}  ({end:.2f}s, {len(cues)} sfx cues)")
 
 
