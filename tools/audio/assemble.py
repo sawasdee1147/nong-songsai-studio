@@ -14,13 +14,57 @@ import argparse, glob, json, os, random, re, subprocess, sys, wave
 SR = 44100
 
 
-def trim_to_wav(src, dst, thr_db):
-    f = (f"silenceremove=start_periods=1:start_threshold={thr_db}dB:start_silence=0.03:detection=peak,"
-         f"areverse,"
-         f"silenceremove=start_periods=1:start_threshold={thr_db}dB:start_silence=0.03:detection=peak,"
-         f"areverse")
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-af", f,
-                    "-ac", "1", "-ar", str(SR), "-c:a", "pcm_s16le", dst], check=True)
+def trim_to_wav(src, dst, thr_db, rel_db=28.0, pad=0.03):
+    """แปลงเป็น WAV mono แล้วตัดเงียบหัวท้ายด้วย RMS ทีละ 10ms
+    ถือว่า "มีเสียงพูด" เมื่อ RMS สูงกว่าทั้ง thr_db (ค่าสัมบูรณ์) และ (RMS สูงสุดของประโยค − rel_db)
+    จึงตัดหางเสียงเบา/เสียงหายใจที่ดังกว่า −45 dB แต่เบากว่าเสียงพูดมากได้
+    """
+    import numpy as np
+    tmp = dst + ".full.wav"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src,
+                    "-ac", "1", "-ar", str(SR), "-c:a", "pcm_s16le", tmp], check=True)
+    with wave.open(tmp, "rb") as w:
+        x = np.frombuffer(w.readframes(w.getnframes()), "<i2").astype(np.float64) / 32768
+    os.remove(tmp)
+    hop = int(SR * 0.01)
+    n = len(x) // hop
+    if n == 0:
+        y = x[:0]
+    else:
+        rms = np.sqrt(np.mean(x[: n * hop].reshape(n, hop) ** 2, axis=1) + 1e-12)
+        db = 20 * np.log10(rms)
+        thr = max(thr_db, db.max() - rel_db)
+        active = db > thr
+        # รวมช่วงเสียงที่ห่างกัน < 150ms แล้วทิ้งช่วงสั้น < 80ms (เสียงคลิก/หายใจที่หัวท้าย)
+        runs, i = [], 0
+        while i < n:
+            if active[i]:
+                j = i
+                while j < n and active[j]:
+                    j += 1
+                if runs and i - runs[-1][1] < 15:
+                    runs[-1][1] = j
+                    runs[-1][2] += j - i
+                else:
+                    runs.append([i, j, j - i])
+                i = j
+            else:
+                i += 1
+        # นับเฉพาะเฟรมที่มีเสียงจริง (ไม่นับช่องว่างที่ถูกรวม)
+        runs = [r for r in runs if r[2] >= 8] or runs
+        if not runs:
+            y = x[:0]
+        else:
+            a = max(0, runs[0][0] * hop - int(pad * SR))
+            b = min(len(x), runs[-1][1] * hop + int(pad * SR))
+            y = x[a:b]
+            fade = min(int(0.01 * SR), len(y) // 2)
+            if fade:
+                ramp = np.linspace(0, 1, fade)
+                y = y.copy(); y[:fade] *= ramp; y[-fade:] *= ramp[::-1]
+    with wave.open(dst, "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes((np.clip(y, -1, 1) * 32767).astype("<i2").tobytes())
 
 
 def read_frames(path):
@@ -38,7 +82,8 @@ def main():
     ap.add_argument("--gap-max", type=float, default=0.4)
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--max-line", type=float, default=3.0)
-    ap.add_argument("--threshold", type=float, default=-45.0, help="dB ระดับที่ถือว่าเงียบ")
+    ap.add_argument("--threshold", type=float, default=-45.0, help="dB ระดับที่ถือว่าเงียบ (ค่าสัมบูรณ์)")
+    ap.add_argument("--rel", type=float, default=28.0, help="dB ต่ำกว่าช่วงที่ดังที่สุดของประโยค ที่ถือว่าเงียบ")
     a = ap.parse_args()
     assert 0 <= a.gap_min <= a.gap_max
 
@@ -60,7 +105,7 @@ def main():
     for k, src in enumerate(files):
         idx = int(re.search(r"line_(\d+)", src).group(1))
         dst = os.path.join(a.out_dir, "trimmed", f"line_{idx:02d}.wav")
-        trim_to_wav(src, dst, a.threshold)
+        trim_to_wav(src, dst, a.threshold, a.rel)
         fr = read_frames(dst)
         n = len(fr) // 2
         if n == 0:
