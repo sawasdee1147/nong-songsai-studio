@@ -8,9 +8,9 @@
 | ตรวจข้อเท็จจริง | `factcheck.md` | ✅ |
 | ตรวจบท (QA) | `qa-script.md` | ✅ |
 | ⛔ เจ้าของช่องเลือกฮุก/อนุมัติบท | — | ✅ ฮุก A (2026-11-21) |
-| เสียง | `audio/voice.wav`, `audio/timings.json`, `audio/mix.wav`, `audio/audio-report.md` | ⬜ |
-| วิดีโอ | `video/renders/EP001-chili-heat.mp4`, `assets.md` | ⬜ |
-| ตรวจคลิป (QA) | `qa-final.md` | ⬜ |
-| การตลาด | `marketing.md` | ⬜ |
-| ⛔ เจ้าของช่องอนุมัติโพสต์ | — | ⬜ |
+| เสียง | `audio/voice.wav`, `audio/timings.json`, `audio/mix.wav`, `audio/audio-report.md` | ✅ |
+| วิดีโอ | `video/renders/EP001-chili-heat.mp4`, `assets.md` | ✅ |
+| ตรวจคลิป (QA) | `qa-final.md` | ✅ |
+| การตลาด | `marketing.md` | ✅ |
+| ⛔ เจ้าของช่องอนุมัติโพสต์ | — | ⏳ รออนุมัติ |
 | โพสต์แล้ว | ลิงก์: | ⬜ |
