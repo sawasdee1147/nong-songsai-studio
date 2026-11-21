@@ -1,0 +1,140 @@
+[
+ {
+  "sfx": "pop",
+  "at": 0.0,
+  "gain_db": -20,
+  "line": 1
+ },
+ {
+  "sfx": "thud",
+  "at": 2.275,
+  "gain_db": -20,
+  "line": 2
+ },
+ {
+  "sfx": "pop",
+  "at": 4.305,
+  "gain_db": -20,
+  "line": 3
+ },
+ {
+  "sfx": "blip_talk",
+  "at": 4.805,
+  "gain_db": -24,
+  "line": 3
+ },
+ {
+  "sfx": "pop",
+  "at": 6.405,
+  "gain_db": -20,
+  "line": 4
+ },
+ {
+  "sfx": "tick",
+  "at": 7.269,
+  "gain_db": -20,
+  "line": 5
+ },
+ {
+  "sfx": "tick",
+  "at": 10.056,
+  "gain_db": -20,
+  "line": 6
+ },
+ {
+  "sfx": "tick",
+  "at": 11.056,
+  "gain_db": -20,
+  "line": 6
+ },
+ {
+  "sfx": "glint",
+  "at": 12.569,
+  "gain_db": -22,
+  "line": 7
+ },
+ {
+  "sfx": "tick",
+  "at": 15.001,
+  "gain_db": -20,
+  "line": 8
+ },
+ {
+  "sfx": "tick",
+  "at": 15.901,
+  "gain_db": -20,
+  "line": 8
+ },
+ {
+  "sfx": "wrong",
+  "at": 17.162,
+  "gain_db": -22,
+  "line": 9
+ },
+ {
+  "sfx": "whoosh",
+  "at": 19.069,
+  "gain_db": -22,
+  "line": 10
+ },
+ {
+  "sfx": "ding",
+  "at": 21.136,
+  "gain_db": -22,
+  "line": 11
+ },
+ {
+  "sfx": "riser",
+  "at": 23.14,
+  "gain_db": -24,
+  "line": 12
+ },
+ {
+  "sfx": "tick",
+  "at": 24.888,
+  "gain_db": -20,
+  "line": 13
+ },
+ {
+  "sfx": "tick",
+  "at": 27.013,
+  "gain_db": -20,
+  "line": 14
+ },
+ {
+  "sfx": "wrong",
+  "at": 29.998,
+  "gain_db": -22,
+  "line": 15
+ },
+ {
+  "sfx": "boing",
+  "at": 30.548,
+  "gain_db": -22,
+  "line": 15
+ },
+ {
+  "sfx": "pop",
+  "at": 32.163,
+  "gain_db": -20,
+  "line": 16
+ },
+ {
+  "sfx": "thud",
+  "at": 34.168,
+  "gain_db": -20,
+  "line": 17
+ },
+ {
+  "sfx": "ding",
+  "at": 34.968,
+  "gain_db": -22,
+  "line": 17
+ },
+ {
+  "sfx": "glint",
+  "at": 37.323,
+  "gain_db": -22,
+  "line": 18
+ }
+]
