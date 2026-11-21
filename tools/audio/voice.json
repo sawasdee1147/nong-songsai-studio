@@ -7,5 +7,6 @@
   "voice_settings": {
     "stability": 0.5
   },
-  "_note": "ภาษาไทยใช้ได้เฉพาะ eleven_v3. stability 0.5 = Natural (เจ้าของช่องเลือก). v3 รับ stability ได้แค่ 0.0/0.5/1.0. ใส่แท็กอารมณ์ภาษาอังกฤษหน้าแต่ละบรรทัดใน script.tts.txt ตามกฎใน docs/show-bible.md"
+  "_note": "ภาษาไทยใช้ได้เฉพาะ eleven_v3. stability 0.5 = Natural (เจ้าของช่องเลือก). v3 รับ stability ได้แค่ 0.0/0.5/1.0. ใส่แท็กอารมณ์ภาษาอังกฤษหน้าแต่ละบรรทัดใน script.tts.txt ตามกฎใน docs/show-bible.md tempo 1.13 = เร่งเสียงพูด 13% ตอนประกอบ (เจ้าของช่องเลือก 2026-11-21) ใช้กับ assemble.py --tempo",
+  "tempo": 1.13
 }
