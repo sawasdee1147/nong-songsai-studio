@@ -93,7 +93,8 @@ def main():
         sys.exit(f"ไม่พบไฟล์ line_XX ใน {a.raw_dir}")
     texts = []
     if a.script:
-        texts = [l.strip() for l in open(a.script, encoding="utf-8") if l.strip()]
+        # ตัดแท็กอารมณ์ [xxx] ออกจากข้อความใน timings (ซับใช้ข้อความล้วน)
+        texts = [re.sub(r"\[[^\]]*\]\s*", "", l).strip() for l in open(a.script, encoding="utf-8") if l.strip()]
         if len(texts) != len(files):
             print(f"WARNING: บทมี {len(texts)} บรรทัด แต่มีไฟล์เสียง {len(files)} ไฟล์", file=sys.stderr)
 
