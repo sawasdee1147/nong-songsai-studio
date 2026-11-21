@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#FFF8EC;width:720px;height:720px;overflow:hidden;font-family:"Noto Sans Thai",sans-serif}
+#c{position:absolute;left:50%;top:-6px;transform:translateX(-50%)}
+#c svg{width:384px;height:591px}
+.cap{position:absolute;width:100%;text-align:center;font-weight:800;color:#2B2B2B;opacity:0}
+#c1{bottom:78px;font-size:36px}
+#c2{bottom:14px;font-size:46px;color:#E0704F}
+</style></head><body><div id="c"></div><div class="cap" id="c1">รู้เรื่องทั้งหมดแล้ว</div><div class="cap" id="c2">พวกมึงฉลาดขึ้นแล้วนะ 🤓</div>
+<script src="kid.js"></script><script>
+const clamp=x=>Math.max(0,Math.min(1,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const io=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+const back=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+window.draw=function(t){ // t seconds 0..3
+  const raise=io(seg(t,0.5,1.15)), lower=io(seg(t,3.35,3.8));
+  const push=raise*(1-lower);
+  const pushUp=back(seg(t,1.15,1.35));
+  const slip=io(seg(t,3.4,4.0));
+  let gdy = 9 - 14*pushUp*(t<3.4?1:0) + (t>=3.4? -5+14*slip : 0);
+  if(t<1.15) gdy=9;
+  const flash = t>1.3 && t<1.5;
+  const gp=seg(t,1.3,1.5);
+  let glint = t<1.3?0 : t<3.4 ? (gp<1? back(gp)*1.1 : 1+0.12*Math.sin((t-1.5)*9)) : 1-seg(t,3.4,3.6);
+  const cool = t>=1.45 && t<3.65;
+  const tilt = cool? -4*io(seg(t,1.45,1.7)) : 0;
+  const o={gl: flash?"glare":"norm", eye: cool?"cool": (t>2.75? "norm":"norm"), brow: cool?"cool":"norm",
+    mo: cool?"smirk":"smile", arm: push>0.02?"left":"down", push: push>0.02?push:0, gdy, glint, tilt};
+  document.getElementById("c").innerHTML=kid(o);
+  const out=1-seg(t,3.45,3.65);
+  const c1=document.getElementById("c1"), c2=document.getElementById("c2");
+  const a1=seg(t,1.5,1.7)*out, a2=seg(t,2.15,2.3)*out;
+  c1.style.opacity=a1; c1.style.transform=`translateY(${(1-seg(t,1.5,1.7))*14}px)`;
+  c2.style.opacity=a2; c2.style.transform=`scale(${a2>0? (1+0.25*(1-back(seg(t,2.15,2.35)))):1})`;
+};
+draw(0);
+</script></body></html>

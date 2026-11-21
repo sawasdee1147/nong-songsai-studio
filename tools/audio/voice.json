@@ -1,0 +1,14 @@
+{
+  "voice_id": "<ยังไม่ได้เลือก — เจ้าของช่องเลือกเสียงจากคลัง ElevenLabs แล้วใส่ voice ID ที่นี่>",
+  "model_id": "eleven_multilingual_v2",
+  "language_code": "",
+  "output_format": "mp3_44100_128",
+  "seed": 1147,
+  "voice_settings": {
+    "stability": 0.45,
+    "similarity_boost": 0.8,
+    "style": 0.35,
+    "use_speaker_boost": true,
+    "speed": 1.05
+  }
+}

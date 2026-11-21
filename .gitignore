@@ -1,0 +1,9 @@
+node_modules/
+**/video/node_modules/
+**/video/.hyperframes/
+**/video/frames/
+**/audio/trimmed/
+.DS_Store
+*.log
+.env
+__pycache__/
