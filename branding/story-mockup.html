@@ -36,10 +36,10 @@ function roomNight(){
      <rect x="640" y="430" width="320" height="400" rx="16" fill="#4F6FA8"/>
      <path d="M800 430 V830 M640 630 H960" fill="none"/>
      <circle cx="880" cy="520" r="44" fill="#FFF3C4"/>
-     <rect x="80" y="1090" width="640" height="200" rx="30" fill="#7A86B8"/>
-     <rect x="70" y="930" width="330" height="200" rx="70" fill="#FFF8EC"/>
-     <path d="M100 990 Q235 955 370 990" fill="none" stroke-width="5" opacity=".35"/>
-     <path d="M70 1290 H730" />
+     <rect x="160" y="1090" width="600" height="200" rx="30" fill="#7A86B8"/>
+     <rect x="150" y="930" width="330" height="200" rx="70" fill="#FFF8EC"/>
+     <path d="M180 990 Q315 955 450 990" fill="none" stroke-width="5" opacity=".35"/>
+     <path d="M150 1290 H770" />
      <rect x="760" y="1040" width="130" height="250" rx="12" fill="#5A4A6A"/>
      <rect x="790" y="1000" width="70" height="44" rx="8" fill="#FFD84D"/>
    </g>
@@ -51,26 +51,22 @@ const put=(svg,x,y,w)=>`<div class="ch" style="left:${x}px;top:${y}px;width:${w}
 window.render=function(v){
   const f=document.getElementById("f");
   if(v==="a"){
-    // ฉากเรื่อง: รูมเมทนอน (ตัวละครใหม่) + เงาตัวหลอน (ghost) + การ์ดนาฬิกา + น้องสงสัยมุมจอ
-    const sleeper=kid({skin:"tan",hair:"short",hairColor:"#3A2A20",top:"#4F6FA8",gl:"none",ah:"none",eye:"sleep",brow:"none",mo:"flat",pocket:false,strings:false});
+    // ฉากเล่าเรื่อง: น้องสงสัยเป็นตัวเอก นอนบนหมอน + เงาหลอนข้างเตียง (ตัวละครเสริม) + นาฬิกา
+    const sleeper=kid({eye:"sleep",brow:"worry",mo:"wobble",ah:"zig"});
     const ghost=kid({skin:"ghost",hair:"long",hairColor:"#1B1B22",top:"#3B3446",gl:"none",ah:"none",eye:"creepy",brow:"none",mo:"flat",pocket:false,strings:false});
-    const nong=kid({gl:"down",eye:"side",brow:"none",mo:"flatlow",ah:"droop"});
-    // คนนอน: หมุนทั้งตัวด้วย CSS (ไม่หมุนใน SVG) หัวจะไม่ถูกตัด แล้วห่มผ้าห่มทับตัว
-    const lying=`<div class="ch" style="left:60px;top:735px;width:400px;height:616px;transform:rotate(-90deg)">${sleeper}</div>`;
-    const blanket=`<svg width="1080" height="1920" style="position:absolute;inset:0"><g transform="translate(40 0)"><path d="M300 990 Q330 960 380 965 L680 975 Q706 978 706 1005 L700 1180 Q698 1200 676 1200 L310 1200 Q290 1198 292 1176Z" fill="#9AA6D8" stroke="#2B2B2B" stroke-width="8" stroke-linejoin="round"/><path d="M300 1012 Q490 1000 700 1015" fill="none" stroke="#2B2B2B" stroke-width="6"/><path d="M420 1060 L430 1180 M560 1065 L566 1180" stroke="#2B2B2B" stroke-width="4" opacity=".3"/></g></svg>`;
-    f.innerHTML=roomNight()+lying+blanket+put(ghost,640,600,430)
+    const lying=`<div class="ch" style="left:140px;top:735px;width:400px;height:616px;transform:rotate(-90deg)">${sleeper}</div>`;
+    const blanket=`<svg width="1080" height="1920" style="position:absolute;inset:0"><g transform="translate(120 0) scale(.92 1)"><path d="M300 990 Q330 960 380 965 L680 975 Q706 978 706 1005 L700 1180 Q698 1200 676 1200 L310 1200 Q290 1198 292 1176Z" fill="#9AA6D8" stroke="#2B2B2B" stroke-width="8" stroke-linejoin="round"/><path d="M300 1012 Q490 1000 700 1015" fill="none" stroke="#2B2B2B" stroke-width="6"/><path d="M420 1060 L430 1180 M560 1065 L566 1180" stroke="#2B2B2B" stroke-width="4" opacity=".3"/></g></svg>`;
+    f.innerHTML=roomNight()+lying+blanket+put(ghost,690,600,400)
       +`<div class="chip"><b>03:00</b><span>ตีสาม</span></div>`
-      +`<div class="nong">${nong}</div><div class="bubble">เอ๊ะ…</div>`
-      +`<div class="cap"><div>ตื่นมาตัว<span class="y">ขยับไม่ได้</span></div></div>`
-      +`<div class="tag">ตัวอย่าง A · ฉากเล่าเรื่อง</div>`;
+      +`<div class="cap"><div>ตื่นมาแล้ว <span class="y">ขยับไม่ได้!</span></div></div>`
+      +`<div class="tag">ตัวอย่าง A · น้องสงสัยเป็นตัวเอก</div>`;
   } else {
-    // ฉากเฉลย: การ์ดตัวเลข + ตัวละครใหม่ + น้องสงสัยดันแว่นมุมจอ
+    // ฉากหักมุม/เฉลย: น้องสงสัยเต็มจอ ดันแว่น + การ์ดตัวเลข + เพื่อน (ตัวละครเสริม) ตกใจ
     const friend=kid({skin:"light",hair:"bun",hairColor:"#5A3A22",top:"#7FD6C2",gl:"none",ah:"none",eye:"shock",brow:"shock",mo:"shock",pocket:false,strings:false,arm:"up"});
     const nong=kid({eye:"cool",brow:"cool",mo:"smirk",arm:"left",push:1,gdy:-5,glint:1});
-    f.innerHTML=dark()+put(friend,250,700,560)
+    f.innerHTML=dark()+put(friend,650,860,380)+put(nong,120,700,560)
       +`<div class="card"><div class="k">ผีอำ คนเคยเจออย่างน้อย 1 ครั้ง</div><div class="n">??<small>%</small></div><div class="src">ตัวเลขจริงจากนักวิจัย · ผู้แต่ง ปี · วารสาร</div></div>`
-      +`<div class="nong">${nong}</div>`
-      +`<div class="cap"><div>สมองตื่น <span class="y">แต่ร่างกายยังหลับ!</span></div></div>`
+      +`<div class="cap"><div>สมองตื่น <span class="y">แต่ตัวยังหลับ!</span></div></div>`
       +`<div class="tag">ตัวอย่าง B · หักมุม/เฉลย</div>`;
   }
 };
