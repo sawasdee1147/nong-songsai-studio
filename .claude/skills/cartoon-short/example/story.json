@@ -1,0 +1,35 @@
+{
+ "title": "รูมเมทตอนตีสาม",
+ "voice": "th-TH-PremwadeeNeural",
+ "mood": "dark",
+ "outro": "ตอนหน้า: เขาจะกลับมาไหม",
+ "cast": {
+  "A": {"skin": "tan", "hair": "short", "shirt": "#3a4a76"},
+  "B": {"skin": "light", "hair": "bun", "hair_color": "#2a1d16", "shirt": "#3f6b4a"},
+  "C": {"skin": "ghost", "hair": "long", "hair_color": "#0f0c12", "shirt": "#2a2630"}
+ },
+ "lines": [
+  {"vo": "ถ้ารูมเมทคุณ จ้องคุณตอนตีสาม อย่าลืมตาขึ้นมามอง", "cap": "ถ้ารูมเมทคุณ|จ้องคุณ|*ตอนตีสาม|!อย่าลืมตา", "en": "If your roommate stares at you at 3 a.m., don't open your eyes",
+   "clock": {"t": "03:00", "s": "ตีสาม"},
+   "scene": {"bg": "room_night", "push": 1.25, "chars": [{"who": "A", "x": 300, "y": 1250, "s": 1.1, "face": "sleep"}, {"who": "B", "x": 820, "y": 1060, "s": 1.25, "face": "creepy", "look": "left", "flip": true}]}},
+  {"vo": "แต่คุณลืมตาไปแล้ว แล้วตัวคุณก็แข็งค้างไปเอง", "cap": "แต่คุณ|*ลืมตาไปแล้ว|ตัวคุณ|!แข็งค้าง|ไปเอง", "en": "But you already did. And your body freezes on its own",
+   "card": {"k": "เจอภัย ร่างกายนิ่งไปเอง", "n": "50", "u": "คน", "s": "เห็นหน้าโกรธ → ตัวไหวน้อยลง หัวใจช้าลง", "src": "Roelofs et al. 2010 · Psychological Science"},
+   "sfx": ["heart", ["heart", 0.8]],
+   "scene": {"bg": "dark", "push": 1.3, "chars": [{"who": "A", "x": 540, "y": 1100, "s": 2.0, "face": "scared", "look": "right"}]}},
+  {"vo": "คนปกติกะพริบตา นาทีละสิบเจ็ดครั้ง", "cap": "คนปกติ|กะพริบตา|นาทีละ*17 ครั้ง", "en": "People blink about 17 times a minute",
+   "card": {"k": "คนปกติกะพริบตา", "n": "17", "u": "ครั้ง/นาที", "s": "ค่าเฉลี่ยขณะพัก จาก 150 คน", "src": "Bentivoglio et al. 1997 · Movement Disorders"},
+   "scene": {"bg": "room_night", "chars": [{"who": "B", "x": 540, "y": 1120, "s": 1.6, "face": "creepy"}]}},
+  {"vo": "คุณนับในใจ หนึ่งนาทีเต็ม เขาไม่กะพริบเลยสักครั้ง", "cap": "คุณนับในใจ|หนึ่งนาทีเต็ม|เขา!ไม่กะพริบ|สักครั้ง", "en": "You count a full minute. He doesn't blink once",
+   "clock": {"t": "03:01", "s": "ผ่านไปหนึ่งนาที"},
+   "sfx": ["heart", ["heart", 0.8], ["heart", 1.6]],
+   "scene": {"bg": "dark", "push": 1.4, "chars": [{"who": "B", "x": 540, "y": 1000, "s": 2.6, "face": "creepy"}]}},
+  {"vo": "คุณเลยหลับตา แล้วแกล้งกรน จนฟ้าสว่าง", "cap": "คุณเลย|*หลับตา|แกล้งกรน|จนฟ้าสว่าง", "en": "So you shut your eyes and fake-snore till dawn",
+   "scene": {"bg": "room_night", "chars": [{"who": "A", "x": 540, "y": 1150, "s": 1.5, "face": "sleep"}]}},
+  {"vo": "เช้ามา เขาเพิ่งเปิดประตูเข้ามา บอกว่าเมื่อคืน นอนค้างบ้านแม่", "cap": "เช้ามา|เขาเพิ่ง*เปิดประตูเข้ามา|บอกว่าเมื่อคืน|!นอนบ้านแม่", "en": "Morning. He walks in and says he slept at his mom's",
+   "twist": true, "clock": {"t": "07:10", "s": "เช้า"},
+   "scene": {"bg": "room_day", "chars": [{"who": "B", "x": 760, "y": 1120, "s": 1.3, "face": "smile", "talk": true, "flip": true}, {"who": "A", "x": 300, "y": 1200, "s": 1.2, "face": "scared", "look": "right"}]}},
+  {"vo": "แล้วคนที่จ้องคุณทั้งคืน คือใคร", "cap": "แล้วคนที่|จ้องคุณ*ทั้งคืน|!คือใคร", "en": "Then who was staring at you all night?",
+   "sfx": ["creak"],
+   "scene": {"bg": "dark", "push": 1.3, "chars": [{"who": "C", "x": 540, "y": 1080, "s": 2.0, "face": "creepy"}]}}
+ ]
+}
