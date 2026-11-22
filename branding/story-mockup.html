@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"NST";src:url("../assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2");font-weight:900}
+@font-face{font-family:"NST";src:url("../assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2");font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1d2236;font-family:"NST",sans-serif}
+.frame{position:absolute;inset:0;overflow:hidden}
+.ch{position:absolute}
+.ch svg{width:100%;height:100%}
+.card{position:absolute;left:90px;top:230px;width:900px;padding:28px 40px 24px;border-radius:28px;background:#FFF8EC;border:6px solid #2B2B2B;box-shadow:10px 10px 0 #2B2B2B;color:#2B2B2B}
+.card .k{font-weight:700;font-size:36px}
+.card .n{font-weight:900;font-size:120px;line-height:1.05}
+.card .n small{font-size:46px;margin-left:12px}
+.card .src{font-weight:700;font-size:24px;color:#7a6f60;margin-top:6px}
+.chip{position:absolute;left:70px;top:230px;padding:12px 26px;border-radius:18px;background:#FFF8EC;border:5px solid #2B2B2B;box-shadow:6px 6px 0 #2B2B2B;display:flex;gap:14px;align-items:center;color:#2B2B2B}
+.chip b{font-weight:900;font-size:48px}.chip span{font-weight:700;font-size:30px}
+.cap{position:absolute;left:60px;right:140px;top:1440px;text-align:center}
+.cap div{display:inline-block;background:#fff;border:6px solid #2B2B2B;border-radius:24px;padding:18px 30px 12px;font-weight:900;font-size:76px;line-height:1.42;color:#2B2B2B;box-shadow:8px 8px 0 #2B2B2B}
+.cap .y{color:#E0704F}
+.tag{position:absolute;top:30px;left:30px;font:700 26px sans-serif;color:#fff;background:#0008;padding:6px 14px;border-radius:10px}
+.nong{position:absolute;right:120px;top:1060px;width:250px;height:385px}
+.bubble{position:absolute;right:330px;top:1080px;background:#FFD84D;border:5px solid #2B2B2B;border-radius:22px;padding:10px 20px;font-weight:900;font-size:40px;color:#2B2B2B;box-shadow:5px 5px 0 #2B2B2B}
+</style></head><body>
+<div class="frame" id="f"></div>
+<script src="../character/kid.js"></script>
+<script>
+
+function roomNight(){
+  // ห้องนอนกลางคืน ลายเส้นของช่อง: ขอบหมึกหนา สีเรียบ ไม่มีเงาไล่เฉด
+  return `<svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+   <rect width="1080" height="1920" fill="#2E3553"/>
+   <rect y="1250" width="1080" height="670" fill="#3B3046"/>
+   <path d="M0 1250 H1080" stroke="${INK}" stroke-width="8"/>
+   <g stroke="${INK}" stroke-width="8" stroke-linejoin="round">
+     <rect x="640" y="430" width="320" height="400" rx="16" fill="#4F6FA8"/>
+     <path d="M800 430 V830 M640 630 H960" fill="none"/>
+     <circle cx="880" cy="520" r="44" fill="#FFF3C4"/>
+     <rect x="60" y="1060" width="620" height="230" rx="30" fill="#7A86B8"/>
+     <rect x="60" y="990" width="170" height="110" rx="26" fill="#FFF8EC"/>
+     <path d="M40 1290 H700" />
+     <rect x="760" y="1040" width="130" height="250" rx="12" fill="#5A4A6A"/>
+     <rect x="790" y="1000" width="70" height="44" rx="8" fill="#FFD84D"/>
+   </g>
+   <circle cx="825" cy="1000" r="170" fill="#FFD84D" opacity=".12"/>
+  </svg>`;
+}
+function dark(){return `<svg width="1080" height="1920" style="position:absolute;inset:0"><rect width="1080" height="1920" fill="#1B1E2E"/><circle cx="540" cy="900" r="560" fill="#2E3553"/></svg>`;}
+const put=(svg,x,y,w)=>`<div class="ch" style="left:${x}px;top:${y}px;width:${w}px;height:${w*400/260}px">${svg}</div>`;
+window.render=function(v){
+  const f=document.getElementById("f");
+  if(v==="a"){
+    // ฉากเรื่อง: รูมเมทนอน (ตัวละครใหม่) + เงาตัวหลอน (ghost) + การ์ดนาฬิกา + น้องสงสัยมุมจอ
+    const sleeper=kid({skin:"tan",hair:"short",hairColor:"#3A2A20",top:"#4F6FA8",gl:"none",ah:"none",eye:"sleep",brow:"none",mo:"flat",pocket:false,strings:false,tilt:-80});
+    const ghost=kid({skin:"ghost",hair:"long",hairColor:"#1B1B22",top:"#3B3446",gl:"none",ah:"none",eye:"creepy",brow:"none",mo:"flat",pocket:false,strings:false});
+    const nong=kid({gl:"down",eye:"side",brow:"none",mo:"flatlow",ah:"droop"});
+    f.innerHTML=roomNight()+put(sleeper,120,760,380)+put(ghost,560,620,430)
+      +`<div class="chip"><b>03:00</b><span>ตีสาม</span></div>`
+      +`<div class="nong">${nong}</div><div class="bubble">เอ๊ะ…</div>`
+      +`<div class="cap"><div>ตื่นมาตัว<span class="y">ขยับไม่ได้</span></div></div>`
+      +`<div class="tag">ตัวอย่าง A · ฉากเล่าเรื่อง</div>`;
+  } else {
+    // ฉากเฉลย: การ์ดตัวเลข + ตัวละครใหม่ + น้องสงสัยดันแว่นมุมจอ
+    const friend=kid({skin:"light",hair:"bun",hairColor:"#5A3A22",top:"#7FD6C2",gl:"none",ah:"none",eye:"shock",brow:"shock",mo:"shock",pocket:false,strings:false,arm:"up"});
+    const nong=kid({eye:"cool",brow:"cool",mo:"smirk",arm:"left",push:1,gdy:-5,glint:1});
+    f.innerHTML=dark()+put(friend,250,700,560)
+      +`<div class="card"><div class="k">ผีอำ คนเคยเจออย่างน้อย 1 ครั้ง</div><div class="n">??<small>%</small></div><div class="src">ตัวเลขจริงจากนักวิจัย · ผู้แต่ง ปี · วารสาร</div></div>`
+      +`<div class="nong">${nong}</div>`
+      +`<div class="cap"><div>สมองตื่น <span class="y">แต่ร่างกายยังหลับ!</span></div></div>`
+      +`<div class="tag">ตัวอย่าง B · หักมุม/เฉลย</div>`;
+  }
+};
+</script></body></html>

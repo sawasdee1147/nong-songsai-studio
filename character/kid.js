@@ -11,7 +11,23 @@ function pushArm(p){
   return o;
 }
 
-const INK="#2B2B2B", SKIN="#FFE0C2", HAIR="#2B2B2B", HOOD="#FF8C69", HOODD="#E0704F", CHEEK="#FF9AA2", YEL="#FFD84D";
+const INK="#2B2B2B", CHEEK="#FF9AA2", YEL="#FFD84D";
+// สีที่เปลี่ยนได้ต่อตัวละคร (ค่าเริ่มต้น = น้องสงสัย) — kid() ตั้งค่าชั่วคราวระหว่างวาด
+let SKIN="#FFE0C2", HAIR="#2B2B2B", HOOD="#FF8C69", HOODD="#E0704F";
+const SKINS={nong:"#FFE0C2", light:"#FBE6D3", tan:"#E2A874", dark:"#A8704A", ghost:"#E4E6EE"};
+function shade(hex,f){const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));return "#"+c.map(v=>Math.max(0,Math.min(255,Math.round(v*f))).toString(16).padStart(2,"0")).join("");}
+// ทรงผม (ด้านหน้า, ด้านหลัง) — "nong" คือทรงของน้องสงสัย
+const HAIRS={
+  nong:{front:'M62 150 C52 72 102 46 150 46 C200 46 250 72 238 150 C230 130 222 116 210 106 C202 122 186 124 172 112 C160 128 132 126 120 112 C108 126 86 132 62 150Z'},
+  short:{front:'M64 140 C58 76 104 50 150 50 C198 50 244 76 236 140 C222 112 196 96 170 94 C150 104 120 104 100 96 C86 104 72 118 64 140Z'},
+  spiky:{front:'M62 142 L70 92 L92 102 L100 58 L126 84 L150 44 L172 84 L200 58 L208 102 L230 92 L238 142 C220 118 196 104 150 104 C104 104 80 118 62 142Z'},
+  long:{front:'M60 160 C52 76 102 48 150 48 C200 48 250 76 240 160 C228 120 206 100 182 92 C168 112 140 118 112 108 C92 116 72 132 60 160Z',
+        back:'M60 150 C40 210 52 262 70 290 L118 280 L150 240 L182 280 L230 290 C248 262 260 210 240 150Z'},
+  bun:{front:'M62 148 C54 76 104 50 150 50 C198 50 248 76 238 148 C222 112 190 98 150 98 C110 98 78 112 62 148Z',
+       top:'<circle cx="150" cy="40" r="30"/>'},
+  bald:{front:''}
+};
+
 const EY=152, L=118, R=182;
 function star(x,y){let p="";for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,r=i%2?9:22;p+=`${x+r*Math.cos(a)},${y+r*Math.sin(a)} `}return `<polygon points="${p}" fill="${YEL}" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>`}
 function eyes(t){
@@ -27,6 +43,8 @@ function eyes(t){
     case "wink": return dot(L)+`<path d="M168 148 L194 154 L168 160" fill="none" stroke="${INK}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
     case "cool": return [L,R].map(x=>`<path d="M${x-13} ${EY} Q${x} ${EY+20} ${x+13} ${EY}Z" fill="${INK}"/><circle cx="${x+5}" cy="${EY+5}" r="3" fill="#fff"/><path d="M${x-15} ${EY} L${x+15} ${EY-1}" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>`).join("");
     case "sad": return dot(L,0,3)+dot(R,0,3);
+    case "sleep": return eyes("blink");
+    case "creepy": return [L,R].map(x=>`<circle cx="${x}" cy="${EY}" r="15" fill="${INK}"/>`).join("");
     case "blink": return arc(L,false)+arc(R,false); // ตาปิด (กะพริบ) วาดใต้ชั้นแว่นตามลำดับเดิม
     default: return dot(L)+dot(R);
   }
@@ -75,6 +93,7 @@ function mouth(t){
   }
 }
 function ahoge(t){
+  if(t==="none") return "";
   const p=d=>`<path d="${d}" fill="none" stroke="${HAIR}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`;
   if(t==="!") return p("M150 48 L150 2")+`<circle cx="150" cy="-14" r="7" fill="${YEL}" stroke="${INK}" stroke-width="4"/>`;
   if(t==="zig") return p("M150 48 L138 30 L160 18 L142 0 L164 -14");
@@ -98,21 +117,33 @@ function arms(t){
     default: return arm(Ls,[90,280],[96,302])+arm(Rs,[210,280],[204,302]);
   }
 }
-function kid({gdy=0,glint=0,push=0,gl="norm",eye="norm",brow="norm",mo="smile",ah="?",arm="down",extra="",tilt=0,front=false}){
+function kid({gdy=0,glint=0,push=0,gl="norm",eye="norm",brow="norm",mo="smile",ah="?",arm="down",extra="",tilt=0,front=false,
+             skin="nong",hair="nong",hairColor="#2B2B2B",top="#FF8C69",pocket=true,strings=true}={}){
+  // ตั้งค่าสีของตัวละครนี้ชั่วคราว (arms/pushArm ใช้ตัวแปรเดียวกัน)
+  const saved=[SKIN,HAIR,HOOD,HOODD];
+  SKIN=SKINS[skin]||skin; HAIR=hairColor; HOOD=top; HOODD=(top==="#FF8C69")?"#E0704F":shade(top,.86);
+  const H=HAIRS[hair]||HAIRS.nong, ghost=skin==="ghost";
+  const hairBack=H.back?`<path d="${H.back}" fill="${HAIR}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>`:"";
+  const hairTop=H.top?`<g fill="${HAIR}" stroke="${INK}" stroke-width="6">${H.top}</g>`:"";
+  const hairFront=H.front?`<path d="${H.front}" fill="${HAIR}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>`:"";
+  const shine=(hair==="bald")?`<ellipse cx="120" cy="80" rx="22" ry="10" fill="#fff" opacity=".35"/>`:`<path d="M104 64 Q122 54 140 56" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".35"/>`;
   const head=`
+   ${hairTop}
    <circle cx="150" cy="140" r="90" fill="${SKIN}" stroke="${INK}" stroke-width="7"/>
-   <path d="M62 150 C52 72 102 46 150 46 C200 46 250 72 238 150 C230 130 222 116 210 106 C202 122 186 124 172 112 C160 128 132 126 120 112 C108 126 86 132 62 150Z" fill="${HAIR}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
-   <path d="M104 64 Q122 54 140 56" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".35"/>
+   ${hairFront}
+   ${shine}
    <ellipse cx="60" cy="160" rx="10" ry="16" fill="${SKIN}" stroke="${INK}" stroke-width="5"/>
    <ellipse cx="240" cy="160" rx="10" ry="16" fill="${SKIN}" stroke="${INK}" stroke-width="5"/>
    ${eyes(eye)}${glasses(gl,gdy,glint)}<g transform="translate(0 -9)">${brows(brow)}</g>${mouth(mo)}
-   <ellipse cx="96" cy="178" rx="13" ry="7" fill="${CHEEK}" opacity=".75"/><ellipse cx="204" cy="178" rx="13" ry="7" fill="${CHEEK}" opacity=".75"/>`;
+   ${ghost?"":`<ellipse cx="96" cy="178" rx="13" ry="7" fill="${CHEEK}" opacity=".75"/><ellipse cx="204" cy="178" rx="13" ry="7" fill="${CHEEK}" opacity=".75"/>`}`;
   const body=`
    <path d="M128 318 L126 340 L110 340 M172 318 L174 340 L190 340" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
    <path d="M104 245 Q150 222 196 245 L204 312 Q150 328 96 312Z" fill="${HOOD}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
-   <path d="M122 290 Q150 298 178 290 L176 306 Q150 312 124 306Z" fill="${HOODD}" stroke="${INK}" stroke-width="4"/>
-   <path d="M138 236 L136 262 M162 236 L164 262" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`;
-  return `<svg viewBox="20 -40 260 400"><g transform="rotate(${tilt} 150 220)">
+   ${pocket?`<path d="M122 290 Q150 298 178 290 L176 306 Q150 312 124 306Z" fill="${HOODD}" stroke="${INK}" stroke-width="4"/>`:""}
+   ${strings?`<path d="M138 236 L136 262 M162 236 L164 262" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`:""}`;
+  const out=`<svg viewBox="20 -40 260 400"><g transform="rotate(${tilt} 150 220)">
    <ellipse cx="150" cy="344" rx="66" ry="8" fill="#0002"/>
-   ${body}${front?"":arms(arm)}${ahoge(ah)}${head}${front?arms(arm):""}${push?pushArm(push):""}${extra}</g></svg>`;
+   ${hairBack}${body}${front?"":arms(arm)}${ahoge(ah)}${head}${front?arms(arm):""}${push?pushArm(push):""}${extra}</g></svg>`;
+  [SKIN,HAIR,HOOD,HOODD]=saved;
+  return out;
 }
