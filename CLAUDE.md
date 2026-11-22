@@ -64,7 +64,7 @@
 
 ## เครื่องมือ
 - `tools/audio/tts_elevenlabs.py` — พากย์ทีละประโยค (ต้องมี credential ของ api.elevenlabs.io)
-- `tools/audio/assemble.py` — เร่งเสียง `--tempo 1.13` (ค่าประจำช่องใน voice.json), ตัดเงียบหัวท้าย, เว้นช่วง `--gap-min 0.2 --gap-max 0.3`, ต่อไฟล์, เขียน `timings.json`
+- `tools/audio/assemble.py` — เร่งเสียง `--tempo 1.2` (ค่าประจำช่องใน voice.json), ตัดเงียบหัวท้าย, เว้นช่วง `--gap-min 0.2 --gap-max 0.22`, ต่อไฟล์, เขียน `timings.json`
 - `tools/sfx/make_sfx.py` — สร้างเสียงประกอบจากโค้ด → `sfx/`
 - `tools/fetch_page.py` — อ่านหน้าเว็บผ่านเครือข่ายของเซสชัน (WebFetch ใช้ไม่ได้ในเซสชันนี้) งานวิจัยให้อ่านจาก PMC
 - `character/kid.js` — ไลบรารีตัวละคร (ดู `character/README.md`)

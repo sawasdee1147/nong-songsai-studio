@@ -12,7 +12,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
    - ใช้ voice ID ใน `tools/audio/voice.json` (เจ้าของช่องเป็นคนเลือก) ห้ามเปลี่ยนเสียงเอง
    - ถ้า API ตอบ 401/403 หรือไม่มี credential → หยุด รายงานโปรดิวเซอร์ (ห้ามสร้างเสียงปลอม)
    - ห้ามใส่ API key ในไฟล์หรือคำสั่งใดๆ (ระบบแนบ credential ให้เอง)
-2. **ประกอบ** — `python3 tools/audio/assemble.py episodes/<EP>/audio/raw episodes/<EP>/audio --script episodes/<EP>/script.tts.txt --tempo <tempo จาก voice.json> --gap-min 0.2 --gap-max 0.3`
+2. **ประกอบ** — `python3 tools/audio/assemble.py episodes/<EP>/audio/raw episodes/<EP>/audio --script episodes/<EP>/script.tts.txt --tempo <tempo จาก voice.json> --gap-min 0.2 --gap-max 0.22`
    - เร่งความเร็วด้วย tempo ของช่อง, ตัดความเงียบหัวท้ายแต่ละไฟล์, เว้นช่วง 0.2–0.3 วิ, ต่อเป็น `voice.wav`, เขียน `timings.json`
    - ประโยคที่ยาว > 3.0 วิ สคริปต์จะเตือน → **รายงานโปรดิวเซอร์พร้อมเลขประโยคและความยาว** เพื่อส่งให้นักเขียนบทตัด แล้วพากย์ใหม่เฉพาะประโยคนั้น (`--only N`)
 3. **ตรวจท้ายไฟล์ดิบ** — เสียงประจำช่องมักจบห้วนเป็นปกติ (−22 ถึง −30 dB ใน 50ms สุดท้าย) ถ้าบรรทัดไหนสั้นผิดปกติเทียบจำนวนพยางค์ หรือพยางค์สุดท้ายฟังขาด/สั้นกว่าบรรทัดอื่นชัดเจน (เช่น EP002 บรรทัด 20 "…ของครั้ง" ที่ไม่มีเครื่องหมายปิด) ให้เติม `!`/`.` ท้ายบรรทัดใน script.tts.txt (ไม่กระทบซับ) แล้วพากย์ใหม่ และแจ้งโปรดิวเซอร์

@@ -7,7 +7,7 @@ R="$(cd "$(dirname "$0")/../.." && pwd)"; EP="$(cd "$1" && pwd)"; cd "$R"
 TEMPO=$(python3 -c "import json;print(json.load(open('tools/audio/voice.json'))['tempo'])")
 MOOD=$(python3 -c "import json;print(json.load(open('$EP/story.json')).get('mood','dark'))")
 TAIL=$(python3 -c "import json;s=json.load(open('$EP/story.json'));print(4.0 if any(l.get('outro') for l in s['lines']) else 1.5)")
-python3 tools/audio/assemble.py "$EP/audio/raw" "$EP/audio" --script "$EP/script.tts.txt" --tempo "$TEMPO" --gap-min 0.2 --gap-max 0.3 || echo "⚠️ มีประโยคเกิน 3 วิ (ดูด้านบน)"
+python3 tools/audio/assemble.py "$EP/audio/raw" "$EP/audio" --script "$EP/script.tts.txt" --tempo "$TEMPO" --gap-min 0.2 --gap-max 0.22 || echo "⚠️ มีประโยคเกิน 3 วิ (ดูด้านบน)"
 python3 tools/story/cues.py "$EP"
 python3 tools/audio/mix.py "$EP/audio/voice.wav" "$EP/audio/sfx_cues.json" "$EP/audio/mix.wav" --tail "$TAIL" --bed "sfx/bed_$MOOD.wav"
 python3 tools/story/build.py "$EP"
