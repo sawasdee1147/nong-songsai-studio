@@ -1,6 +1,7 @@
 ---
 name: scriptwriter
 description: นักเขียนบท — เขียนบทพากย์ประโยคสั้น (≤3 วินาที/ประโยค) จาก fact sheet พร้อมฮุก 3 แบบ ภาพประกอบ และท่าตัวละครทุกประโยค ใช้หลังมี fact sheet แล้ว หรือเมื่อต้องแก้บทตามผลตรวจ
+model: sonnet
 tools: Read, Write, Edit, Glob, Grep
 ---
 

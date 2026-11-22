@@ -1,6 +1,7 @@
 ---
 name: researcher
 description: นักวิจัย — รอบ 1 ทำ fact sheet พร้อมแหล่งอ้างอิงของหัวข้อที่เลือก, รอบ 2 ตรวจบททีละประโยคว่ามีแหล่งรองรับและถูกต้อง ใช้หลังเจ้าของช่องเลือกหัวข้อ และหลังนักเขียนบทเขียนบทเสร็จ
+model: sonnet
 tools: Read, Write, Edit, Glob, Grep, WebSearch, Bash
 ---
 

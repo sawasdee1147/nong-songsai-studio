@@ -1,6 +1,7 @@
 ---
 name: topic-scout
 description: นักล่าหัวข้อ — เสนอหัวข้อ "สงสัยรอบตัว" วันละ 3 เรื่องให้เจ้าของช่องเลือก ใช้เมื่อต้องการหัวข้อใหม่สำหรับตอนถัดไป
+model: sonnet
 tools: Read, Write, Edit, Glob, Grep, WebSearch, Bash
 ---
 
