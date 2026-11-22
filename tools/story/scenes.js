@@ -28,15 +28,16 @@ function _mite(x, y, rot = 0, s = 1) {
     <path d="M-40 0 A40 16 0 0 0 40 0Z" fill="${_PORE}"/><path d="M-40 0 A40 16 0 0 0 40 0" fill="none" stroke="${SC_INK}" stroke-width="6"/></g>`;
 }
 const _pore = (x, y, rx = 38) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${rx * .42}" fill="${_PORE}" stroke="${SC_INK}" stroke-width="6"/>`;
-const PORE_ZOOM = () => _sv(`<rect width="1080" height="1920" fill="#2E2A47"/>
+let _pzN = 0; // id ของ clipPath ต้องไม่ซ้ำ เมื่อใช้ฉากนี้หลายครั้งในหน้าเดียว
+const PORE_ZOOM = () => { const id = `pzLens${++_pzN}`; return _sv(`<rect width="1080" height="1920" fill="#2E2A47"/>
     <circle cx="600" cy="700" r="560" fill="#3B3352"/>
     <g fill="#26223B">${[[110,260,14],[260,1180,12],[90,620,10],[930,1240,14],[1000,300,11],[760,1500,12],[180,1620,10],[960,1700,13],[480,1320,9],[60,1020,11]].map(([x,y,r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .5}"/>`).join("")}</g>
-    <defs><clipPath id="pzLens"><circle cx="600" cy="700" r="356"/></clipPath></defs>
+    <defs><clipPath id="${id}"><circle cx="600" cy="700" r="356"/></clipPath></defs>
     <g transform="rotate(-45 600 700)" stroke="${SC_INK}" stroke-width="8" stroke-linejoin="round">
       <rect x="575" y="1080" width="50" height="40" fill="#8A7AA8"/>
       <rect x="560" y="1115" width="80" height="270" rx="36" fill="#6B4E8A"/>
       <path d="M580 1160 V1340" stroke="#FFF8EC" stroke-width="8" stroke-linecap="round" opacity=".35"/></g>
-    <g clip-path="url(#pzLens)">
+    <g clip-path="url(#${id})">
       <rect x="220" y="320" width="760" height="760" fill="#F2CCA6"/>
       <g fill="none" stroke="${SC_INK}" stroke-width="5" stroke-linecap="round" opacity=".14">
         <path d="M250 760 Q420 720 560 770 T900 740"/><path d="M300 980 Q500 940 700 990"/><path d="M330 430 Q520 400 760 440"/></g>
@@ -52,7 +53,7 @@ const PORE_ZOOM = () => _sv(`<rect width="1080" height="1920" fill="#2E2A47"/>
     <circle cx="600" cy="700" r="373" fill="none" stroke="${SC_INK}" stroke-width="50"/>
     <circle cx="600" cy="700" r="373" fill="none" stroke="#FFD84D" stroke-width="30"/>
     <rect x="390" y="205" width="420" height="78" rx="39" fill="#FFF8EC" stroke="${SC_INK}" stroke-width="7"/>
-    <text x="600" y="258" text-anchor="middle" font-family="NST" font-weight="900" font-size="42" fill="${SC_INK}">ขยายหลายร้อยเท่า</text>`);
+    <text x="600" y="258" text-anchor="middle" font-family="NST" font-weight="900" font-size="42" fill="${SC_INK}">ขยายหลายร้อยเท่า</text>`); };
 
 const BG = {
   bedroom_night: () => _sv(`<rect width="1080" height="1920" fill="#2E3553"/>
