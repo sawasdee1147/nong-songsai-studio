@@ -1,0 +1,124 @@
+<!doctype html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=1080, height=1920">
+<!-- สร้างโดย tools/story/build.py จาก story.json — แก้ที่ story.json แทน -->
+<script src="assets/lib/gsap.min.js"></script><script src="assets/lib/kid.js"></script><script src="assets/lib/scenes.js"></script>
+<style>
+@font-face{font-family:"NST";font-weight:700;src:url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2")}
+@font-face{font-family:"NST";font-weight:900;src:url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2")}
+@font-face{font-family:"NS";font-weight:700;src:url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"NS";font-weight:900;src:url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2")}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1B1E2E}
+#root{position:absolute;inset:0;overflow:hidden;font-family:"NST","NS",sans-serif;color:#2B2B2B}
+.L{position:absolute;inset:0;visibility:hidden;overflow:hidden}.cam{position:absolute;inset:0;transform-origin:50% 55%}
+.bgw{position:absolute;inset:0}.ch{position:absolute}.br{position:absolute;inset:0}.k{position:absolute;inset:0}.k svg{width:100%;height:100%}
+.bl{visibility:hidden}.blanket{position:absolute;inset:0}
+.card{position:absolute;left:90px;top:230px;width:900px;padding:28px 40px 24px;border-radius:28px;background:#FFF8EC;border:6px solid #2B2B2B;box-shadow:10px 10px 0 #2B2B2B;opacity:0;z-index:15}
+.card .ck{font-weight:700;font-size:38px}.card .cn{font-weight:900;font-size:130px;line-height:1.05;font-family:"NS","NST"}
+.card .cn small{font-size:54px;margin-left:12px}.card .cs{font-weight:700;font-size:26px;color:#7a6f60;margin-top:6px;font-family:"NS","NST"}
+.card.next{top:300px}.card .nx{font-weight:900;font-size:60px;line-height:1.35;margin-top:6px}
+.chip{position:absolute;left:70px;top:230px;padding:12px 26px;border-radius:18px;background:#FFF8EC;border:5px solid #2B2B2B;box-shadow:6px 6px 0 #2B2B2B;display:flex;gap:14px;align-items:center;opacity:0;z-index:16}
+.chip b{font-weight:900;font-size:50px;font-family:"NS","NST"}.chip span{font-weight:700;font-size:32px}
+.cap{position:absolute;left:60px;right:140px;top:1440px;text-align:center;visibility:hidden;z-index:20}
+.cap div{display:inline-block;background:#fff;border:6px solid #2B2B2B;border-radius:24px;padding:18px 30px 12px;font-weight:900;font-size:72px;line-height:1.42;box-shadow:8px 8px 0 #2B2B2B}
+.cap .y{color:#E0704F}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="33.035" data-width="1080" data-height="1920">
+<audio id="vo" src="assets/audio/mix.wav" data-start="0" data-duration="33.035" data-volume="1"></audio>
+<div class="L" id="sc1"><div class="cam"><div class="bgw" data-bg="bedroom_night"></div><div class="ch" id="sc1c0" style="left:140px;top:735px;width:400px;height:616px;transform:rotate(-90deg)"><div class="br" id="sc1c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;sleep&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;zig&quot;}"></div></div></div><div class="blanket"></div></div></div>
+<div class="L" id="sc2"><div class="cam"><div class="bgw" data-bg="bedroom_night"></div><div class="ch" id="sc2c0" style="left:140px;top:735px;width:400px;height:616px;transform:rotate(-90deg)"><div class="br" id="sc2c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;}"></div><div class="k bl" id="sc2c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;}"></div></div></div><div class="blanket"></div></div></div>
+<div class="L" id="sc3"><div class="cam"><div class="bgw" data-bg="dark"></div><div class="ch" id="sc3c0" style="left:230px;top:520px;width:620px;height:954px"><div class="br" id="sc3c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc3c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div></div></div>
+<div class="L" id="sc4"><div class="cam"><div class="bgw" data-bg="bedroom_night"></div><div class="ch" id="sc4c0" style="left:140px;top:735px;width:400px;height:616px;transform:rotate(-90deg)"><div class="br" id="sc4c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;}"></div><div class="k bl" id="sc4c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;}"></div></div></div><div class="ch" id="sc4c1" style="left:690px;top:600px;width:400px;height:615px"><div class="br" id="sc4c1b"><div class="k" data-kid="{&quot;skin&quot;: &quot;ghost&quot;, &quot;hair&quot;: &quot;long&quot;, &quot;hairColor&quot;: &quot;#1B1B22&quot;, &quot;top&quot;: &quot;#3B3446&quot;, &quot;gl&quot;: &quot;none&quot;, &quot;ah&quot;: &quot;none&quot;, &quot;eye&quot;: &quot;creepy&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;pocket&quot;: false, &quot;strings&quot;: false}"></div></div></div><div class="blanket"></div></div></div>
+<div class="L" id="sc5"><div class="cam"><div class="bgw" data-bg="cream"></div><div class="ch" id="sc5c0" style="left:260px;top:620px;width:560px;height:862px"><div class="br" id="sc5c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div><div class="k bl" id="sc5c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div></div></div></div></div>
+<div class="L" id="sc6"><div class="cam"><div class="bgw" data-bg="cream"></div><div class="ch" id="sc6c0" style="left:260px;top:640px;width:540px;height:831px"><div class="br" id="sc6c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;spark&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;grin&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;arm&quot;: &quot;point&quot;}"></div><div class="k bl" id="sc6c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;grin&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;arm&quot;: &quot;point&quot;}"></div></div></div></div></div>
+<div class="L" id="sc7"><div class="cam"><div class="bgw" data-bg="dark"></div><div class="ch" id="sc7c0" style="left:90px;top:700px;width:480px;height:738px"><div class="br" id="sc7c0b"><div class="k" data-kid="{&quot;gl&quot;: &quot;glare&quot;, &quot;eye&quot;: &quot;smug&quot;, &quot;brow&quot;: &quot;smug&quot;, &quot;mo&quot;: &quot;smirk&quot;, &quot;arm&quot;: &quot;shrug&quot;}"></div><div class="k bl" id="sc7c0x" data-kid="{&quot;gl&quot;: &quot;glare&quot;, &quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;smug&quot;, &quot;mo&quot;: &quot;smirk&quot;, &quot;arm&quot;: &quot;shrug&quot;}"></div></div></div><div class="ch" id="sc7c1" style="left:600px;top:680px;width:360px;height:554px"><div class="br" id="sc7c1b"><div class="k" data-kid="{&quot;skin&quot;: &quot;ghost&quot;, &quot;hair&quot;: &quot;long&quot;, &quot;hairColor&quot;: &quot;#1B1B22&quot;, &quot;top&quot;: &quot;#3B3446&quot;, &quot;gl&quot;: &quot;none&quot;, &quot;ah&quot;: &quot;none&quot;, &quot;eye&quot;: &quot;creepy&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;pocket&quot;: false, &quot;strings&quot;: false}"></div></div></div></div></div>
+<div class="L" id="sc8"><div class="cam"><div class="bgw" data-bg="bedroom_day"></div><div class="ch" id="sc8c0" style="left:140px;top:735px;width:400px;height:616px;transform:rotate(-90deg)"><div class="br" id="sc8c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;sleep&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;smile&quot;}"></div></div></div><div class="blanket"></div></div></div>
+<div class="L" id="outro"><div class="bgw" data-bg="cream"></div><div class="ch" id="op" style="left:250px;top:560px;width:580px;height:892px"></div></div>
+<div class="chip" id="ck1"><b>03:00</b><span>ตีสาม</span></div>
+<div class="cap" id="cp1"><div>ถ้าคุณตื่นมาตอน<span class="y">ตีสาม</span></div></div>
+<div class="cap" id="cp2"><div>แล้วตัว<span class="y">ขยับไม่ได้!</span></div></div>
+<div class="cap" id="cp3"><div>ลืมตาได้ หายใจได้!</div></div>
+<div class="cap" id="cp4"><div>แต่แขนขา<span class="y">ไม่ยอมขยับเลย!</span></div></div>
+<div class="cap" id="cp5"><div>มีเงา<span class="y">ยืนจ้อง</span>ข้างเตียง</div></div>
+<div class="cap" id="cp6"><div>คนสมัยก่อนเรียกว่า <span class="y">ผีอำ!</span></div></div>
+<div class="cap" id="cp7"><div>แต่ความจริงคือ…</div></div>
+<div class="cap" id="cp8"><div>สมองตื่น <span class="y">แต่ตัวยังหลับ!</span></div></div>
+<div class="card" id="cd9"><div class="ck">คนทั่วไปเคยเจอผีอำ อย่างน้อย 1 ครั้ง</div><div class="cn">7.6<small>%</small></div><div class="cs">Sharpless &amp; Barber 2011 · Sleep Medicine Reviews</div></div>
+<div class="cap" id="cp9"><div>คนทั่วไปเกือบ <span class="y">8 ใน 100</span> เคยเจอ</div></div>
+<div class="cap" id="cp10"><div>เงาที่เห็น = <span class="y">ภาพหลอน</span> ตอนกึ่งหลับกึ่งตื่น</div></div>
+<div class="cap" id="cp11"><div>มักเกิดตอน<span class="y">นอนหงาย</span></div></div>
+<div class="cap" id="cp12"><div>รู้เรื่องทั้งหมดแล้ว</div></div>
+<div class="cap" id="cp13"><div>พวกมึง<span class="y">ฉลาดขึ้นแล้วนะ</span></div></div>
+<div class="card next" id="nextc"><div class="ck">ตอนหน้า</div><div class="nx">ทำไมเราชอบเห็นหน้าคน ในสิ่งของ?</div></div>
+</div>
+<script>
+document.querySelectorAll("[data-kid]").forEach(e=>e.innerHTML=kid(JSON.parse(e.dataset.kid)));
+document.querySelectorAll("[data-bg]").forEach(e=>e.innerHTML=(BG[e.dataset.bg]||BG.cream)());
+document.querySelectorAll(".blanket").forEach(e=>e.innerHTML=BLANKET);
+window.__timelines=window.__timelines||{};
+const tl=gsap.timeline({paused:true});window.__timelines["main"]=tl;
+const show=(e,a,b)=>{tl.set(e,{visibility:"visible"},a);if(b!==undefined)tl.set(e,{visibility:"hidden"},b);};
+const blink=(e,a)=>{tl.set(e,{visibility:"visible"},a);tl.set(e,{visibility:"hidden"},a+.12);};
+const card=(e,a,b)=>{tl.fromTo(e,{opacity:0,scale:1.12},{opacity:1,scale:1,duration:.35,ease:"back.out(1.7)",immediateRender:false},a);tl.to(e,{opacity:0,duration:.2},b-.2);};
+const chip=(e,a,b)=>{tl.fromTo(e,{opacity:0,y:-30},{opacity:1,y:0,duration:.3,ease:"back.out(1.6)",immediateRender:false},a);tl.to(e,{opacity:0,duration:.2},b-.2);};
+function buildPush(sel,t0,dur){
+  const box=document.querySelector(sel); const n=Math.ceil(Math.min(dur,4.0)*15);
+  for(let f=0;f<=n;f++){const d=document.createElement("div");d.className="k";d.style.visibility="hidden";
+    d.innerHTML=kid(pushGlassesPose(Math.min(f/15,3.3)));box.appendChild(d);
+    tl.set(d,{visibility:"visible"},t0+f/15); if(f<n) tl.set(d,{visibility:"hidden"},t0+(f+1)/15);}
+}
+tl.fromTo("#sc1c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:1,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},0.000);
+blink("#sc1c0x",0.900);
+show("#sc1",0.000,1.752);tl.fromTo("#sc1 .cam",{scale:1},{scale:1.08,duration:1.752,ease:"none",immediateRender:false},0.000);
+tl.fromTo("#sc2c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:1,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},1.752);
+blink("#sc2c0x",2.652);
+show("#sc2",1.752,3.257);tl.fromTo("#sc2 .cam",{scale:1},{scale:1.12,duration:1.505,ease:"none",immediateRender:false},1.752);
+tl.fromTo("#sc3c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:3,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},3.257);
+blink("#sc3c0x",4.157);
+blink("#sc3c0x",7.057);
+show("#sc3",3.257,7.409);tl.fromTo("#sc3 .cam",{scale:1},{scale:1.1,duration:4.152,ease:"none",immediateRender:false},3.257);
+tl.fromTo("#sc4c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:4,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},7.409);
+blink("#sc4c0x",8.309);
+blink("#sc4c0x",11.209);
+tl.fromTo("#sc4c1b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:4,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},7.409);
+tl.fromTo("#sc4c1",{opacity:0},{opacity:1,duration:.7,ease:"power1.in",immediateRender:false},7.459);
+blink("#sc4c1x",8.309);
+blink("#sc4c1x",11.209);
+show("#sc4",7.409,12.915);tl.fromTo("#sc4 .cam",{scale:1},{scale:1.14,duration:5.506,ease:"none",immediateRender:false},7.409);
+tl.fromTo("#sc5c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:1,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},12.915);
+blink("#sc5c0x",13.815);
+show("#sc5",12.915,14.262);tl.fromTo("#sc5 .cam",{scale:1},{scale:1.05,duration:1.347,ease:"none",immediateRender:false},12.915);
+tl.fromTo("#sc5 .cam",{x:-12},{x:12,duration:.05,yoyo:true,repeat:9,ease:"none",immediateRender:false},12.965);
+tl.fromTo("#sc6c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:5,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},14.262);
+blink("#sc6c0x",15.162);
+blink("#sc6c0x",18.062);
+show("#sc6",14.262,20.765);tl.fromTo("#sc6 .cam",{scale:1},{scale:1.06,duration:6.503,ease:"none",immediateRender:false},14.262);
+tl.fromTo("#sc7c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:3,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},20.765);
+blink("#sc7c0x",21.665);
+tl.fromTo("#sc7c1b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:3,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},20.765);
+blink("#sc7c1x",21.665);
+show("#sc7",20.765,24.639);tl.fromTo("#sc7 .cam",{scale:1},{scale:1.06,duration:3.874,ease:"none",immediateRender:false},20.765);
+tl.fromTo("#sc8c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:6,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},24.639);
+blink("#sc8c0x",25.539);
+blink("#sc8c0x",28.439);
+blink("#sc8c0x",31.339);
+show("#sc8",24.639,33.035);tl.fromTo("#sc8 .cam",{scale:1},{scale:1.06,duration:8.396,ease:"none",immediateRender:false},24.639);
+show("#outro",26.426,33.035);
+buildPush("#op",26.476,6.559);
+chip("#ck1",0.000,2.200);
+show("#cp1",-0.050,1.752);
+show("#cp2",1.752,3.257);
+show("#cp3",3.257,5.412);
+show("#cp4",5.412,7.409);
+show("#cp5",7.409,10.032);
+show("#cp6",10.032,12.915);
+show("#cp7",12.915,14.262);
+show("#cp8",14.262,17.364);
+card("#cd9",17.664,21.511);
+show("#cp9",17.364,20.765);
+show("#cp10",20.765,24.639);
+show("#cp11",24.639,26.426);
+show("#cp12",26.426,28.015);
+show("#cp13",28.015,29.935);
+card("#nextc",29.635,33.035);
+tl.set({},{},33.035);
+</script></body></html>

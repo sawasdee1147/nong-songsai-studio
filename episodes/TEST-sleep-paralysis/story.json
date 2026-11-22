@@ -1,0 +1,227 @@
+{
+ "next": "ทำไมเราชอบเห็นหน้าคน ในสิ่งของ?",
+ "cast": {
+  "G": {
+   "skin": "ghost",
+   "hair": "long",
+   "hairColor": "#1B1B22",
+   "top": "#3B3446",
+   "gl": "none",
+   "ah": "none",
+   "eye": "creepy",
+   "brow": "none",
+   "mo": "flat",
+   "pocket": false,
+   "strings": false
+  }
+ },
+ "lines": [
+  {
+   "cap": "ถ้าคุณตื่นมาตอน*ตีสาม*",
+   "clock": {
+    "t": "03:00",
+    "s": "ตีสาม"
+   },
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "sleep",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "แล้วตัว*ขยับไม่ได้!*",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.12,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "flat",
+       "ah": "zig",
+       "gl": "askew"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ลืมตาได้ หายใจได้!",
+   "scene": {
+    "bg": "dark",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "o",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "down"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "แต่แขนขา*ไม่ยอมขยับเลย!*"
+  },
+  {
+   "cap": "มีเงา*ยืนจ้อง*ข้างเตียง",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.14,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "flat",
+       "ah": "zig",
+       "gl": "askew"
+      }
+     },
+     {
+      "who": "G",
+      "x": 690,
+      "y": 600,
+      "w": 400,
+      "enter": "fade"
+     }
+    ]
+   }
+  },
+  {
+   "cap": "คนสมัยก่อนเรียกว่า *ผีอำ!*"
+  },
+  {
+   "cap": "แต่ความจริงคือ…",
+   "scene": {
+    "bg": "cream",
+    "push": 1.05,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 620,
+      "w": 560,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "!",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "สมองตื่น *แต่ตัวยังหลับ!*",
+   "scene": {
+    "bg": "cream",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "คนทั่วไปเกือบ *8 ใน 100* เคยเจอ",
+   "card": {
+    "k": "คนทั่วไปเคยเจอผีอำ อย่างน้อย 1 ครั้ง",
+    "n": "7.6",
+    "u": "%",
+    "src": "Sharpless & Barber 2011 · Sleep Medicine Reviews"
+   }
+  },
+  {
+   "cap": "เงาที่เห็น = *ภาพหลอน* ตอนกึ่งหลับกึ่งตื่น",
+   "scene": {
+    "bg": "dark",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 90,
+      "y": 700,
+      "w": 480,
+      "pose": {
+       "gl": "glare",
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smirk",
+       "arm": "shrug"
+      }
+     },
+     {
+      "who": "G",
+      "x": 600,
+      "y": 680,
+      "w": 360
+     }
+    ]
+   }
+  },
+  {
+   "cap": "มักเกิดตอน*นอนหงาย*",
+   "scene": {
+    "bg": "bedroom_day",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "sleep",
+       "brow": "none",
+       "mo": "smile"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "รู้เรื่องทั้งหมดแล้ว",
+   "outro": true
+  },
+  {
+   "cap": "พวกมึง*ฉลาดขึ้นแล้วนะ*"
+  }
+ ]
+}

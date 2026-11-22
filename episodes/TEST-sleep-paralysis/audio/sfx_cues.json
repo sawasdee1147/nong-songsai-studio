@@ -1,0 +1,67 @@
+[
+ {
+  "sfx": "tick",
+  "at": 0,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 1.652,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 3.157,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 7.309,
+  "gain_db": -26
+ },
+ {
+  "sfx": "riser",
+  "at": 7.259,
+  "gain_db": -24
+ },
+ {
+  "sfx": "whoosh",
+  "at": 12.815,
+  "gain_db": -26
+ },
+ {
+  "sfx": "thud",
+  "at": 13.015,
+  "gain_db": -18
+ },
+ {
+  "sfx": "whoosh",
+  "at": 14.162,
+  "gain_db": -26
+ },
+ {
+  "sfx": "pop",
+  "at": 17.664,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 20.665,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 24.539,
+  "gain_db": -26
+ },
+ {
+  "sfx": "glint",
+  "at": 27.776,
+  "gain_db": -18
+ },
+ {
+  "sfx": "ding",
+  "at": 29.635,
+  "gain_db": -20
+ }
+]
