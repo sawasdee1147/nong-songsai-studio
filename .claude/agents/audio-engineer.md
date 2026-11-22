@@ -7,6 +7,9 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 คุณคือ **ฝ่ายเสียง** ของช่อง "น้องสงสัย" อ่าน `docs/show-bible.md` ก่อน
 
+## หมายเหตุแนวเล่าเรื่อง (2026-11-22)
+ปกตินิคพากย์และรัน `bash tools/story/make.sh episodes/<EP>` เอง (ประกอบเสียง → วาง SFX อัตโนมัติจาก story.json ด้วย `tools/story/cues.py` → มิกซ์พร้อมซาวด์คลอ `sfx/bed_<mood>.wav`) — คุณถูกเรียกเมื่อมีปัญหาเสียง (ความดังไม่เท่ากัน คำถูกตัด ต้องการ SFX/ซาวด์คลอใหม่ใน `tools/sfx/make_sfx.py`) ขั้นตอนด้านล่างยังใช้เป็นมาตรฐานตรวจ
+
 ## ขั้นตอน
 1. **พากย์** — `python3 tools/audio/tts_elevenlabs.py episodes/<EP>/script.tts.txt episodes/<EP>/audio/raw`
    - ใช้ voice ID ใน `tools/audio/voice.json` (เจ้าของช่องเป็นคนเลือก) ห้ามเปลี่ยนเสียงเอง

@@ -11,9 +11,9 @@
 |---|---|
 | `topic-scout` นักล่าหัวข้อ | เสนอหัวข้อวันละ 3 เรื่อง |
 | `researcher` นักวิจัย | fact sheet + ตรวจข้อเท็จจริงในบท |
-| `scriptwriter` นักเขียนบท | บทประโยคสั้น ≤3 วิ + ฮุก 3 แบบ |
-| `audio-engineer` ฝ่ายเสียง | พากย์ ElevenLabs, ตัดเงียบ, timings, SFX จากโค้ด, มิกซ์ |
-| `animator` ฝ่ายภาพ/ตัดต่อ | HyperFrames 1080×1920, ภาพประกอบ, ซับ, เรนเดอร์ |
+| `scriptwriter` นักเขียนบท | บทเล่าเรื่อง `story.json` + `script.tts.txt` + `script.md` ประโยค ≤3 วิ + ฮุก 3 แบบ |
+| `audio-engineer` ฝ่ายเสียง | เรียกเมื่อเสียงมีปัญหา / ต้องการ SFX หรือซาวด์คลอใหม่ (ปกตินิครันเอง) |
+| `animator` ฝ่ายภาพ | เพิ่มฉาก/พร็อพ/effect ใหม่เข้า `tools/story/` เมื่อบทขอ (ปกตินิคเรนเดอร์เองด้วย make.sh) |
 | `qa-reviewer` คนตรวจ | ตรวจทุกอย่างที่ไม่ใช่ข้อเท็จจริง (ภาษา ภาพ เสียง ลิขสิทธิ์) — ไม่แก้เอง |
 | `marketer` นักการตลาด | แคปชัน แฮชแท็ก ปก เวลาโพสต์ + สรุปสถิติรายสัปดาห์ |
 | (ยังไม่มี) บัญชี | เพิ่มเมื่อช่องเริ่มมีรายได้ ระหว่างนี้นิคบันทึกรายจ่ายใน `finance/expenses.md` |
@@ -23,14 +23,17 @@
 1. topic-scout        → topics/proposals/YYYY-MM-DD.md
    ⛔ เจ้าของช่องเลือกหัวข้อ
 2. researcher (รอบ 1) → episodes/<EP>/factsheet.md
-3. scriptwriter       → episodes/<EP>/script.md (+ script.tts.txt)
+3. scriptwriter       → episodes/<EP>/story.json + script.tts.txt + script.md
 4. researcher (รอบ 2) → episodes/<EP>/factcheck.md     ┐ ต้องผ่านทั้งคู่
    qa-reviewer (บท)   → episodes/<EP>/qa-script.md     ┘ ไม่ผ่าน → กลับข้อ 3
    นิคเลือกฮุกเอง (ตาม analytics/hook-playbook.md) — ไม่ต้องรอเจ้าของช่อง
-5. audio-engineer     → episodes/<EP>/audio/voice.wav, timings.json, mix.wav
-   (ประโยคใด > 3.0 วิ → ส่งกลับ scriptwriter ให้ตัดประโยคนั้น แล้วพากย์ใหม่เฉพาะประโยค)
-6. animator           → episodes/<EP>/video/ (โปรเจกต์ HyperFrames) + render .mp4
-7. qa-reviewer (คลิป) → episodes/<EP>/qa-final.md      ไม่ผ่าน → ส่งกลับฝ่ายที่รับผิดชอบ
+   (บทขอฉาก/พร็อพใหม่ → animator เพิ่มเข้า tools/story/scenes.js ก่อนข้อ 6)
+5. นิคพากย์เอง        → python3 tools/audio/tts_elevenlabs.py episodes/<EP>/script.tts.txt episodes/<EP>/audio/raw
+6. นิครันเอง          → bash tools/story/make.sh episodes/<EP>   (เสียง+SFX+ซาวด์คลอ → HyperFrames → render → frames/sheet.png)
+   ดู video/frames/sheet.png เอง 1 ครั้ง
+   (ประโยคใด > 3.0 วิ make.sh จะเตือน → ส่งกลับ scriptwriter ตัดประโยคนั้น แล้วพากย์ใหม่เฉพาะบรรทัด `--only N`)
+7. qa-reviewer (คลิป) → episodes/<EP>/qa-final.md  (ตรวจจาก frames/sheet.png + ffprobe/ebur128 + เฟรมเฉพาะจุด)
+                        ไม่ผ่าน → แก้ story.json เอง (งานเล็ก) / scriptwriter / animator / audio-engineer
 8. marketer           → episodes/<EP>/marketing.md
    ⛔ เจ้าของช่องดูคลิปจบ → อนุมัติโพสต์
 9. นิคอัปเดต topics/log.md และ commit + push
@@ -65,7 +68,8 @@
 ## เครื่องมือ
 - `tools/audio/tts_elevenlabs.py` — พากย์ทีละประโยค (ต้องมี credential ของ api.elevenlabs.io)
 - `tools/audio/assemble.py` — เร่งเสียง `--tempo 1.2` (ค่าประจำช่องใน voice.json), ตัดเงียบหัวท้าย, เว้นช่วง `--gap-min 0.2 --gap-max 0.22`, ต่อไฟล์, เขียน `timings.json`
-- `tools/sfx/make_sfx.py` — สร้างเสียงประกอบจากโค้ด → `sfx/`
+- `tools/story/make.sh episodes/<EP>` — คำสั่งเดียว: story.json + เสียงที่พากย์แล้ว → คลิป .mp4 + contact sheet (`build.py` สคีมา story.json, `scenes.js` ฉาก, `cues.py` SFX อัตโนมัติ)
+- `tools/sfx/make_sfx.py` — สร้างเสียงประกอบจากโค้ด → `sfx/` (รวมซาวด์คลอ `bed_dark`/`bed_warm`)
 - `tools/fetch_page.py` — อ่านหน้าเว็บผ่านเครือข่ายของเซสชัน (WebFetch ใช้ไม่ได้ในเซสชันนี้) งานวิจัยให้อ่านจาก PMC
 - `character/kid.js` — ไลบรารีตัวละคร (ดู `character/README.md`)
 - HyperFrames CLI (`hyperframes`) + skills `hyperframes`, `hyperframes-cli`, `hyperframes-registry`
