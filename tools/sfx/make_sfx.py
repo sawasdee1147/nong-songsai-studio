@@ -185,6 +185,14 @@ def wrong():
     return norm(np.concatenate([sq(a), np.zeros(int(SR * 0.03)), sq(b)]))
 
 
+def sting():
+    """ตุ้งแช่: คอร์ดไม่ประสาน ดังทันทีแล้วค่อยๆ หาย + เสียงฟู่"""
+    d = 1.4; tt = t(d)
+    x = sum(np.sin(2 * np.pi * f * tt) for f in (233.1, 246.9, 349.2, 493.9, 698.5)) * np.exp(-tt * 2.6)
+    x += lowpass(noise(d), 3000) * np.exp(-tt * 9) * 2
+    return norm(x)
+
+
 def heartbeat():
     """หัวใจเต้นตุบ-ตุบ (ใช้ตอนลุ้น/กลัว)"""
     d = 0.9; tt = t(d)
@@ -234,6 +242,7 @@ SFX = {
     "riser": (riser, "สร้างความลุ้นก่อนเฉลย"),
     "blip_talk": (blip_talk, "ตัวละคร 'อืม?' แบบการ์ตูน"),
     "wrong": (wrong, "ผิด! / ความเชื่อผิด"),
+    "sting": (sting, "ตุ้งแช่! (ฉาก jumpscare ดึงคนดูกลับ)"),
     "heartbeat": (heartbeat, "หัวใจเต้นตุบ-ตุบ (ฉากลุ้น/ดิ้นไม่หลุด)"),
     "bed_dark": (bed_dark, "ซาวด์คลอทั้งคลิป แนวหลอน/ลี้ลับ (60 วิ — mix.py --bed ตัดตามความยาวคลิป)"),
     "bed_warm": (bed_warm, "ซาวด์คลอทั้งคลิป แนวอบอุ่น/ตลก (60 วิ)"),

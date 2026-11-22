@@ -15,6 +15,7 @@ story.json (ย่อ):
                         "enter": "fade", "blink": true}]},
    "card": {"k": "หัวข้อ", "n": "7.6", "u": "%", "src": "ผู้แต่ง ปี · วารสาร"},
    "clock": {"t": "03:00", "s": "ตีสาม"},
+   "jumpscare": "G",                        # ตุ้งแช่: ตัวละครนี้พุ่งเต็มจอ + แฟลช + จอสั่น (ตัวดึงคนดูกลับช่วง 8–13 วิ)
    "outro": true                            # บรรทัดปิด: น้องสงสัยดันแว่นกลางจอ (ใส่ที่บรรทัดแรกของท่าปิด)
  } ]
 }
@@ -103,6 +104,23 @@ if oi is not None:
     J.append(f'show("#outro",{t0 - .05:.3f},{END:.3f});')
     J.append(f'buildPush("#op",{t0:.3f},{END - t0:.3f});')
 
+# ---------- ตุ้งแช่ (jumpscare): ตัวละครพุ่งเต็มจอ + แฟลช + จอสั่น ----------
+for i, ln in enumerate(L):
+    js = ln.get("jumpscare")
+    if not js: continue
+    who = js if isinstance(js, str) else js.get("who", "G")
+    opts = dict(CAST.get(who, {})); opts.update({} if isinstance(js, str) else js.get("pose", {}))
+    jid = f"js{i + 1}"; a = T[i] - .05; b = (T[i + 1] - .05) if i + 1 < len(L) else END
+    H.append(f'<div class="L js" id="{jid}"><div class="bgw" data-bg="dark"></div>'
+             f'<div class="ch" id="{jid}c" style="left:40px;top:80px;width:1000px;height:{round(1000 * 400 / 260)}px">'
+             f'<div class="k" data-kid="{esc(json.dumps(opts, ensure_ascii=False))}"></div></div>'
+             f'<div class="redtint"></div><div class="flash" id="{jid}f"></div></div>')
+    J.append(f'show("#{jid}",{a:.3f},{b:.3f});'
+             f'tl.fromTo("#{jid}c",{{scale:.35,y:300}},{{scale:1.12,y:0,duration:.22,ease:"expo.out",immediateRender:false}},{T[i]:.3f});'
+             f'tl.to("#{jid}c",{{scale:1.2,duration:{max(.3, b - T[i] - .22):.3f},ease:"none"}},{T[i] + .22:.3f});'
+             f'tl.fromTo("#{jid}f",{{opacity:1}},{{opacity:0,duration:.3,immediateRender:false}},{T[i]:.3f});'
+             f'tl.fromTo("#{jid}c",{{x:-16}},{{x:16,duration:.04,yoyo:true,repeat:9,ease:"none",immediateRender:false}},{T[i]:.3f});')
+
 # ---------- การ์ดตัวเลข / นาฬิกา / ซับ ----------
 for i, ln in enumerate(L):
     nxt = T[i + 1] - .05 if i + 1 < len(L) else END
@@ -137,7 +155,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1B1E2E}
 #root{position:absolute;inset:0;overflow:hidden;font-family:"NST","NS",sans-serif;color:#2B2B2B}
 .L{position:absolute;inset:0;visibility:hidden;overflow:hidden}.cam{position:absolute;inset:0;transform-origin:50% 55%}
 .bgw{position:absolute;inset:0}.ch{position:absolute}.br{position:absolute;inset:0}.k{position:absolute;inset:0}.k svg{width:100%;height:100%}
-.bl{visibility:hidden}.blanket{position:absolute;inset:0}
+.bl{visibility:hidden}.js{z-index:10}.flash{position:absolute;inset:0;background:#fff;opacity:0}.redtint{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(0,0,0,0) 35%,rgba(120,10,20,.55) 100%)}.blanket{position:absolute;inset:0}
 .card{position:absolute;left:90px;top:230px;width:900px;padding:28px 40px 24px;border-radius:28px;background:#FFF8EC;border:6px solid #2B2B2B;box-shadow:10px 10px 0 #2B2B2B;opacity:0;z-index:15}
 .card .ck{font-weight:700;font-size:38px}.card .cn{font-weight:900;font-size:130px;line-height:1.05;font-family:"NS","NST"}
 .card .cn small{font-size:54px;margin-left:12px}.card .cs{font-weight:700;font-size:26px;color:#7a6f60;margin-top:6px;font-family:"NS","NST"}

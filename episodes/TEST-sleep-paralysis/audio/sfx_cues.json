@@ -50,43 +50,53 @@
   "gain_db": -24
  },
  {
+  "sfx": "sting",
+  "at": 9.42,
+  "gain_db": -12
+ },
+ {
+  "sfx": "thud",
+  "at": 9.45,
+  "gain_db": -14
+ },
+ {
   "sfx": "whoosh",
-  "at": 12.001,
+  "at": 13.806,
   "gain_db": -26
  },
  {
   "sfx": "thud",
-  "at": 12.201,
+  "at": 14.006,
   "gain_db": -18
  },
  {
   "sfx": "whoosh",
-  "at": 13.269,
+  "at": 16.446,
   "gain_db": -26
  },
  {
   "sfx": "pop",
-  "at": 16.586,
+  "at": 19.754,
   "gain_db": -20
  },
  {
   "sfx": "whoosh",
-  "at": 19.391,
+  "at": 22.567,
   "gain_db": -26
  },
  {
   "sfx": "whoosh",
-  "at": 23.018,
+  "at": 26.186,
   "gain_db": -26
  },
  {
   "sfx": "glint",
-  "at": 26.159,
+  "at": 29.328,
   "gain_db": -18
  },
  {
   "sfx": "ding",
-  "at": 27.87,
+  "at": 31.046,
   "gain_db": -20
  }
 ]
