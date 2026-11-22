@@ -3,16 +3,16 @@
 | ขั้น | ไฟล์ | สถานะ |
 |---|---|---|
 | หัวข้อที่เลือก | `topic.md` | ✅ |
-| Fact sheet | `factsheet.md` | ⬜ |
-| บท | `script.md`, `script.tts.txt` | ⬜ |
-| ตรวจข้อเท็จจริง | `factcheck.md` | ⬜ |
-| ตรวจบท (QA) | `qa-script.md` | ⬜ |
-| ⛔ เจ้าของช่องเลือกฮุก/อนุมัติบท | — | ⬜ |
-| เสียง | `audio/voice.wav`, `audio/timings.json`, `audio/mix.wav`, `audio/audio-report.md` | ⬜ |
-| วิดีโอ | `video/renders/EP002-own-voice.mp4`, `assets.md` | ⬜ |
-| ตรวจคลิป (QA) | `qa-final.md` | ⬜ |
-| การตลาด | `marketing.md` | ⬜ |
-| ⛔ เจ้าของช่องอนุมัติโพสต์ | — | ⬜ |
+| Fact sheet | `factsheet.md` | ✅ |
+| บท | `script.md`, `script.tts.txt` | ✅ |
+| ตรวจข้อเท็จจริง | `factcheck.md` | ✅ |
+| ตรวจบท (QA) | `qa-script.md` | ✅ |
+| ⛔ เจ้าของช่องเลือกฮุก/อนุมัติบท | — | ✅ นิคเลือก H4 |
+| เสียง | `audio/voice.wav`, `audio/timings.json`, `audio/mix.wav`, `audio/audio-report.md` | ✅ |
+| วิดีโอ | `video/renders/EP002-own-voice.mp4`, `assets.md` | ✅ |
+| ตรวจคลิป (QA) | `qa-final.md` | ✅ |
+| การตลาด | `marketing.md` | ✅ |
+| ⛔ เจ้าของช่องอนุมัติโพสต์ | — | ⏳ รออนุมัติ |
 | โพสต์แล้ว | ลิงก์: | ⬜ |
 
 > **ข้อยกเว้นเฉพาะ EP002:** เรียกคนดูว่า "คุณ" ทุกจุด (ซับ ป้าย แคปชัน คอมเมนต์ปักหมุด) — เจ้าของช่องสั่ง 2026-11-21 ประโยคปิด "พวกมึงฉลาดขึ้นแล้วนะ" คงเดิม
