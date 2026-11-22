@@ -3,43 +3,395 @@
  "cast": {},
  "mood": "dark",
  "lines": [
-  {"cap": "ตีสาม คุณตื่นมาเพราะ*ขนตาคัน*", "clock": {"t": "03:00", "s": "ตีสาม"},
-   "scene": {"bg": "bedroom_night", "push": 1.08, "chars": [{"who": "N", "lying": true, "pose": {"eye": "sad", "brow": "worry", "mo": "wobble", "ah": "zig"}}]}},
-  {"cap": "นึกว่า*เตียงสกปรก* รีบเปลี่ยนปลอกหมอน",
-   "scene": {"bg": "bedroom_day", "push": 1.05, "chars": [{"who": "N", "x": 260, "y": 620, "w": 560, "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "up"}}]}},
-  {"cap": "ล้างหน้าแล้ว*ก็ยังคัน*",
-   "scene": {"bg": "bedroom_night", "push": 1.1, "chars": [{"who": "N", "lying": true, "pose": {"eye": "sad", "brow": "worry", "mo": "wobble", "ah": "droop"}}]}},
-  {"cap": "แต่เดี๋ยวก่อน… *มีเรื่องที่คุณยังไม่รู้!*", "sfx": ["pop"],
-   "scene": {"bg": "dark", "push": 1.12, "shake": true, "chars": [{"who": "N", "x": 230, "y": 520, "w": 620, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]}},
-  {"cap": "บนหน้าคนเรา มี*ไรจิ๋ว*อาศัยอยู่",
-   "scene": {"bg": "pore_zoom", "push": 1.1, "chars": [{"who": "N", "x": 40, "y": 880, "w": 380, "pose": {"eye": "shock", "brow": "shock", "mo": "flat", "ah": "zig", "gl": "askew", "arm": "up"}}]}},
-  {"cap": "ในรูขุมขน *ยาวไม่ถึงครึ่งมิลลิเมตร*",
-   "scene": {"bg": "pore_zoom", "push": 1.16, "chars": [{"who": "N", "x": 40, "y": 880, "w": 380, "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "chin", "front": true}}]}},
-  {"cap": "มันกิน*น้ำมันผิว*กับเซลล์ผิวคุณ",
-   "scene": {"bg": "dark", "push": 1.06, "chars": [{"who": "N", "x": 230, "y": 520, "w": 620, "pose": {"gl": "askew", "eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "arm": "up"}}]}},
-  {"cap": "*นักวิจัยเชื่อว่า* ตอนหลับ มันหาคู่",
-   "scene": {"bg": "bedroom_night", "push": 1.1, "chars": [{"who": "N", "lying": true, "pose": {"eye": "sleep", "brow": "worry", "mo": "wobble", "ah": "zig"}}]}},
-  {"cap": "*ดีเอ็นเอ*ผู้ใหญ่ เจอไรครบ*สิบเก้าคน*", "sfx": [["thud", 0.1]],
-   "card": {"k": "ตรวจดีเอ็นเอไรหน้า พบในผู้ใหญ่", "n": "19/19", "u": " คน", "src": "Thoemmes et al. 2014 · PLoS ONE"},
-   "scene": {"bg": "cream", "push": 1.05, "shake": true, "chars": [{"who": "N", "x": 260, "y": 640, "w": 540, "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "chin", "front": true}}]}},
-  {"cap": "ส่องกล้อง เห็นตัวแค่ *14%*",
-   "card": {"k": "ส่องกล้องเห็นตัวไรในผู้ใหญ่ (253 คน)", "n": "14", "u": "%", "src": "Thoemmes et al. 2014 · PLoS ONE"}},
-  {"cap": "ดีเอ็นเอบอกว่า *แทบทุกคนมี!*",
-   "scene": {"bg": "dark", "push": 1.1, "shake": true, "chars": [{"who": "N", "x": 230, "y": 520, "w": 620, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "!", "gl": "askew", "arm": "up"}}]}},
-  {"cap": "*ไม่ใช่เรื่องหน้าสกปรก*นะ"},
-  {"cap": "ลือกันว่า*ไรไม่มีรูทวาร*",
-   "scene": {"bg": "pore_zoom", "push": 1.08, "chars": [{"who": "N", "x": 40, "y": 880, "w": 380, "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}]}},
-  {"cap": "แต่งานวิจัยบอกว่า *ผิด! มันมีจริง!*",
-   "scene": {"bg": "cream", "push": 1.08, "chars": [{"who": "N", "x": 260, "y": 640, "w": 540, "pose": {"eye": "laugh", "brow": "none", "mo": "grin", "arm": "belly", "tilt": -6, "front": true}}]}},
-  {"cap": "ขอโทษนะ*ปลอกหมอน* ที่หาว่าสกปรก",
-   "scene": {"bg": "bedroom_day", "push": 1.05, "chars": [{"who": "N", "x": 260, "y": 640, "w": 540, "pose": {"eye": "sad", "brow": "worry", "mo": "wobble", "ah": "heart", "arm": "cover", "front": true}}]}},
-  {"cap": "ส่วน*คืนนั้นคันเพราะอะไร* ไม่รู้นะ",
-   "scene": {"bg": "bedroom_night", "push": 1.06, "chars": [{"who": "N", "x": 260, "y": 640, "w": 540, "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}]}},
-  {"cap": "ส่วนใหญ่มัน*ไม่ก่ออาการ*อะไรเลย",
-   "scene": {"bg": "cream", "push": 1.05, "chars": [{"who": "N", "x": 260, "y": 640, "w": 540, "pose": {"eye": "smug", "brow": "smug", "mo": "smile", "arm": "shrug"}}]}},
-  {"cap": "*คันตา*หรือมีผื่นนานๆ ไปหาหมอ",
-   "scene": {"bg": "cream", "push": 1.06, "chars": [{"who": "N", "x": 260, "y": 640, "w": 540, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}]}},
-  {"cap": "รู้เรื่องทั้งหมดแล้ว", "outro": true},
-  {"cap": "พวกมึง*ฉลาดขึ้นแล้วนะ*"}
+  {
+   "cap": "ตีสาม คุณตื่นมาเพราะ*ขนตาคัน*",
+   "clock": {
+    "t": "03:00",
+    "s": "ตีสาม"
+   },
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "sad",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "นึกว่า*เตียงสกปรก* รีบเปลี่ยนปลอกหมอน",
+   "scene": {
+    "bg": "bedroom_day",
+    "push": 1.05,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 620,
+      "w": 560,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ล้างหน้าแล้ว*ก็ยังคัน*",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "sad",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "droop"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "แต่เดี๋ยวก่อน… *มีเรื่องที่คุณยังไม่รู้!*",
+   "sfx": [
+    "pop"
+   ],
+   "scene": {
+    "bg": "dark",
+    "push": 1.12,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "บนหน้าคนเรา มี*ไรจิ๋ว*อาศัยอยู่",
+   "scene": {
+    "bg": "pore_zoom",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "flat",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ยาว*ไม่ถึงครึ่งมิลลิเมตร!*",
+   "scene": {
+    "bg": "pore_zoom",
+    "push": 1.16,
+    "chars": [
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "arm": "chin",
+       "front": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "มันกิน*น้ำมันผิว*กับเซลล์ผิวคุณ",
+   "scene": {
+    "bg": "dark",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "gl": "askew",
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "*นักวิจัยเชื่อว่า* ตอนหลับ มันหาคู่",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "sleep",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ผู้ใหญ่ 19 คน เจอ*ดีเอ็นเอไร*ครบ",
+   "sfx": [
+    [
+     "thud",
+     0.1
+    ]
+   ],
+   "card": {
+    "k": "ตรวจดีเอ็นเอไรหน้า พบในผู้ใหญ่",
+    "n": "19/19",
+    "u": " คน",
+    "src": "Thoemmes et al. 2014 · PLoS ONE"
+   },
+   "scene": {
+    "bg": "cream",
+    "push": 1.05,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "arm": "chin",
+       "front": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ส่องกล้อง เห็นตัวแค่ *14%*",
+   "card": {
+    "k": "ส่องกล้องเห็นตัวไรในผู้ใหญ่ (253 คน)",
+    "n": "14",
+    "u": "%",
+    "src": "Thoemmes et al. 2014 · PLoS ONE"
+   }
+  },
+  {
+   "cap": "ดีเอ็นเอบอกว่า *แทบทุกคนมี!*",
+   "scene": {
+    "bg": "dark",
+    "push": 1.1,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "!",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "*ไม่ใช่เรื่องหน้าสกปรก*นะ"
+  },
+  {
+   "cap": "ลือกันว่า*ไรไม่มีรูทวาร*",
+   "scene": {
+    "bg": "pore_zoom",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "gl": "glare",
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smirk",
+       "arm": "shrug",
+       "tilt": 5
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "แต่งานวิจัยบอกว่า *ผิด! มันมีจริง!*",
+   "scene": {
+    "bg": "cream",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "laugh",
+       "brow": "none",
+       "mo": "grin",
+       "arm": "belly",
+       "tilt": -6,
+       "front": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ขอโทษนะ*ปลอกหมอน* ที่หาว่าสกปรก",
+   "scene": {
+    "bg": "bedroom_day",
+    "push": 1.05,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "sad",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "heart",
+       "arm": "cover",
+       "front": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ส่วน*คืนนั้นคันเพราะอะไร* ไม่รู้นะ",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "gl": "glare",
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smirk",
+       "arm": "shrug",
+       "tilt": 5
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ส่วนใหญ่มัน*ไม่ก่ออาการ*อะไรเลย",
+   "scene": {
+    "bg": "cream",
+    "push": 1.05,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smile",
+       "arm": "shrug"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ถ้า*คันตา*หรือผื่นนานๆ ไปหาหมอ",
+   "scene": {
+    "bg": "cream",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "รู้เรื่องทั้งหมดแล้ว",
+   "outro": true
+  },
+  {
+   "cap": "พวกมึง*ฉลาดขึ้นแล้วนะ*"
+  }
  ]
 }
