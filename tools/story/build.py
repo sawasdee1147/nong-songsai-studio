@@ -48,6 +48,14 @@ H, J = [], []  # html, gsap
 
 def esc(s): return html.escape(s, quote=True)
 
+# เส้นเกร็ง + เหงื่อ รอบตัวละคร (พิกัดเดียวกับ kid.js) — ใช้กับ "struggle": true
+STRAIN = ('<svg class="st" id="{id}s" viewBox="20 -40 260 400" style="position:absolute;inset:0;width:100%;height:100%">'
+          '<g stroke="#2B2B2B" stroke-width="6" stroke-linecap="round" fill="none">'
+          '<path d="M36 70 l-14 -10 M30 98 l-18 0 M36 126 l-14 10"/><path d="M264 70 l14 -10 M270 98 l18 0 M264 126 l14 10"/>'
+          '<path d="M60 300 l-16 8 M70 322 l-12 14"/><path d="M240 300 l16 8 M230 322 l12 14"/></g>'
+          '<path d="M236 92 Q248 114 236 122 Q224 114 236 92Z" fill="#9ED8FF" stroke="#2B2B2B" stroke-width="4"/>'
+          '<path d="M70 104 Q80 122 70 129 Q60 122 70 104Z" fill="#9ED8FF" stroke="#2B2B2B" stroke-width="4"/></svg>')
+
 # ---------- ฉาก ----------
 scenes = []  # (sid, start_line, scene)
 for i, ln in enumerate(L):
@@ -67,8 +75,14 @@ for k, (i, sc) in enumerate(scenes):
         figs += (f'<div class="ch" id="{cid}" style="{box}"><div class="br" id="{cid}b">'
                  f'<div class="k" data-kid="{esc(json.dumps(opts, ensure_ascii=False))}"></div>'
                  + (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps({**opts, "eye": "blink"}, ensure_ascii=False))}"></div>' if c.get("blink", True) and opts.get("eye", "norm") not in ("sleep", "blink", "creepy", "laugh", "cool") else "")
-                 + '</div></div>')
+                 + '</div>' + (STRAIN.format(id=cid) if c.get("struggle") else "") + '</div>')
         J.append(f'tl.fromTo("#{cid}b",{{scaleY:1}},{{scaleY:1.02,duration:1.2,yoyo:true,repeat:{max(0, int((b - a) / 1.2))},ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false}},{a:.3f});')
+        if c.get("struggle"):  # ดิ้นเป็นจังหวะ: สั่น 0.6 วิ พัก 0.35 วิ + เส้นเกร็งกะพริบ
+            t = max(a, T[i]) + .1
+            while t < b - .4:
+                J.append(f'tl.fromTo("#{cid}b",{{x:-5,rotation:-1.2}},{{x:5,rotation:1.2,duration:.05,yoyo:true,repeat:11,ease:"none",immediateRender:false}},{t:.3f});'
+                         f'tl.set("#{cid}s",{{opacity:1}},{t:.3f});tl.set("#{cid}s",{{opacity:.25}},{t + .6:.3f});')
+                t += .95
         if c.get("enter") == "fade":
             J.append(f'tl.fromTo("#{cid}",{{opacity:0}},{{opacity:1,duration:.7,ease:"power1.in",immediateRender:false}},{max(a, T[i]):.3f});')
         t = a + .9

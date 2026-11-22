@@ -54,7 +54,8 @@
        "mo": "flat",
        "ah": "zig",
        "gl": "askew"
-      }
+      },
+      "struggle": true
      }
     ]
    }
@@ -83,7 +84,25 @@
    }
   },
   {
-   "cap": "แต่แขนขา*ไม่ยอมขยับเลย!*"
+   "cap": "แต่แขนขา*ไม่ยอมขยับเลย!*",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.16,
+    "chars": [
+     {
+      "who": "N",
+      "lying": true,
+      "struggle": true,
+      "pose": {
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig",
+       "gl": "askew"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "มีเงา*ยืนจ้อง*ข้างเตียง",
@@ -223,5 +242,6 @@
   {
    "cap": "พวกมึง*ฉลาดขึ้นแล้วนะ*"
   }
- ]
+ ],
+ "mood": "dark"
 }

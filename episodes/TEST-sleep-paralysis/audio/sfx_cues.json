@@ -10,9 +10,34 @@
   "gain_db": -26
  },
  {
+  "sfx": "heartbeat",
+  "at": 1.902,
+  "gain_db": -16
+ },
+ {
+  "sfx": "heartbeat",
+  "at": 2.852,
+  "gain_db": -16
+ },
+ {
   "sfx": "whoosh",
   "at": 3.157,
   "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 5.312,
+  "gain_db": -26
+ },
+ {
+  "sfx": "heartbeat",
+  "at": 5.562,
+  "gain_db": -16
+ },
+ {
+  "sfx": "heartbeat",
+  "at": 6.512,
+  "gain_db": -16
  },
  {
   "sfx": "whoosh",

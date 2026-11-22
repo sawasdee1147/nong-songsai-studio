@@ -36,6 +36,8 @@ def main():
     ap.add_argument("--sfx-dir", default="sfx")
     ap.add_argument("--tail", type=float, default=0.0)
     ap.add_argument("--lufs", type=float, default=-14.0)
+    ap.add_argument("--bed", help="ซาวด์คลอทั้งคลิป เช่น sfx/bed_dark.wav (ตัด/วนให้พอดีความยาว, เฟดเข้าออก)")
+    ap.add_argument("--bed-db", type=float, default=-24.0, help="ความดังซาวด์คลอเทียบเสียงพากย์")
     a = ap.parse_args()
 
     voice = load(a.voice)
@@ -53,13 +55,27 @@ def main():
         i = int(round(c["at"] * SR))
         mixbuf[i: i + len(s)] += s[: len(mixbuf) - i]
 
+    if a.bed:
+        b = load(a.bed)
+        reps = int(np.ceil(len(mixbuf) / len(b)))
+        b = np.tile(b, reps)[: len(mixbuf)]
+        fi, fo = int(1.0 * SR), int(1.5 * SR)
+        b[:fi] *= np.linspace(0, 1, fi); b[-fo:] *= np.linspace(1, 0, fo)
+        mixbuf += b * 10 ** (a.bed_db / 20)
+
     with tempfile.TemporaryDirectory() as td:
         raw = os.path.join(td, "raw.wav")
         save(raw, mixbuf * 0.7)
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw,
-                        # ส่งออกเป็นสเตอริโอ (dual mono) แล้ววัด/ปรับความดังในรูปสเตอริโอ
-                        # วิดีโอใช้เสียงสเตอริโอ ถ้า normalize แบบโมโนแล้วไปแตกเป็น 2 ช่องทีหลัง จะดังขึ้น ~3 LU
-                        "-af", f"pan=stereo|c0=c0|c1=c0,loudnorm=I={a.lufs}:TP=-2:LRA=11",
+        # ปรับความดังแบบ 2 รอบ (วัดก่อน แล้วปรับแบบเชิงเส้น) — รอบเดียวมักเบากว่าเป้าเมื่อมีช่วงเงียบยาว
+        # ส่งออกเป็นสเตอริโอ (dual mono) แล้ววัด/ปรับในรูปสเตอริโอ (วิดีโอใช้เสียงสเตอริโอ)
+        pre = "pan=stereo|c0=c0|c1=c0"
+        r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", raw, "-af",
+                            f"{pre},loudnorm=I={a.lufs}:TP=-2:LRA=11:print_format=json", "-f", "null", "-"],
+                           capture_output=True, text=True)
+        m = json.loads(r.stderr[r.stderr.rindex("{"):r.stderr.rindex("}") + 1])
+        ln2 = (f"loudnorm=I={a.lufs}:TP=-2:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+               f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw, "-af", f"{pre},{ln2}",
                         "-ar", str(SR), "-ac", "2", "-c:a", "pcm_s16le", a.out], check=True)
     print(f"mix -> {a.out}  ({end:.2f}s, {len(cues)} sfx cues)")
 

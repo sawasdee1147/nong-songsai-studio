@@ -185,6 +185,40 @@ def wrong():
     return norm(np.concatenate([sq(a), np.zeros(int(SR * 0.03)), sq(b)]))
 
 
+def heartbeat():
+    """หัวใจเต้นตุบ-ตุบ (ใช้ตอนลุ้น/กลัว)"""
+    d = 0.9; tt = t(d)
+    def thump(start, f, g):
+        x = np.zeros_like(tt); m = tt >= start; u = tt[m] - start
+        x[m] = np.sin(2 * np.pi * f * u) * np.exp(-u * 22) * g
+        return x
+    return norm(thump(0, 55, 1) + thump(.24, 48, .7))
+
+
+def bed_dark(dur=60.0):
+    """ซาวด์คลอแนวหลอน: โดรนเสียงต่ำสั่นช้าๆ + ลมเบาๆ + เสียงแหลมบางๆ เป็นช่วง (ไม่มีจังหวะดนตรี)"""
+    tt = t(dur)
+    x = sum(np.sin(2 * np.pi * f * tt + p) * g for f, p, g in [(41.2, 0, 1), (41.5, 1, .8), (61.7, .5, .4), (82.4, 2, .2)])
+    x *= .55 + .45 * np.sin(2 * np.pi * tt / 13) ** 2
+    wind = lowpass(noise(dur), 300) * 6
+    wind *= .5 + .5 * np.sin(2 * np.pi * tt / 7 + 1) ** 2
+    x = x + wind
+    for k in range(int(dur / 4)):  # เสียงแหลมเย็นๆ แผ่วๆ ทุกไม่กี่วินาที
+        st = int((k * 4 + rng.uniform(0, 3)) * SR); n = int(1.6 * SR)
+        if st + n < len(x):
+            f = rng.choice([1318.5, 1396.9, 1975.5])
+            x[st:st + n] += np.sin(2 * np.pi * f * np.arange(n) / SR) * np.hanning(n) * .08
+    return norm(x)
+
+
+def bed_warm(dur=60.0):
+    """ซาวด์คลอแนวอบอุ่น: คอร์ดนุ่มๆ ลอยช้าๆ"""
+    tt = t(dur)
+    x = sum(np.sin(2 * np.pi * f * tt) * g for f, g in [(130.8, 1), (164.8, .7), (196, .6), (261.6, .3)])
+    x *= .6 + .4 * np.sin(2 * np.pi * tt / 9) ** 2
+    return norm(x)
+
+
 SFX = {
     "pop": (pop, "ของโผล่/เด้งขึ้นจอ"),
     "boing": (boing, "ตัวละครเด้ง ท่าซนๆ"),
@@ -200,6 +234,9 @@ SFX = {
     "riser": (riser, "สร้างความลุ้นก่อนเฉลย"),
     "blip_talk": (blip_talk, "ตัวละคร 'อืม?' แบบการ์ตูน"),
     "wrong": (wrong, "ผิด! / ความเชื่อผิด"),
+    "heartbeat": (heartbeat, "หัวใจเต้นตุบ-ตุบ (ฉากลุ้น/ดิ้นไม่หลุด)"),
+    "bed_dark": (bed_dark, "ซาวด์คลอทั้งคลิป แนวหลอน/ลี้ลับ (60 วิ — mix.py --bed ตัดตามความยาวคลิป)"),
+    "bed_warm": (bed_warm, "ซาวด์คลอทั้งคลิป แนวอบอุ่น/ตลก (60 วิ)"),
 }
 
 
