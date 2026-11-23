@@ -1,0 +1,194 @@
+<!doctype html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=1080, height=1920">
+<!-- สร้างโดย tools/story/build.py จาก story.json — แก้ที่ story.json แทน -->
+<script src="assets/lib/gsap.min.js"></script><script src="assets/lib/kid.js"></script><script src="assets/lib/scenes.js"></script>
+<style>
+@font-face{font-family:"NST";font-weight:700;src:url("assets/fonts/noto-sans-thai-thai-700-normal.woff2") format("woff2")}
+@font-face{font-family:"NST";font-weight:900;src:url("assets/fonts/noto-sans-thai-thai-900-normal.woff2") format("woff2")}
+@font-face{font-family:"NS";font-weight:700;src:url("assets/fonts/noto-sans-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"NS";font-weight:900;src:url("assets/fonts/noto-sans-latin-900-normal.woff2") format("woff2")}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1B1E2E}
+#root{position:absolute;inset:0;overflow:hidden;font-family:"NST","NS",sans-serif;color:#2B2B2B}
+.L{position:absolute;inset:0;visibility:hidden;overflow:hidden}.cam{position:absolute;inset:0;transform-origin:50% 55%}
+.bgw{position:absolute;inset:0}.ch{position:absolute}.br{position:absolute;inset:0}.k{position:absolute;inset:0}.k svg{width:100%;height:100%}
+.bl{visibility:hidden}.js{z-index:10}.flash{position:absolute;inset:0;background:#fff;opacity:0}.redtint{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(0,0,0,0) 35%,rgba(120,10,20,.55) 100%)}.blanket{position:absolute;inset:0}
+.card{position:absolute;left:90px;top:230px;width:900px;padding:28px 40px 24px;border-radius:28px;background:#FFF8EC;border:6px solid #2B2B2B;box-shadow:10px 10px 0 #2B2B2B;opacity:0;z-index:15}
+.card .ck{font-weight:700;font-size:38px}.card .cn{font-weight:900;font-size:130px;line-height:1.05;font-family:"NS","NST"}
+.card .cn small{font-size:54px;margin-left:12px}.card .cs{font-weight:700;font-size:26px;color:#7a6f60;margin-top:6px;font-family:"NS","NST"}
+.card.next{top:300px}.card .nx{font-weight:900;font-size:60px;line-height:1.35;margin-top:6px}
+.chip{position:absolute;left:70px;top:230px;padding:12px 26px;border-radius:18px;background:#FFF8EC;border:5px solid #2B2B2B;box-shadow:6px 6px 0 #2B2B2B;display:flex;gap:14px;align-items:center;opacity:0;z-index:16}
+.chip b{font-weight:900;font-size:50px;font-family:"NS","NST"}.chip span{font-weight:700;font-size:32px}
+.cap{position:absolute;left:60px;right:140px;top:1440px;text-align:center;visibility:hidden;z-index:20}
+.cap div{display:inline-block;background:#fff;border:6px solid #2B2B2B;border-radius:24px;padding:18px 30px 12px;font-weight:900;font-size:72px;line-height:1.42;box-shadow:8px 8px 0 #2B2B2B}
+.cap .y{color:#E0704F}
+.cap.rule div{background:#E23B3B;color:#fff;font-size:78px;border-width:7px;box-shadow:10px 10px 0 #2B2B2B}.cap.rule .y{color:#FFD84D}
+.w{white-space:nowrap}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="61.899" data-width="1080" data-height="1920">
+<audio id="vo" src="assets/audio/mix.wav" data-start="0" data-duration="61.899" data-volume="1"></audio>
+<div class="L" id="sc1"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc1c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc1c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;up&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc1c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div></div></div>
+<div class="L" id="sc2"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc2c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc2c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div><div class="k bl" id="sc2c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div></div></div></div></div>
+<div class="L" id="sc3"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc3c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc3c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;cover&quot;, &quot;front&quot;: true}"></div><div class="k bl" id="sc3c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;cover&quot;, &quot;front&quot;: true}"></div></div></div></div></div>
+<div class="L" id="sc4"><div class="cam"><div class="bgw" data-bg="elevator_hatch_up"></div><div class="ch" id="sc4c0" style="left:300px;top:900px;width:460px;height:708px"><div class="br" id="sc4c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;up&quot;, &quot;brow&quot;: &quot;up&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;chin&quot;, &quot;front&quot;: true}"></div><div class="k bl" id="sc4c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;up&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;chin&quot;, &quot;front&quot;: true}"></div></div></div></div></div>
+<div class="L" id="sc5"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc5c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc5c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div><div class="k bl" id="sc5c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div></div></div></div></div>
+<div class="L" id="sc6"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc6c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc6c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;up&quot;, &quot;brow&quot;: &quot;up&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;chin&quot;, &quot;front&quot;: true}"></div><div class="k bl" id="sc6c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;up&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;chin&quot;, &quot;front&quot;: true}"></div></div></div></div></div>
+<div class="L" id="sc7"><div class="cam"><div class="bgw" data-bg="elevator_shaft_cables"></div><div class="ch" id="sc7c0" style="left:20px;top:1000px;width:380px;height:585px"><div class="br" id="sc7c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;spark&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;grin&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;arm&quot;: &quot;point&quot;}"></div><div class="k bl" id="sc7c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;grin&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;arm&quot;: &quot;point&quot;}"></div></div></div></div></div>
+<div class="L" id="sc8"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc8c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc8c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;norm&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;smile&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc8c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;smile&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div></div></div>
+<div class="L" id="sc9"><div class="cam"><div class="bgw" data-bg="elevator_shaft_sheave"></div><div class="ch" id="sc9c0" style="left:20px;top:1000px;width:380px;height:585px"><div class="br" id="sc9c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;spark&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;grin&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;arm&quot;: &quot;point&quot;}"></div><div class="k bl" id="sc9c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;none&quot;, &quot;mo&quot;: &quot;grin&quot;, &quot;ah&quot;: &quot;!&quot;, &quot;arm&quot;: &quot;point&quot;}"></div></div></div></div></div>
+<div class="L" id="sc10"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc10c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc10c0b"><div class="k" data-kid="{&quot;gl&quot;: &quot;glare&quot;, &quot;eye&quot;: &quot;smug&quot;, &quot;brow&quot;: &quot;smug&quot;, &quot;mo&quot;: &quot;smirk&quot;, &quot;arm&quot;: &quot;shrug&quot;, &quot;tilt&quot;: 5}"></div><div class="k bl" id="sc10c0x" data-kid="{&quot;gl&quot;: &quot;glare&quot;, &quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;smug&quot;, &quot;mo&quot;: &quot;smirk&quot;, &quot;arm&quot;: &quot;shrug&quot;, &quot;tilt&quot;: 5}"></div></div></div></div></div>
+<div class="L" id="sc11"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc11c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc11c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;norm&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;flatlow&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;point&quot;}"></div><div class="k bl" id="sc11c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;flatlow&quot;, &quot;ah&quot;: &quot;?&quot;, &quot;arm&quot;: &quot;point&quot;}"></div></div></div></div></div>
+<div class="L" id="sc12"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc12c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc12c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;side&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;droop&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc12c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;droop&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div></div></div>
+<div class="L" id="sc13"><div class="cam"><div class="bgw" data-bg="elevator_inside_7"></div><div class="ch" id="sc13c0" style="left:300px;top:760px;width:460px;height:708px"><div class="br" id="sc13c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc13c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div></div></div>
+<div class="L" id="sc14"><div class="cam"><div class="bgw" data-bg="dark"></div><div class="ch" id="sc14c0" style="left:230px;top:520px;width:620px;height:954px"><div class="br" id="sc14c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc14c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;o&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div></div></div>
+<div class="L" id="sc15"><div class="cam"><div class="bgw" data-bg="elevator_hatch_up_knock"></div><div class="ch" id="sc15c0" style="left:300px;top:900px;width:460px;height:708px"><div class="br" id="sc15c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div><div class="k bl" id="sc15c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;shock&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;up&quot;}"></div></div></div></div></div>
+<div class="L" id="sc16"><div class="cam"><div class="bgw" data-bg="elevator_hatch_up_open"></div><div class="ch" id="sc16c0" style="left:300px;top:900px;width:460px;height:708px"><div class="br" id="sc16c0b"><div class="k" data-kid="{&quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div><div class="k bl" id="sc16c0x" data-kid="{&quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;shock&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;gl&quot;: &quot;askew&quot;, &quot;arm&quot;: &quot;down&quot;}"></div></div></div><div style="position:absolute;left:390px;top:400px;width:300px;height:300px;overflow:hidden"><div class="ch" id="sc16c1" style="left:-35px;top:-163px;width:370px;height:569px"><div style="position:absolute;inset:0;transform:rotate(180deg)"><div class="br" id="sc16c1b"><div class="k" data-kid="{&quot;skin&quot;: &quot;tan&quot;, &quot;hair&quot;: &quot;short&quot;, &quot;hairColor&quot;: &quot;#9A9A9A&quot;, &quot;top&quot;: &quot;#5B6B7B&quot;, &quot;gl&quot;: &quot;none&quot;, &quot;ah&quot;: &quot;none&quot;, &quot;eye&quot;: &quot;norm&quot;, &quot;brow&quot;: &quot;norm&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;pocket&quot;: false, &quot;strings&quot;: false}"></div><div class="k bl" id="sc16c1x" data-kid="{&quot;skin&quot;: &quot;tan&quot;, &quot;hair&quot;: &quot;short&quot;, &quot;hairColor&quot;: &quot;#9A9A9A&quot;, &quot;top&quot;: &quot;#5B6B7B&quot;, &quot;gl&quot;: &quot;none&quot;, &quot;ah&quot;: &quot;none&quot;, &quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;norm&quot;, &quot;mo&quot;: &quot;flat&quot;, &quot;pocket&quot;: false, &quot;strings&quot;: false}"></div></div></div></div></div></div></div>
+<div class="L" id="sc17"><div class="cam"><div class="bgw" data-bg="dark"></div><div class="ch" id="sc17c0" style="left:300px;top:700px;width:480px;height:738px"><div class="br" id="sc17c0b"><div class="k" data-kid="{&quot;gl&quot;: &quot;askew&quot;, &quot;eye&quot;: &quot;shock&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;arm&quot;: &quot;cover&quot;, &quot;front&quot;: true}"></div><div class="k bl" id="sc17c0x" data-kid="{&quot;gl&quot;: &quot;askew&quot;, &quot;eye&quot;: &quot;blink&quot;, &quot;brow&quot;: &quot;worry&quot;, &quot;mo&quot;: &quot;wobble&quot;, &quot;ah&quot;: &quot;zig&quot;, &quot;arm&quot;: &quot;cover&quot;, &quot;front&quot;: true}"></div></div></div></div></div>
+<div class="L" id="sc18"><div class="cam"><div class="bgw" data-bg="elevator_hatch_up_open"></div><div style="position:absolute;left:390px;top:400px;width:300px;height:300px;overflow:hidden"><div class="ch" id="sc18c0" style="left:-35px;top:-163px;width:370px;height:569px"><div style="position:absolute;inset:0;transform:rotate(180deg)"><div class="br" id="sc18c0b"><div class="k" data-kid="{&quot;skin&quot;: &quot;tan&quot;, &quot;hair&quot;: &quot;short&quot;, &quot;hairColor&quot;: &quot;#9A9A9A&quot;, &quot;top&quot;: &quot;#5B6B7B&quot;, &quot;gl&quot;: &quot;none&quot;, &quot;ah&quot;: &quot;none&quot;, &quot;eye&quot;: &quot;creepy&quot;, &quot;brow&quot;: &quot;norm&quot;, &quot;mo&quot;: &quot;flatlow&quot;, &quot;pocket&quot;: false, &quot;strings&quot;: false}"></div></div></div></div></div></div></div>
+<div class="L js" id="js21"><div class="cam" id="js21m"><div class="bgw" data-bg="elevator_hatch_up_open"></div><div style="position:absolute;left:390px;top:400px;width:300px;height:300px;overflow:hidden"><div class="ch" id="js21c" style="left:-35px;top:-163px;width:370px;height:569px"><div style="position:absolute;inset:0;transform:rotate(180deg)"><div class="br" id="js21cb"><div class="k" data-kid="{&quot;skin&quot;: &quot;tan&quot;, &quot;hair&quot;: &quot;short&quot;, &quot;hairColor&quot;: &quot;#9A9A9A&quot;, &quot;top&quot;: &quot;#5B6B7B&quot;, &quot;gl&quot;: &quot;none&quot;, &quot;ah&quot;: &quot;none&quot;, &quot;eye&quot;: &quot;creepy&quot;, &quot;brow&quot;: &quot;norm&quot;, &quot;mo&quot;: &quot;flatlow&quot;, &quot;pocket&quot;: false, &quot;strings&quot;: false}"></div></div></div></div></div></div><div class="redtint"></div><div class="flash" id="js21f"></div></div>
+<div class="chip" id="ck1"><b>02:10</b><span>ตีสองสิบนาที</span></div>
+<div class="cap" id="cp1"><div><span class="w">ตีสองสิบนาที</span> <span class="w">คุณอยู่ในลิฟต์!</span></div></div>
+<div class="cap" id="cp2"><div><span class="w">แล้ว<span class="y">ไฟก็ดับ</span></span> <span class="w">ลิฟต์กระตุกอย่างแรง!</span></div></div>
+<div class="cap" id="cp3"><div><span class="w">เหล็กครูดดัง</span> ลิฟต์ค้าง<span class="y">ระหว่างชั้นเจ็ดกับแปด!</span></div></div>
+<div class="cap" id="cp4"><div><span class="w">บนเพดานลิฟต์</span> <span class="w">มี<span class="y">ช่องหลังคา</span>…</span></div></div>
+<div class="cap" id="cp5"><div><span class="w">คุณอยากปีนหนีไหม?</span></div></div>
+<div class="cap rule" id="cp6"><div><span class="w"><span class="y">อย่าปีนออกช่องนั้น!</span></span> <span class="w">อย่างัดประตูด้วย!</span></div></div>
+<div class="cap" id="cp7"><div><span class="w">ทำไมถึงห้ามน่ะเหรอ?</span></div></div>
+<div class="cap" id="cp8"><div><span class="w">เพราะลิฟต์<span class="y">ไม่ได้อันตราย</span></span> <span class="w">อย่างที่คุณกลัว!</span></div></div>
+<div class="cap" id="cp9"><div>ลิฟต์ห้อยด้วย<span class="y">สายเหล็กหลายเส้น!</span></div></div>
+<div class="card" id="cd10"><div class="ck">สายเหล็ก 1 เส้น รับได้ 125% ของน้ำหนักเต็มคันสูงสุด</div><div class="cn">125<small>%</small></div><div class="cs">Fischetti 2009 · Scientific American</div></div>
+<div class="cap" id="cp10"><div><span class="w">สายแค่เส้นเดียว</span> <span class="w"><span class="y">ก็แบกลิฟต์เต็มคันได้แล้ว!</span></span></div></div>
+<div class="cap" id="cp11"><div><span class="w">คุณ<span class="y">เริ่มใจชื้น</span>ขึ้นมานิดหนึ่ง!</span></div></div>
+<div class="cap" id="cp12"><div><span class="w">ตอนไฟดับ</span> <span class="y">เบรกที่มอเตอร์ลิฟต์จะงับเอง!</span></div></div>
+<div class="cap" id="cp13"><div><span class="w">สรุปคือ</span> <span class="w">ลิฟต์<span class="y">แทบไม่มีทางร่วงอิสระ!</span></span></div></div>
+<div class="cap" id="cp14"><div><span class="w">งั้น<span class="y">รออยู่ข้างในลิฟต์</span></span> <span class="w">ดีกว่าปีนออกไปเสี่ยง!</span></div></div>
+<div class="cap rule" id="cp15"><div><span class="w">อีกอย่าง</span> <span class="w"><span class="y">กดปุ่มระฆังเรียกคนช่วย!</span></span></div></div>
+<div class="cap" id="cp16"><div><span class="w">คุณกดปุ่มระฆัง…</span> <span class="w"><span class="y">แต่ยังไม่มีใครตอบเลย!</span></span></div></div>
+<div class="chip" id="ck17"><b>02:20</b><span>ตีสองยี่สิบ</span></div>
+<div class="cap" id="cp17"><div><span class="w"><span class="y">ตีสองยี่สิบ</span>แล้ว</span> <span class="w">ไฟฉุกเฉินก็เริ่มกะพริบ!</span></div></div>
+<div class="cap" id="cp18"><div><span class="w">แต่คืนนี้</span> <span class="w">ยังมี<span class="y">เรื่องที่น่ากลัวกว่านั้น!</span></span></div></div>
+<div class="cap" id="cp19"><div><span class="w">ก๊อก</span> <span class="w">ก๊อก</span> <span class="w">ก๊อก…</span> <span class="y">มีใครเคาะ</span>อยู่บนหลังคาลิฟต์!</div></div>
+<div class="cap" id="cp20"><div>แล้ว<span class="y">ไฟฉาย</span>ก็ส่องลงมาจากช่องหลังคา!</div></div>
+<div class="cap" id="cp21"><div><span class="w">แล้ว<span class="y">หน้าลุงยาม</span>คนหนึ่ง</span> <span class="w">ก็โผล่มาจ้องคุณ!</span></div></div>
+<div class="cap" id="cp22"><div><span class="w">แต่คุณรู้ดีว่า…</span></div></div>
+<div class="cap" id="cp23"><div><span class="w"><span class="y">คอนโดนี้ไม่มียาม!</span></span></div></div>
+<div class="cap" id="cp24"><div><span class="w">ไม่มีมาสิบปีแล้ว!</span></div></div>
+<div class="cap" id="cp25"><div><span class="w">แล้ว<span class="y">ลุงคนนี้ใครกัน?</span></span></div></div>
+<div class="card next" id="nextc" style="top:1060px"><div class="ck">ตอนหน้า</div><div class="nx"><span class="w">ใครเคาะลิฟต์ตอนตีสอง?</span></div></div>
+</div>
+<script>
+document.querySelectorAll("[data-kid]").forEach(e=>e.innerHTML=kid(JSON.parse(e.dataset.kid)));
+document.querySelectorAll("[data-bg]").forEach(e=>e.innerHTML=(BG[e.dataset.bg]||BG.cream)());
+document.querySelectorAll(".blanket").forEach(e=>e.innerHTML=BLANKET);
+window.__timelines=window.__timelines||{};
+const tl=gsap.timeline({paused:true});window.__timelines["main"]=tl;
+const show=(e,a,b)=>{tl.set(e,{visibility:"visible"},a);if(b!==undefined)tl.set(e,{visibility:"hidden"},b);};
+const blink=(e,a)=>{tl.set(e,{visibility:"visible"},a);tl.set(e,{visibility:"hidden"},a+.12);};
+const card=(e,a,b)=>{tl.fromTo(e,{opacity:0,scale:1.12},{opacity:1,scale:1,duration:.35,ease:"back.out(1.7)",immediateRender:false},a);tl.to(e,{opacity:0,duration:.2},b-.2);};
+const chip=(e,a,b)=>{tl.fromTo(e,{opacity:0,y:-30},{opacity:1,y:0,duration:.3,ease:"back.out(1.6)",immediateRender:false},a);tl.to(e,{opacity:0,duration:.2},b-.2);};
+function buildPush(sel,t0,dur){
+  const box=document.querySelector(sel); const n=Math.ceil(Math.min(dur,4.0)*15);
+  for(let f=0;f<=n;f++){const d=document.createElement("div");d.className="k";d.style.visibility="hidden";
+    d.innerHTML=kid(pushGlassesPose(Math.min(f/15,3.3)));box.appendChild(d);
+    tl.set(d,{visibility:"visible"},t0+f/15); if(f<n) tl.set(d,{visibility:"hidden"},t0+(f+1)/15);}
+}
+tl.fromTo("#sc1c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:1,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},0.000);
+blink("#sc1c0x",0.900);
+show("#sc1",0.000,2.317);tl.fromTo("#sc1 .cam",{scale:1},{scale:1.08,duration:2.317,ease:"none",immediateRender:false},0.000);
+tl.fromTo("#sc2c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},2.317);
+blink("#sc2c0x",3.217);
+show("#sc2",2.317,4.911);tl.fromTo("#sc2 .cam",{scale:1},{scale:1.12,duration:2.594,ease:"none",immediateRender:false},2.317);
+tl.fromTo("#sc2 .cam",{x:-12},{x:12,duration:.05,yoyo:true,repeat:9,ease:"none",immediateRender:false},2.367);
+tl.fromTo("#sc3c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},4.911);
+blink("#sc3c0x",5.811);
+show("#sc3",4.911,8.104);tl.fromTo("#sc3 .cam",{scale:1},{scale:1.18,duration:3.193,ease:"none",immediateRender:false},4.911);
+tl.fromTo("#sc3 .cam",{x:-12},{x:12,duration:.05,yoyo:true,repeat:9,ease:"none",immediateRender:false},4.961);
+tl.fromTo("#sc4c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:3,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},8.104);
+blink("#sc4c0x",9.004);
+show("#sc4",8.104,12.067);tl.fromTo("#sc4 .cam",{scale:1},{scale:1.1,duration:3.963,ease:"none",immediateRender:false},8.104);
+tl.fromTo("#sc5c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},12.067);
+blink("#sc5c0x",12.967);
+show("#sc5",12.067,14.644);tl.fromTo("#sc5 .cam",{scale:1},{scale:1.06,duration:2.577,ease:"none",immediateRender:false},12.067);
+tl.fromTo("#sc6c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:3,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},14.644);
+blink("#sc6c0x",15.544);
+blink("#sc6c0x",18.444);
+show("#sc6",14.644,18.769);tl.fromTo("#sc6 .cam",{scale:1},{scale:1.06,duration:4.125,ease:"none",immediateRender:false},14.644);
+tl.fromTo("#sc7c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:4,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},18.769);
+blink("#sc7c0x",19.669);
+blink("#sc7c0x",22.569);
+show("#sc7",18.769,23.755);tl.fromTo("#sc7 .cam",{scale:1},{scale:1.05,duration:4.986,ease:"none",immediateRender:false},18.769);
+tl.fromTo("#sc8c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:1,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},23.755);
+blink("#sc8c0x",24.655);
+show("#sc8",23.755,25.851);tl.fromTo("#sc8 .cam",{scale:1},{scale:1.06,duration:2.096,ease:"none",immediateRender:false},23.755);
+tl.fromTo("#sc9c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},25.851);
+blink("#sc9c0x",26.751);
+show("#sc9",25.851,28.765);tl.fromTo("#sc9 .cam",{scale:1},{scale:1.08,duration:2.914,ease:"none",immediateRender:false},25.851);
+tl.fromTo("#sc10c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:4,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},28.765);
+blink("#sc10c0x",29.665);
+blink("#sc10c0x",32.565);
+show("#sc10",28.765,34.230);tl.fromTo("#sc10 .cam",{scale:1},{scale:1.05,duration:5.465,ease:"none",immediateRender:false},28.765);
+tl.fromTo("#sc11c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},34.230);
+blink("#sc11c0x",35.130);
+show("#sc11",34.230,37.010);tl.fromTo("#sc11 .cam",{scale:1},{scale:1.08,duration:2.780,ease:"none",immediateRender:false},34.230);
+tl.fromTo("#sc12c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},37.010);
+blink("#sc12c0x",37.910);
+show("#sc12",37.010,39.813);tl.fromTo("#sc12 .cam",{scale:1},{scale:1.14,duration:2.803,ease:"none",immediateRender:false},37.010);
+tl.fromTo("#sc13c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},39.813);
+blink("#sc13c0x",40.713);
+show("#sc13",39.813,42.854);tl.fromTo("#sc13 .cam",{scale:1},{scale:1.22,duration:3.041,ease:"none",immediateRender:false},39.813);
+tl.fromTo("#sc14c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},42.854);
+blink("#sc14c0x",43.754);
+show("#sc14",42.854,45.981);tl.fromTo("#sc14 .cam",{scale:1},{scale:1.1,duration:3.127,ease:"none",immediateRender:false},42.854);
+tl.fromTo("#sc15c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},45.981);
+blink("#sc15c0x",46.881);
+show("#sc15",45.981,48.751);tl.fromTo("#sc15 .cam",{scale:1},{scale:1.14,duration:2.770,ease:"none",immediateRender:false},45.981);
+tl.fromTo("#sc15 .cam",{x:-12},{x:12,duration:.05,yoyo:true,repeat:9,ease:"none",immediateRender:false},46.031);
+tl.fromTo("#sc16c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:4,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},48.751);
+blink("#sc16c0x",49.651);
+blink("#sc16c0x",52.551);
+tl.fromTo("#sc16c1",{y:-569},{y:0,duration:.45,ease:"power2.out",immediateRender:false},48.801);
+tl.fromTo("#sc16c1b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:4,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},48.751);
+blink("#sc16c1x",49.651);
+blink("#sc16c1x",52.551);
+show("#sc16",48.751,54.543);tl.fromTo("#sc16 .cam",{scale:1},{scale:1.12,duration:5.792,ease:"none",immediateRender:false},48.751);
+tl.fromTo("#sc17c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:3,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},54.543);
+blink("#sc17c0x",55.443);
+blink("#sc17c0x",58.343);
+show("#sc17",54.543,59.049);tl.fromTo("#sc17 .cam",{scale:1},{scale:1.06,duration:4.506,ease:"none",immediateRender:false},54.543);
+tl.fromTo("#sc18c0",{y:-569},{y:0,duration:.45,ease:"power2.out",immediateRender:false},59.099);
+tl.fromTo("#sc18c0b",{scaleY:1},{scaleY:1.02,duration:1.2,yoyo:true,repeat:2,ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false},59.049);
+blink("#sc18c0x",59.949);
+show("#sc18",59.049,61.899);tl.fromTo("#sc18 .cam",{scale:1},{scale:1.15,duration:2.850,ease:"none",immediateRender:false},59.049);
+show("#js21",51.636,54.543);tl.fromTo("#js21c",{y:-569},{y:0,duration:.16,ease:"expo.out",immediateRender:false},51.686);tl.fromTo("#js21m",{scale:1,transformOrigin:"540px 550px"},{scale:2.6,duration:.24,ease:"expo.out",immediateRender:false},51.686);tl.to("#js21m",{scale:2.81,duration:2.617,ease:"none"},51.926);tl.fromTo("#js21f",{opacity:1},{opacity:0,duration:.3,immediateRender:false},51.686);tl.fromTo("#js21m",{x:-16},{x:16,duration:.04,yoyo:true,repeat:9,ease:"none",immediateRender:false},51.686);
+chip("#ck1",0.000,2.661);
+show("#cp1",-0.050,2.317);
+show("#cp2",2.317,4.911);
+show("#cp3",4.911,8.104);
+show("#cp4",8.104,10.616);
+show("#cp5",10.616,12.067);
+show("#cp6",12.067,14.644);
+tl.fromTo("#cp6>div",{scale:.4,rotation:-6},{scale:1,rotation:0,duration:.35,ease:"back.out(2.2)",immediateRender:false},12.067);tl.fromTo("#cp6>div",{x:-7},{x:7,duration:.05,yoyo:true,repeat:7,ease:"none",immediateRender:false},12.417);tl.set("#cp6>div",{x:0},12.827);
+show("#cp7",14.644,15.875);
+show("#cp8",15.875,18.769);
+show("#cp9",18.769,20.796);
+card("#cd10",21.096,24.496);
+show("#cp10",20.796,23.755);
+show("#cp11",23.755,25.851);
+show("#cp12",25.851,28.765);
+show("#cp13",28.765,31.503);
+show("#cp14",31.503,34.230);
+show("#cp15",34.230,37.010);
+tl.fromTo("#cp15>div",{scale:.4,rotation:-6},{scale:1,rotation:0,duration:.35,ease:"back.out(2.2)",immediateRender:false},34.230);tl.fromTo("#cp15>div",{x:-7},{x:7,duration:.05,yoyo:true,repeat:7,ease:"none",immediateRender:false},34.580);tl.set("#cp15>div",{x:0},34.990);
+show("#cp16",37.010,39.813);
+chip("#ck17",39.863,43.191);
+show("#cp17",39.813,42.854);
+show("#cp18",42.854,45.981);
+show("#cp19",45.981,48.751);
+show("#cp20",48.751,51.636);
+show("#cp21",51.636,54.543);
+show("#cp22",54.543,55.864);
+show("#cp23",55.864,57.453);
+show("#cp24",57.453,59.049);
+show("#cp25",59.049,60.899);
+card("#nextc",60.599,61.899);
+tl.set({},{},61.899);
+</script></body></html>

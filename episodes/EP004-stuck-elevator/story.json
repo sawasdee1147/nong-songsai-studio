@@ -24,7 +24,7 @@
     "s": "ตีสองสิบนาที"
    },
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.08,
     "chars": [
      {
@@ -46,7 +46,7 @@
   {
    "cap": "แล้ว*ไฟก็ดับ* ลิฟต์กระตุกอย่างแรง!",
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.12,
     "shake": true,
     "chars": [
@@ -70,7 +70,7 @@
   {
    "cap": "เหล็กครูดดัง ลิฟต์ค้าง*ระหว่างชั้นเจ็ดกับแปด!*",
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.18,
     "shake": true,
     "chars": [
@@ -93,7 +93,7 @@
    }
   },
   {
-   "cap": "บนเพดานลิฟต์ มี*ช่องหลังคา*… คุณอยากปีนหนีไหม?",
+   "cap": "บนเพดานลิฟต์ มี*ช่องหลังคา*…",
    "scene": {
     "bg": "elevator_hatch_up",
     "push": 1.1,
@@ -116,10 +116,13 @@
    }
   },
   {
+   "cap": "คุณอยากปีนหนีไหม?"
+  },
+  {
    "cap": "*อย่าปีนออกช่องนั้น!* อย่างัดประตูด้วย!",
    "rule": true,
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.06,
     "chars": [
      {
@@ -145,7 +148,7 @@
   {
    "cap": "ทำไมถึงห้ามน่ะเหรอ?",
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.06,
     "chars": [
      {
@@ -169,7 +172,7 @@
    "cap": "เพราะลิฟต์*ไม่ได้อันตราย* อย่างที่คุณกลัว!"
   },
   {
-   "cap": "ลิฟต์ห้อยด้วย*สายเหล็กหลายเส้น* เหนือหัวคุณ!",
+   "cap": "ลิฟต์ห้อยด้วย*สายเหล็กหลายเส้น!*",
    "scene": {
     "bg": "elevator_shaft_cables",
     "push": 1.05,
@@ -202,7 +205,7 @@
   {
    "cap": "คุณ*เริ่มใจชื้น*ขึ้นมานิดหนึ่ง!",
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.06,
     "chars": [
      {
@@ -246,7 +249,7 @@
   {
    "cap": "สรุปคือ ลิฟต์*แทบไม่มีทางร่วงอิสระ!*",
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.05,
     "chars": [
      {
@@ -273,7 +276,7 @@
    "cap": "อีกอย่าง *กดปุ่มระฆังเรียกคนช่วย!*",
    "rule": true,
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.08,
     "chars": [
      {
@@ -298,7 +301,7 @@
   {
    "cap": "คุณกดปุ่มระฆัง… *แต่ยังไม่มีใครตอบเลย!*",
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.14,
     "chars": [
      {
@@ -324,7 +327,7 @@
     "s": "ตีสองยี่สิบ"
    },
    "scene": {
-    "bg": "elevator_inside",
+    "bg": "elevator_inside_7",
     "push": 1.22,
     "chars": [
      {
@@ -445,14 +448,14 @@
    }
   },
   {
-   "cap": "แต่คุณรู้ดีว่า *คอนโดนี้ไม่มียาม!*",
+   "cap": "แต่คุณรู้ดีว่า…",
    "scene": {
     "bg": "dark",
     "push": 1.06,
     "chars": [
      {
       "who": "N",
-      "x": 90,
+      "x": 300,
       "y": 700,
       "w": 480,
       "pose": {
@@ -464,22 +467,33 @@
        "arm": "cover",
        "front": true
       }
-     },
-     {
-      "who": "Y",
-      "x": 600,
-      "y": 680,
-      "w": 360,
-      "pose": {
-       "eye": "norm",
-       "mo": "flat"
-      }
      }
     ]
    }
   },
   {
-   "cap": "ไม่มีมาสิบปีแล้ว! แล้ว*ลุงคนนี้ใครกัน?*"
+   "cap": "*คอนโดนี้ไม่มียาม!*"
+  },
+  {
+   "cap": "ไม่มีมาสิบปีแล้ว!"
+  },
+  {
+   "cap": "แล้ว*ลุงคนนี้ใครกัน?*",
+   "scene": {
+    "bg": "elevator_hatch_up_open",
+    "push": 1.15,
+    "chars": [
+     {
+      "who": "Y",
+      "peek": "down",
+      "pose": {
+       "eye": "creepy",
+       "mo": "flatlow"
+      }
+     }
+    ]
+   }
   }
- ]
+ ],
+ "next_top": 1060
 }
