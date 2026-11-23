@@ -18,26 +18,52 @@
  "mood": "warm",
  "lines": [
   {
-   "cap": "เห้ย! มีอะไร*ขยับ* ในรูขุมขนฉัน",
+   "cap": "เฮ้ย! มีอะไร*ขยับ* ในรูขุมขนฉัน",
    "scene": {
     "bg": "pore_zoom",
     "push": 1.1,
     "chars": [
-     {"who": "N", "x": 40, "y": 880, "w": 380,
-      "pose": {"eye": "shock", "brow": "shock", "mo": "flat", "ah": "zig", "gl": "askew", "arm": "up"}}
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "flat",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
     ]
    }
   },
   {
-   "cap": "ล้างแรงๆ! ส่องอีกที… *ยังอยู่!!*",
-   "sfx": ["whoosh"],
+   "cap": "ส่องอีกที… *ขยับจริงๆ* ด้วย!!",
+   "sfx": [
+    "whoosh"
+   ],
    "scene": {
     "bg": "pore_zoom",
     "push": 1.14,
     "shake": true,
     "chars": [
-     {"who": "N", "x": 40, "y": 880, "w": 380,
-      "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
     ]
    }
   },
@@ -47,21 +73,46 @@
     "bg": "pore_zoom",
     "push": 1.18,
     "chars": [
-     {"who": "N", "x": 40, "y": 880, "w": 380,
-      "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "chin", "front": true}}
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "arm": "chin",
+       "front": true
+      }
+     }
     ]
    }
   },
   {
    "cap": "มัน…กิน*น้ำมันผิวฉัน* เหรอ?!",
-   "sfx": ["pop"],
+   "sfx": [
+    "pop"
+   ],
    "scene": {
     "bg": "dark",
     "push": 1.06,
     "shake": true,
     "chars": [
-     {"who": "N", "x": 230, "y": 520, "w": 620,
-      "pose": {"gl": "askew", "eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "arm": "up"}}
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "gl": "askew",
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "arm": "up"
+      }
+     }
     ]
    }
   },
@@ -71,21 +122,49 @@
     "bg": "bedroom_night",
     "push": 1.1,
     "chars": [
-     {"who": "N", "lying": true,
-      "pose": {"eye": "sleep", "brow": "worry", "mo": "wobble", "ah": "zig"}}
+     {
+      "who": "N",
+      "lying": true,
+      "pose": {
+       "eye": "sleep",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig"
+      }
+     }
     ]
    }
   },
   {
-   "cap": "*ฉันสกปรกเหรอ?!* ไปส่องเพื่อนดู",
+   "cap": "แหวะ! *ฉันสกปรกเหรอ?* ส่องเพื่อนดู!",
    "scene": {
     "bg": "bedroom_day",
     "push": 1.05,
     "chars": [
-     {"who": "N", "x": 20, "y": 700, "w": 500,
-      "pose": {"eye": "shock", "brow": "worry", "mo": "o", "ah": "zig", "arm": "up"}},
-     {"who": "F", "x": 580, "y": 720, "w": 440,
-      "pose": {"eye": "norm", "brow": "norm", "mo": "smile"}}
+     {
+      "who": "N",
+      "x": 20,
+      "y": 700,
+      "w": 500,
+      "pose": {
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "o",
+       "ah": "zig",
+       "arm": "up"
+      }
+     },
+     {
+      "who": "F",
+      "x": 580,
+      "y": 720,
+      "w": 440,
+      "pose": {
+       "eye": "norm",
+       "brow": "norm",
+       "mo": "smile"
+      }
+     }
     ]
    }
   },
@@ -95,26 +174,56 @@
     "bg": "pore_zoom_empty",
     "push": 1.1,
     "chars": [
-     {"who": "N", "x": 40, "y": 880, "w": 380,
-      "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "?", "arm": "up"}}
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "ah": "?",
+       "arm": "up"
+      }
+     }
     ]
    }
   },
   {
-   "cap": "*ไม่รอด!* นักวิจัยตรวจดีเอ็นเอ",
-   "sfx": ["pop"],
+   "cap": "*อย่าเพิ่งดีใจ!* นักวิจัยตรวจดีเอ็นเอ",
+   "sfx": [
+    "pop"
+   ],
    "scene": {
     "bg": "cream",
     "push": 1.06,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "gl": "glare",
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smirk",
+       "arm": "shrug",
+       "tilt": 5
+      }
+     }
     ]
    }
   },
   {
    "cap": "ผู้ใหญ่ 19 คน เจอ*ดีเอ็นเอไร*ครบ",
-   "sfx": [["thud", 0.1]],
+   "sfx": [
+    [
+     "thud",
+     0.1
+    ]
+   ],
    "card": {
     "k": "ตรวจดีเอ็นเอไรหน้า พบในผู้ใหญ่",
     "n": "19/19",
@@ -126,8 +235,19 @@
     "push": 1.05,
     "shake": true,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "chin", "front": true}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "arm": "chin",
+       "front": true
+      }
+     }
     ]
    }
   },
@@ -142,25 +262,50 @@
   },
   {
    "cap": "กล้องหาไม่เจอ *ไม่ได้แปลว่าไม่มี!*",
-   "sfx": ["pop"],
+   "sfx": [
+    "pop"
+   ],
    "scene": {
     "bg": "dark",
     "push": 1.1,
     "shake": true,
     "chars": [
-     {"who": "N", "x": 230, "y": 520, "w": 620,
-      "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "!", "gl": "askew", "arm": "up"}}
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "!",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
     ]
    }
   },
   {
-   "cap": "ดีเอ็นเอบอกว่า *แทบทุกคนมี!*",
+   "cap": "ดีเอ็นเอบอกว่า *ผู้ใหญ่แทบทุกคนมี!*",
    "scene": {
     "bg": "cream",
     "push": 1.06,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
     ]
    }
   },
@@ -170,8 +315,18 @@
     "bg": "bedroom_day",
     "push": 1.05,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "smug", "brow": "smug", "mo": "smile", "arm": "shrug"}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smile",
+       "arm": "shrug"
+      }
+     }
     ]
    }
   },
@@ -181,19 +336,43 @@
     "bg": "pore_zoom",
     "push": 1.08,
     "chars": [
-     {"who": "N", "x": 40, "y": 880, "w": 380,
-      "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}
+     {
+      "who": "N",
+      "x": 40,
+      "y": 880,
+      "w": 380,
+      "pose": {
+       "gl": "glare",
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smirk",
+       "arm": "shrug",
+       "tilt": 5
+      }
+     }
     ]
    }
   },
   {
-   "cap": "แต่งานวิจัยบอกว่า *ผิด! มันมีจริง!*",
+   "cap": "งานวิจัยบอก *ผิด!* ไรมีรูทวาร!",
    "scene": {
     "bg": "cream",
     "push": 1.08,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "laugh", "brow": "none", "mo": "grin", "arm": "belly", "tilt": -6, "front": true}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "laugh",
+       "brow": "none",
+       "mo": "grin",
+       "arm": "belly",
+       "tilt": -6,
+       "front": true
+      }
+     }
     ]
    }
   },
@@ -203,8 +382,19 @@
     "bg": "bedroom_day",
     "push": 1.06,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "wink", "brow": "none", "mo": "tongue", "arm": "point", "tilt": 6}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "wink",
+       "brow": "none",
+       "mo": "tongue",
+       "arm": "point",
+       "tilt": 6
+      }
+     }
     ]
    }
   },
@@ -214,8 +404,18 @@
     "bg": "cream",
     "push": 1.05,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "smug", "brow": "smug", "mo": "smile", "arm": "shrug"}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smile",
+       "arm": "shrug"
+      }
+     }
     ]
    }
   },
@@ -225,8 +425,19 @@
     "bg": "cream",
     "push": 1.06,
     "chars": [
-     {"who": "N", "x": 260, "y": 640, "w": 540,
-      "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}
+     {
+      "who": "N",
+      "x": 260,
+      "y": 640,
+      "w": 540,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
     ]
    }
   },
