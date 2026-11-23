@@ -6,147 +6,147 @@
  },
  {
   "sfx": "whoosh",
-  "at": 2.217,
+  "at": 2.224,
   "gain_db": -26
  },
  {
   "sfx": "thud",
-  "at": 2.417,
+  "at": 2.424,
   "gain_db": -18
  },
  {
   "sfx": "whoosh",
-  "at": 4.811,
+  "at": 4.818,
   "gain_db": -26
  },
  {
   "sfx": "thud",
-  "at": 5.011,
+  "at": 5.018,
   "gain_db": -18
  },
  {
   "sfx": "whoosh",
-  "at": 8.004,
+  "at": 8.011,
   "gain_db": -26
  },
  {
   "sfx": "whoosh",
-  "at": 11.967,
-  "gain_db": -26
- },
- {
-  "sfx": "pop",
-  "at": 12.117,
-  "gain_db": -20
- },
- {
-  "sfx": "whoosh",
-  "at": 14.544,
-  "gain_db": -26
- },
- {
-  "sfx": "whoosh",
-  "at": 18.669,
+  "at": 11.972,
   "gain_db": -26
  },
  {
   "sfx": "pop",
-  "at": 21.096,
+  "at": 12.122,
   "gain_db": -20
  },
  {
   "sfx": "whoosh",
-  "at": 23.655,
+  "at": 14.559,
   "gain_db": -26
  },
  {
   "sfx": "whoosh",
-  "at": 25.751,
-  "gain_db": -26
- },
- {
-  "sfx": "whoosh",
-  "at": 28.665,
-  "gain_db": -26
- },
- {
-  "sfx": "whoosh",
-  "at": 34.13,
+  "at": 18.683,
   "gain_db": -26
  },
  {
   "sfx": "pop",
-  "at": 34.28,
+  "at": 21.109,
   "gain_db": -20
  },
  {
   "sfx": "whoosh",
-  "at": 36.91,
+  "at": 23.677,
   "gain_db": -26
  },
  {
   "sfx": "whoosh",
-  "at": 39.713,
+  "at": 25.772,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 28.692,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 34.167,
+  "gain_db": -26
+ },
+ {
+  "sfx": "pop",
+  "at": 34.317,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 36.957,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 39.756,
   "gain_db": -26
  },
  {
   "sfx": "tick",
-  "at": 39.863,
+  "at": 39.906,
   "gain_db": -20
  },
  {
   "sfx": "whoosh",
-  "at": 42.754,
+  "at": 42.79,
   "gain_db": -26
  },
  {
   "sfx": "whoosh",
-  "at": 45.881,
+  "at": 45.918,
   "gain_db": -26
  },
  {
   "sfx": "thud",
-  "at": 46.081,
+  "at": 46.118,
   "gain_db": -18
  },
  {
   "sfx": "thud",
-  "at": 47.431,
+  "at": 47.468,
   "gain_db": -20
  },
  {
   "sfx": "thud",
-  "at": 47.931,
+  "at": 47.968,
   "gain_db": -20
  },
  {
   "sfx": "whoosh",
-  "at": 48.651,
+  "at": 48.685,
   "gain_db": -26
  },
  {
   "sfx": "sting",
-  "at": 51.656,
+  "at": 51.684,
   "gain_db": -12
  },
  {
   "sfx": "thud",
-  "at": 51.686,
+  "at": 51.714,
   "gain_db": -14
  },
  {
   "sfx": "whoosh",
-  "at": 54.443,
+  "at": 54.469,
   "gain_db": -26
  },
  {
   "sfx": "whoosh",
-  "at": 58.949,
+  "at": 58.998,
   "gain_db": -26
  },
  {
   "sfx": "ding",
-  "at": 60.599,
+  "at": 60.638,
   "gain_db": -20
  }
 ]
