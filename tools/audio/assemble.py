@@ -14,6 +14,9 @@
   -> ลำโพงอินเตอร์คอม (bandpass 300-3400 Hz + ผิดเพี้ยนเล็กน้อย + เสียงซ่าเบาๆ หัว/ท้าย)
 - ปรับความดังรายบรรทัดอัตโนมัติ: วัด LUFS (ffmpeg ebur128) แล้วปรับ gain เข้าหา --target-lufs (จำกัด ±--max-adjust dB,
   กันพีคเกิน -1 dBFS) ทำหลัง radio เพื่อให้บรรทัดวิทยุดังใกล้เคียงบรรทัดอื่น; ปิดด้วย --no-loudnorm
+บรรทัดเงียบ: story.json บรรทัดที่ i มี "silent": <วินาที> -> ไม่ต้องมีไฟล์ line_XX ใส่ความเงียบยาวตามค่านั้นแทน
+  (ไม่ตัดเงียบ ไม่ปรับความดัง; เว้นช่วง gap ก่อนบรรทัดตามปกติ) timings มี "silent": true; ซับ/เวลาใช้ตามปกติ
+  (ใน script.tts.txt เขียน `[silent] ก๊อก ก๊อก ก๊อก…` — แท็ก [..] ถูกตัดออกจากข้อความ)
 exit code 2 ถ้ามีประโยคยาวเกิน --max-line (ไฟล์ยังถูกสร้าง แต่ต้องส่งกลับนักเขียนบท)
 """
 import argparse, glob, json, os, random, re, subprocess, sys, wave
@@ -160,20 +163,26 @@ def main():
 
     files = sorted(glob.glob(os.path.join(a.raw_dir, "line_*.*")),
                    key=lambda p: int(re.search(r"line_(\d+)", p).group(1)))
-    if not files:
+    sp0 = a.story or (os.path.join(os.path.dirname(os.path.abspath(a.script)), "story.json") if a.script else None)
+    silent_map = {}
+    if sp0 and os.path.exists(sp0):
+        for j, l in enumerate(json.load(open(sp0, encoding="utf-8")).get("lines", []), 1):
+            if l.get("silent"):
+                silent_map[j] = float(l["silent"])
+    if not files and not silent_map:
         sys.exit(f"ไม่พบไฟล์ line_XX ใน {a.raw_dir}")
     texts = []
     if a.script:
         # ตัดแท็กอารมณ์ [xxx] ออกจากข้อความใน timings (ซับใช้ข้อความล้วน)
         texts = [re.sub(r"\[[^\]]*\]\s*", "", l).strip() for l in open(a.script, encoding="utf-8") if l.strip()]
-        if len(texts) != len(files):
-            print(f"WARNING: บทมี {len(texts)} บรรทัด แต่มีไฟล์เสียง {len(files)} ไฟล์", file=sys.stderr)
+        if len(texts) != len(files) + len(silent_map):
+            print(f"WARNING: บทมี {len(texts)} บรรทัด แต่มีไฟล์เสียง {len(files)} ไฟล์ + เงียบ {len(silent_map)}", file=sys.stderr)
 
     story_lines = []
     sp = a.story or (os.path.join(os.path.dirname(os.path.abspath(a.script)), "story.json") if a.script else None)
     if sp and os.path.exists(sp):
         story_lines = json.load(open(sp, encoding="utf-8")).get("lines", [])
-        if len(story_lines) != len(files):
+        if len(story_lines) != len(files) + len(silent_map):
             print(f"WARNING: story.json มี {len(story_lines)} บรรทัด แต่มีไฟล์เสียง {len(files)} ไฟล์ — ข้าม radio ถ้าเลขไม่ตรง",
                   file=sys.stderr)
     os.makedirs(os.path.join(a.out_dir, "trimmed"), exist_ok=True)
@@ -181,16 +190,21 @@ def main():
     out = bytearray()
     lines, too_long = [], []
     t = 0.0
-    for k, src in enumerate(files):
-        idx = int(re.search(r"line_(\d+)", src).group(1))
+    by_idx = {int(re.search(r"line_(\d+)", f).group(1)): f for f in files}
+    for k, idx in enumerate(sorted(set(by_idx) | set(silent_map))):
+        src = by_idx.get(idx)
         dst = os.path.join(a.out_dir, "trimmed", f"line_{idx:02d}.wav")
-        trim_to_wav(src, dst, a.threshold, a.rel, tempo=a.tempo)
         sl = story_lines[idx - 1] if idx - 1 < len(story_lines) else {}
-        is_radio = bool(sl.get("radio"))
-        if is_radio:
-            radio_filter(dst)
-        gain = None if a.no_loudnorm else loudnorm_file(dst, a.target_lufs, a.max_adjust)
-        fr = read_frames(dst)
+        is_radio = bool(sl.get("radio")) and idx not in silent_map
+        if idx in silent_map:
+            fr = b"\x00\x00" * int(round(silent_map[idx] * SR))
+            gain = None
+        else:
+            trim_to_wav(src, dst, a.threshold, a.rel, tempo=a.tempo)
+            if is_radio:
+                radio_filter(dst)
+            gain = None if a.no_loudnorm else loudnorm_file(dst, a.target_lufs, a.max_adjust)
+            fr = read_frames(dst)
         n = len(fr) // 2
         if n == 0:
             sys.exit(f"ERROR: line_{idx:02d} เงียบทั้งไฟล์หลังตัด (threshold {a.threshold} dB)")
@@ -209,12 +223,14 @@ def main():
             entry["speaker"] = sl["speaker"]
         if is_radio:
             entry["radio"] = True
+        if idx in silent_map:
+            entry["silent"] = True
         if gain is not None:
             entry["gain_db"] = gain
         if k > 0:
             entry["gap_before"] = gap
         lines.append(entry)
-        if dur > a.max_line:
+        if dur > a.max_line and idx not in silent_map:
             too_long.append(entry)
 
     with wave.open(os.path.join(a.out_dir, "voice.wav"), "wb") as w:
@@ -227,7 +243,7 @@ def main():
 
     for e in lines:
         flag = "  ⚠️ เกิน" if e in too_long else ""
-        extra = (f" gain{e['gain_db']:+.1f}" if "gain_db" in e else "") + (" RADIO" if e.get("radio") else "")
+        extra = (f" gain{e['gain_db']:+.1f}" if "gain_db" in e else "") + (" RADIO" if e.get("radio") else "") + (" SILENT" if e.get("silent") else "")
         print(f"[{e['index']:02d}] {e['start']:6.2f} → {e['end']:6.2f}  ({e['duration']:.2f}s){extra}{flag}  {e['text']}")
     print(f"ความยาวรวม: {t:.2f} วินาที · {len(lines)} ประโยค")
     if too_long:

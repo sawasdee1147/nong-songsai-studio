@@ -13,6 +13,8 @@
   ต้องมีจำนวนบรรทัดใน story.json เท่ากับ script.tts.txt (ไม่เท่า = error) script.tts.txt ไม่ต้องมี marker
   พากย์เฉพาะบรรทัดลุง: ดูเลขบรรทัดจาก story.json แล้ว --only เช่น --only 5,9
   (ฟิลเตอร์ "radio": true ทำตอน assemble.py ไม่ใช่ตอนพากย์)
+- บรรทัดเงียบ: story.json บรรทัดที่ i มี "silent": <วินาที> -> ข้าม ไม่เรียก API ไม่สร้างไฟล์ (assemble.py ใส่ความเงียบแทน)
+  ใน script.tts.txt ยังต้องมีบรรทัดนั้น เช่น `[silent] ก๊อก ก๊อก ก๊อก…` เพื่อให้เลขบรรทัดตรง; ไม่ส่งเป็น previous/next_text
 - ส่ง previous_text / next_text ให้ API เพื่อให้น้ำเสียงต่อเนื่องระหว่างประโยค
 """
 import argparse, json, os, ssl, sys, time, urllib.request, urllib.error
@@ -85,11 +87,13 @@ def main():
     lines = [l.strip() for l in open(a.script, encoding="utf-8") if l.strip()]
     sp = a.story or os.path.join(os.path.dirname(os.path.abspath(a.script)), "story.json")
     speakers = [None] * len(lines)
+    silent = [False] * len(lines)
     if os.path.exists(sp):
         sl = json.load(open(sp, encoding="utf-8")).get("lines", [])
         if len(sl) != len(lines):
             sys.exit(f"ERROR: story.json มี {len(sl)} บรรทัด แต่ script มี {len(lines)} บรรทัด — ไม่เท่ากัน")
         speakers = [l.get("speaker") for l in sl]
+        silent = [bool(l.get("silent")) for l in sl]
         for sk in set(speakers) - {None}:
             if sk not in cfg.get("voices", {}):
                 sys.exit(f"ERROR: speaker '{sk}' ไม่มีใน voices ของ voice.json")
@@ -100,8 +104,11 @@ def main():
     for i, text in enumerate(lines, 1):
         if only and i not in only:
             continue
-        prev_t = lines[i - 2] if i > 1 else None
-        next_t = lines[i] if i < len(lines) else None
+        if silent[i - 1]:
+            print(f"[{i:02d}] (silent — ข้าม) {text}")
+            continue
+        prev_t = lines[i - 2] if i > 1 and not silent[i - 2] else None
+        next_t = lines[i] if i < len(lines) and not silent[i] else None
         c = dict(cfg)
         if speakers[i - 1]:
             c.update(cfg["voices"][speakers[i - 1]])

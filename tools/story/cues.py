@@ -6,7 +6,7 @@
 - เปลี่ยนฉาก -> whoosh (เบา) · นาฬิกา -> tick · การ์ด -> pop · ฉากสั่น -> thud
 - ตุ้งแช่ (jumpscare) -> sting + thud ดังกว่าปกติ
 - ตัวละครดิ้น (struggle) -> heartbeat ทุก 0.95 วิ
-- ฉาก bg=elevator_hatch_up_knock -> knock (ก๊อก×3 บนฝาเหล็ก, ดังกว่า ambient เป็นจุดสำคัญ) ตอน +0.1 วิ — ข้ามถ้าบรรทัดนั้นระบุ knock/knock_one เองใน "sfx"
+- ฉาก bg=elevator_hatch_up_knock -> knock (ก๊อก×3 บนฝาเหล็ก, ดังกว่า ambient เป็นจุดสำคัญ) ตอน +0.1 วิ ที่ -6 dB (ใกล้ระดับเสียงพูด; คาดว่าอยู่ในบรรทัด "silent" ไม่ทับคำพูด) — ข้ามถ้าบรรทัดนั้นระบุ knock/knock_one เองใน "sfx"
 - ตัวละครค่อยๆ โผล่ (enter: fade) -> riser · ท่าปิด -> glint ตอนเลนส์แวบ (+1.3 วิ) · การ์ดตอนหน้า -> ding
 """
 import json, sys
@@ -22,7 +22,7 @@ for i, ln in enumerate(S["lines"]):
     if sc and sc.get("shake"): add("thud", t + .05, -18)
     if sc and any(c.get("enter") == "fade" for c in sc.get("chars", [])): add("riser", t - .2, -24)
     manual = {x if isinstance(x, str) else x[0] for x in ln.get("sfx", [])}
-    if sc and sc.get("bg") == "elevator_hatch_up_knock" and not manual & {"knock", "knock_one"}: add("knock", t + .1, -16)
+    if sc and sc.get("bg") == "elevator_hatch_up_knock" and not manual & {"knock", "knock_one"}: add("knock", t + .1, -6)
     if ln.get("clock"): add("tick", t, -20)
     if sc and any(c.get("struggle") for c in sc.get("chars", [])):
         end = TL[i]["end"]; k = t + .1

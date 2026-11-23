@@ -203,38 +203,59 @@ def heartbeat():
     return norm(thump(0, 55, 1) + thump(.24, 48, .7))
 
 
-def _knock_hit(amp=1.0, f=1.0):
-    """เคาะ 1 ครั้งบนฝาเหล็ก: ตุบทึบ + กังวานโลหะ (partial ไม่เป็นเลขคู่) สั้นๆ"""
-    d = 0.35; tt = t(d)
-    body = np.sin(2 * np.pi * np.cumsum(190 * f * np.exp(-tt * 14) + 95 * f) / SR) * np.exp(-tt * 30)
-    ring = sum(g * np.sin(2 * np.pi * fr * f * tt) * np.exp(-tt * r)
-               for fr, g, r in [(430, .35, 18), (731, .25, 22), (1190, .12, 28), (1830, .06, 35)])
-    click = lowpass(noise(d), 2500) * np.exp(-tt * 140) * .5
-    return (body + ring + click) * amp
+def _fconv(x, h):
+    n = len(x) + len(h) - 1; m = 1 << (n - 1).bit_length()
+    return np.fft.irfft(np.fft.rfft(x, m) * np.fft.rfft(h, m), m)[:n]
 
 
-def _shaft_echo(x, tail=0.5):
-    """สะท้อนในปล่องลิฟต์: echo ถี่ๆ 3 ชั้น เสียงทึบลงทุกชั้น"""
-    out = np.concatenate([x, np.zeros(int(SR * tail))])
-    for dl, g, lp in [(0.07, .35, 3500), (0.14, .22, 2500), (0.26, .12, 1800)]:
-        e = lowpass(x, lp) * g
-        s0 = int(dl * SR)
-        out[s0:s0 + len(e)] += e
-    return out
+def _knock_hit(amp=1.0, f=1.0, r=None):
+    """เคาะ 1 ครั้งด้วยข้อนิ้วบนประตูไม้/ฝาเหล็กบาง (modal synthesis ไม่มีโทนดนตรี)
+    impulse สั้น 3 ms (noise ผ่าน lowpass) กระตุ้นชุด resonator: body ต่ำ + โหมดไม้ไม่เป็นเลขทวี + click แหลม"""
+    r = r or rng
+    d = 0.4; n = int(SR * d); tt = np.arange(n) / SR
+    # (ความถี่ Hz, แอมป์, decay วินาที) — ความถี่ไม่เป็นอัตราส่วนเต็ม เสียงจึงเป็น "ก๊อก" ไม่ใช่โน้ต
+    modes = [(128, .8, .075), (171, .55, .06), (312, .5, .045), (487, .9, .04), (643, .7, .035),
+             (871, .6, .03), (1240, .45, .02), (2350, .35, .005), (3100, .2, .004)]
+    h = np.zeros(n)
+    for fr, g, dc in modes:
+        fr = fr * f * r.uniform(.985, 1.015)
+        h += g * np.sin(2 * np.pi * fr * tt + r.uniform(0, 6.28)) * np.exp(-tt / dc)
+    ne = int(SR * .003)
+    exc = lowpass(r.standard_normal(ne), 3500) * np.hanning(ne) * 2
+    exc[0] += .0
+    x = _fconv(exc, h)[:n] * (4 * amp)
+    return x
+
+
+def _room(x, tail=0.35):
+    """ห้องเล็กสั้นๆ: early reflections 15–40 ms + หางก้อง ~0.3 วิ เบาๆ"""
+    r = np.random.default_rng(5)
+    h = np.zeros(int(SR * (tail + .1))); h[0] = 1.0
+    for dl, g in [(.017, .16), (.023, .12), (.031, .09), (.038, .07)]:
+        h[int(dl * SR)] += g
+    m = int(SR * tail); tt = np.arange(m) / SR
+    tl = lowpass(r.standard_normal(m), 2200) * np.exp(-tt * 9) * .004
+    h[int(.04 * SR):int(.04 * SR) + m] += tl[: len(h) - int(.04 * SR)]
+    return _fconv(x, h)
+
+
+def _knocks(times, amps, fs, seed):
+    r = np.random.default_rng(seed)
+    out = np.zeros(int(SR * (max(times) + .5)))
+    for st, a, f in zip(times, amps, fs):
+        h = _knock_hit(a, f, r); s0 = int(st * SR)
+        out[s0:s0 + len(h)] += h
+    return _room(out)
 
 
 def knock_one():
-    """เคาะฝาเหล็กครั้งเดียว (มีเสียงสะท้อนในปล่อง)"""
-    return norm(_shaft_echo(_knock_hit()))
+    """เคาะประตู/ฝาเหล็กครั้งเดียว (วางซ้ำเองด้วย [\"knock_one\", วินาที])"""
+    return norm(_knocks([0.0], [1.0], [1.0], 21))
 
 
 def knock():
-    """ก๊อก ก๊อก ก๊อก — เคาะฝาเหล็กหลังคาลิฟต์ 3 ครั้ง (ห่าง ~0.3 วิ) + เสียงสะท้อนในปล่อง"""
-    out = np.zeros(int(SR * 1.5))
-    for k, (st, amp, f) in enumerate([(0.0, 1.0, 1.0), (0.31, .9, 0.97), (0.62, .95, 1.02)]):
-        h = _knock_hit(amp, f); s0 = int(st * SR)
-        out[s0:s0 + len(h)] += h
-    return norm(_shaft_echo(out, 0.35))
+    """ก๊อก ก๊อก ก๊อก — เคาะ 3 ครั้งจังหวะคนจริง (ห่าง 0.29 / 0.34 วิ แรงไม่เท่ากัน) + ห้องเล็ก"""
+    return norm(_knocks([0.0, 0.29, 0.63], [1.0, .82, .93], [1.0, 1.03, .98], 21))
 
 
 def bed_dark(dur=60.0):
@@ -278,8 +299,8 @@ SFX = {
     "wrong": (wrong, "ผิด! / ความเชื่อผิด"),
     "sting": (sting, "ตุ้งแช่! (ฉาก jumpscare ดึงคนดูกลับ)"),
     "heartbeat": (heartbeat, "หัวใจเต้นตุบ-ตุบ (ฉากลุ้น/ดิ้นไม่หลุด)"),
-    "knock": (knock, "เคาะฝาเหล็กหลังคาลิฟต์ ก๊อก×3 + สะท้อนในปล่อง (อ้าง: [\"knock\", 0.1])"),
-    "knock_one": (knock_one, "เคาะฝาเหล็กครั้งเดียว (วางซ้ำเองด้วย [\"knock_one\", วินาที])"),
+    "knock": (knock, "เคาะประตู/ฝาเหล็กด้วยข้อนิ้ว ก๊อก×3 (modal + ห้องเล็ก) (อ้าง: [\"knock\", 0.1])"),
+    "knock_one": (knock_one, "เคาะครั้งเดียว (วางซ้ำเองด้วย [\"knock_one\", วินาที])"),
     "bed_dark": (bed_dark, "ซาวด์คลอทั้งคลิป แนวหลอน/ลี้ลับ (60 วิ — mix.py --bed ตัดตามความยาวคลิป)"),
     "bed_warm": (bed_warm, "ซาวด์คลอทั้งคลิป แนวอบอุ่น/ตลก (60 วิ)"),
 }
