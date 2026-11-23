@@ -49,6 +49,26 @@ H, J = [], []  # html, gsap
 
 def esc(s): return html.escape(s, quote=True)
 
+MARKS = set("\u0e31\u0e34\u0e35\u0e36\u0e37\u0e38\u0e39\u0e3a\u0e47\u0e48\u0e49\u0e4a\u0e4b\u0e4c\u0e4d\u0e4e")
+
+def words(text, hl=True):
+    """ข้อความ -> HTML ที่ตัดบรรทัดเฉพาะตรงช่องว่าง (ภาษาไทยไม่มีช่องว่างระหว่างคำ เบราว์เซอร์ชอบตัดกลางคำ เช่น "รูท/วาร")
+    แต่ละก้อนระหว่างช่องว่างห้ามตัด (.w nowrap) ยกเว้นก้อนกว้างเกิน ~20 ตัวอักษร (ไม่นับสระบน/ล่าง วรรณยุกต์) (ปล่อยให้ตัดเอง กันล้นกล่อง)
+    *...* = คำเน้นสีส้ม (คร่อมช่องว่างได้)"""
+    out, on = [], False
+    for chunk in text.split(" "):
+        seg, buf = [], ""
+        for ch in chunk:
+            if ch == "*" and hl:
+                if buf: seg.append((on, buf)); buf = ""
+                on = not on
+            else: buf += ch
+        if buf: seg.append((on, buf))
+        inner = "".join(f'<span class="y">{esc(t)}</span>' if y else esc(t) for y, t in seg)
+        n = sum(1 for c in chunk if c != "*" and c not in MARKS)  # นับเฉพาะตัวที่กินที่ (ไม่นับสระบน/ล่าง วรรณยุกต์)
+        out.append(f'<span class="w">{inner}</span>' if 0 < n <= 20 else inner)
+    return " ".join(out)
+
 # เส้นเกร็ง + เหงื่อ รอบตัวละคร (พิกัดเดียวกับ kid.js) — ใช้กับ "struggle": true
 STRAIN = ('<svg class="st" id="{id}s" viewBox="20 -40 260 400" style="position:absolute;inset:0;width:100%;height:100%">'
           '<g stroke="#2B2B2B" stroke-width="6" stroke-linecap="round" fill="none">'
@@ -135,14 +155,12 @@ for i, ln in enumerate(L):
         kid_ = f"ck{i + 1}"
         H.append(f'<div class="chip" id="{kid_}"><b>{esc(ck["t"])}</b><span>{esc(ck.get("s", ""))}</span></div>')
         J.append(f'chip("#{kid_}",{T[i]:.3f},{min(max(E[i] + .5, T[i] + 2.2), END):.3f});')
-    cap = esc(ln["cap"])
-    parts = cap.split("*")
-    capH = "".join(f'<span class="y">{p}</span>' if k % 2 else p for k, p in enumerate(parts))
+    capH = words(ln["cap"])
     H.append(f'<div class="cap" id="cp{i + 1}"><div>{capH}</div></div>')
     J.append(f'show("#cp{i + 1}",{T[i] - .05:.3f},{min(nxt, E[i] + .5):.3f});')
 
 if S.get("next"):
-    H.append(f'<div class="card next" id="nextc"><div class="ck">ตอนหน้า</div><div class="nx">{esc(S["next"])}</div></div>')
+    H.append(f'<div class="card next" id="nextc"><div class="ck">ตอนหน้า</div><div class="nx">{words(S["next"], hl=False)}</div></div>')
     J.append(f'card("#nextc",{E[-1] + .2:.3f},{END:.3f});')
 
 CSS = """
@@ -165,6 +183,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1B1E2E}
 .cap{position:absolute;left:60px;right:140px;top:1440px;text-align:center;visibility:hidden;z-index:20}
 .cap div{display:inline-block;background:#fff;border:6px solid #2B2B2B;border-radius:24px;padding:18px 30px 12px;font-weight:900;font-size:72px;line-height:1.42;box-shadow:8px 8px 0 #2B2B2B}
 .cap .y{color:#E0704F}
+.w{white-space:nowrap}
 """
 
 page = f"""<!doctype html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=1080, height=1920">
