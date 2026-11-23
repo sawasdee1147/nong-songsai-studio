@@ -1,193 +1,120 @@
 {
  "next": "ผ่อนหรือซื้อสด แบบไหนคุ้มกว่า?",
- "cast": {},
- "mood": "dark",
+ "cast": {
+  "F": {
+   "skin": "tan",
+   "hair": "short",
+   "hairColor": "#3A2A20",
+   "top": "#4F6FA8",
+   "gl": "none",
+   "ah": "none",
+   "eye": "norm",
+   "brow": "norm",
+   "mo": "smile",
+   "pocket": false,
+   "strings": false
+  }
+ },
+ "mood": "warm",
  "lines": [
   {
-   "cap": "ตีสาม คุณตื่นมาเพราะ*ขนตาคัน*",
-   "clock": {
-    "t": "03:00",
-    "s": "ตีสาม"
-   },
+   "cap": "เห้ย! มีอะไร*ขยับ* ในรูขุมขนฉัน",
    "scene": {
-    "bg": "bedroom_night",
-    "push": 1.08,
+    "bg": "pore_zoom",
+    "push": 1.1,
     "chars": [
-     {
-      "who": "N",
-      "lying": true,
-      "pose": {
-       "eye": "sad",
-       "brow": "worry",
-       "mo": "wobble",
-       "ah": "zig"
-      }
-     }
+     {"who": "N", "x": 40, "y": 880, "w": 380,
+      "pose": {"eye": "shock", "brow": "shock", "mo": "flat", "ah": "zig", "gl": "askew", "arm": "up"}}
     ]
    }
   },
   {
-   "cap": "นึกว่า*เตียงสกปรก* รีบเปลี่ยนปลอกหมอน",
+   "cap": "ล้างแรงๆ! ส่องอีกที… *ยังอยู่!!*",
+   "sfx": ["whoosh"],
+   "scene": {
+    "bg": "pore_zoom",
+    "push": 1.14,
+    "shake": true,
+    "chars": [
+     {"who": "N", "x": 40, "y": 880, "w": 380,
+      "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}
+    ]
+   }
+  },
+  {
+   "cap": "*ไรจิ๋ว!* ยาวไม่ถึงครึ่งมิลลิเมตร",
+   "scene": {
+    "bg": "pore_zoom",
+    "push": 1.18,
+    "chars": [
+     {"who": "N", "x": 40, "y": 880, "w": 380,
+      "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "chin", "front": true}}
+    ]
+   }
+  },
+  {
+   "cap": "มัน…กิน*น้ำมันผิวฉัน* เหรอ?!",
+   "sfx": ["pop"],
+   "scene": {
+    "bg": "dark",
+    "push": 1.06,
+    "shake": true,
+    "chars": [
+     {"who": "N", "x": 230, "y": 520, "w": 620,
+      "pose": {"gl": "askew", "eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "arm": "up"}}
+    ]
+   }
+  },
+  {
+   "cap": "แถม*นักวิจัยเชื่อว่า* ตอนหลับ มันหาคู่!",
+   "scene": {
+    "bg": "bedroom_night",
+    "push": 1.1,
+    "chars": [
+     {"who": "N", "lying": true,
+      "pose": {"eye": "sleep", "brow": "worry", "mo": "wobble", "ah": "zig"}}
+    ]
+   }
+  },
+  {
+   "cap": "*ฉันสกปรกเหรอ?!* ไปส่องเพื่อนดู",
    "scene": {
     "bg": "bedroom_day",
     "push": 1.05,
     "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 620,
-      "w": 560,
-      "pose": {
-       "eye": "up",
-       "brow": "up",
-       "mo": "o",
-       "arm": "up"
-      }
-     }
+     {"who": "N", "x": 20, "y": 700, "w": 500,
+      "pose": {"eye": "shock", "brow": "worry", "mo": "o", "ah": "zig", "arm": "up"}},
+     {"who": "F", "x": 580, "y": 720, "w": 440,
+      "pose": {"eye": "norm", "brow": "norm", "mo": "smile"}}
     ]
    }
   },
   {
-   "cap": "ล้างหน้าแล้ว*ก็ยังคัน*",
+   "cap": "ไม่เจอสักตัว! *เพื่อนรอด?!*",
    "scene": {
-    "bg": "bedroom_night",
+    "bg": "pore_zoom_empty",
     "push": 1.1,
     "chars": [
-     {
-      "who": "N",
-      "lying": true,
-      "pose": {
-       "eye": "sad",
-       "brow": "worry",
-       "mo": "wobble",
-       "ah": "droop"
-      }
-     }
+     {"who": "N", "x": 40, "y": 880, "w": 380,
+      "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "?", "arm": "up"}}
     ]
    }
   },
   {
-   "cap": "แต่เดี๋ยวก่อน… *มีเรื่องที่คุณยังไม่รู้!*",
-   "sfx": [
-    "pop"
-   ],
+   "cap": "*ไม่รอด!* นักวิจัยตรวจดีเอ็นเอ",
+   "sfx": ["pop"],
    "scene": {
-    "bg": "dark",
-    "push": 1.12,
-    "shake": true,
-    "chars": [
-     {
-      "who": "N",
-      "x": 230,
-      "y": 520,
-      "w": 620,
-      "pose": {
-       "eye": "shock",
-       "brow": "shock",
-       "mo": "shock",
-       "ah": "zig",
-       "gl": "askew",
-       "arm": "up"
-      }
-     }
-    ]
-   }
-  },
-  {
-   "cap": "บนหน้าคนเรา มี*ไรจิ๋ว*อาศัยอยู่",
-   "scene": {
-    "bg": "pore_zoom",
-    "push": 1.1,
-    "chars": [
-     {
-      "who": "N",
-      "x": 40,
-      "y": 880,
-      "w": 380,
-      "pose": {
-       "eye": "shock",
-       "brow": "shock",
-       "mo": "flat",
-       "ah": "zig",
-       "gl": "askew",
-       "arm": "up"
-      }
-     }
-    ]
-   }
-  },
-  {
-   "cap": "ยาว*ไม่ถึงครึ่งมิลลิเมตร!*",
-   "scene": {
-    "bg": "pore_zoom",
-    "push": 1.16,
-    "chars": [
-     {
-      "who": "N",
-      "x": 40,
-      "y": 880,
-      "w": 380,
-      "pose": {
-       "eye": "up",
-       "brow": "up",
-       "mo": "o",
-       "arm": "chin",
-       "front": true
-      }
-     }
-    ]
-   }
-  },
-  {
-   "cap": "มันกิน*น้ำมันผิว*กับเซลล์ผิวคุณ",
-   "scene": {
-    "bg": "dark",
+    "bg": "cream",
     "push": 1.06,
     "chars": [
-     {
-      "who": "N",
-      "x": 230,
-      "y": 520,
-      "w": 620,
-      "pose": {
-       "gl": "askew",
-       "eye": "shock",
-       "brow": "shock",
-       "mo": "shock",
-       "ah": "zig",
-       "arm": "up"
-      }
-     }
-    ]
-   }
-  },
-  {
-   "cap": "*นักวิจัยเชื่อว่า* ตอนหลับ มันหาคู่",
-   "scene": {
-    "bg": "bedroom_night",
-    "push": 1.1,
-    "chars": [
-     {
-      "who": "N",
-      "lying": true,
-      "pose": {
-       "eye": "sleep",
-       "brow": "worry",
-       "mo": "wobble",
-       "ah": "zig"
-      }
-     }
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}
     ]
    }
   },
   {
    "cap": "ผู้ใหญ่ 19 คน เจอ*ดีเอ็นเอไร*ครบ",
-   "sfx": [
-    [
-     "thud",
-     0.1
-    ]
-   ],
+   "sfx": [["thud", 0.1]],
    "card": {
     "k": "ตรวจดีเอ็นเอไรหน้า พบในผู้ใหญ่",
     "n": "19/19",
@@ -199,24 +126,13 @@
     "push": 1.05,
     "shake": true,
     "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 640,
-      "w": 540,
-      "pose": {
-       "eye": "up",
-       "brow": "up",
-       "mo": "o",
-       "arm": "chin",
-       "front": true
-      }
-     }
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "up", "brow": "up", "mo": "o", "arm": "chin", "front": true}}
     ]
    }
   },
   {
-   "cap": "ส่องกล้อง เห็นตัวแค่ *14%*",
+   "cap": "แต่ส่องกล้อง เห็นตัวแค่ *14%*",
    "card": {
     "k": "ส่องกล้องเห็นตัวไรในผู้ใหญ่ (253 คน)",
     "n": "14",
@@ -225,52 +141,48 @@
    }
   },
   {
-   "cap": "ดีเอ็นเอบอกว่า *แทบทุกคนมี!*",
+   "cap": "กล้องหาไม่เจอ *ไม่ได้แปลว่าไม่มี!*",
+   "sfx": ["pop"],
    "scene": {
     "bg": "dark",
     "push": 1.1,
     "shake": true,
     "chars": [
-     {
-      "who": "N",
-      "x": 230,
-      "y": 520,
-      "w": 620,
-      "pose": {
-       "eye": "shock",
-       "brow": "shock",
-       "mo": "shock",
-       "ah": "!",
-       "gl": "askew",
-       "arm": "up"
-      }
-     }
+     {"who": "N", "x": 230, "y": 520, "w": 620,
+      "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "!", "gl": "askew", "arm": "up"}}
     ]
    }
   },
   {
-   "cap": "*ไม่ใช่เรื่องหน้าสกปรก*นะ"
+   "cap": "ดีเอ็นเอบอกว่า *แทบทุกคนมี!*",
+   "scene": {
+    "bg": "cream",
+    "push": 1.06,
+    "chars": [
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}
+    ]
+   }
   },
   {
-   "cap": "ลือกันว่า*ไรไม่มีรูทวาร*",
+   "cap": "*ไม่ใช่เรื่องหน้าสกปรก* นะ",
+   "scene": {
+    "bg": "bedroom_day",
+    "push": 1.05,
+    "chars": [
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "smug", "brow": "smug", "mo": "smile", "arm": "shrug"}}
+    ]
+   }
+  },
+  {
+   "cap": "ลือกันว่า *ไรไม่มีรูทวาร*",
    "scene": {
     "bg": "pore_zoom",
     "push": 1.08,
     "chars": [
-     {
-      "who": "N",
-      "x": 40,
-      "y": 880,
-      "w": 380,
-      "pose": {
-       "gl": "glare",
-       "eye": "smug",
-       "brow": "smug",
-       "mo": "smirk",
-       "arm": "shrug",
-       "tilt": 5
-      }
-     }
+     {"who": "N", "x": 40, "y": 880, "w": 380,
+      "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}
     ]
    }
   },
@@ -280,66 +192,19 @@
     "bg": "cream",
     "push": 1.08,
     "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 640,
-      "w": 540,
-      "pose": {
-       "eye": "laugh",
-       "brow": "none",
-       "mo": "grin",
-       "arm": "belly",
-       "tilt": -6,
-       "front": true
-      }
-     }
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "laugh", "brow": "none", "mo": "grin", "arm": "belly", "tilt": -6, "front": true}}
     ]
    }
   },
   {
-   "cap": "ขอโทษนะ*ปลอกหมอน* ที่หาว่าสกปรก",
+   "cap": "งั้น… *ฝากตัวด้วยนะ รูมเมท!*",
    "scene": {
     "bg": "bedroom_day",
-    "push": 1.05,
-    "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 640,
-      "w": 540,
-      "pose": {
-       "eye": "sad",
-       "brow": "worry",
-       "mo": "wobble",
-       "ah": "heart",
-       "arm": "cover",
-       "front": true
-      }
-     }
-    ]
-   }
-  },
-  {
-   "cap": "ส่วน*คืนนั้นคันเพราะอะไร* ไม่รู้นะ",
-   "scene": {
-    "bg": "bedroom_night",
     "push": 1.06,
     "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 640,
-      "w": 540,
-      "pose": {
-       "gl": "glare",
-       "eye": "smug",
-       "brow": "smug",
-       "mo": "smirk",
-       "arm": "shrug",
-       "tilt": 5
-      }
-     }
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "wink", "brow": "none", "mo": "tongue", "arm": "point", "tilt": 6}}
     ]
    }
   },
@@ -349,18 +214,8 @@
     "bg": "cream",
     "push": 1.05,
     "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 640,
-      "w": 540,
-      "pose": {
-       "eye": "smug",
-       "brow": "smug",
-       "mo": "smile",
-       "arm": "shrug"
-      }
-     }
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "smug", "brow": "smug", "mo": "smile", "arm": "shrug"}}
     ]
    }
   },
@@ -370,19 +225,8 @@
     "bg": "cream",
     "push": 1.06,
     "chars": [
-     {
-      "who": "N",
-      "x": 260,
-      "y": 640,
-      "w": 540,
-      "pose": {
-       "eye": "spark",
-       "brow": "none",
-       "mo": "grin",
-       "ah": "!",
-       "arm": "point"
-      }
-     }
+     {"who": "N", "x": 260, "y": 640, "w": 540,
+      "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}
     ]
    }
   },
