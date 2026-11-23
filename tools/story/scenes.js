@@ -29,7 +29,7 @@ function _mite(x, y, rot = 0, s = 1) {
 }
 const _pore = (x, y, rx = 38) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${rx * .42}" fill="${_PORE}" stroke="${SC_INK}" stroke-width="6"/>`;
 let _pzN = 0; // id ของ clipPath ต้องไม่ซ้ำ เมื่อใช้ฉากนี้หลายครั้งในหน้าเดียว
-const PORE_ZOOM = () => { const id = `pzLens${++_pzN}`; return _sv(`<rect width="1080" height="1920" fill="#2E2A47"/>
+const PORE_ZOOM = (mites = true) => { const id = `pzLens${++_pzN}`; return _sv(`<rect width="1080" height="1920" fill="#2E2A47"/>
     <circle cx="600" cy="700" r="560" fill="#3B3352"/>
     <g fill="#26223B">${[[110,260,14],[260,1180,12],[90,620,10],[930,1240,14],[1000,300,11],[760,1500,12],[180,1620,10],[960,1700,13],[480,1320,9],[60,1020,11]].map(([x,y,r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .5}"/>`).join("")}</g>
     <defs><clipPath id="${id}"><circle cx="600" cy="700" r="356"/></clipPath></defs>
@@ -47,7 +47,7 @@ const PORE_ZOOM = () => { const id = `pzLens${++_pzN}`; return _sv(`<rect width=
       <path d="M860 580 Q870 470 960 360" fill="none" stroke="#5A3A2A" stroke-width="12" stroke-linecap="round"/>
       <path d="M330 840 Q290 760 230 720" fill="none" stroke="${SC_INK}" stroke-width="20" stroke-linecap="round"/>
       <path d="M330 840 Q290 760 230 720" fill="none" stroke="#5A3A2A" stroke-width="10" stroke-linecap="round"/>
-      ${_mite(440, 660, -16, 1.05)}${_mite(650, 520, 8, .82)}${_mite(780, 870, 20, .95)}
+      ${mites ? `${_mite(440, 660, -16, 1.05)}${_mite(650, 520, 8, .82)}${_mite(780, 870, 20, .95)}` : ""}
       <path d="M380 470 A300 300 0 0 1 520 380" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" opacity=".35"/>
     </g>
     <circle cx="600" cy="700" r="373" fill="none" stroke="${SC_INK}" stroke-width="50"/>
@@ -78,7 +78,8 @@ const BG = {
       <rect x="60" y="620" width="60" height="70" fill="#FFD84D"/><rect x="380" y="480" width="60" height="70" fill="#FFD84D"/>
       <rect x="880" y="560" width="60" height="70" fill="#FFD84D"/>
       <rect x="0" y="1300" width="1080" height="620" fill="#2A2438"/></g>`),
-  pore_zoom: PORE_ZOOM, // แว่นขยายส่องผิวหน้า + ไรรูขุมขนน่ารัก 3 ตัว (โทนมืด) เว้นมุมล่างซ้ายให้ตัวละคร x40 y880 w380
+  pore_zoom: () => PORE_ZOOM(true), // แว่นขยายส่องผิวหน้า + ไรรูขุมขนน่ารัก 3 ตัว (โทนมืด) เว้นมุมล่างซ้ายให้ตัวละคร x40 y880 w380
+  pore_zoom_empty: () => PORE_ZOOM(false), // ฉากเดียวกันแต่ส่องแล้ว "ไม่เห็น" ไร (รูขุมขนว่าง)
 };
 
 // ---------- ท่าดันแว่นแบบทีละเวลา (ย้ายมาจาก character/outro-push-glasses.html) ----------
