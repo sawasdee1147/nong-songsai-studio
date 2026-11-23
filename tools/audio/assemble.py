@@ -107,7 +107,7 @@ def radio_filter(path, seed=11):
     lvl = 0.05 * peak                      # ~ -26 dB ใต้พีค
     pre, post = hiss(0.09, lvl), hiss(0.14, lvl)
     pre *= np.linspace(0.3, 1, len(pre)); post *= np.linspace(1, 0, len(post)) ** 1.5
-    bed = hiss(len(x) / SR, lvl * 0.35)    # ซ่าเบาๆ ใต้เสียงพูด
+    bed = r.standard_normal(len(x)) * lvl * 0.35    # ซ่าเบาๆ ใต้เสียงพูด (ยาวเท่า x พอดี)
     y = np.concatenate([pre, x + bed, post])
     with wave.open(path, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
