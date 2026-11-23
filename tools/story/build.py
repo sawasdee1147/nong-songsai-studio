@@ -18,9 +18,16 @@ story.json (ย่อ):
    "rule": true,                            # ป้ายแดงคำสั่งเอาตัวรอด: ซับบรรทัดนี้กลายเป็นป้ายแดงตัวหนาขาว เด้งเข้า+สั่นเล็กน้อย
                                             #   (ตำแหน่งเดียวกับซับ = พื้นที่ปลอดภัย; *...* ในป้าย = สีเหลือง)
    "jumpscare": "G",                        # ตุ้งแช่: ตัวละครนี้พุ่งเต็มจอ + แฟลช + จอสั่น (ตัวดึงคนดูกลับช่วง 8–13 วิ)
+                                            #   แบบโผล่จากช่อง: {"who":"Y","pose":{...},"bg":"elevator_hatch_up_open","peek":"down",
+                                            #   "hole":[390,400,300,300],"zoom":2.6} -> หัวโผล่ในช่อง แล้วกล้องพุ่งเข้าหาช่อง + แฟลช + สั่น
    "outro": true                            # บรรทัดปิด: น้องสงสัยดันแว่นกลางจอ (ใส่ที่บรรทัดแรกของท่าปิด)
  } ]
 }
+ตัวละครโผล่จากช่อง (ใน chars หรือ jumpscare): "peek": "down" | "up", "hole": [x, y, กว้าง, สูง] (ค่าเริ่มต้น = ช่องหลังคา
+  ของ elevator_hatch_up_open [390,400,300,300]) -> เห็นแค่หัวในกรอบช่อง ตัวที่เหลือถูกตัดออก
+  "down" = ห้อยหัวลงมาจากข้างบน (กลับหัว ตัวอยู่เหนือช่อง), "up" = โผล่หัวขึ้นจากขอบล่างของช่อง
+  x/y ไม่ต้องใส่ (คำนวณให้หัวอยู่กลางช่อง) · "w" = ขนาดตัว (ค่าเริ่มต้น ≈ หัวกว้าง 85% ของช่อง) · "dy" = เลื่อนหัวลง/ขึ้นเพิ่ม (px)
+  "drop": px ให้หัวล้นขอบล่างของช่องได้ · เข้าฉากแบบเลื่อนออกมาจากช่อง 0.45 วิ (ปิดด้วย "enter": "none")
 ฉากต่อเนื่อง: ถ้าบรรทัดไม่มี "scene" จะใช้ฉากของบรรทัดก่อนหน้าต่อ (ไม่ตัดภาพ)
 """
 import json, os, shutil, sys, html
@@ -79,6 +86,20 @@ STRAIN = ('<svg class="st" id="{id}s" viewBox="20 -40 260 400" style="position:a
           '<path d="M236 92 Q248 114 236 122 Q224 114 236 92Z" fill="#9ED8FF" stroke="#2B2B2B" stroke-width="4"/>'
           '<path d="M70 104 Q80 122 70 129 Q60 122 70 104Z" fill="#9ED8FF" stroke="#2B2B2B" stroke-width="4"/></svg>')
 
+def peek_html(cid, c, opts, blink=True):
+    """ตัวละครโผล่จากช่อง: กล่องตัด (overflow hidden) ขนาดเท่าช่อง + ตัวละครกลับหัว (down) ให้หัวอยู่กลางช่อง
+    สัดส่วน kid(): หัวกลม cx150 cy140 r90 ใน viewBox 20 -40 260 400 -> ศูนย์กลางหัวอยู่ที่ 50% กว้าง, 45% สูง; หัวกว้าง ≈ 0.69w"""
+    hx, hy, hw, hh = c.get("hole", [390, 400, 300, 300]); down = c.get("peek") == "down"
+    w = c.get("w", round(hw * .85 / .69)); h = round(w * 400 / 260)
+    fy = .55 if down else .45  # ตำแหน่งศูนย์กลางหัวในกล่อง (หลังกลับหัว)
+    left = round(hw / 2 - w / 2); top = round(hh / 2 - fy * h + c.get("dy", 0))
+    bl = (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps({**opts, "eye": "blink"}, ensure_ascii=False))}"></div>'
+          if blink and opts.get("eye", "norm") not in ("sleep", "blink", "creepy", "laugh", "cool") else "")
+    return (f'<div style="position:absolute;left:{hx}px;top:{hy}px;width:{hw}px;height:{hh + c.get("drop", 0)}px;overflow:hidden">'
+            f'<div class="ch" id="{cid}" style="left:{left}px;top:{top}px;width:{w}px;height:{h}px">'
+            f'<div style="position:absolute;inset:0;transform:rotate({180 if down else 0}deg)"><div class="br" id="{cid}b">'
+            f'<div class="k" data-kid="{esc(json.dumps(opts, ensure_ascii=False))}"></div>{bl}</div></div></div></div>'), (-h if down else h)
+
 # ---------- ฉาก ----------
 scenes = []  # (sid, start_line, scene)
 for i, ln in enumerate(L):
@@ -91,11 +112,15 @@ for k, (i, sc) in enumerate(scenes):
     for j, c in enumerate(sc.get("chars", [])):
         opts = dict(CAST.get(c.get("who", "N"), {})); opts.update(c.get("pose", {}))
         cid = f"{sid}c{j}"
-        if c.get("lying"):
+        if c.get("peek"):
+            ph, off = peek_html(cid, c, opts, c.get("blink", True)); figs += ph
+            if c.get("enter", "slide") == "slide":
+                J.append(f'tl.fromTo("#{cid}",{{y:{off}}},{{y:0,duration:.45,ease:"power2.out",immediateRender:false}},{max(a, T[i]):.3f});')
+        elif c.get("lying"):
             box = 'left:140px;top:735px;width:400px;height:616px;transform:rotate(-90deg)'
         else:
             w = c.get("w", 420); box = f'left:{c.get("x", 330)}px;top:{c.get("y", 700)}px;width:{w}px;height:{round(w * 400 / 260)}px'
-        figs += (f'<div class="ch" id="{cid}" style="{box}"><div class="br" id="{cid}b">'
+        if not c.get("peek"): figs += (f'<div class="ch" id="{cid}" style="{box}"><div class="br" id="{cid}b">'
                  f'<div class="k" data-kid="{esc(json.dumps(opts, ensure_ascii=False))}"></div>'
                  + (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps({**opts, "eye": "blink"}, ensure_ascii=False))}"></div>' if c.get("blink", True) and opts.get("eye", "norm") not in ("sleep", "blink", "creepy", "laugh", "cool") else "")
                  + '</div>' + (STRAIN.format(id=cid) if c.get("struggle") else "") + '</div>')
@@ -133,6 +158,18 @@ for i, ln in enumerate(L):
     who = js if isinstance(js, str) else js.get("who", "G")
     opts = dict(CAST.get(who, {})); opts.update({} if isinstance(js, str) else js.get("pose", {}))
     jid = f"js{i + 1}"; a = T[i] - .05; b = (T[i + 1] - .05) if i + 1 < len(L) else END
+    if not isinstance(js, str) and js.get("peek"):  # หัวโผล่จากช่อง แล้วกล้องพุ่งเข้าหาช่อง
+        ph, off = peek_html(f"{jid}c", js, opts, False)
+        hx, hy, hw, hh = js.get("hole", [390, 400, 300, 300]); z = js.get("zoom", 2.6); ox, oy = hx + hw / 2, hy + hh / 2
+        H.append(f'<div class="L js" id="{jid}"><div class="cam" id="{jid}m"><div class="bgw" data-bg="{js.get("bg", "elevator_hatch_up_open")}"></div>{ph}</div>'
+                 f'<div class="redtint"></div><div class="flash" id="{jid}f"></div></div>')
+        J.append(f'show("#{jid}",{a:.3f},{b:.3f});'
+                 f'tl.fromTo("#{jid}c",{{y:{off}}},{{y:0,duration:.16,ease:"expo.out",immediateRender:false}},{T[i]:.3f});'
+                 f'tl.fromTo("#{jid}m",{{scale:1,transformOrigin:"{ox:.0f}px {oy:.0f}px"}},{{scale:{z},duration:.24,ease:"expo.out",immediateRender:false}},{T[i]:.3f});'
+                 f'tl.to("#{jid}m",{{scale:{z * 1.08:.2f},duration:{max(.3, b - T[i] - .24):.3f},ease:"none"}},{T[i] + .24:.3f});'
+                 f'tl.fromTo("#{jid}f",{{opacity:1}},{{opacity:0,duration:.3,immediateRender:false}},{T[i]:.3f});'
+                 f'tl.fromTo("#{jid}m",{{x:-16}},{{x:16,duration:.04,yoyo:true,repeat:9,ease:"none",immediateRender:false}},{T[i]:.3f});')
+        continue
     H.append(f'<div class="L js" id="{jid}"><div class="bgw" data-bg="dark"></div>'
              f'<div class="ch" id="{jid}c" style="left:40px;top:80px;width:1000px;height:{round(1000 * 400 / 260)}px">'
              f'<div class="k" data-kid="{esc(json.dumps(opts, ensure_ascii=False))}"></div></div>'
