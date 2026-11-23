@@ -282,6 +282,17 @@ def bed_warm(dur=60.0):
     return norm(x)
 
 
+def flicker_buzz():
+    """ไฟช็อต/หลอดกระตุก: ฮัมไฟฟ้า 100 Hz + ฮาร์มอนิก + เสียงแตกแปะๆ สั้น 0.16 วิ (ใช้ rng ของตัวเอง ไม่กระทบเสียงอื่น)"""
+    r = np.random.default_rng(4242); d = 0.16; tt = t(d); n = len(tt)
+    hum = sum(np.sign(np.sin(2 * np.pi * 100 * k * tt)) / k for k in (1, 2, 3)) * 0.5
+    crk = np.zeros(n)
+    for c in r.integers(0, n - 200, 7): crk[c:c + 120] += r.standard_normal(120) * np.exp(-np.arange(120) / 25)
+    x = lowpass(hum, 2500) + 0.8 * crk
+    e = np.clip(np.arange(n) / (SR * .004), 0, 1) * np.clip((n - np.arange(n)) / (SR * .03), 0, 1)
+    return norm(x * e, -6)
+
+
 SFX = {
     "pop": (pop, "ของโผล่/เด้งขึ้นจอ"),
     "boing": (boing, "ตัวละครเด้ง ท่าซนๆ"),
@@ -302,6 +313,7 @@ SFX = {
     "knock": (knock, "เคาะประตู/ฝาเหล็กด้วยข้อนิ้ว ก๊อก×3 (modal + ห้องเล็ก) (อ้าง: [\"knock\", 0.1])"),
     "knock_one": (knock_one, "เคาะครั้งเดียว (วางซ้ำเองด้วย [\"knock_one\", วินาที])"),
     "bed_dark": (bed_dark, "ซาวด์คลอทั้งคลิป แนวหลอน/ลี้ลับ (60 วิ — mix.py --bed ตัดตามความยาวคลิป)"),
+    "flicker_buzz": (flicker_buzz, "ไฟช็อต/หลอดกระตุก (cues.py ใส่ให้เองทุกครั้งที่ไฟดับใน \"flicker\")"),
     "bed_warm": (bed_warm, "ซาวด์คลอทั้งคลิป แนวอบอุ่น/ตลก (60 วิ)"),
 }
 

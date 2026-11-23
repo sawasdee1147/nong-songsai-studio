@@ -30,8 +30,17 @@ story.json (ย่อ):
   x/y ไม่ต้องใส่ (คำนวณให้หัวอยู่กลางช่อง) · "w" = ขนาดตัว (ค่าเริ่มต้น ≈ หัวกว้าง 85% ของช่อง) · "dy" = เลื่อนหัวลง/ขึ้นเพิ่ม (px)
   "drop": px ให้หัวล้นขอบล่างของช่องได้ · เข้าฉากแบบเลื่อนออกมาจากช่อง 0.45 วิ (ปิดด้วย "enter": "none")
 ฉากต่อเนื่อง: ถ้าบรรทัดไม่มี "scene" จะใช้ฉากของบรรทัดก่อนหน้าต่อ (ไม่ตัดภาพ)
+ไฟกะพริบ (หลอดไฟจะเสีย): "flicker" ใส่ใน "scene" (เริ่มที่บรรทัดแรกของฉาก) หรือที่ระดับบรรทัด (เริ่มกลางฉากที่บรรทัดนั้น)
+  "flicker": true                      -> ฉากมืดวูบ-สว่างไม่สม่ำเสมอ ตั้งแต่บรรทัดนั้นจนจบฉาก (ต่อเนื่องข้ามบรรทัดที่ไม่มี "scene")
+  "flicker": 2.5                       -> กะพริบแค่ 2.5 วิ (ไม่เกินจบฉาก)
+  "flicker": {"dur": 2.5, "rate": 1.6, "depth": 0.72, "seed": 7, "delay": 0.1}
+             rate = ครั้ง/วิ เฉลี่ย (สูงสุด 2.5) · depth = ความมืดตอนดับ 0.2–0.85 · seed = เปลี่ยนแพตเทิร์น · delay = เริ่มหลังต้นบรรทัด
+  เป็นการหรี่มืดทับฉาก (ไม่ใช่แฟลชขาว) เว้นจุดดับ ≥ 0.36 วิ -> ≤ 3 ครั้ง/วินาที ปลอดภัยต่อผู้ไวแสง; ซับ/การ์ดไม่มืดตาม
+  จังหวะสุ่มแบบ seed คงที่ (tools/story/flicker.py) เรนเดอร์ซ้ำได้เท่าเดิม · ดวงไฟฉุกเฉิน (.el-emlight + แสง .el-emglow
+  ใน elevator_inside*/elevator_hatch_up*) ดับตามพร้อมกัน · cues.py ใส่เสียงไฟช็อต (flicker_buzz) ตอนดับให้อัตโนมัติ
 """
 import json, os, shutil, sys, html
+import flicker as FL
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 EP = os.path.abspath(sys.argv[1])
@@ -105,6 +114,13 @@ def peek_html(cid, c, opts, blink=True):
 scenes = []  # (sid, start_line, scene)
 for i, ln in enumerate(L):
     if "scene" in ln or i == 0: scenes.append([i, ln.get("scene", {"bg": "cream"})])
+# ไฟกะพริบ: {ลำดับฉาก: [บรรทัดที่เริ่มกะพริบ, ค่า flicker]}
+FLK = {}
+for k, (i, sc) in enumerate(scenes):
+    j1 = scenes[k + 1][0] if k + 1 < len(scenes) else len(L)
+    for j in range(i, j1):
+        v = sc.get("flicker") if j == i and sc.get("flicker") else L[j].get("flicker")
+        if v: FLK.setdefault(k, []).append((j, v))
 for k, (i, sc) in enumerate(scenes):
     a = 0 if k == 0 else T[i] - .05
     b = (T[scenes[k + 1][0]] - .05) if k + 1 < len(scenes) else END
@@ -138,7 +154,12 @@ for k, (i, sc) in enumerate(scenes):
         while t < b - .3:
             J.append(f'blink("#{cid}x",{t:.3f});'); t += 2.9
     blanket = '<div class="blanket"></div>' if any(c.get("lying") for c in sc.get("chars", [])) else ""
-    H.append(f'<div class="L" id="{sid}"><div class="cam"><div class="bgw" data-bg="{sc.get("bg", "cream")}"></div>{figs}{blanket}</div></div>')
+    dim = f'<div class="dim" id="{sid}d"></div>' if k in FLK else ""
+    H.append(f'<div class="L" id="{sid}"><div class="cam"><div class="bgw" data-bg="{sc.get("bg", "cream")}"></div>{figs}{blanket}</div>{dim}</div>')
+    for n, (j, v) in enumerate(FLK.get(k, [])):
+        nj = FLK[k][n + 1][0] if n + 1 < len(FLK[k]) else None  # บรรทัด flicker ถัดไปในฉากเดียวกันมาแทนที่
+        ev = FL.events(T[j], T[nj] - .05 if nj is not None else b, FL.opts(v, j))
+        J.append(f'flk("#{sid}",{json.dumps([list(e) for e in ev])});')
     J.append(f'show("#{sid}",{a:.3f},{b:.3f});tl.fromTo("#{sid} .cam",{{scale:1}},{{scale:{sc.get("push", 1.06)},duration:{b - a:.3f},ease:"none",immediateRender:false}},{a:.3f});')
     if sc.get("shake"):
         J.append(f'tl.fromTo("#{sid} .cam",{{x:-12}},{{x:12,duration:.05,yoyo:true,repeat:9,ease:"none",immediateRender:false}},{T[i]:.3f});')
@@ -218,7 +239,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1B1E2E}
 #root{position:absolute;inset:0;overflow:hidden;font-family:"NST","NS",sans-serif;color:#2B2B2B}
 .L{position:absolute;inset:0;visibility:hidden;overflow:hidden}.cam{position:absolute;inset:0;transform-origin:50% 55%}
 .bgw{position:absolute;inset:0}.ch{position:absolute}.br{position:absolute;inset:0}.k{position:absolute;inset:0}.k svg{width:100%;height:100%}
-.bl{visibility:hidden}.js{z-index:10}.flash{position:absolute;inset:0;background:#fff;opacity:0}.redtint{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(0,0,0,0) 35%,rgba(120,10,20,.55) 100%)}.blanket{position:absolute;inset:0}
+.bl{visibility:hidden}.dim{position:absolute;inset:0;background:#05060E;opacity:0;pointer-events:none}.js{z-index:10}.flash{position:absolute;inset:0;background:#fff;opacity:0}.redtint{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(0,0,0,0) 35%,rgba(120,10,20,.55) 100%)}.blanket{position:absolute;inset:0}
 .card{position:absolute;left:90px;top:230px;width:900px;padding:28px 40px 24px;border-radius:28px;background:#FFF8EC;border:6px solid #2B2B2B;box-shadow:10px 10px 0 #2B2B2B;opacity:0;z-index:15}
 .card .ck{font-weight:700;font-size:38px}.card .cn{font-weight:900;font-size:130px;line-height:1.05;font-family:"NS","NST"}
 .card .cn small{font-size:54px;margin-left:12px}.card .cs{font-weight:700;font-size:26px;color:#7a6f60;margin-top:6px;font-family:"NS","NST"}
@@ -250,6 +271,12 @@ const show=(e,a,b)=>{{tl.set(e,{{visibility:"visible"}},a);if(b!==undefined)tl.s
 const blink=(e,a)=>{{tl.set(e,{{visibility:"visible"}},a);tl.set(e,{{visibility:"hidden"}},a+.12);}};
 const card=(e,a,b)=>{{tl.fromTo(e,{{opacity:0,scale:1.12}},{{opacity:1,scale:1,duration:.35,ease:"back.out(1.7)",immediateRender:false}},a);tl.to(e,{{opacity:0,duration:.2}},b-.2);}};
 const chip=(e,a,b)=>{{tl.fromTo(e,{{opacity:0,y:-30}},{{opacity:1,y:0,duration:.3,ease:"back.out(1.6)",immediateRender:false}},a);tl.to(e,{{opacity:0,duration:.2}},b-.2);}};
+function flk(s,ev){{const r=document.querySelector(s),d=r.querySelector(".dim"),lm=r.querySelectorAll(".el-emlight"),gl=r.querySelectorAll(".el-emglow");
+  ev.forEach(([a,b,v])=>{{tl.fromTo(d,{{opacity:0}},{{opacity:v,duration:.03,ease:"none",immediateRender:false}},a);
+    tl.fromTo(d,{{opacity:v}},{{opacity:0,duration:.06,ease:"none",immediateRender:false}},b);
+    if(lm.length){{tl.set(lm,{{fill:v>.5?"#4F4A3A":"#A89C72"}},a);tl.set(lm,{{fill:"#FFE9A8"}},b);}}
+    if(gl.length){{tl.set(gl,{{opacity:Math.max(0,1-v*1.4)}},a);tl.set(gl,{{opacity:1}},b);}}}});
+}}
 function buildPush(sel,t0,dur){{
   const box=document.querySelector(sel); const n=Math.ceil(Math.min(dur,4.0)*15);
   for(let f=0;f<=n;f++){{const d=document.createElement("div");d.className="k";d.style.visibility="hidden";
