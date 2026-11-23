@@ -213,10 +213,10 @@ function ELEVATOR_SHAFT(hl = "", labels = false) {
 }
 
 // ---------- แหงนมองช่องหลังคาที่ปิดอยู่ (มืด น่ากลัว) ----------
-// knock: เส้นสะเทือนรอบฝาช่อง (ใช้ตอน "มีเสียงเคาะจากข้างบน")
+// knock: true = เส้นสะเทือนรอบฝาช่อง (ใช้ตอน "มีเสียงเคาะจากข้างบน") | "open" = ฝาเปิด แสงไฟฉายส่องลงมา
 // พื้นที่ว่าง: ตัวละครล่างกลาง x 300–780, y 1080–1440 (หันหน้าแหงนขึ้น) | ซับ y 1440+ เป็นผนังมืดเรียบ
-function ELEVATOR_HATCH_UP(floor = "14", knock = false) {
-  const I = SC_INK, f = String(floor);
+function ELEVATOR_HATCH_UP(knock = false) {
+  const I = SC_INK;
   return _sv(`<rect width="1080" height="1920" fill="#14161F"/>
   <g stroke="${I}" stroke-width="8" stroke-linejoin="round">
     <path d="M0 0 H1080 L900 220 H180Z" fill="#232838"/>
@@ -226,26 +226,27 @@ function ELEVATOR_HATCH_UP(floor = "14", knock = false) {
     <rect x="180" y="220" width="720" height="740" fill="#202436"/></g>
   <g fill="none" stroke="#2F3550" stroke-width="6" stroke-linecap="round">
     <path d="M90 110 V1440 M990 110 V1440 M300 220 V960 M780 220 V960"/></g>
-  <!-- ขอบบนประตู + จอเลขชั้น (เห็นกลับหัวไม่ได้ จึงวาดตั้งตรงที่ผนังด้านล่าง) -->
+  <!-- ขอบบนประตู (ไม่มีจอเลขชั้น: หัวตัวละครจะบัง) -->
   <rect x="250" y="1120" width="580" height="40" rx="8" fill="#2F3550" stroke="${I}" stroke-width="7"/>
-  <rect x="440" y="990" width="200" height="96" rx="16" fill="#17181F" stroke="${I}" stroke-width="7"/>
-  <path d="M468 1050 L486 1020 L504 1050Z" fill="#FFB347"/>
-  <text x="582" y="1064" text-anchor="middle" font-family="NS,NST" font-weight="900" font-size="66" fill="#FFB347">${f}</text>
   <!-- ไฟเพดานดับ -->
   <rect x="250" y="270" width="140" height="300" rx="18" fill="#2E3347" stroke="${I}" stroke-width="7"/>
   <rect x="690" y="270" width="140" height="300" rx="18" fill="#2E3347" stroke="${I}" stroke-width="7"/>
   <!-- ไฟฉุกเฉิน -->
   <circle cx="760" cy="860" r="90" fill="#FFE9A8" opacity=".14"/>
   <rect x="705" y="835" width="110" height="50" rx="14" fill="#FFE9A8" stroke="${I}" stroke-width="7"/>
-  <!-- ช่องหลังคา (ปิด) -->
+  ${knock === "open" ? `<!-- ช่องหลังคาเปิด: ฝาพับขึ้นไปทางขวา + ลำแสงไฟฉายส่องลง (ตัวละครที่ "โผล่" ให้วางใน x 390–690, y 400–700) -->
+  <path d="M380 1920 L470 560 H610 L760 1920Z" fill="#FFF3C4" opacity=".13"/>
+  <rect x="390" y="400" width="300" height="300" rx="12" fill="#07080D" stroke="${I}" stroke-width="10"/>
+  <circle cx="540" cy="560" r="86" fill="#FFF3C4" opacity=".55"/><circle cx="540" cy="560" r="44" fill="#FFF8DC" stroke="${I}" stroke-width="6"/>
+  <path d="M690 400 L770 330 L770 630 L690 700Z" fill="#2A2F44" stroke="${I}" stroke-width="7" stroke-linejoin="round"/>` : `<!-- ช่องหลังคา (ปิด) -->
   ${knock ? `<rect x="370" y="380" width="340" height="340" rx="20" fill="#FFE9A8" opacity=".08"/>` : ""}
   <g class="el-hatch" stroke="${I}" stroke-linejoin="round">
     <rect x="390" y="400" width="300" height="300" rx="12" fill="#07080D" stroke-width="10"/>
     <rect x="404" y="414" width="272" height="272" rx="8" fill="#2A2F44" stroke-width="6"/>
     <path d="M420 430 L660 670 M660 430 L420 670" stroke="#353B52" stroke-width="10" stroke-linecap="round"/>
     <path d="M510 550 H570" stroke-width="16" stroke-linecap="round"/><path d="M510 550 H570" stroke="#4A5170" stroke-width="6" stroke-linecap="round"/>
-    <g fill="${I}" stroke="none"><circle cx="424" cy="434" r="9"/><circle cx="656" cy="434" r="9"/><circle cx="424" cy="666" r="9"/><circle cx="656" cy="666" r="9"/></g></g>
-  ${knock ? `<g class="el-knock" stroke="#FFE9A8" stroke-width="10" stroke-linecap="round" fill="none">
+    <g fill="${I}" stroke="none"><circle cx="424" cy="434" r="9"/><circle cx="656" cy="434" r="9"/><circle cx="424" cy="666" r="9"/><circle cx="656" cy="666" r="9"/></g></g>`}
+  ${knock === true ? `<g class="el-knock" stroke="#FFE9A8" stroke-width="10" stroke-linecap="round" fill="none">
     <path d="M370 470 l-50 -20 M366 550 l-60 0 M370 630 l-50 20 M710 470 l50 -20 M714 550 l60 0 M710 630 l50 20"/>
     <path d="M470 380 l-14 -46 M540 376 v-50 M610 380 l14 -46"/></g>
     <g fill="#8A90A0">${[[455, 760, 6], [520, 800, 4], [600, 770, 5], [640, 830, 3], [480, 850, 4]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}"/>`).join("")}</g>` : ""}`);
@@ -260,16 +261,15 @@ Object.assign(BG, {
   elevator_shaft_brake: () => ELEVATOR_SHAFT("brake"),
   elevator_shaft_sheave: () => ELEVATOR_SHAFT("sheave"),
   elevator_shaft_cw: () => ELEVATOR_SHAFT("cw"),
-  elevator_hatch_up: () => ELEVATOR_HATCH_UP("14", false),
-  elevator_hatch_up_knock: () => ELEVATOR_HATCH_UP("14", true),
+  elevator_hatch_up: () => ELEVATOR_HATCH_UP(false),
+  elevator_hatch_up_knock: () => ELEVATOR_HATCH_UP(true),
+  elevator_hatch_up_open: () => ELEVATOR_HATCH_UP("open"),
 });
-// เลขชั้นท้ายชื่อ: elevator_inside_<ชั้น>, elevator_lit_<ชั้น>, elevator_hatch_up_<ชั้น>, elevator_hatch_up_knock_<ชั้น>
+// เลขชั้นท้ายชื่อ: elevator_inside_<ชั้น>, elevator_lit_<ชั้น> (ฉาก hatch_up ไม่มีจอเลขชั้น)
 // (build.py เรียก BG[ชื่อ]() ตรงๆ จึงลงทะเบียนชื่อไว้ล่วงหน้า: ชั้น 1–60, G, B1–B3, M)
 for (const n of [...Array.from({ length: 60 }, (_, i) => String(i + 1)), "G", "B1", "B2", "B3", "M"]) {
   BG[`elevator_inside_${n}`] = () => ELEVATOR_INSIDE(n, false);
   BG[`elevator_lit_${n}`] = () => ELEVATOR_INSIDE(n, true);
-  BG[`elevator_hatch_up_${n}`] = () => ELEVATOR_HATCH_UP(n, false);
-  BG[`elevator_hatch_up_knock_${n}`] = () => ELEVATOR_HATCH_UP(n, true);
 }
 
 // ---------- ท่าดันแว่นแบบทีละเวลา (ย้ายมาจาก character/outro-push-glasses.html) ----------

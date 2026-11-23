@@ -15,6 +15,8 @@ story.json (ย่อ):
                         "enter": "fade", "blink": true}]},
    "card": {"k": "หัวข้อ", "n": "7.6", "u": "%", "src": "ผู้แต่ง ปี · วารสาร"},
    "clock": {"t": "03:00", "s": "ตีสาม"},
+   "rule": true,                            # ป้ายแดงคำสั่งเอาตัวรอด: ซับบรรทัดนี้กลายเป็นป้ายแดงตัวหนาขาว เด้งเข้า+สั่นเล็กน้อย
+                                            #   (ตำแหน่งเดียวกับซับ = พื้นที่ปลอดภัย; *...* ในป้าย = สีเหลือง)
    "jumpscare": "G",                        # ตุ้งแช่: ตัวละครนี้พุ่งเต็มจอ + แฟลช + จอสั่น (ตัวดึงคนดูกลับช่วง 8–13 วิ)
    "outro": true                            # บรรทัดปิด: น้องสงสัยดันแว่นกลางจอ (ใส่ที่บรรทัดแรกของท่าปิด)
  } ]
@@ -156,8 +158,13 @@ for i, ln in enumerate(L):
         H.append(f'<div class="chip" id="{kid_}"><b>{esc(ck["t"])}</b><span>{esc(ck.get("s", ""))}</span></div>')
         J.append(f'chip("#{kid_}",{T[i]:.3f},{min(max(E[i] + .5, T[i] + 2.2), END):.3f});')
     capH = words(ln["cap"])
-    H.append(f'<div class="cap" id="cp{i + 1}"><div>{capH}</div></div>')
+    rule = ln.get("rule")
+    H.append(f'<div class="cap{" rule" if rule else ""}" id="cp{i + 1}"><div>{capH}</div></div>')
     J.append(f'show("#cp{i + 1}",{T[i] - .05:.3f},{min(nxt, E[i] + .5):.3f});')
+    if rule:  # ป้ายแดง: เด้งเข้า (scale + หมุนนิดๆ) แล้วสั่นซ้ายขวาเล็กน้อย 0.4 วิ
+        J.append(f'tl.fromTo("#cp{i + 1}>div",{{scale:.4,rotation:-6}},{{scale:1,rotation:0,duration:.35,ease:"back.out(2.2)",immediateRender:false}},{T[i] - .05:.3f});'
+                 f'tl.fromTo("#cp{i + 1}>div",{{x:-7}},{{x:7,duration:.05,yoyo:true,repeat:7,ease:"none",immediateRender:false}},{T[i] + .3:.3f});'
+                 f'tl.set("#cp{i + 1}>div",{{x:0}},{T[i] + .71:.3f});')
 
 if S.get("next"):
     H.append(f'<div class="card next" id="nextc"><div class="ck">ตอนหน้า</div><div class="nx">{words(S["next"], hl=False)}</div></div>')
@@ -183,6 +190,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1B1E2E}
 .cap{position:absolute;left:60px;right:140px;top:1440px;text-align:center;visibility:hidden;z-index:20}
 .cap div{display:inline-block;background:#fff;border:6px solid #2B2B2B;border-radius:24px;padding:18px 30px 12px;font-weight:900;font-size:72px;line-height:1.42;box-shadow:8px 8px 0 #2B2B2B}
 .cap .y{color:#E0704F}
+.cap.rule div{background:#E23B3B;color:#fff;font-size:78px;border-width:7px;box-shadow:10px 10px 0 #2B2B2B}.cap.rule .y{color:#FFD84D}
 .w{white-space:nowrap}
 """
 
