@@ -68,7 +68,7 @@
     {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "none", "mo": "smile", "ah": "?", "arm": "down"}}]}
   },
   {
-   "cap": "ตอนไฟดับ *เบรกที่มอเตอร์ลิฟต์* จะงับเอง!",
+   "cap": "ตอนไฟดับ *เบรกที่มอเตอร์ลิฟต์จะงับเอง!*",
    "scene": {"bg": "elevator_shaft_sheave", "push": 1.08, "chars": [
     {"who": "N", "x": 20, "y": 1000, "w": 380, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}]}
   },
@@ -81,7 +81,7 @@
    "cap": "งั้น*รออยู่ข้างในลิฟต์* ดีกว่าปีนออกไปเสี่ยง!"
   },
   {
-   "cap": "ข้อสอง *กดปุ่มระฆังเรียกคนช่วย!*",
+   "cap": "อีกอย่าง *กดปุ่มระฆังเรียกคนช่วย!*",
    "rule": true,
    "scene": {"bg": "elevator_inside", "push": 1.08, "chars": [
     {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "point"}}]},
