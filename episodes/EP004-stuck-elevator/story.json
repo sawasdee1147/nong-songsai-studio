@@ -19,63 +19,252 @@
  "lines": [
   {
    "cap": "ตีสองสิบนาที คุณอยู่ในลิฟต์!",
-   "clock": {"t": "02:10", "s": "ตีสองสิบนาที"},
-   "scene": {"bg": "elevator_inside", "push": 1.08, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "up", "brow": "worry", "mo": "o", "ah": "?", "arm": "down"}}]}
+   "clock": {
+    "t": "02:10",
+    "s": "ตีสองสิบนาที"
+   },
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "worry",
+       "mo": "o",
+       "ah": "?",
+       "arm": "down"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "แล้ว*ไฟก็ดับ* ลิฟต์กระตุกอย่างแรง!",
-   "scene": {"bg": "elevator_inside", "push": 1.12, "shake": true, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]}
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.12,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "เหล็กครูดดัง ลิฟต์ค้าง*ระหว่างชั้นเจ็ดกับแปด!*",
-   "scene": {"bg": "elevator_inside", "push": 1.18, "shake": true, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "worry", "mo": "wobble", "ah": "zig", "gl": "askew", "arm": "cover", "front": true}}]}
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.18,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "cover",
+       "front": true
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "บนเพดานลิฟต์ มี*ช่องหลังคา*… คุณอยากปีนหนีไหม?",
-   "scene": {"bg": "elevator_hatch_up", "push": 1.1, "chars": [
-    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "?", "arm": "chin", "front": true}}]}
+   "scene": {
+    "bg": "elevator_hatch_up",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "ah": "?",
+       "arm": "chin",
+       "front": true
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "*อย่าปีนออกช่องนั้น!* อย่างัดประตูด้วย!",
    "rule": true,
-   "scene": {"bg": "elevator_inside", "push": 1.06, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]},
-   "sfx": ["pop"]
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
   },
   {
    "cap": "ทำไมถึงห้ามน่ะเหรอ?",
-   "scene": {"bg": "elevator_inside", "push": 1.06, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "?", "arm": "chin", "front": true}}]}
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "ah": "?",
+       "arm": "chin",
+       "front": true
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "เพราะลิฟต์*ไม่ได้อันตราย* อย่างที่คุณกลัว!"
   },
   {
    "cap": "ลิฟต์ห้อยด้วย*สายเหล็กหลายเส้น* เหนือหัวคุณ!",
-   "scene": {"bg": "elevator_shaft_cables", "push": 1.05, "chars": [
-    {"who": "N", "x": 20, "y": 1000, "w": 380, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}]}
+   "scene": {
+    "bg": "elevator_shaft_cables",
+    "push": 1.05,
+    "chars": [
+     {
+      "who": "N",
+      "x": 20,
+      "y": 1000,
+      "w": 380,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "สายแค่เส้นเดียว *ก็แบกลิฟต์เต็มคันได้แล้ว!*",
-   "card": {"k": "สายเหล็ก 1 เส้น รับได้ 125% ของน้ำหนักเต็มคันสูงสุด", "n": "125", "u": "%", "src": "Fischetti 2009 · Scientific American"}
+   "card": {
+    "k": "สายเหล็ก 1 เส้น รับได้ 125% ของน้ำหนักเต็มคันสูงสุด",
+    "n": "125",
+    "u": "%",
+    "src": "Fischetti 2009 · Scientific American"
+   }
   },
   {
    "cap": "คุณ*เริ่มใจชื้น*ขึ้นมานิดหนึ่ง!",
-   "scene": {"bg": "elevator_inside", "push": 1.06, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "none", "mo": "smile", "ah": "?", "arm": "down"}}]}
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "norm",
+       "brow": "none",
+       "mo": "smile",
+       "ah": "?",
+       "arm": "down"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "ตอนไฟดับ *เบรกที่มอเตอร์ลิฟต์จะงับเอง!*",
-   "scene": {"bg": "elevator_shaft_sheave", "push": 1.08, "chars": [
-    {"who": "N", "x": 20, "y": 1000, "w": 380, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}]}
+   "scene": {
+    "bg": "elevator_shaft_sheave",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 20,
+      "y": 1000,
+      "w": 380,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "สรุปคือ ลิฟต์*แทบไม่มีทางร่วงอิสระ!*",
-   "scene": {"bg": "elevator_inside", "push": 1.05, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}]}
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.05,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "gl": "glare",
+       "eye": "smug",
+       "brow": "smug",
+       "mo": "smirk",
+       "arm": "shrug",
+       "tilt": 5
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "งั้น*รออยู่ข้างในลิฟต์* ดีกว่าปีนออกไปเสี่ยง!"
@@ -83,57 +272,214 @@
   {
    "cap": "อีกอย่าง *กดปุ่มระฆังเรียกคนช่วย!*",
    "rule": true,
-   "scene": {"bg": "elevator_inside", "push": 1.08, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "point"}}]},
-   "sfx": ["pop"]
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "norm",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "point"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
   },
   {
    "cap": "คุณกดปุ่มระฆัง… *แต่ยังไม่มีใครตอบเลย!*",
-   "scene": {"bg": "elevator_inside", "push": 1.14, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "wobble", "ah": "droop", "arm": "down"}}]}
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.14,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "side",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "droop",
+       "arm": "down"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "*ตีสองยี่สิบ*แล้ว ไฟฉุกเฉินก็เริ่มกะพริบ!",
-   "clock": {"t": "02:20", "s": "ตีสองยี่สิบ"},
-   "scene": {"bg": "elevator_inside", "push": 1.22, "chars": [
-    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "worry", "mo": "o", "ah": "zig", "gl": "askew", "arm": "down"}}]}
+   "clock": {
+    "t": "02:20",
+    "s": "ตีสองยี่สิบ"
+   },
+   "scene": {
+    "bg": "elevator_inside",
+    "push": 1.22,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "o",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "down"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "แต่คืนนี้ ยังมี*เรื่องที่น่ากลัวกว่านั้น!*",
-   "scene": {"bg": "dark", "push": 1.1, "chars": [
-    {"who": "N", "x": 230, "y": 520, "w": 620, "pose": {"eye": "shock", "brow": "shock", "mo": "o", "ah": "zig", "gl": "askew", "arm": "down"}}]}
+   "scene": {
+    "bg": "dark",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "o",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "down"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "ก๊อก ก๊อก ก๊อก… *มีใครเคาะ*อยู่บนหลังคาลิฟต์!",
-   "scene": {"bg": "elevator_hatch_up_knock", "push": 1.14, "shake": true, "chars": [
-    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]},
-   "sfx": [["thud", 1.4], ["thud", 1.9]]
+   "scene": {
+    "bg": "elevator_hatch_up_knock",
+    "push": 1.14,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    [
+     "thud",
+     1.4
+    ],
+    [
+     "thud",
+     1.9
+    ]
+   ]
   },
   {
    "cap": "แล้ว*ไฟฉาย*ก็ส่องลงมาจากช่องหลังคา!",
-   "scene": {"bg": "elevator_hatch_up_open", "push": 1.12, "chars": [
-    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "flat", "ah": "zig", "gl": "askew", "arm": "down"}},
-    {"who": "Y", "peek": "down", "pose": {"eye": "norm", "mo": "flat"}}]}
+   "scene": {
+    "bg": "elevator_hatch_up_open",
+    "push": 1.12,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "flat",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "down"
+      }
+     },
+     {
+      "who": "Y",
+      "peek": "down",
+      "pose": {
+       "eye": "norm",
+       "mo": "flat"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "แล้ว*หน้าลุงยาม*คนหนึ่ง ก็โผล่มาจ้องคุณ!",
-   "jumpscare": {"who": "Y", "peek": "down", "bg": "elevator_hatch_up_open", "pose": {"eye": "creepy", "mo": "flatlow"}}
+   "jumpscare": {
+    "who": "Y",
+    "peek": "down",
+    "bg": "elevator_hatch_up_open",
+    "pose": {
+     "eye": "creepy",
+     "mo": "flatlow"
+    }
+   }
   },
   {
    "cap": "แต่คุณรู้ดีว่า *คอนโดนี้ไม่มียาม!*",
-   "scene": {"bg": "dark", "push": 1.06, "chars": [
-    {"who": "N", "x": 90, "y": 700, "w": 480, "pose": {"gl": "askew", "eye": "shock", "brow": "worry", "mo": "wobble", "ah": "zig", "arm": "cover", "front": true}},
-    {"who": "Y", "x": 600, "y": 680, "w": 360, "pose": {"eye": "norm", "mo": "flat"}}]}
+   "scene": {
+    "bg": "dark",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 90,
+      "y": 700,
+      "w": 480,
+      "pose": {
+       "gl": "askew",
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "zig",
+       "arm": "cover",
+       "front": true
+      }
+     },
+     {
+      "who": "Y",
+      "x": 600,
+      "y": 680,
+      "w": 360,
+      "pose": {
+       "eye": "norm",
+       "mo": "flat"
+      }
+     }
+    ]
+   }
   },
   {
    "cap": "ไม่มีมาสิบปีแล้ว! แล้ว*ลุงคนนี้ใครกัน?*"
-  },
-  {
-   "cap": "รู้เรื่องทั้งหมดแล้ว",
-   "outro": true
-  },
-  {
-   "cap": "พวกมึง*ฉลาดขึ้นแล้วนะ*"
   }
  ]
 }

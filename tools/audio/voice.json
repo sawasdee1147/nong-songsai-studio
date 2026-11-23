@@ -5,8 +5,8 @@
   "output_format": "mp3_44100_128",
   "seed": 1147,
   "voice_settings": {
-    "stability": 0.5
+    "stability": 0.0
   },
-  "_note": "ภาษาไทยใช้ได้เฉพาะ eleven_v3. stability 0.5 = Natural (เจ้าของช่องเลือก). v3 รับ stability ได้แค่ 0.0/0.5/1.0. ใส่แท็กอารมณ์ภาษาอังกฤษหน้าแต่ละบรรทัดใน script.tts.txt ตามกฎใน docs/show-bible.md tempo 1.2 = เร่งเสียงพูด 20% ตอนประกอบ (เจ้าของช่องขอเร็วขึ้นอีก 2026-11-22; เดิม 1.13) ใช้กับ assemble.py --tempo",
+  "_note": "ภาษาไทยใช้ได้เฉพาะ eleven_v3. stability 0.0 = Creative (เจ้าของช่องเลือก 2026-11-23 หลังฟัง A/B; เดิม 0.5 Natural). v3 รับ stability ได้แค่ 0.0/0.5/1.0. ใส่แท็กอารมณ์ภาษาอังกฤษหน้าแต่ละบรรทัดใน script.tts.txt ตามกฎใน docs/show-bible.md tempo 1.2 = เร่งเสียงพูด 20% ตอนประกอบ (เจ้าของช่องขอเร็วขึ้นอีก 2026-11-22; เดิม 1.13) ใช้กับ assemble.py --tempo",
   "tempo": 1.2
 }
