@@ -8,6 +8,11 @@
 - voice_id / model / voice_settings อ่านจาก tools/audio/voice.json
 - API key: ห้ามเขียนลงไฟล์ ระบบ proxy ของเซสชันแนบ credential ให้อัตโนมัติ
   (ถ้ารันบนเครื่องตัวเอง ให้ตั้ง env ELEVENLABS_API_KEY)
+- หลายเสียง: ถ้ามี story.json ข้างไฟล์ script (หรือ --story) และบรรทัดที่ i มี "speaker": "Y" จะใช้
+  voices["Y"] ใน voice.json (voice_id/voice_settings/... ทับค่าหลัก) — บรรทัดไม่มี speaker ใช้เสียงหลัก
+  ต้องมีจำนวนบรรทัดใน story.json เท่ากับ script.tts.txt (ไม่เท่า = error) script.tts.txt ไม่ต้องมี marker
+  พากย์เฉพาะบรรทัดลุง: ดูเลขบรรทัดจาก story.json แล้ว --only เช่น --only 5,9
+  (ฟิลเตอร์ "radio": true ทำตอน assemble.py ไม่ใช่ตอนพากย์)
 - ส่ง previous_text / next_text ให้ API เพื่อให้น้ำเสียงต่อเนื่องระหว่างประโยค
 """
 import argparse, json, os, ssl, sys, time, urllib.request, urllib.error
@@ -70,6 +75,7 @@ def main():
     ap.add_argument("script")
     ap.add_argument("out_dir")
     ap.add_argument("--only", help="พากย์ใหม่เฉพาะประโยค เช่น 3,7")
+    ap.add_argument("--story", help="story.json (ค่าเริ่มต้น: ข้างไฟล์ script)")
     ap.add_argument("--voice-config", default=os.path.join(HERE, "voice.json"))
     a = ap.parse_args()
 
@@ -77,6 +83,16 @@ def main():
     if not cfg.get("voice_id") or cfg["voice_id"].startswith("<"):
         sys.exit("ERROR: ยังไม่ได้ตั้ง voice_id ใน tools/audio/voice.json — ให้เจ้าของช่องเลือกเสียงก่อน")
     lines = [l.strip() for l in open(a.script, encoding="utf-8") if l.strip()]
+    sp = a.story or os.path.join(os.path.dirname(os.path.abspath(a.script)), "story.json")
+    speakers = [None] * len(lines)
+    if os.path.exists(sp):
+        sl = json.load(open(sp, encoding="utf-8")).get("lines", [])
+        if len(sl) != len(lines):
+            sys.exit(f"ERROR: story.json มี {len(sl)} บรรทัด แต่ script มี {len(lines)} บรรทัด — ไม่เท่ากัน")
+        speakers = [l.get("speaker") for l in sl]
+        for sk in set(speakers) - {None}:
+            if sk not in cfg.get("voices", {}):
+                sys.exit(f"ERROR: speaker '{sk}' ไม่มีใน voices ของ voice.json")
     only = {int(x) for x in a.only.split(",")} if a.only else None
     os.makedirs(a.out_dir, exist_ok=True)
     ctx = ssl_ctx()
@@ -86,12 +102,17 @@ def main():
             continue
         prev_t = lines[i - 2] if i > 1 else None
         next_t = lines[i] if i < len(lines) else None
-        audio = synth(text, prev_t, next_t, cfg, ctx)
+        c = dict(cfg)
+        if speakers[i - 1]:
+            c.update(cfg["voices"][speakers[i - 1]])
+            c.pop("voices", None)
+            prev_t = next_t = None  # เสียงต่างคน ไม่ส่งบริบทข้ามคน
+        audio = synth(text, prev_t, next_t, c, ctx)
         path = os.path.join(a.out_dir, f"line_{i:02d}.mp3")
         with open(path, "wb") as f:
             f.write(audio)
         total_chars += len(text)
-        print(f"[{i:02d}] {len(audio)/1024:6.1f} KB  {text}")
+        print(f"[{i:02d}] {len(audio)/1024:6.1f} KB  {('<'+speakers[i-1]+'> ') if speakers[i-1] else ''}{text}")
     print(f"done: {total_chars} ตัวอักษร (≈ เครดิตที่ใช้ ขึ้นกับโมเดล)")
 
 

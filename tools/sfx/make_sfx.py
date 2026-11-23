@@ -203,6 +203,40 @@ def heartbeat():
     return norm(thump(0, 55, 1) + thump(.24, 48, .7))
 
 
+def _knock_hit(amp=1.0, f=1.0):
+    """เคาะ 1 ครั้งบนฝาเหล็ก: ตุบทึบ + กังวานโลหะ (partial ไม่เป็นเลขคู่) สั้นๆ"""
+    d = 0.35; tt = t(d)
+    body = np.sin(2 * np.pi * np.cumsum(190 * f * np.exp(-tt * 14) + 95 * f) / SR) * np.exp(-tt * 30)
+    ring = sum(g * np.sin(2 * np.pi * fr * f * tt) * np.exp(-tt * r)
+               for fr, g, r in [(430, .35, 18), (731, .25, 22), (1190, .12, 28), (1830, .06, 35)])
+    click = lowpass(noise(d), 2500) * np.exp(-tt * 140) * .5
+    return (body + ring + click) * amp
+
+
+def _shaft_echo(x, tail=0.5):
+    """สะท้อนในปล่องลิฟต์: echo ถี่ๆ 3 ชั้น เสียงทึบลงทุกชั้น"""
+    out = np.concatenate([x, np.zeros(int(SR * tail))])
+    for dl, g, lp in [(0.07, .35, 3500), (0.14, .22, 2500), (0.26, .12, 1800)]:
+        e = lowpass(x, lp) * g
+        s0 = int(dl * SR)
+        out[s0:s0 + len(e)] += e
+    return out
+
+
+def knock_one():
+    """เคาะฝาเหล็กครั้งเดียว (มีเสียงสะท้อนในปล่อง)"""
+    return norm(_shaft_echo(_knock_hit()))
+
+
+def knock():
+    """ก๊อก ก๊อก ก๊อก — เคาะฝาเหล็กหลังคาลิฟต์ 3 ครั้ง (ห่าง ~0.3 วิ) + เสียงสะท้อนในปล่อง"""
+    out = np.zeros(int(SR * 1.5))
+    for k, (st, amp, f) in enumerate([(0.0, 1.0, 1.0), (0.31, .9, 0.97), (0.62, .95, 1.02)]):
+        h = _knock_hit(amp, f); s0 = int(st * SR)
+        out[s0:s0 + len(h)] += h
+    return norm(_shaft_echo(out, 0.35))
+
+
 def bed_dark(dur=60.0):
     """ซาวด์คลอแนวหลอน: โดรนเสียงต่ำสั่นช้าๆ + ลมเบาๆ + เสียงแหลมบางๆ เป็นช่วง (ไม่มีจังหวะดนตรี)"""
     tt = t(dur)
@@ -244,6 +278,8 @@ SFX = {
     "wrong": (wrong, "ผิด! / ความเชื่อผิด"),
     "sting": (sting, "ตุ้งแช่! (ฉาก jumpscare ดึงคนดูกลับ)"),
     "heartbeat": (heartbeat, "หัวใจเต้นตุบ-ตุบ (ฉากลุ้น/ดิ้นไม่หลุด)"),
+    "knock": (knock, "เคาะฝาเหล็กหลังคาลิฟต์ ก๊อก×3 + สะท้อนในปล่อง (อ้าง: [\"knock\", 0.1])"),
+    "knock_one": (knock_one, "เคาะฝาเหล็กครั้งเดียว (วางซ้ำเองด้วย [\"knock_one\", วินาที])"),
     "bed_dark": (bed_dark, "ซาวด์คลอทั้งคลิป แนวหลอน/ลี้ลับ (60 วิ — mix.py --bed ตัดตามความยาวคลิป)"),
     "bed_warm": (bed_warm, "ซาวด์คลอทั้งคลิป แนวอบอุ่น/ตลก (60 วิ)"),
 }
