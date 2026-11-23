@@ -144,9 +144,9 @@ function ELEVATOR_INSIDE(floor = "14", lit = false) {
   <!-- ราวจับผนังขวา -->
   <path d="M1080 1210 L880 1130" stroke="${I}" stroke-width="22" stroke-linecap="round"/><path d="M1080 1210 L880 1130" stroke="${lit ? "#E8EBF0" : "#5A6280"}" stroke-width="10" stroke-linecap="round"/>
   ${lit ? "" : `<!-- ไฟฉุกเฉินสีเหลืองอ่อน (มุมเพดานขวา) + ลำแสงจางๆ -->
-  <path d="M800 150 L560 1920 H1080 V420Z" fill="#FFE9A8" opacity=".09"/>
+  <g class="el-emglow"><path d="M800 150 L560 1920 H1080 V420Z" fill="#FFE9A8" opacity=".09"/></g>
   <rect class="el-emlight" x="760" y="110" width="110" height="56" rx="14" fill="#FFE9A8" stroke="${I}" stroke-width="7"/>
-  <circle cx="815" cy="138" r="70" fill="#FFE9A8" opacity=".16"/>`}`);
+  <g class="el-emglow"><circle cx="815" cy="138" r="70" fill="#FFE9A8" opacity=".16"/></g>`}`);
 }
 
 // ---------- แผนภาพปล่องลิฟต์ (โหมดอธิบาย พื้นครีม) ----------
@@ -231,9 +231,9 @@ function ELEVATOR_HATCH_UP(knock = false) {
   <!-- ไฟเพดานดับ -->
   <rect x="250" y="270" width="140" height="300" rx="18" fill="#2E3347" stroke="${I}" stroke-width="7"/>
   <rect x="690" y="270" width="140" height="300" rx="18" fill="#2E3347" stroke="${I}" stroke-width="7"/>
-  <!-- ไฟฉุกเฉิน -->
-  <circle cx="760" cy="860" r="90" fill="#FFE9A8" opacity=".14"/>
-  <rect x="705" y="835" width="110" height="50" rx="14" fill="#FFE9A8" stroke="${I}" stroke-width="7"/>
+  <!-- ไฟฉุกเฉิน (class ให้ "flicker" ใน build.py ดับตาม) -->
+  <g class="el-emglow"><circle cx="760" cy="860" r="90" fill="#FFE9A8" opacity=".14"/></g>
+  <rect class="el-emlight" x="705" y="835" width="110" height="50" rx="14" fill="#FFE9A8" stroke="${I}" stroke-width="7"/>
   ${knock === "open" ? `<!-- ช่องหลังคาเปิด: ฝาพับขึ้นไปทางขวา + ลำแสงไฟฉายส่องลง (ตัวละครที่ "โผล่" ให้วางใน x 390–690, y 400–700) -->
   <path d="M380 1920 L470 560 H610 L760 1920Z" fill="#FFF3C4" opacity=".13"/>
   <rect x="390" y="400" width="300" height="300" rx="12" fill="#07080D" stroke="${I}" stroke-width="10"/>

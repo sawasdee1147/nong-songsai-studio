@@ -397,7 +397,8 @@
        "arm": "down"
       }
      }
-    ]
+    ],
+    "flicker": true
    }
   },
   {
