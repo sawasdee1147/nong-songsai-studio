@@ -1,0 +1,114 @@
+{
+ "next": "ใครเคาะลิฟต์ตอนตีสอง?",
+ "cast": {
+  "Y": {
+   "skin": "tan",
+   "hair": "short",
+   "hairColor": "#2A2A2E",
+   "top": "#5B6B7B",
+   "gl": "none",
+   "ah": "none",
+   "eye": "norm",
+   "brow": "norm",
+   "mo": "flat",
+   "pocket": false,
+   "strings": false
+  }
+ },
+ "mood": "dark",
+ "lines": [
+  {
+   "cap": "ตีสองสิบนาที ไฟลิฟต์*คุณดับ!*",
+   "clock": {"t": "02:10", "s": "ตีสองสิบนาที"},
+   "scene": {"bg": "elevator_inside", "push": 1.08, "chars": [
+    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "up", "brow": "worry", "mo": "o", "ah": "?", "arm": "down"}}]}
+  },
+  {
+   "cap": "ลิฟต์ค้าง ระหว่าง*ชั้นเจ็ดกับแปด!*",
+   "scene": {"bg": "elevator_inside", "push": 1.14, "shake": true, "chars": [
+    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]}
+  },
+  {
+   "cap": "ข้างบนมีช่อง… *อยากปีนออก*ใช่ไหม?",
+   "scene": {"bg": "elevator_hatch_up", "push": 1.1, "chars": [
+    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "?", "arm": "chin", "front": true}}]}
+  },
+  {
+   "cap": "*อย่าปีน!* อย่างัดประตู!",
+   "rule": true,
+   "scene": {"bg": "elevator_inside", "push": 1.06, "chars": [
+    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]},
+   "sfx": ["pop"]
+  },
+  {
+   "cap": "ลิฟต์ห้อยด้วย*สายเหล็กหลายเส้น*",
+   "scene": {"bg": "elevator_shaft", "push": 1.05, "chars": [
+    {"who": "N", "x": 80, "y": 1180, "w": 360, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}]}
+  },
+  {
+   "cap": "*เส้นเดียว*ก็แบกลิฟต์เต็มคันไหว!",
+   "card": {"k": "สายเหล็กหนึ่งเส้น รับน้ำหนักเต็มคันสูงสุดได้", "n": "125", "u": "%", "src": "Fischetti 2009 · Scientific American"}
+  },
+  {
+   "cap": "ไฟดับ *เบรกก็งับเอง* ไม่ไหลลง!",
+   "scene": {"bg": "elevator_shaft", "push": 1.08, "chars": [
+    {"who": "N", "x": 80, "y": 1180, "w": 360, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "point"}}]}
+  },
+  {
+   "cap": "ลิฟต์เลย *แทบไม่มีทางร่วง* อิสระ",
+   "scene": {"bg": "elevator_lit", "push": 1.05, "chars": [
+    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"gl": "glare", "eye": "smug", "brow": "smug", "mo": "smirk", "arm": "shrug", "tilt": 5}}]}
+  },
+  {
+   "cap": "ข้อสอง *กดปุ่มระฆัง* แล้วรอ!",
+   "rule": true,
+   "scene": {"bg": "elevator_inside", "push": 1.08, "chars": [
+    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "point"}}]},
+   "sfx": ["pop"]
+  },
+  {
+   "cap": "กดแล้ว… *แต่ไม่มีใครตอบ!*",
+   "scene": {"bg": "elevator_inside", "push": 1.14, "chars": [
+    {"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "wobble", "ah": "droop", "arm": "down"}}]}
+  },
+  {
+   "cap": "แต่คืนนี้ นั่น*ยังไม่น่ากลัวที่สุด!*",
+   "scene": {"bg": "dark", "push": 1.1, "chars": [
+    {"who": "N", "x": 230, "y": 520, "w": 620, "pose": {"eye": "shock", "brow": "shock", "mo": "o", "ah": "zig", "gl": "askew", "arm": "down"}}]}
+  },
+  {
+   "cap": "ก๊อก ก๊อก ก๊อก… *จากช่องหลังคา!*",
+   "scene": {"bg": "elevator_hatch_up", "push": 1.14, "shake": true, "chars": [
+    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]},
+   "sfx": [["thud", 0.1], ["thud", 0.6], ["thud", 1.1]]
+  },
+  {
+   "cap": "มีใคร *เคาะอยู่ข้างบน* ลิฟต์!",
+   "scene": {"bg": "elevator_hatch_up", "push": 1.18, "chars": [
+    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "up", "brow": "worry", "mo": "wobble", "ah": "zig", "gl": "askew", "arm": "cover", "front": true}}]}
+  },
+  {
+   "cap": "แสงไฟฉาย *ส่องลงมาจากช่อง!*",
+   "scene": {"bg": "elevator_hatch_up", "push": 1.22, "chars": [
+    {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "flat", "ah": "zig", "gl": "askew", "arm": "down"}},
+    {"who": "Y", "x": 330, "y": 120, "w": 420, "enter": "fade", "pose": {"eye": "norm", "mo": "flat"}}]}
+  },
+  {
+   "cap": "แล้ว*หน้าคน*ก็โผล่มาจ้อง!",
+   "jumpscare": {"who": "Y", "pose": {"eye": "norm", "mo": "flatlow", "tilt": -8}}
+  },
+  {
+   "cap": "ไม่ใช่ช่าง… *ลุงยามคนนี้ใคร?*",
+   "scene": {"bg": "dark", "push": 1.06, "chars": [
+    {"who": "N", "x": 90, "y": 700, "w": 480, "pose": {"gl": "askew", "eye": "shock", "brow": "worry", "mo": "wobble", "ah": "zig", "arm": "cover", "front": true}},
+    {"who": "Y", "x": 600, "y": 680, "w": 360, "pose": {"eye": "norm", "mo": "flat"}}]}
+  },
+  {
+   "cap": "รู้เรื่องทั้งหมดแล้ว",
+   "outro": true
+  },
+  {
+   "cap": "พวกมึง*ฉลาดขึ้นแล้วนะ*"
+  }
+ ]
+}
