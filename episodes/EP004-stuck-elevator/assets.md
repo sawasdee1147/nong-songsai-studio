@@ -8,3 +8,5 @@
 | audio/raw/line_07.mp3 (เสียงลุงยาม) | เสียงพากย์ตัวละครเสริม | ElevenLabs eleven_v3 เสียงคลัง premade "Bill" (pqHfZKP75CvOlQylNhV4) ไม่ได้โคลนเสียงบุคคล + ฟิลเตอร์ลำโพงจากโค้ด | ใบอนุญาตเชิงพาณิชย์ตามแพ็กเกจ | ✅ |
 | Noto Sans Thai / Noto Sans | ฟอนต์ | Google Fonts (ไฟล์ในโปรเจกต์) | SIL OFL 1.1 | ✅ |
 | gsap.min.js | ไลบรารี | npm gsap@3.14.2 (ไฟล์ในโปรเจกต์) | GSAP Standard License | ✅ |
+| sfx/knock_el.wav | เสียงเคาะ (บรรทัด 22) | ElevenLabs Sound Effects 2026-11-24 — prompt: "Three firm knuckle knocks on a thin metal elevator ceiling hatch from above, close, in a quiet small elevator, no music" (2.0 วิ, influence 0.6) +10.6 dB | ใบอนุญาตเชิงพาณิชย์ตามแพ็กเกจ ElevenLabs (เจ้าของช่องอนุญาตใช้ 2026-11-23) | ✅ |
+| sfx/scrape_el.wav | เสียงเหล็กครูดเบาๆ (บรรทัด 3) | ElevenLabs Sound Effects 2026-11-24 — prompt: "Subtle metal on metal scrape and creak inside an elevator shaft, short, no music" (2.0 วิ, influence 0.5) +1.6 dB | เหมือนข้างบน | ✅ |

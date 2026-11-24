@@ -25,6 +25,11 @@
   "gain_db": -18
  },
  {
+  "sfx": "scrape_el",
+  "at": 4.968,
+  "gain_db": -14
+ },
+ {
   "sfx": "whoosh",
   "at": 8.011,
   "gain_db": -26
@@ -125,8 +130,8 @@
   "gain_db": -18
  },
  {
-  "sfx": "knock",
-  "at": 54.702,
+  "sfx": "knock_el",
+  "at": 54.602,
   "gain_db": -1
  },
  {

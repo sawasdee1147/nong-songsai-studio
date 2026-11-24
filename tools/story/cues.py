@@ -2,7 +2,7 @@
 """วางเสียงประกอบอัตโนมัติจาก story.json + timings.json -> audio/sfx_cues.json (ใช้กับ tools/audio/mix.py)
 
 ใช้: python3 tools/story/cues.py episodes/<EP>
-กติกา (ปรับเพิ่มต่อบรรทัดได้ด้วย "sfx": [["thud", 0.2], "pop"] ใน story.json — ตัวเลข = วินาทีหลังเริ่มบรรทัด):
+กติกา (ปรับเพิ่มต่อบรรทัดได้ด้วย "sfx": [["thud", 0.2], "pop", ["knock_el", 0.05, -4]] ใน story.json — ตัวเลข = วินาทีหลังเริ่มบรรทัด, ตัวที่ 3 (ไม่บังคับ) = gain dB ค่าเริ่ม -20):
 - เปลี่ยนฉาก -> whoosh (เบา) · นาฬิกา -> tick · การ์ด -> pop · ฉากสั่น -> thud
 - ตุ้งแช่ (jumpscare) -> sting + thud ดังกว่าปกติ
 - ตัวละครดิ้น (struggle) -> heartbeat ทุก 0.95 วิ
@@ -24,7 +24,7 @@ for i, ln in enumerate(S["lines"]):
     if sc and sc.get("shake"): add("thud", t + .05, -18)
     if sc and any(c.get("enter") == "fade" for c in sc.get("chars", [])): add("riser", t - .2, -24)
     manual = {x if isinstance(x, str) else x[0] for x in ln.get("sfx", [])}
-    if sc and sc.get("bg") == "elevator_hatch_up_knock" and not manual & {"knock", "knock_one"}: add("knock", t + .1, -1)
+    if sc and sc.get("bg") == "elevator_hatch_up_knock" and not manual & {"knock", "knock_one", "knock_el"}: add("knock", t + .1, -1)
     if ln.get("clock"): add("tick", t, -20)
     if sc and any(c.get("struggle") for c in sc.get("chars", [])):
         end = TL[i]["end"]; k = t + .1
@@ -33,8 +33,8 @@ for i, ln in enumerate(S["lines"]):
     if ln.get("card"): add("pop", t + .25, -20)
     if ln.get("outro"): add("glint", t + 1.3, -18)
     for x in ln.get("sfx", []):
-        name, off = (x, 0) if isinstance(x, str) else x
-        add(name, t + off, -20)
+        name, off, g = (x, 0, -20) if isinstance(x, str) else (list(x) + [-20])[:3]
+        add(name, t + off, g)
 # ไฟกะพริบ: ใช้ตารางจังหวะเดียวกับ build.py (ช่วงเดียวกัน: ถึงบรรทัด flicker ถัดไป/ฉากถัดไป)
 L = S["lines"]; starts = [i for i, ln in enumerate(L) if "scene" in ln or i == 0]
 for k, i in enumerate(starts):
