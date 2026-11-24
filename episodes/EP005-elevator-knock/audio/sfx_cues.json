@@ -1,0 +1,207 @@
+[
+ {
+  "sfx": "tick",
+  "at": 0,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 4.088,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 6.951,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 9.882,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 12.253,
+  "gain_db": -26
+ },
+ {
+  "sfx": "thud",
+  "at": 12.453,
+  "gain_db": -18
+ },
+ {
+  "sfx": "whoosh",
+  "at": 14.81,
+  "gain_db": -26
+ },
+ {
+  "sfx": "pop",
+  "at": 14.96,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 17.5,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 20.02,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 24.438,
+  "gain_db": -26
+ },
+ {
+  "sfx": "thud",
+  "at": 24.638,
+  "gain_db": -18
+ },
+ {
+  "sfx": "thud",
+  "at": 24.888,
+  "gain_db": -20
+ },
+ {
+  "sfx": "pop",
+  "at": 26.984,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 29.636,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 32.504,
+  "gain_db": -26
+ },
+ {
+  "sfx": "pop",
+  "at": 32.654,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 35.393,
+  "gain_db": -26
+ },
+ {
+  "sfx": "thud",
+  "at": 35.593,
+  "gain_db": -18
+ },
+ {
+  "sfx": "knock_el",
+  "at": 35.543,
+  "gain_db": -4
+ },
+ {
+  "sfx": "whoosh",
+  "at": 38.106,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 39.902,
+  "gain_db": -26
+ },
+ {
+  "sfx": "thud",
+  "at": 40.102,
+  "gain_db": -18
+ },
+ {
+  "sfx": "pop",
+  "at": 40.052,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 43.185,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 45.577,
+  "gain_db": -26
+ },
+ {
+  "sfx": "whoosh",
+  "at": 48.547,
+  "gain_db": -26
+ },
+ {
+  "sfx": "pop",
+  "at": 51.167,
+  "gain_db": -20
+ },
+ {
+  "sfx": "whoosh",
+  "at": 53.372,
+  "gain_db": -26
+ },
+ {
+  "sfx": "sting",
+  "at": 55.542,
+  "gain_db": -12
+ },
+ {
+  "sfx": "thud",
+  "at": 55.572,
+  "gain_db": -14
+ },
+ {
+  "sfx": "whoosh",
+  "at": 57.933,
+  "gain_db": -26
+ },
+ {
+  "sfx": "thud",
+  "at": 58.133,
+  "gain_db": -18
+ },
+ {
+  "sfx": "knock_el",
+  "at": 58.383,
+  "gain_db": -4
+ },
+ {
+  "sfx": "flicker_buzz",
+  "at": 0.1,
+  "gain_db": -24
+ },
+ {
+  "sfx": "flicker_buzz",
+  "at": 1.016,
+  "gain_db": -24
+ },
+ {
+  "sfx": "flicker_buzz",
+  "at": 1.743,
+  "gain_db": -24
+ },
+ {
+  "sfx": "flicker_buzz",
+  "at": 2.336,
+  "gain_db": -24
+ },
+ {
+  "sfx": "flicker_buzz",
+  "at": 3.256,
+  "gain_db": -24
+ },
+ {
+  "sfx": "flicker_buzz",
+  "at": 3.842,
+  "gain_db": -24
+ },
+ {
+  "sfx": "ding",
+  "at": 60.927,
+  "gain_db": -20
+ }
+]
