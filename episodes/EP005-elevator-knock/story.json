@@ -46,7 +46,7 @@
     "chars": [{"who": "N", "x": 20, "y": 1000, "w": 380, "pose": {"eye": "shock", "brow": "worry", "mo": "o", "ah": "zig", "arm": "cover"}}]},
    "sfx": [["thud", 0.3]]},
   {"cap": "อีกเหตุ *ลิฟต์เลื่อนลง*ตอนคนก้าวออก!",
-   "card": {"k": "เคยมีเหตุจริง ลิฟต์เลื่อนลงตอนคนกำลังก้าวออก (นิวยอร์ก)", "n": "2019", "u": "ปี", "src": "Wikipedia · List of elevator accidents"}},
+   "card": {"k": "เคยมีเหตุจริง ลิฟต์เลื่อนลงตอนคนกำลังก้าวออก (นิวยอร์ก)", "n": "2019", "u": "ค.ศ.", "src": "Wikipedia · List of elevator accidents"}},
   {"cap": "ลิฟต์ปลอดภัยนะ แต่*ตอนค้าง อย่ารีบ!*",
    "scene": {"bg": "elevator_inside_7", "push": 1.06,
     "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "shrug"}}]}},
