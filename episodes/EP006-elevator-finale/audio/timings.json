@@ -1,0 +1,262 @@
+{
+  "sample_rate": 44100,
+  "tempo": 1.2,
+  "total": 65.245,
+  "gap_range": [
+    0.2,
+    0.22
+  ],
+  "max_line": 3.0,
+  "lines": [
+    {
+      "index": 1,
+      "text": "ตีสองยี่สิบห้า เสียงเคาะใต้เท้าคุณ!",
+      "start": 0.0,
+      "end": 2.508,
+      "duration": 2.508,
+      "gain_db": -0.42
+    },
+    {
+      "index": 2,
+      "text": "ข้างบนมีชายแปลกหน้า แล้วข้างล่างล่ะ?",
+      "start": 2.714,
+      "end": 5.505,
+      "duration": 2.791,
+      "gain_db": -0.08,
+      "gap_before": 0.206
+    },
+    {
+      "index": 3,
+      "text": "คุณกดกริ่งฉุกเฉิน ไม่มีใครตอบ!",
+      "start": 5.708,
+      "end": 7.618,
+      "duration": 1.91,
+      "gain_db": -2.0,
+      "gap_before": 0.203
+    },
+    {
+      "index": 4,
+      "text": "คุณเลยรีบกดปุ่มชั้นรัวๆ!",
+      "start": 7.831,
+      "end": 9.536,
+      "duration": 1.704,
+      "gain_db": -4.5,
+      "gap_before": 0.213
+    },
+    {
+      "index": 5,
+      "text": "หยุด! ลุงยามเอง อย่ากดนะ!",
+      "start": 9.737,
+      "end": 11.925,
+      "duration": 2.189,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": -1.2,
+      "gap_before": 0.201
+    },
+    {
+      "index": 6,
+      "text": "ไม่ต้องกดปุ่มชั้น! เคาะตอบแทน!",
+      "start": 12.136,
+      "end": 14.596,
+      "duration": 2.46,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": -1.0,
+      "gap_before": 0.211
+    },
+    {
+      "index": 7,
+      "text": "ทำไมต้องเคาะ ไม่ใช่กดปุ่ม?",
+      "start": 14.803,
+      "end": 16.483,
+      "duration": 1.68,
+      "gain_db": -1.3,
+      "gap_before": 0.207
+    },
+    {
+      "index": 8,
+      "text": "ลิฟต์บางระบบ ช่างเปิดโหมดตรวจสอบได้!",
+      "start": 16.684,
+      "end": 19.654,
+      "duration": 2.97,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": -1.0,
+      "gap_before": 0.201
+    },
+    {
+      "index": 9,
+      "text": "พอเปิด ปุ่มชั้นในลิฟต์ก็ใช้ไม่ได้!",
+      "start": 19.864,
+      "end": 22.107,
+      "duration": 2.242,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": 0.28,
+      "gap_before": 0.21
+    },
+    {
+      "index": 10,
+      "text": "เคาะบอกช่างข้างล่าง ว่าคุณยังโอเค!",
+      "start": 22.308,
+      "end": 24.915,
+      "duration": 2.608,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": -1.0,
+      "gap_before": 0.201
+    },
+    {
+      "index": 11,
+      "text": "คุณเคาะพื้นตอบ ก๊อก ก๊อก!",
+      "start": 25.124,
+      "end": 26.784,
+      "duration": 1.66,
+      "gain_db": -0.56,
+      "gap_before": 0.209
+    },
+    {
+      "index": 12,
+      "text": "แล้วเสียงข้างล่าง ก็เคาะตอบกลับมา!",
+      "start": 26.985,
+      "end": 29.591,
+      "duration": 2.606,
+      "gain_db": -0.1,
+      "gap_before": 0.201
+    },
+    {
+      "index": 13,
+      "text": "ใต้พื้นคือช่างลิฟต์ ตัวจริง!",
+      "start": 29.793,
+      "end": 32.186,
+      "duration": 2.393,
+      "gain_db": -3.6,
+      "gap_before": 0.202
+    },
+    {
+      "index": 14,
+      "text": "ช่างที่ลุงเรียก เปิดโหมดนั้นแล้ว!",
+      "start": 32.394,
+      "end": 34.704,
+      "duration": 2.31,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": 0.13,
+      "gap_before": 0.208
+    },
+    {
+      "index": 15,
+      "text": "ช่างตะโกนบอก ไฟชั้นนี้ถูกคนตัด!",
+      "start": 34.921,
+      "end": 37.699,
+      "duration": 2.778,
+      "gain_db": -0.26,
+      "gap_before": 0.217
+    },
+    {
+      "index": 16,
+      "text": "คือชายบนหลังคา ที่ใส่หมวกยามปลอม!",
+      "start": 37.901,
+      "end": 40.479,
+      "duration": 2.578,
+      "gain_db": -0.3,
+      "gap_before": 0.202
+    },
+    {
+      "index": 17,
+      "text": "เขาตัดไฟ และตัดสายกริ่งของคุณด้วย!",
+      "start": 40.683,
+      "end": 43.391,
+      "duration": 2.708,
+      "gain_db": -0.17,
+      "gap_before": 0.204
+    },
+    {
+      "index": 18,
+      "text": "หวังให้คุณปีนออกทางช่องหลังคา!",
+      "start": 43.604,
+      "end": 46.074,
+      "duration": 2.47,
+      "gain_db": -0.9,
+      "gap_before": 0.213
+    },
+    {
+      "index": 19,
+      "text": "แล้วฉกของคุณตอนปีนขึ้นไป!",
+      "start": 46.293,
+      "end": 48.362,
+      "duration": 2.069,
+      "gain_db": 0.06,
+      "gap_before": 0.219
+    },
+    {
+      "index": 20,
+      "text": "เขาติดบนหลังคา ลุงเรียกตำรวจแล้ว!",
+      "start": 48.574,
+      "end": 51.144,
+      "duration": 2.57,
+      "speaker": "Y",
+      "radio": true,
+      "gain_db": -1.0,
+      "gap_before": 0.212
+    },
+    {
+      "index": 21,
+      "text": "ช่างออกจากหลุมก่อน แล้วค่อยๆ ขยับลิฟต์!",
+      "start": 51.352,
+      "end": 53.902,
+      "duration": 2.55,
+      "gain_db": -0.31,
+      "gap_before": 0.208
+    },
+    {
+      "index": 22,
+      "text": "ติ๊ง! ประตูเปิด ไฟตำรวจสาดเข้ามา!",
+      "start": 54.122,
+      "end": 57.142,
+      "duration": 3.02,
+      "gain_db": -0.45,
+      "gap_before": 0.22
+    },
+    {
+      "index": 23,
+      "text": "เป็นนิยายนะ! ติดลิฟต์จริง กดกริ่งแล้วรอ!",
+      "start": 57.343,
+      "end": 60.172,
+      "duration": 2.83,
+      "gain_db": -2.8,
+      "gap_before": 0.201
+    },
+    {
+      "index": 24,
+      "text": "อย่างัดประตู อย่าปีนออกเอง!",
+      "start": 60.389,
+      "end": 62.426,
+      "duration": 2.037,
+      "gain_db": -2.5,
+      "gap_before": 0.217
+    },
+    {
+      "index": 25,
+      "text": "รู้เรื่องทั้งหมดแล้ว!",
+      "start": 62.632,
+      "end": 63.862,
+      "duration": 1.23,
+      "gain_db": -1.6,
+      "gap_before": 0.206
+    },
+    {
+      "index": 26,
+      "text": "พวกมึงฉลาดขึ้นแล้วนะ!",
+      "start": 64.065,
+      "end": 65.245,
+      "duration": 1.18,
+      "gain_db": 0.1,
+      "gap_before": 0.203
+    }
+  ],
+  "too_long": [
+    22
+  ]
+}

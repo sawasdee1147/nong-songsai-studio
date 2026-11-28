@@ -10,7 +10,7 @@
  },
  "mood": "dark",
  "lines": [
-  {"cap": "*ตีสองยี่สิบห้า* เสียงเคาะดังใต้เท้าคุณ!",
+  {"cap": "*ตีสองยี่สิบห้า* เสียงเคาะใต้เท้าคุณ!",
    "clock": {"t": "02:25", "s": "ตีสองยี่สิบห้า"},
    "scene": {"bg": "elevator_inside_7", "push": 1.1, "shake": true,
     "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "o", "ah": "zig", "gl": "askew", "arm": "cover", "front": true}}]},
