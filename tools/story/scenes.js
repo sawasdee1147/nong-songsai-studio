@@ -351,13 +351,13 @@ function LOBBY_POLICE() {
   <text x="540" y="458" text-anchor="middle" font-family="NS,NST" font-weight="900" font-size="58" fill="#FFB347">G</text>
   <!-- ไฟตำรวจ: แดง (fx-pulse-a) / ฟ้า (fx-pulse-b) — ดวงในกระจก + แสงสาดบนผนัง/พื้น -->
   <g class="fx-pulse-a" opacity=".55">
-    <circle cx="60" cy="960" r="60" fill="${RED}" opacity=".55"/><circle cx="60" cy="960" r="22" fill="#FFD0D4"/>
-    <path d="M220 380 L1080 160 V760 L220 1080Z" fill="${RED}" opacity=".16"/>
-    <path d="M220 1360 L1080 1500 V1920 H360Z" fill="${RED}" opacity=".14"/></g>
+    <circle cx="90" cy="960" r="52" fill="${RED}" opacity=".6"/><circle cx="90" cy="960" r="20" fill="#FFD0D4"/>
+    <path d="M220 380 L1080 160 V760 L220 1080Z" fill="${RED}" opacity=".24"/>
+    <path d="M220 1360 L1080 1500 V1920 H360Z" fill="${RED}" opacity=".2"/></g>
   <g class="fx-pulse-b" opacity=".55">
-    <circle cx="160" cy="980" r="60" fill="${BLU}" opacity=".55"/><circle cx="160" cy="980" r="22" fill="#D6E4FF"/>
-    <path d="M220 700 L1080 900 V1360 H220Z" fill="${BLU}" opacity=".16"/>
-    <path d="M220 1360 L620 1920 H0 V1500Z" fill="${BLU}" opacity=".14"/></g>`);
+    <circle cx="170" cy="975" r="52" fill="${BLU}" opacity=".6"/><circle cx="170" cy="975" r="20" fill="#D6E4FF"/>
+    <path d="M220 700 L1080 900 V1360 H220Z" fill="${BLU}" opacity=".24"/>
+    <path d="M220 1360 L620 1920 H0 V1500Z" fill="${BLU}" opacity=".2"/></g>`);
 }
 
 Object.assign(BG, {
