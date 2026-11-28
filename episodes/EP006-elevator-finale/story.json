@@ -1,112 +1,690 @@
 {
  "next": "จบซีรีส์ลิฟต์",
  "next_label": "จบแล้ว",
- "next_top": 1060,
+ "next_top": 300,
  "cast": {
-  "Y": {"skin": "tan", "hair": "short", "hairColor": "#9A9A9A", "top": "#5B6B7B", "gl": "none", "ah": "none", "eye": "norm", "brow": "norm", "mo": "flat", "pocket": false, "strings": false},
-  "YH": {"skin": "tan", "hair": "short", "hairColor": "#9A9A9A", "top": "#5B6B7B", "hat": "guard", "gl": "none", "ah": "none", "eye": "norm", "brow": "norm", "mo": "flat", "pocket": false, "strings": false},
-  "Z": {"skin": "light", "hair": "bald", "hairColor": "#F2F2F2", "top": "#1F3A8A", "gl": "none", "ah": "none", "eye": "norm", "brow": "norm", "mo": "flat", "pocket": false, "strings": false},
-  "W": {"skin": "light", "hair": "short", "hairColor": "#3A2A20", "top": "#5E8C61", "hat": "helmet", "lamp": true, "gl": "none", "ah": "none", "eye": "norm", "brow": "norm", "mo": "smile", "pocket": false, "strings": false}
+  "Y": {
+   "skin": "tan",
+   "hair": "short",
+   "hairColor": "#9A9A9A",
+   "top": "#5B6B7B",
+   "gl": "none",
+   "ah": "none",
+   "eye": "norm",
+   "brow": "norm",
+   "mo": "flat",
+   "pocket": false,
+   "strings": false
+  },
+  "YH": {
+   "skin": "tan",
+   "hair": "short",
+   "hairColor": "#9A9A9A",
+   "top": "#5B6B7B",
+   "hat": "guard",
+   "gl": "none",
+   "ah": "none",
+   "eye": "norm",
+   "brow": "norm",
+   "mo": "flat",
+   "pocket": false,
+   "strings": false,
+   "drop": 80,
+   "hatTilt": 10
+  },
+  "Z": {
+   "skin": "light",
+   "hair": "bald",
+   "hairColor": "#F2F2F2",
+   "top": "#1F3A8A",
+   "gl": "none",
+   "ah": "none",
+   "eye": "norm",
+   "brow": "norm",
+   "mo": "flat",
+   "pocket": false,
+   "strings": false
+  },
+  "W": {
+   "skin": "light",
+   "hair": "short",
+   "hairColor": "#3A2A20",
+   "top": "#5E8C61",
+   "hat": "helmet",
+   "lamp": true,
+   "gl": "none",
+   "ah": "none",
+   "eye": "norm",
+   "brow": "norm",
+   "mo": "smile",
+   "pocket": false,
+   "strings": false
+  }
  },
  "mood": "dark",
  "lines": [
-  {"cap": "*ตีสองยี่สิบห้า* เสียงเคาะใต้เท้าคุณ!",
-   "clock": {"t": "02:25", "s": "ตีสองยี่สิบห้า"},
-   "scene": {"bg": "elevator_inside_7", "push": 1.1, "shake": true,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "o", "ah": "zig", "gl": "askew", "arm": "cover", "front": true}}]},
-   "sfx": [["knock_el", 0.2, -4]]},
-  {"cap": "ข้างบนมี*ชายแปลกหน้า* แล้วข้างล่างล่ะ?",
-   "scene": {"bg": "elevator_hatch_up_open", "push": 1.12,
+  {
+   "cap": "*ตีสองยี่สิบห้า* เสียงเคาะใต้เท้าคุณ!",
+   "clock": {
+    "t": "02:25",
+    "s": "ตีสองยี่สิบห้า"
+   },
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.1,
+    "shake": true,
     "chars": [
-     {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "up", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "down"}},
-     {"who": "Y", "peek": "down", "pose": {"eye": "norm", "mo": "flat"}}]}},
-  {"cap": "คุณ*กดกริ่งฉุกเฉิน* ไม่มีใครตอบ!",
-   "scene": {"bg": "elevator_inside_7", "push": 1.14,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "wobble", "ah": "droop", "arm": "point"}}]},
-   "sfx": ["pop"]},
-  {"cap": "คุณเลยรีบ*กดปุ่มชั้น*รัวๆ!",
-   "scene": {"bg": "dark", "push": 1.12, "shake": true,
-    "chars": [{"who": "N", "x": 230, "y": 520, "w": 620, "pose": {"eye": "shock", "brow": "worry", "mo": "o", "ah": "zig", "gl": "askew", "arm": "point"}}]}},
-  {"cap": "🔊 *หยุด!* ลุงยามเอง อย่ากดนะ!",
-   "speaker": "Y", "radio": true,
-   "scene": {"bg": "elevator_inside_7", "push": 1.2, "shake": true,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]},
-   "sfx": ["pop"]},
-  {"cap": "*ไม่ต้องกดปุ่มชั้น!* เคาะตอบแทน!",
-   "speaker": "Y", "radio": true, "rule": true,
-   "scene": {"bg": "dark", "push": 1.08,
-    "chars": [{"who": "Z", "x": 230, "y": 520, "w": 620, "pose": {"eye": "norm", "mo": "flatlow"}}]},
-   "sfx": ["pop"]},
-  {"cap": "ทำไม*ต้องเคาะ* ไม่ใช่กดปุ่ม?",
-   "scene": {"bg": "elevator_inside_7", "push": 1.1,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "?", "arm": "chin", "front": true}}]}},
-  {"cap": "🔊 ลิฟต์บางระบบ ช่าง*เปิดโหมดตรวจสอบ*ได้!",
-   "speaker": "Y", "radio": true,
-   "scene": {"bg": "dark", "push": 1.1,
-    "chars": [{"who": "Z", "x": 230, "y": 520, "w": 620, "pose": {"eye": "norm", "mo": "flatlow"}}]}},
-  {"cap": "🔊 พอเปิด *ปุ่มชั้นในลิฟต์* ก็ใช้ไม่ได้!",
-   "speaker": "Y", "radio": true,
-   "scene": {"bg": "elevator_inside_7", "push": 1.06,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "!", "arm": "point"}}]},
-   "card": {"k": "โหมดตรวจสอบ ปุ่มชั้นในลิฟต์ใช้ไม่ได้", "n": "0", "u": "ปุ่มชั้นที่กดได้", "src": "Wikipedia · Elevator (Inspection service)"}},
-  {"cap": "🔊 *เคาะ*บอกช่างข้างล่าง ว่าคุณยังโอเค!",
-   "speaker": "Y", "radio": true,
-   "scene": {"bg": "elevator_shaft", "push": 1.05,
-    "chars": [{"who": "N", "x": 20, "y": 1000, "w": 380, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "point"}}]}},
-  {"cap": "คุณ*เคาะพื้นตอบ* ก๊อก ก๊อก!",
-   "scene": {"bg": "elevator_inside_7", "push": 1.14,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "down", "tilt": -4}}]},
-   "sfx": [["knock_el", 0.9, -4]]},
-  {"cap": "แล้ว*เสียงข้างล่าง* ก็เคาะตอบกลับมา!",
-   "scene": {"bg": "elevator_inside_7", "push": 1.22, "shake": true,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "o", "ah": "zig", "gl": "askew", "arm": "cover", "front": true}}]},
-   "sfx": [["knock_el", 0.3, -3]]},
-  {"cap": "ใต้พื้นคือ*ช่างลิฟต์* ตัวจริง!",
-   "scene": {"bg": "elevator_pit", "push": 1.06,
-    "chars": [{"who": "W", "x": 230, "y": 520, "w": 620, "pose": {"eye": "norm", "brow": "norm", "mo": "smile"}}]},
-   "sfx": ["pop"]},
-  {"cap": "🔊 ช่างที่ลุงเรียก *เปิดโหมดนั้นแล้ว!*",
-   "speaker": "Y", "radio": true},
-  {"cap": "ช่าง*ตะโกนบอก* ไฟชั้นนี้ถูกคนตัด!",
-   "scene": {"bg": "elevator_inside_7", "push": 1.18, "shake": true, "flicker": 2.0,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "shock", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}}]}},
-  {"cap": "คือ*ชายบนหลังคา* ที่ใส่หมวกยามปลอม!",
-   "scene": {"bg": "elevator_hatch_up_open", "push": 1.14,
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "o",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "cover",
+       "front": true
+      }
+     }
+    ]
+   },
+   "sfx": [
+    [
+     "knock_el",
+     0.2,
+     -4
+    ]
+   ]
+  },
+  {
+   "cap": "ข้างบนมี*ชายแปลกหน้า* แล้วข้างล่างล่ะ?",
+   "scene": {
+    "bg": "elevator_hatch_up_open",
+    "push": 1.12,
     "chars": [
-     {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "up", "brow": "shock", "mo": "shock", "ah": "zig", "gl": "askew", "arm": "up"}},
-     {"who": "YH", "peek": "down", "pose": {"eye": "norm", "mo": "smile"}}]}},
-  {"cap": "เขา*ตัดไฟ* และตัดสายกริ่งของคุณด้วย!",
-   "scene": {"bg": "elevator_inside_7", "push": 1.14,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "wobble", "ah": "droop", "arm": "point"}}]}},
-  {"cap": "หวังให้คุณ*ปีนออก*ทางช่องหลังคา!",
-   "scene": {"bg": "elevator_hatch_up_open", "push": 1.2,
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "down"
+      }
+     },
+     {
+      "who": "Y",
+      "peek": "down",
+      "pose": {
+       "eye": "norm",
+       "mo": "flat"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "คุณ*กดกริ่งฉุกเฉิน* ไม่มีใครตอบ!",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.14,
     "chars": [
-     {"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "down"}},
-     {"who": "YH", "peek": "down", "pose": {"eye": "norm", "mo": "smile"}}]}},
-  {"cap": "แล้ว*ฉกของคุณ* ตอนปีนขึ้นไป!",
-   "scene": {"bg": "elevator_inside_7", "push": 1.1,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "side", "brow": "worry", "mo": "wobble", "ah": "droop", "arm": "cover", "front": true}}]}},
-  {"cap": "🔊 เขา*ติดบนหลังคา* ลุงเรียกตำรวจแล้ว!",
-   "speaker": "Y", "radio": true,
-   "scene": {"bg": "elevator_hatch_up", "push": 1.08,
-    "chars": [{"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "up", "brow": "up", "mo": "o", "ah": "!", "arm": "down"}}]}},
-  {"cap": "ช่าง*ออกจากหลุมก่อน* แล้วค่อยๆ ขยับลิฟต์!",
-   "scene": {"bg": "elevator_lit", "push": 1.04,
-    "chars": [{"who": "N", "x": 300, "y": 760, "w": 460, "pose": {"eye": "norm", "brow": "none", "mo": "smile", "ah": "?", "arm": "down"}}]}},
-  {"cap": "*ติ๊ง!* ประตูเปิด ไฟตำรวจสาดเข้ามา!",
-   "scene": {"bg": "lobby_police", "push": 1.1,
-    "chars": [{"who": "N", "x": 300, "y": 900, "w": 460, "pose": {"eye": "spark", "brow": "none", "mo": "grin", "ah": "!", "arm": "up"}}]},
-   "sfx": ["ding"]},
-  {"cap": "*เป็นนิยายนะ!* ติดลิฟต์จริง กดกริ่งแล้วรอ!",
-   "scene": {"bg": "cream", "push": 1.04,
-    "chars": [{"who": "N", "x": 300, "y": 700, "w": 460, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "point"}}]}},
-  {"cap": "อย่างัดประตู อย่าปีนออกเอง!",
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "side",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "droop",
+       "arm": "point"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "cap": "คุณเลยรีบ*กดปุ่มชั้น*รัวๆ!",
+   "scene": {
+    "bg": "dark",
+    "push": 1.12,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "o",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "point"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "🔊 *หยุด!* ลุงยามเอง อย่ากดนะ!",
+   "speaker": "Y",
+   "radio": true,
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.2,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "cap": "*ไม่ต้องกดปุ่มชั้น!* เคาะตอบแทน!",
+   "speaker": "Y",
+   "radio": true,
    "rule": true,
-   "scene": {"bg": "cream", "push": 1.08,
-    "chars": [{"who": "N", "x": 300, "y": 700, "w": 460, "pose": {"eye": "norm", "brow": "worry", "mo": "flatlow", "ah": "?", "arm": "point"}}]},
-   "sfx": ["pop"]},
-  {"cap": "*รู้เรื่องทั้งหมดแล้ว!*",
-   "outro": true},
-  {"cap": "พวกมึง*ฉลาดขึ้นแล้วนะ!*"}
+   "scene": {
+    "bg": "dark",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "Z",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "norm",
+       "mo": "flatlow"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "cap": "ทำไม*ต้องเคาะ* ไม่ใช่กดปุ่ม?",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "ah": "?",
+       "arm": "chin",
+       "front": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "🔊 ลิฟต์บางระบบ ช่าง*เปิดโหมดตรวจสอบ*ได้!",
+   "speaker": "Y",
+   "radio": true,
+   "scene": {
+    "bg": "dark",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "Z",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "norm",
+       "mo": "flatlow"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "🔊 พอเปิด *ปุ่มชั้นในลิฟต์* ก็ใช้ไม่ได้!",
+   "speaker": "Y",
+   "radio": true,
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "ah": "!",
+       "arm": "point"
+      }
+     }
+    ]
+   },
+   "card": {
+    "k": "โหมดตรวจสอบ ปุ่มชั้นในลิฟต์ใช้ไม่ได้",
+    "n": "0",
+    "u": "ปุ่มชั้นที่กดได้",
+    "src": "Wikipedia · Elevator (Inspection service)"
+   }
+  },
+  {
+   "cap": "🔊 *เคาะ*บอกช่างข้างล่าง ว่าคุณยังโอเค!",
+   "speaker": "Y",
+   "radio": true,
+   "scene": {
+    "bg": "elevator_shaft",
+    "push": 1.05,
+    "chars": [
+     {
+      "who": "N",
+      "x": 20,
+      "y": 1000,
+      "w": 380,
+      "pose": {
+       "eye": "norm",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "point"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "คุณ*เคาะพื้นตอบ* ก๊อก ก๊อก!",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.14,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "side",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "down",
+       "tilt": -4
+      }
+     }
+    ]
+   },
+   "sfx": [
+    [
+     "knock_el",
+     0.9,
+     -4
+    ]
+   ]
+  },
+  {
+   "cap": "แล้ว*เสียงข้างล่าง* ก็เคาะตอบกลับมา!",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.22,
+    "shake": true,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "o",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "cover",
+       "front": true
+      }
+     }
+    ]
+   },
+   "sfx": [
+    [
+     "knock_el",
+     0.3,
+     -3
+    ]
+   ]
+  },
+  {
+   "cap": "ใต้พื้นคือ*ช่างลิฟต์* ตัวจริง!",
+   "scene": {
+    "bg": "elevator_pit",
+    "push": 1.06,
+    "chars": [
+     {
+      "who": "W",
+      "x": 230,
+      "y": 520,
+      "w": 620,
+      "pose": {
+       "eye": "norm",
+       "brow": "norm",
+       "mo": "smile"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "cap": "🔊 ช่างที่ลุงเรียก *เปิดโหมดนั้นแล้ว!*",
+   "speaker": "Y",
+   "radio": true
+  },
+  {
+   "cap": "ช่าง*ตะโกนบอก* ไฟชั้นนี้ถูกคนตัด!",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.18,
+    "shake": true,
+    "flicker": 2.0,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "shock",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "คือ*ชายบนหลังคา* ที่ใส่หมวกยามปลอม!",
+   "scene": {
+    "bg": "elevator_hatch_up_open",
+    "push": 1.14,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "shock",
+       "mo": "shock",
+       "ah": "zig",
+       "gl": "askew",
+       "arm": "up"
+      }
+     },
+     {
+      "who": "YH",
+      "peek": "down",
+      "pose": {
+       "eye": "norm",
+       "mo": "smile"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "เขา*ตัดไฟ* และตัดสายกริ่งของคุณด้วย!",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.14,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "side",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "droop",
+       "arm": "point"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "หวังให้คุณ*ปีนออก*ทางช่องหลังคา!",
+   "scene": {
+    "bg": "elevator_hatch_up_open",
+    "push": 1.2,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "side",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "down"
+      }
+     },
+     {
+      "who": "YH",
+      "peek": "down",
+      "pose": {
+       "eye": "norm",
+       "mo": "smile"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "แล้ว*ฉกของคุณ* ตอนปีนขึ้นไป!",
+   "scene": {
+    "bg": "elevator_inside_7",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "side",
+       "brow": "worry",
+       "mo": "wobble",
+       "ah": "droop",
+       "arm": "cover",
+       "front": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "🔊 เขา*ติดบนหลังคา* ลุงเรียกตำรวจแล้ว!",
+   "speaker": "Y",
+   "radio": true,
+   "scene": {
+    "bg": "elevator_hatch_up_open",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "up",
+       "brow": "up",
+       "mo": "o",
+       "ah": "!",
+       "arm": "down"
+      }
+     },
+     {
+      "who": "YH",
+      "peek": "down",
+      "pose": {
+       "eye": "shock",
+       "brow": "worry",
+       "mo": "o"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "ช่าง*ออกจากหลุมก่อน* แล้วค่อยๆ ขยับลิฟต์!",
+   "scene": {
+    "bg": "elevator_lit_3",
+    "push": 1.04,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 760,
+      "w": 460,
+      "pose": {
+       "eye": "norm",
+       "brow": "none",
+       "mo": "smile",
+       "ah": "?",
+       "arm": "down"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "*ติ๊ง!* ประตูเปิด ไฟตำรวจสาดเข้ามา!",
+   "scene": {
+    "bg": "lobby_police",
+    "push": 1.1,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 900,
+      "w": 460,
+      "pose": {
+       "eye": "spark",
+       "brow": "none",
+       "mo": "grin",
+       "ah": "!",
+       "arm": "up"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "ding"
+   ]
+  },
+  {
+   "cap": "*เป็นนิยายนะ!* ติดลิฟต์จริง กดกริ่งแล้วรอ!",
+   "scene": {
+    "bg": "cream",
+    "push": 1.04,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 700,
+      "w": 460,
+      "pose": {
+       "eye": "norm",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "point"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "cap": "อย่างัดประตู อย่าปีนออกเอง!",
+   "rule": true,
+   "scene": {
+    "bg": "cream",
+    "push": 1.08,
+    "chars": [
+     {
+      "who": "N",
+      "x": 300,
+      "y": 700,
+      "w": 460,
+      "pose": {
+       "eye": "norm",
+       "brow": "worry",
+       "mo": "flatlow",
+       "ah": "?",
+       "arm": "point"
+      }
+     }
+    ]
+   },
+   "sfx": [
+    "pop"
+   ]
+  },
+  {
+   "cap": "*รู้เรื่องทั้งหมดแล้ว!*",
+   "outro": true
+  },
+  {
+   "cap": "พวกมึง*ฉลาดขึ้นแล้วนะ!*"
+  }
  ]
 }

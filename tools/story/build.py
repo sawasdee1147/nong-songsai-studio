@@ -7,6 +7,7 @@
 story.json (ย่อ):
 {
  "next": "ตอนหน้า: ...",                    # การ์ดตอนหน้า (ขึ้นตอนท้าย)
+ "next_label": "ตอนหน้า",                   # (ไม่บังคับ) หัวการ์ดท้าย เช่น "จบแล้ว" สำหรับตอนจบซีรีส์
  "next_top": 1100,                          # (ไม่บังคับ) ตำแหน่งบนของการ์ดตอนหน้า px ค่าเดิม 300 — ย้ายเมื่อบังภาพสำคัญ
  "cast": {"G": {kid options}},             # ตัวละครเสริม; "N" = น้องสงสัย (ค่าเริ่มต้น)
  "lines": [ {                               # 1 บรรทัด = 1 บรรทัดใน script.tts.txt (เรียงตรงกัน)
@@ -237,7 +238,7 @@ for i, ln in enumerate(L):
                  f'tl.set("#cp{i + 1}>div",{{x:0}},{T[i] + .71:.3f});')
 
 if S.get("next"):
-    H.append(f'<div class="card next" id="nextc"{f' style="top:{int(S["next_top"])}px"' if S.get("next_top") else ""}><div class="ck">ตอนหน้า</div><div class="nx">{words(S["next"], hl=False)}</div></div>')
+    H.append(f'<div class="card next" id="nextc"{f' style="top:{int(S["next_top"])}px"' if S.get("next_top") else ""}><div class="ck">{S.get("next_label","ตอนหน้า")}</div><div class="nx">{words(S["next"], hl=False)}</div></div>')
     J.append(f'card("#nextc",{E[-1] + .2:.3f},{END:.3f});')
 
 CSS = """
