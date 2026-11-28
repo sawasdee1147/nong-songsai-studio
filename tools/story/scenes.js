@@ -272,6 +272,99 @@ for (const n of [...Array.from({ length: 60 }, (_, i) => String(i + 1)), "G", "B
   BG[`elevator_lit_${n}`] = () => ELEVATOR_INSIDE(n, true);
 }
 
+// ---------- หลุมใต้ลิฟต์ (pit) มองขึ้น: เพดาน = ท้องลิฟต์เหล็ก (EP006) ----------
+// แคบ มืด เพดานต่ำ: ท้องลิฟต์ (คานเหล็ก + รอยต่อ + รอยแยกมีแสงลอด + แถบเตือนเหลืองดำ) กินจอบน y 0–560
+// วงแสงไฟคาดหัวบนท้องลิฟต์ตรงกลาง (x≈580, y≈330) — เข้าคู่กับ kid({hat:"helmet",lamp:true}) ที่ยืน {x:230, y:520, w:620}
+// สปริงกันกระแทก 2 ตัวชิดผนัง (x 130–280 / 800–950, y 1050–1430) ไม่บังตัวละคร · ซับ y 1440+ เป็นพื้นปูนมืดเรียบ
+function ELEVATOR_PIT() {
+  const I = SC_INK, LT = "#FFF3C4";
+  const beam = (y, t) => { const xl = y < 390 ? 0 : (y - 390); return `<path d="M${xl} ${y} H${1080 - xl} V${y + t} H${xl}Z" fill="#3A4058" stroke="${I}" stroke-width="6" stroke-linejoin="round"/>
+    <g fill="${I}">${[0.12, 0.3, 0.5, 0.7, 0.88].map(f => `<circle cx="${xl + f * (1080 - 2 * xl)}" cy="${y + t / 2}" r="${Math.max(4, t / 6)}"/>`).join("")}</g>`; };
+  const spring = (x, top, bot) => { let z = `M${x - 52} ${top + 30}`; const n = 7, h = (bot - top - 60) / n;
+    for (let k = 0; k < n; k++) z += ` L${x + 52} ${top + 30 + h * (k + .5)} L${x - 52} ${top + 30 + h * (k + 1)}`;
+    return `<g class="el-buffer" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="${x - 74}" y="${bot - 26}" width="148" height="34" rx="8" fill="#4A5170" stroke="${I}" stroke-width="7"/>
+      <path d="${z}" fill="none" stroke="${I}" stroke-width="24"/><path d="${z}" fill="none" stroke="#FFD84D" stroke-width="11"/>
+      <rect x="${x - 66}" y="${top}" width="132" height="34" rx="10" fill="#2F3550" stroke="${I}" stroke-width="7"/>
+      <rect x="${x - 40}" y="${top - 26}" width="80" height="30" rx="8" fill="#1B1E2E" stroke="${I}" stroke-width="6"/></g>`; };
+  return _sv(`<rect width="1080" height="1920" fill="#0B0D14"/>
+  <g stroke="${I}" stroke-width="8" stroke-linejoin="round">
+    <rect x="170" y="560" width="740" height="740" fill="#1B1F2E"/>
+    <path d="M0 390 L170 560 V1300 L0 1470Z" fill="#161926"/><path d="M1080 390 L910 560 V1300 L1080 1470Z" fill="#161926"/>
+    <path d="M0 1470 L170 1300 H910 L1080 1470 V1920 H0Z" fill="#1F1C26"/></g>
+  <!-- ผนังปูน: คราบน้ำมัน + รางนำลิฟต์ (T-rail) บนผนังข้าง -->
+  <g fill="#14161F"><path d="M300 560 q20 120 -6 260 q30 -90 40 -260Z"/><path d="M720 560 q-10 80 8 150 q16 -60 10 -150Z"/>
+    <ellipse cx="560" cy="1640" rx="250" ry="46"/><ellipse cx="300" cy="1780" rx="120" ry="24"/></g>
+  <g stroke="${I}" stroke-width="6">${[[78, 478, 1392], [1002, 478, 1392]].map(([x, a, b]) => `<rect x="${x - 12}" y="${a}" width="24" height="${b - a}" fill="#4A5170"/>
+    <path d="M${x - 30} ${a + 200} h60 M${x - 30} ${a + 520} h60 M${x - 30} ${a + 820} h60" stroke-width="14" stroke-linecap="round"/>`).join("")}</g>
+  <!-- ท้องลิฟต์ (เพดานต่ำ) -->
+  <g stroke="${I}" stroke-width="8" stroke-linejoin="round"><path d="M0 0 H1080 V390 L910 560 H170 L0 390Z" fill="#2A2F44"/></g>
+  <g fill="none" stroke="#202436" stroke-width="7" stroke-linecap="round">
+    <path d="M300 0 L390 560 M780 0 L690 560"/></g>
+  ${beam(70, 60)}${beam(250, 44)}${beam(420, 30)}
+  <!-- รอยแยกรอยต่อแผ่นเหล็ก มีแสงจางๆ ลอดลงมาจากในลิฟต์ -->
+  <path d="M540 0 L548 130 L534 250 L546 420 L540 520" fill="none" stroke="${I}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M540 0 L548 130 L534 250 L546 420 L540 520" fill="none" stroke="#FFE9A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
+  <!-- แผ่นกันชนใต้ลิฟต์ + แถบเตือนเหลืองดำ ที่ขอบไกล -->
+  <rect x="170" y="520" width="740" height="44" fill="#FFD84D" stroke="${I}" stroke-width="7"/>
+  <g fill="${I}">${Array.from({ length: 13 }, (_, k) => `<path d="M${190 + k * 58} 520 h26 l-26 44 h-26Z"/>`).join("")}</g>
+  <!-- วงแสงไฟคาดหัว (ตัวละครที่ใส่ lamp:true ส่องขึ้นมา) -->
+  <ellipse cx="580" cy="330" rx="260" ry="150" fill="${LT}" opacity=".13"/>
+  <ellipse cx="580" cy="330" rx="150" ry="86" fill="${LT}" opacity=".2"/>
+  <ellipse cx="580" cy="330" rx="70" ry="40" fill="${LT}" opacity=".28"/>
+  <!-- สายไฟห้อยจากท้องลิฟต์ -->
+  <path d="M860 200 C930 500 1010 520 1040 300" fill="none" stroke="${I}" stroke-width="22" stroke-linecap="round"/>
+  <path d="M860 200 C930 500 1010 520 1040 300" fill="none" stroke="#3E4560" stroke-width="10" stroke-linecap="round"/>
+  ${spring(205, 1060, 1430)}${spring(875, 1060, 1430)}
+  <!-- ขอบมืดรอบจอ (แคบ อึดอัด) -->
+  <path fill-rule="evenodd" d="M0 0 H1080 V1920 H0Z M540 260 A600 980 0 1 0 540.1 260Z" fill="#05060B" opacity=".42"/>`);
+}
+
+// ---------- ล็อบบี้ตึกกลางคืน ประตูลิฟต์เปิด + ไฟตำรวจฟ้า-แดงสาดจากนอกตึก (EP006) ----------
+// ไม่มีตัวตำรวจ · ไฟฟ้า/แดงอยู่ใน class fx-pulse-a (แดง) / fx-pulse-b (ฟ้า) -> build.py สลับสว่างแบบนุ่ม
+//   (sine, รอบละ 1.2 วิ ต่อสี = เปลี่ยน < 2 ครั้ง/วิ ปลอดภัยต่อผู้ไวแสง) ภาพนิ่งเห็นทั้งสองสีจางๆ
+// ตัวละคร: ยืนหน้าประตูลิฟต์ {x:300, y:900, w:460} (เท้าบนพื้นล็อบบี้ y≈1600) · ซับ y 1440+ พื้นมันเรียบ
+function LOBBY_POLICE() {
+  const I = SC_INK, RED = "#FF4D5E", BLU = "#4D8CFF";
+  return _sv(`<rect width="1080" height="1920" fill="#262B45"/>
+  <g stroke="${I}" stroke-width="8" stroke-linejoin="round">
+    <path d="M0 0 H1080 V300 H0Z" fill="#1E2236"/>
+    <path d="M0 1360 H1080 V1920 H0Z" fill="#2E2A3C"/></g>
+  <g fill="none" stroke="#3A3550" stroke-width="6"><path d="M0 1500 H1080 M0 1700 H1080 M270 1360 L120 1920 M540 1360 V1920 M810 1360 L960 1920"/></g>
+  <!-- ไฟเพดานล็อบบี้ (ดับ เหลือดวงเดียวสลัว) -->
+  <g stroke="${I}" stroke-width="6"><rect x="120" y="230" width="180" height="40" rx="12" fill="#3A3F58"/><rect x="780" y="230" width="180" height="40" rx="12" fill="#3A3F58"/></g>
+  <!-- กระจกหน้าตึก (ซ้าย) มองเห็นถนนมืด -->
+  <g stroke="${I}" stroke-width="8" stroke-linejoin="round">
+    <rect x="-10" y="380" width="230" height="980" fill="#10142A"/>
+    <path d="M-10 1080 H220 M105 380 V1360" fill="none" stroke-width="10"/></g>
+  <g fill="#0A0D1C"><rect x="0" y="560" width="70" height="520"/><rect x="120" y="640" width="90" height="440"/></g>
+  <!-- ประตูลิฟต์ (เปิด) + ห้องลิฟต์ไฟสว่าง -->
+  <g stroke="${I}" stroke-width="8" stroke-linejoin="round">
+    <rect x="290" y="500" width="500" height="900" fill="#5A6280"/>
+    <rect x="330" y="560" width="420" height="840" fill="#FFF0C8"/>
+    <path d="M330 1240 H750 V1400 H330Z" fill="#D9C4A2"/>
+    <rect x="330" y="560" width="70" height="840" fill="#9AA2B0"/><rect x="680" y="560" width="70" height="840" fill="#9AA2B0"/></g>
+  <path d="M440 600 H640" stroke="#FFF8DC" stroke-width="14" stroke-linecap="round"/>
+  <path d="M330 1400 L250 1600 H830 L750 1400Z" fill="#FFF0C8" opacity=".12"/>
+  <g stroke="${I}" stroke-width="7"><rect x="440" y="400" width="200" height="80" rx="14" fill="#17181F"/>
+    <rect x="850" y="900" width="70" height="140" rx="14" fill="#4A5170"/><circle cx="885" cy="945" r="16" fill="#FFD84D"/><circle cx="885" cy="1000" r="16" fill="#C9CED8"/></g>
+  <text x="540" y="458" text-anchor="middle" font-family="NS,NST" font-weight="900" font-size="58" fill="#FFB347">G</text>
+  <!-- ไฟตำรวจ: แดง (fx-pulse-a) / ฟ้า (fx-pulse-b) — ดวงในกระจก + แสงสาดบนผนัง/พื้น -->
+  <g class="fx-pulse-a" opacity=".55">
+    <circle cx="60" cy="960" r="60" fill="${RED}" opacity=".55"/><circle cx="60" cy="960" r="22" fill="#FFD0D4"/>
+    <path d="M220 380 L1080 160 V760 L220 1080Z" fill="${RED}" opacity=".16"/>
+    <path d="M220 1360 L1080 1500 V1920 H360Z" fill="${RED}" opacity=".14"/></g>
+  <g class="fx-pulse-b" opacity=".55">
+    <circle cx="160" cy="980" r="60" fill="${BLU}" opacity=".55"/><circle cx="160" cy="980" r="22" fill="#D6E4FF"/>
+    <path d="M220 700 L1080 900 V1360 H220Z" fill="${BLU}" opacity=".16"/>
+    <path d="M220 1360 L620 1920 H0 V1500Z" fill="${BLU}" opacity=".14"/></g>`);
+}
+
+Object.assign(BG, {
+  elevator_pit: () => ELEVATOR_PIT(),
+  lobby_police: () => LOBBY_POLICE(),
+});
+
 // ---------- ท่าดันแว่นแบบทีละเวลา (ย้ายมาจาก character/outro-push-glasses.html) ----------
 const _clamp = x => Math.max(0, Math.min(1, x));
 const _seg = (t, a, b) => _clamp((t - a) / (b - a));

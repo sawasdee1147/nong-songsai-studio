@@ -38,6 +38,12 @@ story.json (ย่อ):
   เป็นการหรี่มืดทับฉาก (ไม่ใช่แฟลชขาว) เว้นจุดดับ ≥ 0.36 วิ -> ≤ 3 ครั้ง/วินาที ปลอดภัยต่อผู้ไวแสง; ซับ/การ์ดไม่มืดตาม
   จังหวะสุ่มแบบ seed คงที่ (tools/story/flicker.py) เรนเดอร์ซ้ำได้เท่าเดิม · ดวงไฟฉุกเฉิน (.el-emlight + แสง .el-emglow
   ใน elevator_inside*/elevator_hatch_up*) ดับตามพร้อมกัน · cues.py ใส่เสียงไฟช็อต (flicker_buzz) ตอนดับให้อัตโนมัติ
+ไฟสลับสี (อัตโนมัติ ไม่ต้องใส่อะไรใน story.json): ฉากที่มีชิ้น class fx-pulse-a / fx-pulse-b (เช่น bg "lobby_police" ไฟตำรวจแดง/ฟ้า)
+  สองกลุ่มสว่างสลับกันแบบ sine รอบละ 1.2 วิ (< 2 ครั้ง/วิ ปลอดภัยต่อผู้ไวแสง) ตลอดฉาก
+หมวก/ไฟคาดหัว: ใส่ใน cast หรือ pose ได้เลย -> ส่งถึง kid() ตรงๆ: "hat": "guard" | "helmet", "hatTilt": องศา, "lamp": true
+  (lamp ชั้นตาปิดจะวาดแค่ดวงไฟ ไม่วาดลำแสงซ้ำ)
+ฉากใหม่ EP006: "elevator_pit" (หลุมใต้ลิฟต์มองขึ้น — คู่กับช่างใส่ helmet+lamp ที่ {x:230,y:520,w:620}),
+  "lobby_police" (ล็อบบี้กลางคืน ประตูลิฟต์เปิด ไฟตำรวจสาด — ตัวละคร {x:300,y:900,w:460})
 """
 import json, os, shutil, sys, html
 import flicker as FL
@@ -96,6 +102,10 @@ STRAIN = ('<svg class="st" id="{id}s" viewBox="20 -40 260 400" style="position:a
           '<path d="M236 92 Q248 114 236 122 Q224 114 236 92Z" fill="#9ED8FF" stroke="#2B2B2B" stroke-width="4"/>'
           '<path d="M70 104 Q80 122 70 129 Q60 122 70 104Z" fill="#9ED8FF" stroke="#2B2B2B" stroke-width="4"/></svg>')
 
+def blink_opts(opts):
+    """ชั้นตาปิด (ซ้อนทับตัวหลัก 0.12 วิ): ไฟคาดหัว lamp:true -> "lens" กันลำแสงซ้อนสองชั้นจนดูวูบ"""
+    return {**opts, "eye": "blink", **({"lamp": "lens"} if opts.get("lamp") is True else {})}
+
 def peek_html(cid, c, opts, blink=True):
     """ตัวละครโผล่จากช่อง: กล่องตัด (overflow hidden) ขนาดเท่าช่อง + ตัวละครกลับหัว (down) ให้หัวอยู่กลางช่อง
     สัดส่วน kid(): หัวกลม cx150 cy140 r90 ใน viewBox 20 -40 260 400 -> ศูนย์กลางหัวอยู่ที่ 50% กว้าง, 45% สูง; หัวกว้าง ≈ 0.69w"""
@@ -103,7 +113,7 @@ def peek_html(cid, c, opts, blink=True):
     w = c.get("w", round(hw * .85 / .69)); h = round(w * 400 / 260)
     fy = .55 if down else .45  # ตำแหน่งศูนย์กลางหัวในกล่อง (หลังกลับหัว)
     left = round(hw / 2 - w / 2); top = round(hh / 2 - fy * h + c.get("dy", 0))
-    bl = (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps({**opts, "eye": "blink"}, ensure_ascii=False))}"></div>'
+    bl = (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps(blink_opts(opts), ensure_ascii=False))}"></div>'
           if blink and opts.get("eye", "norm") not in ("sleep", "blink", "creepy", "laugh", "cool") else "")
     return (f'<div style="position:absolute;left:{hx}px;top:{hy}px;width:{hw}px;height:{hh + c.get("drop", 0)}px;overflow:hidden">'
             f'<div class="ch" id="{cid}" style="left:{left}px;top:{top}px;width:{w}px;height:{h}px">'
@@ -139,7 +149,7 @@ for k, (i, sc) in enumerate(scenes):
             w = c.get("w", 420); box = f'left:{c.get("x", 330)}px;top:{c.get("y", 700)}px;width:{w}px;height:{round(w * 400 / 260)}px'
         if not c.get("peek"): figs += (f'<div class="ch" id="{cid}" style="{box}"><div class="br" id="{cid}b">'
                  f'<div class="k" data-kid="{esc(json.dumps(opts, ensure_ascii=False))}"></div>'
-                 + (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps({**opts, "eye": "blink"}, ensure_ascii=False))}"></div>' if c.get("blink", True) and opts.get("eye", "norm") not in ("sleep", "blink", "creepy", "laugh", "cool") else "")
+                 + (f'<div class="k bl" id="{cid}x" data-kid="{esc(json.dumps(blink_opts(opts), ensure_ascii=False))}"></div>' if c.get("blink", True) and opts.get("eye", "norm") not in ("sleep", "blink", "creepy", "laugh", "cool") else "")
                  + '</div>' + (STRAIN.format(id=cid) if c.get("struggle") else "") + '</div>')
         J.append(f'tl.fromTo("#{cid}b",{{scaleY:1}},{{scaleY:1.02,duration:1.2,yoyo:true,repeat:{max(0, int((b - a) / 1.2))},ease:"sine.inOut",transformOrigin:"50% 100%",immediateRender:false}},{a:.3f});')
         if c.get("struggle"):  # ดิ้นเป็นจังหวะ: สั่น 0.6 วิ พัก 0.35 วิ + เส้นเกร็งกะพริบ
@@ -160,6 +170,7 @@ for k, (i, sc) in enumerate(scenes):
         nj = FLK[k][n + 1][0] if n + 1 < len(FLK[k]) else None  # บรรทัด flicker ถัดไปในฉากเดียวกันมาแทนที่
         ev = FL.events(T[j], T[nj] - .05 if nj is not None else b, FL.opts(v, j))
         J.append(f'flk("#{sid}",{json.dumps([list(e) for e in ev])});')
+    J.append(f'pulse("#{sid}",{a:.3f},{b:.3f});')
     J.append(f'show("#{sid}",{a:.3f},{b:.3f});tl.fromTo("#{sid} .cam",{{scale:1}},{{scale:{sc.get("push", 1.06)},duration:{b - a:.3f},ease:"none",immediateRender:false}},{a:.3f});')
     if sc.get("shake"):
         J.append(f'tl.fromTo("#{sid} .cam",{{x:-12}},{{x:12,duration:.05,yoyo:true,repeat:9,ease:"none",immediateRender:false}},{T[i]:.3f});')
@@ -276,6 +287,11 @@ function flk(s,ev){{const r=document.querySelector(s),d=r.querySelector(".dim"),
     tl.fromTo(d,{{opacity:v}},{{opacity:0,duration:.06,ease:"none",immediateRender:false}},b);
     if(lm.length){{tl.set(lm,{{fill:v>.5?"#4F4A3A":"#A89C72"}},a);tl.set(lm,{{fill:"#FFE9A8"}},b);}}
     if(gl.length){{tl.set(gl,{{opacity:Math.max(0,1-v*1.4)}},a);tl.set(gl,{{opacity:1}},b);}}}});
+}}
+function pulse(s,a,b){{const r=document.querySelector(s),pa=r.querySelectorAll(".fx-pulse-a"),pb=r.querySelectorAll(".fx-pulse-b");
+  if(!pa.length&&!pb.length)return;const n=Math.max(0,Math.ceil((b-a)/.6));
+  if(pa.length)tl.fromTo(pa,{{opacity:.15}},{{opacity:1,duration:.6,yoyo:true,repeat:n,ease:"sine.inOut",immediateRender:false}},a);
+  if(pb.length)tl.fromTo(pb,{{opacity:1}},{{opacity:.15,duration:.6,yoyo:true,repeat:n,ease:"sine.inOut",immediateRender:false}},a);
 }}
 function buildPush(sel,t0,dur){{
   const box=document.querySelector(sel); const n=Math.ceil(Math.min(dur,4.0)*15);

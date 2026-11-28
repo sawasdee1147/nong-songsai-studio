@@ -117,8 +117,38 @@ function arms(t){
     default: return arm(Ls,[90,280],[96,302])+arm(Rs,[210,280],[204,302]);
   }
 }
+// หมวก (วาดทับผม หลังวาดหน้า) — hat: "none" | "guard" (แก๊ปยาม) | "helmet" (หมวกนิรภัยเหลือง)
+// lamp: true = ไฟคาดหัว + ลำแสงจางๆ ชี้ขึ้นข้างบน (svg ล้นกรอบได้), "lens" = ไฟติดอยู่แต่ไม่มีลำแสง (build.py ใช้กับชั้นกะพริบตา)
+// hatTilt: องศา เอียงหมวก (เช่น 8 = หมวกยามปลอมใส่ไม่เข้าที่)
+function hatSvg(t,lamp,tilt){
+  let o="";
+  if(t==="guard"){
+    o=`<path d="M46 30 Q150 56 254 30 L228 84 Q150 96 72 84Z" fill="#24345C" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+    <ellipse cx="150" cy="28" rx="106" ry="24" fill="#2E4170" stroke="${INK}" stroke-width="6"/>
+    <path d="M72 82 Q150 94 228 82 L230 100 Q150 112 70 100Z" fill="#171A26" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M80 90 Q150 101 220 90" fill="none" stroke="${YEL}" stroke-width="4" stroke-linecap="round"/>
+    <path d="M70 99 Q150 114 230 99 Q240 110 224 120 Q150 134 76 120 Q60 110 70 99Z" fill="#12141C" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M96 112 Q130 120 160 119" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".35"/>
+    <path d="M150 38 L172 46 Q172 70 150 80 Q128 70 128 46Z" fill="${YEL}" stroke="${INK}" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M150 49 l3.5 7.5 8 .8 -6 5.4 1.8 8 -7.3 -4.2 -7.3 4.2 1.8 -8 -6 -5.4 8 -.8Z" fill="#E0704F"/>`;
+  } else if(t==="helmet"){
+    o=`<path d="M62 96 C56 30 102 2 150 2 C198 2 244 30 238 96Z" fill="${YEL}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M134 6 Q150 0 166 6 L162 92 H138Z" fill="#F0C02E" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M86 50 Q96 24 122 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+    <path d="M38 92 Q150 72 262 92 Q270 106 252 110 Q150 94 48 110 Q30 106 38 92Z" fill="${YEL}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>`;
+  }
+  if(lamp){
+    const ly=t==="helmet"?50:t==="guard"?58:64;
+    if(lamp!=="lens") o+=`<path d="M141 ${ly} L159 ${ly} L214 -420 L96 -420Z" fill="#FFF3C4" opacity=".2"/>`;
+    o+=`${t==="helmet"?"":`<path d="M64 ${ly+6} Q150 ${ly-14} 236 ${ly+6}" fill="none" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>`}
+    <circle cx="150" cy="${ly}" r="${lamp==="lens"?24:32}" fill="#FFF3C4" opacity=".35"/>
+    <rect x="124" y="${ly-18}" width="52" height="36" rx="11" fill="#3A3F52" stroke="${INK}" stroke-width="5"/>
+    <circle cx="150" cy="${ly}" r="12" fill="#FFF8DC" stroke="${INK}" stroke-width="4"/><circle cx="146" cy="${ly-4}" r="4" fill="#fff"/>`;
+  }
+  return tilt?`<g transform="rotate(${tilt} 150 90)">${o}</g>`:o;
+}
 function kid({gdy=0,glint=0,push=0,gl="norm",eye="norm",brow="norm",mo="smile",ah="?",arm="down",extra="",tilt=0,front=false,
-             skin="nong",hair="nong",hairColor="#2B2B2B",top="#FF8C69",pocket=true,strings=true}={}){
+             skin="nong",hair="nong",hairColor="#2B2B2B",top="#FF8C69",pocket=true,strings=true,hat="none",hatTilt=0,lamp=false}={}){
   // ตั้งค่าสีของตัวละครนี้ชั่วคราว (arms/pushArm ใช้ตัวแปรเดียวกัน)
   const saved=[SKIN,HAIR,HOOD,HOODD];
   SKIN=SKINS[skin]||skin; HAIR=hairColor; HOOD=top; HOODD=(top==="#FF8C69")?"#E0704F":shade(top,.86);
@@ -141,9 +171,9 @@ function kid({gdy=0,glint=0,push=0,gl="norm",eye="norm",brow="norm",mo="smile",a
    <path d="M104 245 Q150 222 196 245 L204 312 Q150 328 96 312Z" fill="${HOOD}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
    ${pocket?`<path d="M122 290 Q150 298 178 290 L176 306 Q150 312 124 306Z" fill="${HOODD}" stroke="${INK}" stroke-width="4"/>`:""}
    ${strings?`<path d="M138 236 L136 262 M162 236 L164 262" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`:""}`;
-  const out=`<svg viewBox="20 -40 260 400"><g transform="rotate(${tilt} 150 220)">
+  const out=`<svg viewBox="20 -40 260 400"${lamp===true?' style="overflow:visible"':""}><g transform="rotate(${tilt} 150 220)">
    <ellipse cx="150" cy="344" rx="66" ry="8" fill="#0002"/>
-   ${hairBack}${body}${front?"":arms(arm)}${ahoge(ah)}${head}${front?arms(arm):""}${push?pushArm(push):""}${extra}</g></svg>`;
+   ${hairBack}${body}${front?"":arms(arm)}${ahoge(ah)}${head}${(hat!=="none"||lamp)?hatSvg(hat,lamp,hatTilt):""}${front?arms(arm):""}${push?pushArm(push):""}${extra}</g></svg>`;
   [SKIN,HAIR,HOOD,HOODD]=saved;
   return out;
 }
